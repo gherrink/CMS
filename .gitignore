@@ -1,0 +1,12 @@
+.settings/
+assets/
+protected/runtime/
+framework/
+Behat
+*.*~
+.project
+.bulidpath
+images-edit/
+*.xcf
+.git
+.bildpath

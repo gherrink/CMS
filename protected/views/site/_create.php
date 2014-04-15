@@ -7,16 +7,30 @@
  * @var SiteController $this 
  * @var Site $model
  * @var BsActiveForm $form
+ * @var String $url
  */
 
-$roles = array('MSITE' => 'moderator');
-$layouts = array('col01' => 'Eine Spalte');
+$roles = SelectHelper::getSiteRoles();
+$layouts = SelectHelper::getLayouts();
+
+$selectedRole = MSG::MSITE;
+if($model->roleaccess !== null)
+	$selectedRole = $model->roleaccess;
+
+$selectedLayout = MSG::COL01;
+if($model->layout !== null)
+	$selectedRole = $model->layout;
+
 
 $form = $this->beginWidget('bootstrap.widgets.BsActiveForm', array(
    	'layout' => BsHtml::FORM_LAYOUT_VERTICAL,
    	'enableAjaxValidation' => true,
 	'id' => 'site-form',
-	'action' => array('site/edit'),
+	'htmlOptions'=>array(
+		'onsubmit'=>"return false;",
+		'onkeypress'=>" if(event.keyCode == 13){ submitForm('modal', 'site-form', '". $url ."'); } ",
+	),
+	'action' => $url,
 ));
 ?>
 	<div class="row">
@@ -29,7 +43,16 @@ $form = $this->beginWidget('bootstrap.widgets.BsActiveForm', array(
 		<div class="col-sm-6">
 			<?php
 				echo $form->dropDownListControlGroup($model, 'roleaccess', $roles, array(
-    				'options' => array($selectRole=>array('selected'=>true)),
+    				'options' => array($selectedRole=>array('selected'=>true)),
+					'labelOptions'=>array('class'=>'control-label required'),
+					'controlOptions'=>array('class'=>''),
+				));
+			?>
+		</div>
+		<div class="col-sm-6">
+			<?php
+				echo $form->dropDownListControlGroup($model, 'layout', $layouts, array(
+    				'options' => array($selectedLayout=>array('selected'=>true)),
 					'labelOptions'=>array('class'=>'control-label required'),
 					'controlOptions'=>array('class'=>''),
 				));
@@ -37,15 +60,21 @@ $form = $this->beginWidget('bootstrap.widgets.BsActiveForm', array(
 		</div>
 	</div>
 	
+	<h4><?php echo MsgPicker::msg()->getMessage(MSG::HEAD_SITE_CREATELANGUAGE)?></h4>
+	
+	<?php
+		if($model->siteid !== null && $model->siteid !== "")
+		{
+			$languages = SiteLanguage::model()->findAllByAttributes(array('siteid'=>$model->siteid));
+			$this->renderPartial('_languages', array('languages'=>$languages, 'form'=>$form));
+		}
+		else
+			$this->renderPartial('_language', array('model'=>new SiteLanguage(), 'form'=>$form));
+	?>
+	
 	<div class="row">
-		<div class="col-sm-6">
-			<?php
-				echo $form->dropDownListControlGroup($model, 'layout', $layouts, array(
-    				'options' => array($selectLayout=>array('selected'=>true)),
-					'labelOptions'=>array('class'=>'control-label required'),
-					'controlOptions'=>array('class'=>''),
-				));
-			?>
+		<div class="col-sm-12">
+			<?php echo BsHtml::button(MsgPicker::msg()->getMessage(MSG::BTN_SITE_ADDLANGUAGE))?>
 		</div>
 	</div>
 <?php $this->endWidget(); ?>

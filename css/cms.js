@@ -1,3 +1,26 @@
+function submitForm(modelid, formid, url)
+{
+	var post = $('#'+formid).serialize();
+	
+	$.ajax({
+		type: 'POST',
+		url: url,
+		data: post,
+		success:function(data, textStatus, jqXHR){
+			if('header' in data && 'body' in data && 'footer' in data)
+				showModal(modelid, data['header'], data['body'], data['footer']);
+			else
+				window.location = data['success'];
+				
+		},
+		error: function(jqXHR, textStatus, errorThrown) {
+			showErrorModal(modelid, jqXHR, textStatus, errorThrown);
+		},
+			
+		dataType:'json'
+	});
+}
+
 function showModalAjax(id, url)
 {
 	$.ajax({
@@ -5,7 +28,6 @@ function showModalAjax(id, url)
 		url: url,
 	
 		success:function(data, textStatus, jqXHR){
-			data = JSON.parse(data);
 			if('header' in data && 'body' in data && 'footer' in data)
 				showModal(id, data['header'], data['body'], data['footer']);
 		},
@@ -13,7 +35,7 @@ function showModalAjax(id, url)
 			showErrorModal(id, jqXHR, textStatus, errorThrown);
 		},
 			
-		dataType:'html'
+		dataType:'json'
 	});
 }
 

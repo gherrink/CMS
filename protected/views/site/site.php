@@ -22,7 +22,6 @@ if($edit === true && $editable === true)
 ?>
 
 <?php if($edit || $editable):?>
-	<?php Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/css/cms.js', CClientScript::POS_END) ?>
 	<div class="row">
 		<?php 
 			echo BsHtml::button('btn', array(

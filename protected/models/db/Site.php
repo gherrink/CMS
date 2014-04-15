@@ -37,14 +37,12 @@ class Site extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('siteid, label, layout, roleaccess, update_time, update_userid, create_userid', 'required'),
+			array('label, layout, roleaccess', 'required', 'on'=>'create, update'),
 			array('siteid', 'length', 'max'=>32),
 			array('label, update_userid, create_userid', 'length', 'max'=>20),
 			array('layout', 'length', 'max'=>5),
 			array('roleaccess', 'length', 'max'=>64),
 			array('create_time', 'safe'),
-			// The following rule is used by search().
-			// @todo Please remove those attributes that should not be searched.
 			array('siteid, label, layout, roleaccess, update_time, update_userid, create_time, create_userid', 'safe', 'on'=>'search'),
 		);
 	}

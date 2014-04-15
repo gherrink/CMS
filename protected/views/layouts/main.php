@@ -22,6 +22,7 @@
 		$cs->registerCoreScript('jquery.ui', CClientScript::POS_END);
 		$cs->registerScriptFile($path . '/css/bootstrap/js/bootstrap.min.js', CClientScript::POS_END);
 		$cs->registerScript('tooltip', "$('[data-toggle=\"tooltip\"]').tooltip();$('[data-toggle=\"popover\"]').tooltip()", CClientScript::POS_READY);
+		$cs->registerScriptFile($path . '/css/cms.js')
 	?>
 	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!--[if lt IE 9]>
@@ -78,22 +79,11 @@
 
 <?php
 $this->widget('bootstrap.widgets.BsModal', array(
-	'id' => 'modal-msg',
-	'header' => 'Modal Heading',
-	'content' => '<p>Modal body</p>',
-	'footer' => array(
-		BSHtml::button('OK', array(
-			'data-dismiss' => 'modal-msg',
-		))
-	)
-));
-
-$this->widget('bootstrap.widgets.BsModal', array(
 	'id' => 'modal',
 	'header' => 'Modal Heading',
 	'content' => '<p>Modal body</p>',
 	'footer' => array(
-		BSHtml::button('OK', array(
+		BsHtml::button('OK', array(
 			'data-dismiss' => 'modal',
 		))
 	),
@@ -102,6 +92,17 @@ $this->widget('bootstrap.widgets.BsModal', array(
 		'data-backdrop' => 'static',
 	),
 	'closeText' => false,
+));
+
+$this->widget('bootstrap.widgets.BsModal', array(
+	'id' => 'modalmsg',
+	'header' => 'Modal Heading',
+	'content' => '<p>Modal body</p>',
+	'footer' => array(
+		BsHtml::button('OK', array(
+			'data-dismiss' => 'modalmsg',
+		))
+	),
 ));
 ?><!-- modal -->
 

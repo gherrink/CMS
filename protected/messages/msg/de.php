@@ -26,23 +26,40 @@ return array(
 	'VISITOR'	=> 'Besucher',
 	/*/Rollen */
 		
+	/* Layouts */
+	'COL01'		=> 'Eine Spalte',
+	/*/Layouts */
+		
 	/* Menu Punkte */
 	'MP_LOGIN'					=> 'Anmelden',
 	'MP_LOGOUT'					=> 'Abmelden',
 	'MP_CONTACT'				=> 'Kontakt',
 	'MP_USER_REGISTERASMEMBER'	=> 'Mitgliedsregistrierung',
+	'MP_MODERATOR'				=> 'Moderator',
+	'MP_MODERATOR_SITECREATE'	=> 'Seite erstellen',
 	/*/Menu Punkte */
 		
 	/* Ueberschriften */
-	'HEAD_CONTACT'		=> 'Kontakt',
-	'HEAD_LOGIN'		=> 'Anmelden',
-	'HEAD_REGISTER'		=> 'Registrieren',
-	'HEAD_CHANGEMAIL'	=> 'E-Mail ändern',
+	'HEAD_QUESTION_REALYCLOSE'			=> 'Wirklich Schließen?',
+	'HEAD_QUESTION'						=> 'Frage',
+	'HEAD_CONTACT'						=> 'Kontakt',
+	'HEAD_LOGIN'						=> 'Anmelden',
+	'HEAD_REGISTER'						=> 'Registrieren',
+	'HEAD_CHANGEMAIL'					=> 'E-Mail ändern',
+	'HEAD_SITE_CREATE'					=> 'Seite erstellen',
+	'HEAD_SITE_CREATELANGUAGE'			=> 'Sprache und Überschriften',
+	'HEAD_SITE_UPDATE'					=> 'Seite bearbeiten',
 	/*/Ueberschriften */
 		
 	/* Buttons */
-	'BTN_OK'		=> 'OK',
-	'BTN_REGISTER'	=> 'Registrieren',
+	'BTN_OK'					=> 'OK',
+	'BTN_YES'					=> 'Ja',
+	'BTN_NO'					=> 'Nein',
+	'BTN_REGISTER'				=> 'Registrieren',
+	'BTN_CREATE'				=> 'Erstellen',
+	'BTN_UPDATE'				=> 'Ändern',
+	'BTN_EXIT'					=> 'Beenden',
+	'BTN_SITE_ADDLANGUAGE'		=> 'Neue Sprache hinzufügen',
 	/*/Buttons */
 		
 	/* Contact */
@@ -74,6 +91,7 @@ return array(
 	'SUCCESS_LOGIN_USERVALIDATE'	=> 'Ihre E-Mail wurde erfolgreich registriert, Sie können sich nun anmelden.',
 	'SUCCESS_LOGIN_RESENDMAIL'		=> 'Die Registrierungsmail wurde erneut an ihre E-Mail-Addresse gesendet, bitte prüfen Sie ihr Postfach.',
 	'SUCCESS_LOGIN_MAILCHANGE'		=> 'Ihre E-Mail-Addresse wurde erfolgreich geändert und eine Registrierungsmail gesendet. Bitte prüfen Sie die Mails in ihrem Postfach.',
+	'SUCCESS_SITE_CREATE'			=> 'Die Seite wurde erfolgreich erstellt.',
 	/*/MSG SUCCESS */
 
 	/* MSG WARNING */
@@ -90,12 +108,18 @@ return array(
 	'ERROR_LOGIN_USERVALIDATE'		=> 'Ihre E-Mail-Addresse konnte leider nicht validiert werden, bitte versuchen Sie es erneut, oder <a href="###mailchange###">&auml;ndern Sie ihre E-Mail</a>',
 	'ERROR_LOGIN_RESENDMAIL'		=> 'Die Registrierungsmail konnte leider nicht versendet werden, bitte versuchen Sie es erneut.',
 	'ERROR_LOGIN_MAILCHANGE'		=> 'Ihre E-Mail-Addresse konnte leider nicht geändert werden, bitte versuchen Sie es erneut.',
+	'ERROR_SITE_NOTCREATE'			=> 'Die Seite konnte nicht erstellt werden, bitte versuchen Sie es erneut.',
 	/*/MSG ERROR */
 
 	/* EXEPTION */
-	'EXEPTION_SITE_NOTFOUND' 	=> 'Die Angeforderte Seite konnte leider nicht gefunden werden.',
-	'EXEPTION_SITE_NOCONTENT'	=> 'Die Seite hat noch keinen Inhalt',
+	'EXEPTION_CONST_NOTDEFINED'			=> 'Die Konstante ###const### ist nicht deffiniert.',
+	'EXEPTION_SITE_NOTFOUND' 			=> 'Die Angeforderte Seite konnte leider nicht gefunden werden.',
+	'EXEPTION_SITE_NOCONTENT'			=> 'Die Seite hat noch keinen Inhalt',
 	/*/EXEPTION */
+
+	/* QUESTION */
+	'QUESTION_EXIT_SITECREATE'		=> 'Möchten Sie wirklich die Seitenbearbeitung beenden? Die Änderungen werden nicht mit übernommen.',
+	/*/QUESTION */
 		
 	/* MAIL */
 	'MAIL_SUBJECT_REGISTER' => 'E-Mail Best&auml;tigung bei CMS',

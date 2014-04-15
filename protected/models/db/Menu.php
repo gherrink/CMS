@@ -210,11 +210,12 @@ class Menu extends CActiveRecord
 				// 				'label' => MSG::msg()->getMsg(MSG::MP_GALLERY),
 				// 				'url' => array('/gallery/gallery'),
 				// 			),
-				array(
-						'label' => MsgPicker::msg()->getMessage(MSG::MP_CONTACT),
-						'url' => array('/contact/contact'),
-				),
-				Menu::getUser(),
+			self::getModerator(),
+			array(
+				'label' => MsgPicker::msg()->getMessage(MSG::MP_CONTACT),
+				'url' => array('/contact/contact'),
+			),
+			Menu::getUser(),
 		);
 	}
 	
@@ -249,5 +250,43 @@ class Menu extends CActiveRecord
 					),
 			);
 		}
+	}
+	
+	/**
+	 * Erstllen des Moderator Menüpunktes
+	 * @return array
+	 */
+	public static function getModerator()
+	{
+		$msite = Yii::app()->user->checkAccess(MSG::MSITE);
+		$mmenu = Yii::app()->user->checkAccess(MSG::MMENU);
+		
+		if($msite || $mmenu)
+			return array(
+				'label' => MsgPicker::msg()->getMessage(MSG::MP_MODERATOR),
+				'url' => '#',
+				'items' => array(
+					self::getMSite($msite),
+					self::getMMenu($mmenu),
+				),
+					
+			);
+	}
+	
+	public static function getMSite($msite)
+	{
+		if($msite)
+			return array(
+				'label' => 'test',
+				'ajax' => 'showModalAjax("modal", "'.Yii::app()->createAbsoluteUrl('site/create').'");',
+			);
+	}
+	
+	public static function getMMenu($mmneu)
+	{
+		if($mmneu)
+			return array(
+				'label' => 'noch machen',
+			);
 	}
 }

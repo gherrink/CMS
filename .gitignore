@@ -9,4 +9,4 @@ Behat
 images-edit/
 *.xcf
 .git
-.bildpath
+.buildpath

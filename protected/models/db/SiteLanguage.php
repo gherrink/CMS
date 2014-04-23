@@ -13,6 +13,7 @@
  * @property SiteContent[] $siteContents1
  * @property VisitSite[] $visitSites
  * @property VisitSite[] $visitSites1
+ * @property Language $language
  */
 class SiteLanguage extends CActiveRecord
 {
@@ -54,6 +55,7 @@ class SiteLanguage extends CActiveRecord
 			'siteContents1' => array(self::HAS_MANY, 'SiteContent', 'languageid'),
 			'visitSites' => array(self::HAS_MANY, 'VisitSite', 'siteid'),
 			'visitSites1' => array(self::HAS_MANY, 'VisitSite', 'languageid'),
+			'language' => array(self::HAS_ONE, 'Language', 'languageid'),
 		);
 	}
 

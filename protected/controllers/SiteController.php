@@ -2,7 +2,7 @@
 
 class SiteController extends Controller
 {
-
+	
 	/**
 	 * This is the default 'index' action that renders
 	 * the Homepage.
@@ -50,8 +50,9 @@ class SiteController extends Controller
 	/**
 	 * Create a new Site
 	 */
-	public function actionCreate()
+	public function actionCreate($language = null)
 	{
+		$transaktion = Yii::app()->db->beginTransaction();
 		$model = new Site('create');
 		$modelCheck = new ModelCheck($model, 'Site', 'createSite', 'site-form');
 		$error = '';
@@ -66,14 +67,20 @@ class SiteController extends Controller
 			$model->layout = strtolower($model->layout);
 			
 			if($model->insert())
-			{
-				$this->addSuccessMessage(new Message(MSG::SUCCESS_SITE_CREATE));
-				$content['success'] = Yii::app()->createAbsoluteUrl('site/edit', array('name'=>$model->siteid));
-				echo json_encode($content);
-				Yii::app()->end();
-			}
-			else
-				$error = BsHtml::alert(BsHtml::ALERT_COLOR_ERROR, MsgPicker::msg()->getMessage(MSG::ERROR_SITE_NOTCREATE));
+				if($this->createSiteHeader($model))
+					try
+					{
+						$transaktion->commit();
+						$this->addSuccessMessage(new Message(MSG::SUCCESS_SITE_CREATE));
+						$content['success'] = Yii::app()->createAbsoluteUrl('site/edit', array('name'=>$model->siteid));
+						echo json_encode($content);
+						Yii::app()->end();
+					}
+					catch (Exception $e)
+					{}
+			
+			$transaktion->rollBack();
+			$error = BsHtml::alert(BsHtml::ALERT_COLOR_ERROR, MsgPicker::msg()->getMessage(MSG::ERROR_SITE_NOTCREATE));
 		}
 		
 		$urlCreate = Yii::app()->createAbsoluteUrl('site/create');
@@ -84,12 +91,29 @@ class SiteController extends Controller
 		));
 		
 		$content['header'] = MsgPicker::msg()->getMessage(MSG::HEAD_SITE_CREATE);
-		$content['body'] = $error . $this->renderPartial('_create', array('model'=>$model, 'url'=>$urlCreate), true);
+		$content['body'] = $error . $this->renderPartial('_edit', array('model'=>$model, 'url'=>$urlCreate), true);
 		$content['footer'] = 
 			BSHtml::button(MsgPicker::msg()->getMessage(MSG::BTN_EXIT), array('onclick'=>"showModalAjax('modalmsg', '".$urlExit."');")).
 			BsHtml::button(MsgPicker::msg()->getMessage(MSG::BTN_CREATE), array('onclick'=>"submitForm('modal', 'site-form', '$urlCreate')"));
 		
 		echo json_encode($content);
+	}
+	
+	private function createSiteHeader(Site $site)
+	{
+		if(! isset($_POST['SiteLanguage']))
+			return true;
+		
+		foreach ($_POST['SiteLanguage'] as $siteAttributes)
+		{
+			$siteLangauge = new SiteLanguage();
+			$siteLangauge->attributes = $siteAttributes;
+			$siteLangauge->siteid = $site->siteid;
+			if(! $siteLangauge->insert())
+				return false;
+		}
+		
+		return true;
 	}
 	
 	/**
@@ -98,18 +122,98 @@ class SiteController extends Controller
 	 */
 	public function actionUpdate($name)
 	{
-		$this->checkAccess('updateSite');
-		
+		$transaktion = Yii::app()->db->beginTransaction();
 		$model = Site::model()->findByAttributes(array('siteid' => $name));
+		$error = '';
 		
 		if($model === null)
 			throw new CHttpException(400, MsgPicker::msg()->getMessage(MSG::EXEPTION_SITE_NOTFOUND));
 		
+		$site = new Site('update');
+		$modelCheck = new ModelCheck($site, 'Site', 'updateSite', 'site-form');
+		if($this->checkModel($modelCheck))
+		{
+			$model->update_userid = Yii::app()->user->getID();
+			$model->update_time = date('Y-m-d H:i:s', time());
+			$model->layout = strtolower($site->layout);
+			$model->roleaccess = $site->roleaccess;
+			$model->label = $site->label;
+			
+			if($model->update())
+				if($this->updateSiteHeader($model))
+					try
+					{
+						$transaktion->commit();
+						$this->addSuccessMessage(new Message(MSG::SUCCESS_SITE_UPDATE));
+						$content['success'] = Yii::app()->createAbsoluteUrl('site/edit', array('name'=>$model->siteid));
+						echo json_encode($content);
+						Yii::app()->end();
+					}
+					catch (Exception $e)
+					{}
+			
+			$transaktion->rollBack();
+			$error = BsHtml::alert(BsHtml::ALERT_COLOR_ERROR, MsgPicker::msg()->getMessage(MSG::ERROR_SITE_NOTUPDATE));
+		}
+		
+		$urlUpdate = Yii::app()->createAbsoluteUrl('site/update', array('name'=>$name));
+		$urlExit = Yii::app()->createAbsoluteUrl('site/question', array(
+			'head'=>MSG::HEAD_QUESTION_REALYCLOSE,
+			'question'=>MSG::QUESTION_EXIT_SITECREATE,
+			'button'=>MSG::QUESTION_BTN_REALYCLOSE,
+		));
+		
 		$content['header'] = MsgPicker::msg()->getMessage(MSG::HEAD_SITE_UPDATE);
-		$content['body'] = $this->renderPartial('_create', array('model'=>$model), true);
-		$content['footer'] = 'foot';
+		$content['body'] = $error . $this->renderPartial('_edit', array('model'=>$model, 'url'=>$urlUpdate), true);
+		$content['footer'] = 
+			BSHtml::button(MsgPicker::msg()->getMessage(MSG::BTN_EXIT), array('onclick'=>"showModalAjax('modalmsg', '".$urlExit."');")).
+			BsHtml::button(MsgPicker::msg()->getMessage(MSG::BTN_UPDATE), array('onclick'=>"submitForm('modal', 'site-form', '$urlUpdate')"));
 		
 		echo json_encode($content);
+	}
+	
+	private function updateSiteHeader(Site $site)
+	{
+		if(! isset($_POST['SiteLanguage']))
+			return true;
+	
+		foreach ($_POST['SiteLanguage'] as $siteAttributes)
+		{
+			$siteLangauge = new SiteLanguage();
+			$siteLangauge->attributes = $siteAttributes;
+			$siteLanguageDB = SiteLanguage::model()->findByAttributes(array('siteid'=>$site->siteid, 'languageid'=>$siteLangauge->languageid));
+			if($siteLanguageDB === null)
+			{
+				$siteLangauge->siteid = $site->siteid;
+				if(! $siteLangauge->insert())
+					return false;
+			}
+			else 
+			{
+				$siteLanguageDB->head = $siteLangauge->head;
+				if(! $siteLanguageDB->update())
+					return false;
+			}
+		}
+	
+		return true;
+	}
+	
+	public function actionNewLanguage($language, $counter)
+	{
+		$this->checkAccess('addSiteNewLanguage');
+		
+		$siteLanguage = new SiteLanguage();
+		$siteLanguage->languageid = $language;
+		$this->renderPartial('_language', array('counter'=>$counter, 'model'=>$siteLanguage, 'form'=> new BsActiveForm()));
+	}
+	
+	public function actionDeleteLanguage($name, $language)
+	{
+		$this->checkAccess('deleteSiteLanguage');
+		
+		if(! SiteLanguage::model()->deleteAllByAttributes(array('siteid'=>$name, 'languageid'=>$language)))
+			throw new CHttpException(500, MsgPicker::msg()->getMessage(MSG::EXCEPTION_SITE_LANGUAGENOTDELETE));
 	}
 	
 	public function actionDelete($name)

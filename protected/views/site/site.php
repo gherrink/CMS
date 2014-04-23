@@ -23,12 +23,13 @@ if($edit === true && $editable === true)
 
 <?php if($edit || $editable):?>
 	<div class="row">
-		<?php 
-			echo BsHtml::button('btn', array(
-				'onclick' => 'showModalAjax("modal", "'.Yii::app()->createAbsoluteUrl('site/create').'");',
-			));
-		?>
-		<?php echo BsHtml::linkButton()?>
+		<div class="col-sm-12">
+			<?php 
+				echo BsHtml::button(MsgPicker::msg()->getMessage(MSG::BTN_UPDATE), array(
+					'onclick' => 'showModalAjax("modal", "'.Yii::app()->createAbsoluteUrl('site/update', array('name'=>$site->siteid)).'");',
+				));
+			?>
+		</div>
 	</div>
 	<hr>
 <?php endif;?>

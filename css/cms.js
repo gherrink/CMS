@@ -41,7 +41,7 @@ function showModalAjax(id, url)
 
 function showErrorModal(id, jqXHR, textStatus, errorThrown)
 {
-	showModal(id, errorThrown, jqXHR.responseText, '<button class="btn btn-default" data-dismiss="'+id+'" type="button">OKs</button>');
+	showModal(id, errorThrown, jqXHR.responseText, '<button class="btn btn-default" onclick="$(\'#'+id+'\').modal(\'hide\');" type="button">OK</button>');
 }
 
 function showModal(id, header, body, footer)

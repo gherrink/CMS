@@ -277,8 +277,14 @@ class Menu extends CActiveRecord
 	{
 		if($msite)
 			return array(
-				'label' => 'test',
-				'ajax' => 'showModalAjax("modal", "'.Yii::app()->createAbsoluteUrl('site/create').'");',
+				'label' => MsgPicker::msg()->getMessage(MSG::MP_MODERATOR_SITE),
+				'url' => '#',
+				'items' => array(
+					array(
+						'label' => MsgPicker::msg()->getMessage(MSG::MP_MODERATOR_SITECREATE),
+						'ajax' => 'showModalAjax("modal", "'.Yii::app()->createAbsoluteUrl('site/create').'");',
+					),
+				),
 			);
 	}
 	

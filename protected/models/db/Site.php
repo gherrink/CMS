@@ -34,8 +34,6 @@ class Site extends CActiveRecord
 	 */
 	public function rules()
 	{
-		// NOTE: you should only define rules for those attributes that
-		// will receive user inputs.
 		return array(
 			array('label, layout, roleaccess', 'required', 'on'=>'create, update'),
 			array('siteid', 'length', 'max'=>32),
@@ -43,6 +41,9 @@ class Site extends CActiveRecord
 			array('layout', 'length', 'max'=>5),
 			array('roleaccess', 'length', 'max'=>64),
 			array('create_time', 'safe'),
+			array('label', 'match', 'pattern'=>'/^[A-Za-z]+$/u',
+					'message'=>MsgPicker::msg()->getMessage(MSG::SITE_MSG_MATCH)),
+			array('label', 'unique', 'on'=>'create'),
 			array('siteid, label, layout, roleaccess, update_time, update_userid, create_time, create_userid', 'safe', 'on'=>'search'),
 		);
 	}

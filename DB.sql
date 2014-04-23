@@ -11,12 +11,12 @@ DROP VIEW VisitUserSite;
 
 DROP TABLE AuthItemChild;
 DROP TABLE SiteContent;
-DROP TABLE Content;
 DROP TABLE VisitSite;
 DROP TABLE SiteLanguage;
 DROP TABLE Site;
-DROP TABLE AuthAssignment;
+DROP TABLE Content;
 DROP TABLE Menu;
+DROP TABLE AuthAssignment;
 DROP TABLE AuthItem;
 DROP TABLE Language;
 DROP TABLE VisitUser;
@@ -68,27 +68,6 @@ CREATE TABLE Language
 );
 
 
-CREATE TABLE Menu
-(
-	menuid char(32) NOT NULL,
-	languageid char(2) NOT NULL,
-	label varchar(20) NOT NULL,
-	url_intern boolean NOT NULL,
-	url varchar(50),
-	siteid char(32),
-	icon varchar(20),
-	position smallint NOT NULL,
-	roleaccess varchar(64) NOT NULL,
-	parent_menuid char(32),
-	parent_langugageid char(2),
-	update_userid varchar(20) NOT NULL,
-	update_time timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL,
-	create_userid varchar(20) NOT NULL,
-	create_time timestamp NOT NULL,
-	PRIMARY KEY (menuid, languageid)
-);
-
-
 CREATE TABLE Visit
 (
 	visitid char(32) NOT NULL UNIQUE,
@@ -134,6 +113,56 @@ CREATE TABLE User
 );
 
 
+CREATE TABLE Menu
+(
+	menuid char(32) NOT NULL,
+	languageid char(2) NOT NULL,
+	label varchar(20) NOT NULL,
+	url_intern boolean NOT NULL,
+	url varchar(50),
+	siteid char(32),
+	icon varchar(20),
+	position smallint NOT NULL,
+	roleaccess varchar(64) NOT NULL,
+	parent_menuid char(32),
+	parent_langugageid char(2),
+	update_userid varchar(20) NOT NULL,
+	update_time timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL,
+	create_userid varchar(20) NOT NULL,
+	create_time timestamp NOT NULL,
+	PRIMARY KEY (menuid, languageid)
+);
+
+
+CREATE TABLE Content
+(
+	contentid char(32) NOT NULL UNIQUE,
+	label varchar(20) NOT NULL,
+	text text NOT NULL,
+	languageid char(2) NOT NULL,
+	roleaccess varchar(64) NOT NULL,
+	update_time timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL,
+	update_userid varchar(20) NOT NULL,
+	create_time timestamp NOT NULL,
+	create_userid varchar(20) NOT NULL,
+	PRIMARY KEY (contentid)
+);
+
+
+CREATE TABLE Site
+(
+	siteid char(32) NOT NULL UNIQUE,
+	label varchar(20) NOT NULL UNIQUE,
+	layout char(5) NOT NULL,
+	roleaccess varchar(64) NOT NULL,
+	update_time timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL,
+	update_userid varchar(20) NOT NULL,
+	create_time timestamp NOT NULL,
+	create_userid varchar(20) NOT NULL,
+	PRIMARY KEY (siteid)
+);
+
+
 CREATE TABLE VisitUser
 (
 	visitid char(32) NOT NULL,
@@ -153,35 +182,6 @@ CREATE TABLE VisitSite
 );
 
 
-CREATE TABLE Site
-(
-	siteid char(32) NOT NULL UNIQUE,
-	label varchar(20) NOT NULL UNIQUE,
-	layout char(5) NOT NULL,
-	roleaccess varchar(64) NOT NULL,
-	update_time timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL,
-	update_userid varchar(20) NOT NULL,
-	create_time timestamp NOT NULL,
-	create_userid varchar(20) NOT NULL,
-	PRIMARY KEY (siteid)
-);
-
-
-CREATE TABLE Content
-(
-	contentid char(32) NOT NULL UNIQUE,
-	label varchar(20) NOT NULL,
-	text text NOT NULL,
-	languageid char(2) NOT NULL,
-	roleaccess varchar(64) NOT NULL,
-	update_time timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL,
-	update_userid varchar(20) NOT NULL,
-	create_time timestamp NOT NULL,
-	create_userid varchar(20) NOT NULL,
-	PRIMARY KEY (contentid)
-);
-
-
 CREATE TABLE UserValidate
 (
 	validateid char(32) NOT NULL UNIQUE,
@@ -193,14 +193,6 @@ CREATE TABLE UserValidate
 
 
 /* Create Foreign Keys */
-
-ALTER TABLE Content
-	ADD FOREIGN KEY (roleaccess)
-	REFERENCES AuthItem (name)
-	ON UPDATE RESTRICT
-	ON DELETE RESTRICT
-;
-
 
 ALTER TABLE AuthItemChild
 	ADD CONSTRAINT AuthItemChild_ibfk_2 FOREIGN KEY (child)
@@ -218,11 +210,11 @@ ALTER TABLE Site
 ;
 
 
-ALTER TABLE AuthAssignment
-	ADD CONSTRAINT AuthAssignment_ibfk_1 FOREIGN KEY (itemname)
+ALTER TABLE Content
+	ADD FOREIGN KEY (roleaccess)
 	REFERENCES AuthItem (name)
-	ON UPDATE CASCADE
-	ON DELETE CASCADE
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
 ;
 
 
@@ -242,10 +234,18 @@ ALTER TABLE Menu
 ;
 
 
+ALTER TABLE AuthAssignment
+	ADD CONSTRAINT AuthAssignment_ibfk_1 FOREIGN KEY (itemname)
+	REFERENCES AuthItem (name)
+	ON UPDATE CASCADE
+	ON DELETE CASCADE
+;
+
+
 ALTER TABLE Menu
 	ADD FOREIGN KEY (languageid)
 	REFERENCES Language (languageid)
-	ON UPDATE RESTRICT
+	ON UPDATE CASCADE
 	ON DELETE RESTRICT
 ;
 
@@ -266,9 +266,9 @@ ALTER TABLE Content
 ;
 
 
-ALTER TABLE Menu
-	ADD FOREIGN KEY (parent_menuid, parent_langugageid)
-	REFERENCES Menu (menuid, languageid)
+ALTER TABLE VisitSite
+	ADD FOREIGN KEY (visitid)
+	REFERENCES Visit (visitid)
 	ON UPDATE CASCADE
 	ON DELETE RESTRICT
 ;
@@ -277,23 +277,7 @@ ALTER TABLE Menu
 ALTER TABLE VisitUser
 	ADD FOREIGN KEY (visitid)
 	REFERENCES Visit (visitid)
-	ON UPDATE RESTRICT
-	ON DELETE RESTRICT
-;
-
-
-ALTER TABLE VisitSite
-	ADD FOREIGN KEY (visitid)
-	REFERENCES Visit (visitid)
-	ON UPDATE RESTRICT
-	ON DELETE RESTRICT
-;
-
-
-ALTER TABLE VisitSite
-	ADD FOREIGN KEY (siteid, languageid)
-	REFERENCES SiteLanguage (siteid, languageid)
-	ON UPDATE RESTRICT
+	ON UPDATE CASCADE
 	ON DELETE RESTRICT
 ;
 
@@ -301,20 +285,28 @@ ALTER TABLE VisitSite
 ALTER TABLE SiteContent
 	ADD FOREIGN KEY (siteid, languageid)
 	REFERENCES SiteLanguage (siteid, languageid)
-	ON UPDATE RESTRICT
-	ON DELETE RESTRICT
+	ON UPDATE CASCADE
+	ON DELETE CASCADE
 ;
 
 
-ALTER TABLE Menu
-	ADD FOREIGN KEY (update_userid)
-	REFERENCES User (userid)
+ALTER TABLE VisitSite
+	ADD FOREIGN KEY (siteid, languageid)
+	REFERENCES SiteLanguage (siteid, languageid)
 	ON UPDATE CASCADE
 	ON DELETE RESTRICT
 ;
 
 
 ALTER TABLE Menu
+	ADD FOREIGN KEY (create_userid)
+	REFERENCES User (userid)
+	ON UPDATE CASCADE
+	ON DELETE RESTRICT
+;
+
+
+ALTER TABLE Site
 	ADD FOREIGN KEY (create_userid)
 	REFERENCES User (userid)
 	ON UPDATE CASCADE
@@ -323,7 +315,7 @@ ALTER TABLE Menu
 
 
 ALTER TABLE Content
-	ADD FOREIGN KEY (create_userid)
+	ADD FOREIGN KEY (update_userid)
 	REFERENCES User (userid)
 	ON UPDATE CASCADE
 	ON DELETE RESTRICT
@@ -346,16 +338,8 @@ ALTER TABLE UserValidate
 ;
 
 
-ALTER TABLE Site
-	ADD FOREIGN KEY (update_userid)
-	REFERENCES User (userid)
-	ON UPDATE CASCADE
-	ON DELETE RESTRICT
-;
-
-
 ALTER TABLE Content
-	ADD FOREIGN KEY (update_userid)
+	ADD FOREIGN KEY (create_userid)
 	REFERENCES User (userid)
 	ON UPDATE CASCADE
 	ON DELETE RESTRICT
@@ -371,8 +355,32 @@ ALTER TABLE VisitUser
 
 
 ALTER TABLE Site
-	ADD FOREIGN KEY (create_userid)
+	ADD FOREIGN KEY (update_userid)
 	REFERENCES User (userid)
+	ON UPDATE CASCADE
+	ON DELETE RESTRICT
+;
+
+
+ALTER TABLE Menu
+	ADD FOREIGN KEY (update_userid)
+	REFERENCES User (userid)
+	ON UPDATE CASCADE
+	ON DELETE RESTRICT
+;
+
+
+ALTER TABLE Menu
+	ADD FOREIGN KEY (parent_menuid, parent_langugageid)
+	REFERENCES Menu (menuid, languageid)
+	ON UPDATE CASCADE
+	ON DELETE RESTRICT
+;
+
+
+ALTER TABLE SiteContent
+	ADD FOREIGN KEY (contentid)
+	REFERENCES Content (contentid)
 	ON UPDATE CASCADE
 	ON DELETE RESTRICT
 ;
@@ -381,16 +389,8 @@ ALTER TABLE Site
 ALTER TABLE SiteLanguage
 	ADD FOREIGN KEY (siteid)
 	REFERENCES Site (siteid)
-	ON UPDATE RESTRICT
-	ON DELETE RESTRICT
-;
-
-
-ALTER TABLE SiteContent
-	ADD FOREIGN KEY (contentid)
-	REFERENCES Content (contentid)
-	ON UPDATE RESTRICT
-	ON DELETE RESTRICT
+	ON UPDATE CASCADE
+	ON DELETE CASCADE
 ;
 
 

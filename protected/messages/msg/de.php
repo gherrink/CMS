@@ -6,7 +6,12 @@
 
 return array(
 	'ERROR_MSG_NOT_FOUND'=>'Die Message ###msg### wurde nicht gefunden.',
-		
+	
+	/* Sprachen */
+	'DE'	=> 'Deutsch',
+	'EN'	=> 'Englisch',
+	/*/Sprachen */
+	
 	/* MSG HEADER */
 	'MSG_SUCCESS'	=> 'Erfolg',
 	'MSG_INFO'		=> 'Information',
@@ -36,6 +41,7 @@ return array(
 	'MP_CONTACT'				=> 'Kontakt',
 	'MP_USER_REGISTERASMEMBER'	=> 'Mitgliedsregistrierung',
 	'MP_MODERATOR'				=> 'Moderator',
+	'MP_MODERATOR_SITE'			=> 'Seiten',
 	'MP_MODERATOR_SITECREATE'	=> 'Seite erstellen',
 	/*/Menu Punkte */
 		
@@ -82,7 +88,9 @@ return array(
 	/*/User */
 
 	/* Site */
-
+	
+	'SITE_MSG_MATCH'				=> 'Das Label darf nur Groß- und Kleinbuchstaben enthalten',
+	'SITE_MSG_HEADLANGUAGEEXISTS'	=> 'Für diese Sprache Existiert bereits eine Überschrift, bitte wählen Sie eine andere.',
 	/*/Site */
 
 	/* MSG SUCCESS */
@@ -92,6 +100,7 @@ return array(
 	'SUCCESS_LOGIN_RESENDMAIL'		=> 'Die Registrierungsmail wurde erneut an ihre E-Mail-Addresse gesendet, bitte prüfen Sie ihr Postfach.',
 	'SUCCESS_LOGIN_MAILCHANGE'		=> 'Ihre E-Mail-Addresse wurde erfolgreich geändert und eine Registrierungsmail gesendet. Bitte prüfen Sie die Mails in ihrem Postfach.',
 	'SUCCESS_SITE_CREATE'			=> 'Die Seite wurde erfolgreich erstellt.',
+	'SUCCESS_SITE_UPDATE'			=> 'Die Seite wurde erfolgreich geändert.',
 	/*/MSG SUCCESS */
 
 	/* MSG WARNING */
@@ -109,12 +118,14 @@ return array(
 	'ERROR_LOGIN_RESENDMAIL'		=> 'Die Registrierungsmail konnte leider nicht versendet werden, bitte versuchen Sie es erneut.',
 	'ERROR_LOGIN_MAILCHANGE'		=> 'Ihre E-Mail-Addresse konnte leider nicht geändert werden, bitte versuchen Sie es erneut.',
 	'ERROR_SITE_NOTCREATE'			=> 'Die Seite konnte nicht erstellt werden, bitte versuchen Sie es erneut.',
+	'ERROR_SITE_NOTUPDATE'			=> 'Die Seite konnte nicht geändert werden, bitte versuchen Sie es erneut.',
 	/*/MSG ERROR */
 
 	/* EXEPTION */
 	'EXEPTION_CONST_NOTDEFINED'			=> 'Die Konstante ###const### ist nicht deffiniert.',
 	'EXEPTION_SITE_NOTFOUND' 			=> 'Die Angeforderte Seite konnte leider nicht gefunden werden.',
 	'EXEPTION_SITE_NOCONTENT'			=> 'Die Seite hat noch keinen Inhalt',
+	'EXCEPTION_SITE_LANGUAGENOTDELETE'	=> 'Die Sprache konnte nicht gelöscht werden, bitte versuchen Sie es erneut.',
 	/*/EXEPTION */
 
 	/* QUESTION */

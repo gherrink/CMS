@@ -26,69 +26,69 @@ class RightController extends Controller
 		$this->createOperationContent($auth);
 		
 		//Visitor
-		$role=$auth->createRole(MSG::VISITOR);
-// 		$role = $auth->getAuthItem(MSG::VISITOR);
+// 		$role=$auth->createRole(MSG::VISITOR);
+		$role = $auth->getAuthItem(MSG::VISITOR);
 		$this->addVisitorRights($role);
 		
 		//User
-		$role=$auth->createRole(MSG::USER);
-// 		$role=$auth->getAuthItem(MSG::USER);
+// 		$role=$auth->createRole(MSG::USER);
+		$role=$auth->getAuthItem(MSG::USER);
 		$this->addUserRights($role);
 		
 		//Member
-		$role=$auth->createRole(MSG::MEMBER);
-// 		$role=$auth->getAuthItem(MSG::MEMBER);
+// 		$role=$auth->createRole(MSG::MEMBER);
+		$role=$auth->getAuthItem(MSG::MEMBER);
 		$this->addMemberRights($role);
 		
 		//Moderator Site
-		$role=$auth->createRole(MSG::MSITE);
-// 		$role=$auth->getAuthItem(MSG::MSITE);
+// 		$role=$auth->createRole(MSG::MSITE);
+		$role=$auth->getAuthItem(MSG::MSITE);
 		$this->addMsiteRights($role);
 	}
 	
 	private function createOperationContact($auth)
 	{
-		$auth->createOperation('contact');
+// 		$auth->createOperation('contact');
 	}
 	
 	private function createOperationLogin($auth)
 	{
-		$auth->createOperation('login');
-		$auth->createOperation('logout');
-		$auth->createOperation('register');
-		$auth->createOperation('changeMail');
-		$auth->createOperation('resendMail');
+// 		$auth->createOperation('login');
+// 		$auth->createOperation('logout');
+// 		$auth->createOperation('register');
+// 		$auth->createOperation('changeMail');
+// 		$auth->createOperation('resendMail');
 	}
 	
 	private function createOperationSite($auth)
 	{
-		$auth->createOperation('createSite');
-		$auth->createOperation('updateSite');
-		$auth->createOperation('deleteSite');
-		$auth->createOperation('deleteSiteLanguage');
-		$auth->createOperation('addSiteNewLanguage');
+// 		$auth->createOperation('createSite');
+// 		$auth->createOperation('updateSite');
+// 		$auth->createOperation('deleteSite');
+// 		$auth->createOperation('deleteSiteLanguage');
+// 		$auth->createOperation('addSiteNewLanguage');
 	}
 	
 	private function createOperationContent($auth)
 	{
-		$auth->createOperation('createContent');
-		$auth->createOperation('updateContent');
-		$auth->createOperation('deleteContent');
+// 		$auth->createOperation('createContent');
+// 		$auth->createOperation('updateContent');
+// 		$auth->createOperation('deleteContent');
 	}
 	
 	private function addVisitorRights($role)
 	{
-		$role->addChild('contact');
-		$role->addChild('login');
-		$role->addChild('register');
-		$role->addChild('changeMail');
-		$role->addChild('resendMail');
+// 		$role->addChild('contact');
+// 		$role->addChild('login');
+// 		$role->addChild('register');
+// 		$role->addChild('changeMail');
+// 		$role->addChild('resendMail');
 	}
 	
 	private function addUserRights($role)
 	{
-		$role->addChild('logout');
-		$role->addChild('contact');
+// 		$role->addChild('logout');
+// 		$role->addChild('contact');
 	}
 	
 	private function addMemberRights($role)
@@ -98,14 +98,14 @@ class RightController extends Controller
 	
 	private function addMsiteRights($role)
 	{
-		$role->addChild('createSite');
-		$role->addChild('updateSite');
-		$role->addChild('deleteSite');
-		$role->addChild('deleteSiteLanguage');
-		$role->addChild('addSiteNewLanguage');
-		$role->addChild('createContent');
-		$role->addChild('updateContent');
-		$role->addChild('deleteContent');
+// 		$role->addChild('createSite');
+// 		$role->addChild('updateSite');
+// 		$role->addChild('deleteSite');
+// 		$role->addChild('deleteSiteLanguage');
+// 		$role->addChild('addSiteNewLanguage');
+// 		$role->addChild('createContent');
+// 		$role->addChild('updateContent');
+// 		$role->addChild('deleteContent');
 	}
 	
 }

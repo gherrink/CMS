@@ -5,7 +5,8 @@
  * @author Maurice Busch <busch.maurice@gmx.net>
  * @copyright 2014
  * @version 0.1
- * 
+ */
+/*
  * @var $this ContactController
  * @var $model ContactForm
  * @var $form BsActiveForm

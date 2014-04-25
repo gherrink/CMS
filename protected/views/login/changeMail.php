@@ -6,7 +6,9 @@
  * @author Maurice Busch
  * @copyright 2014
  * @version 0.1
- * 
+ */
+
+/*
  * @var $this LoginController
  * @var $model User
  * @var $form BsActiveForm

@@ -4,8 +4,9 @@
  * @author Maurice Busch
  * @copyright 2014
  * @version 0.1
- * 
- * @var $this SiteController
+ */
+
+/* @property $this SiteController
  * @var $site Site
  * @var $edit boolean		Bearbeitung aktive
  * @var $editable boolean	Bearbeitung inaktiv kann aktiviert werden (normale

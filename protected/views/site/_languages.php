@@ -3,7 +3,8 @@
  * @author Maurice Busch
  * @copyright 2014
  * @version 0.1
- *
+ */
+/*
  * @var SiteLanguage[] $siteLanguages
  * @var BsActiveForm $form
  * @var Site $model

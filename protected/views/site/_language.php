@@ -3,7 +3,8 @@
  * @author Maurice Busch
  * @copyright 2014
  * @version 0.1
- * 
+ */
+/* 
  * @var SiteLanguage $model
  * @var BsActiveForm $form
  * @var Integer $counter

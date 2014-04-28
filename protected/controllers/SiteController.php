@@ -22,7 +22,7 @@ class SiteController extends Controller
 	{
 		$site = Site::model()->findByAttributes(array('siteid'=>$name));
 		if($site === null)
-			throw new CHttpException(500, MsgPicker::msg()->getMessage(MSG::EXEPTION_SITE_NOTFOUND));
+			throw new CHttpException(500, MsgPicker::msg()->getMessage(MSG::EXCEPTION_SITE_NOTFOUND));
 		
 		$this->checkAccess($site->roleaccess);
 		$editable = Yii::app()->user->checkAccess('updateSite');
@@ -34,7 +34,7 @@ class SiteController extends Controller
 			if(SiteContentView::model()->countBySql("SELECT COUNT(*) FROM SiteContentView WHERE siteid = '$name' AND languageid = '".Yii::app()->language."' AND {$this->getRoleaccessSQLWhere()}") > 0)
 				$this->render('site', array('layout'=>$site->layout, 'site'=>$site, 'edit'=>$edit, 'editable'=>$editable));
 			else 
-				throw new CHttpException(500, MsgPicker::msg()->getMessage(MSG::EXEPTION_SITE_NOCONTENT));
+				throw new CHttpException(500, MsgPicker::msg()->getMessage(MSG::EXCEPTION_SITE_NOCONTENT));
 		}
 	}
 	
@@ -87,13 +87,16 @@ class SiteController extends Controller
 		$urlExit = Yii::app()->createAbsoluteUrl('site/question', array(
 			'head'=>MSG::HEAD_QUESTION_REALYCLOSE,
 			'question'=>MSG::QUESTION_EXIT_SITECREATE,
-			'button'=>MSG::QUESTION_BTN_REALYCLOSE,
 		));
+		$json = json_encode(array('buttons'=>array(
+				MSG::BTN_YES => "$('#modal').modal('hide'); $('#modalmsg').modal('hide');",
+				MSG::BTN_NO => "$('#modalmsg').modal('hide');",
+		)));
 		
 		$content['header'] = MsgPicker::msg()->getMessage(MSG::HEAD_SITE_CREATE);
 		$content['body'] = $error . $this->renderPartial('_edit', array('model'=>$model, 'url'=>$urlCreate), true);
 		$content['footer'] = 
-			BSHtml::button(MsgPicker::msg()->getMessage(MSG::BTN_EXIT), array('onclick'=>"showModalAjax('modalmsg', '".$urlExit."');")).
+			BSHtml::button(MsgPicker::msg()->getMessage(MSG::BTN_EXIT), array('onclick'=>"showModalAjax('modalmsg', '".$urlExit."', $json);")).
 			BsHtml::button(MsgPicker::msg()->getMessage(MSG::BTN_CREATE), array('onclick'=>"submitForm('modal', 'site-form', '$urlCreate')"));
 		
 		echo json_encode($content);
@@ -127,7 +130,7 @@ class SiteController extends Controller
 		$error = '';
 		
 		if($model === null)
-			throw new CHttpException(400, MsgPicker::msg()->getMessage(MSG::EXEPTION_SITE_NOTFOUND));
+			throw new CHttpException(400, MsgPicker::msg()->getMessage(MSG::EXCEPTION_SITE_NOTFOUND));
 		
 		$site = new Site('update');
 		$modelCheck = new ModelCheck($site, 'Site', 'updateSite', 'site-form');
@@ -160,13 +163,16 @@ class SiteController extends Controller
 		$urlExit = Yii::app()->createAbsoluteUrl('site/question', array(
 			'head'=>MSG::HEAD_QUESTION_REALYCLOSE,
 			'question'=>MSG::QUESTION_EXIT_SITECREATE,
-			'button'=>MSG::QUESTION_BTN_REALYCLOSE,
 		));
+		$json = json_encode(array('buttons'=>array(
+			MSG::BTN_YES => "$('#modal').modal('hide'); $('#modalmsg').modal('hide');",
+			MSG::BTN_NO => "$('#modalmsg').modal('hide');",
+		)));
 		
 		$content['header'] = MsgPicker::msg()->getMessage(MSG::HEAD_SITE_UPDATE);
 		$content['body'] = $error . $this->renderPartial('_edit', array('model'=>$model, 'url'=>$urlUpdate), true);
 		$content['footer'] = 
-			BSHtml::button(MsgPicker::msg()->getMessage(MSG::BTN_EXIT), array('onclick'=>"showModalAjax('modalmsg', '".$urlExit."');")).
+			BSHtml::button(MsgPicker::msg()->getMessage(MSG::BTN_EXIT), array('onclick'=>"showModalAjax('modalmsg', '".$urlExit."', ".$json.");")).
 			BsHtml::button(MsgPicker::msg()->getMessage(MSG::BTN_UPDATE), array('onclick'=>"submitForm('modal', 'site-form', '$urlUpdate')"));
 		
 		echo json_encode($content);
@@ -218,7 +224,12 @@ class SiteController extends Controller
 	
 	public function actionDelete($name)
 	{
-		//@TODO deleteSite
+		$this->checkAccess('deleteSite');
+		
+		if(! Site::model()->deleteByPk($name))
+			throw new CHttpException(500, MsgPicker::msg()->getMessage(MSG::EXCEPTION_SITE_NOTDELETE));	
+		
+		echo json_encode(array('success'=>Yii::app()->createAbsoluteUrl('site')));
 	}
 	
 	public function actionCreateContent()
@@ -254,42 +265,29 @@ class SiteController extends Controller
 	 * Gives a JSON array for a Question
 	 * @param String $question
 	 */
-	public function actionQuestion($head, $question, $button)
+	public function actionQuestion($head, $question)
 	{
-		if(! defined('MSG::'.$head))
-			throw new CHttpException(400, MsgPicker::msg()->getMessage(MSG::EXEPTION_CONST_NOTDEFINED, array('const'=>$head)));
-		
-		if(! defined('MSG::'.$question))
-			throw new CHttpException(400, MsgPicker::msg()->getMessage(MSG::EXEPTION_CONST_NOTDEFINED, array('const'=>$question)));
-		
-		if(! defined('MSG::'.$button))
-			throw new CHttpException(400, MsgPicker::msg()->getMessage(MSG::EXEPTION_CONST_NOTDEFINED, array('const'=>$button)));
+		if(in_array('buttons', $_POST))
+			throw new CHttpException(400, MsgPicker::msg()->getMessage(MSG::EXCEPTION_NOBUTTONS));
 		
 		$content['header'] = MsgPicker::msg()->getMessage($head);
 		$content['body'] = MsgPicker::msg()->getMessage($question);
-		$content['footer'] = $this->createQuestionFooter($button);
+		$content['footer'] = $this->createQuestionFooter($_POST['buttons']);
 		
 		echo json_encode($content);
 	}
 	
-	private function createQuestionFooter($button)
+	private function createQuestionFooter($buttons)
 	{
-		$buttons = '';
-		switch ($button) {
-			case MSG::QUESTION_BTN_REALYCLOSE:
-				$buttons = BsHtml::button(MsgPicker::msg()->getMessage(MSG::BTN_YES), array(
-					'onclick' => "$('#modal').modal('hide'); $('#modalmsg').modal('hide');",
-				));
-				$buttons .= BsHtml::button(MsgPicker::msg()->getMessage(MSG::BTN_NO), array(
-					'onclick' => "$('#modalmsg').modal('hide');",
-				));
-			break;
-			
-			default:
-				;
-			break;
+		$html = '';
+		
+		while ( ($buttonaction = current($buttons)) !== FALSE ) {			
+			$html .= BsHtml::button(MsgPicker::msg()->getMessage(key($buttons)), array(
+						'onclick' => $buttonaction,
+					));
+			next($buttons);
 		}
 		
-		return $buttons;
+		return $html;
 	}
 }

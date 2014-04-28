@@ -6,13 +6,11 @@
  * @version 0.1
  */
 
-/* @property $this SiteController
+/* 
+ * @var $this SiteController
  * @var $site Site
- * @var $edit boolean		Bearbeitung aktive
- * @var $editable boolean	Bearbeitung inaktiv kann aktiviert werden (normale
- * 							Seitenansicht)
- * 
- * @todo edit und editable
+ * @var $edit boolean		
+ * @var $editable boolean
  */
 
 if($edit === null || ! $editable)
@@ -29,6 +27,20 @@ if($edit === true && $editable === true)
 				echo BsHtml::button(MsgPicker::msg()->getMessage(MSG::BTN_UPDATE), array(
 					'onclick' => 'showModalAjax("modal", "'.Yii::app()->createAbsoluteUrl('site/update', array('name'=>$site->siteid)).'");',
 				));
+			?>
+			<?php 
+				$urlDelete = Yii::app()->createAbsoluteUrl('site/delete', array('name'=>$site->siteid));
+				$urlQuestionDelete = Yii::app()->createAbsoluteUrl('site/question', array(
+					'head'=>MSG::HEAD_QUESTION_REALYDELETE,
+					'question'=>MSG::QUESTION_DELEATE_SITE,
+				));
+				$json = json_encode(array('buttons'=>array(
+					MSG::BTN_YES => "deleteAjax('$urlDelete'); $('#modalmsg').modal('hide');",
+					MSG::BTN_NO => "$('#modalmsg').modal('hide');",
+				)));
+				echo BSHtml::button(MsgPicker::msg()->getMessage(MSG::BTN_DELETE), array(
+					'onclick'=>"showModalAjax('modalmsg', '$urlQuestionDelete', $json);")
+				);
 			?>
 		</div>
 	</div>

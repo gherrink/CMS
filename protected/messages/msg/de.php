@@ -47,6 +47,7 @@ return array(
 		
 	/* Ueberschriften */
 	'HEAD_QUESTION_REALYCLOSE'			=> 'Wirklich Schließen?',
+	'HEAD_QUESTION_REALYDELETE'			=> 'Wirklich Löschen?',
 	'HEAD_QUESTION'						=> 'Frage',
 	'HEAD_CONTACT'						=> 'Kontakt',
 	'HEAD_LOGIN'						=> 'Anmelden',
@@ -64,6 +65,7 @@ return array(
 	'BTN_REGISTER'				=> 'Registrieren',
 	'BTN_CREATE'				=> 'Erstellen',
 	'BTN_UPDATE'				=> 'Ändern',
+	'BTN_DELETE'				=> 'Löschen',
 	'BTN_EXIT'					=> 'Beenden',
 	'BTN_SITE_ADDLANGUAGE'		=> 'Neue Sprache hinzufügen',
 	/*/Buttons */
@@ -122,14 +124,16 @@ return array(
 	/*/MSG ERROR */
 
 	/* EXEPTION */
-	'EXEPTION_CONST_NOTDEFINED'			=> 'Die Konstante ###const### ist nicht deffiniert.',
-	'EXEPTION_SITE_NOTFOUND' 			=> 'Die Angeforderte Seite konnte leider nicht gefunden werden.',
-	'EXEPTION_SITE_NOCONTENT'			=> 'Die Seite hat noch keinen Inhalt',
+	'EXCEPTION_NOBUTTONS'				=> 'Es wurden keine Buttons gesetzt.',
+	'EXCEPTION_SITE_NOTFOUND' 			=> 'Die Angeforderte Seite konnte leider nicht gefunden werden.',
+	'EXCEPTION_SITE_NOCONTENT'			=> 'Die Seite hat noch keinen Inhalt',
 	'EXCEPTION_SITE_LANGUAGENOTDELETE'	=> 'Die Sprache konnte nicht gelöscht werden, bitte versuchen Sie es erneut.',
+	'EXCEPTION_SITE_NOTDELETE'			=> 'Die Seite konnte leider nicht gelöscht werden, bitte versuchen Sie es erneut.',
 	/*/EXEPTION */
 
 	/* QUESTION */
 	'QUESTION_EXIT_SITECREATE'		=> 'Möchten Sie wirklich die Seitenbearbeitung beenden? Die Änderungen werden nicht mit übernommen.',
+	'QUESTION_DELEATE_SITE'			=> 'Möchten Sie die Seite wirklich löschen? Diese Änderung kann nicht wieder rückgänig gemacht werden.',
 	/*/QUESTION */
 		
 	/* MAIL */

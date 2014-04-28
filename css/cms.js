@@ -1,3 +1,20 @@
+function deleteAjax(url)
+{
+	$.ajax({
+		type: 'POST',
+		url: url,
+		success: function(data, textStatus, jqXHR){
+			if('success' in data)
+				window.location = data['success'];
+		},
+		error: function(jqXHR, textStatus, errorThrown) {
+			showErrorModal(modelid, jqXHR, textStatus, errorThrown);
+		},
+			
+		dataType:'json'
+	});
+}
+
 function submitForm(modelid, formid, url)
 {
 	var post = $('#'+formid).serialize();
@@ -6,7 +23,7 @@ function submitForm(modelid, formid, url)
 		type: 'POST',
 		url: url,
 		data: post,
-		success:function(data, textStatus, jqXHR){
+		success: function(data, textStatus, jqXHR){
 			if('header' in data && 'body' in data && 'footer' in data)
 				showModal(modelid, data['header'], data['body'], data['footer']);
 			else
@@ -21,11 +38,12 @@ function submitForm(modelid, formid, url)
 	});
 }
 
-function showModalAjax(id, url)
+function showModalAjax(id, url, post = {})
 {
 	$.ajax({
 		type: 'POST',
 		url: url,
+		data: post,
 	
 		success:function(data, textStatus, jqXHR){
 			if('header' in data && 'body' in data && 'footer' in data)

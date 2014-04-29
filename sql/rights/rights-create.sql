@@ -22,7 +22,11 @@ INSERT INTO `AuthItem` (`name`, `type`, `description`, `bizrule`, `data`) VALUES
 ('updateNews', 0, '', NULL, 'N;'),
 ('updateSite', 0, '', NULL, 'N;'),
 ('USER', 2, '', NULL, 'N;'),
-('VISITOR', 2, '', NULL, 'N;');
+('VISITOR', 2, '', NULL, 'N;'),
+('deleteGallery', 0, '', NULL, 'N;'),
+('editGallery', 0, '', NULL, 'N;'),
+('MGALLERY', 2, '', NULL, 'N;'),
+('updateGallery', 0, '', NULL, 'N;');
 
 INSERT INTO `AuthItemChild` (`parent`, `child`) VALUES
 ('MSITE', 'addSiteNewLanguage'),
@@ -44,4 +48,8 @@ INSERT INTO `AuthItemChild` (`parent`, `child`) VALUES
 ('VISITOR', 'resendMail'),
 ('MSITE', 'updateContent'),
 ('MNEWS', 'updateNews'),
-('MSITE', 'updateSite');
+('MSITE', 'updateSite'),
+('MGALLERY', 'createGallery'),
+('MGALLERY', 'deleteGallery'),
+('MGALLERY', 'editGallery'),
+('MGALLERY', 'updateGallery');

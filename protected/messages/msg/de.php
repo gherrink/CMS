@@ -41,6 +41,7 @@ return array(
 	'MP_CONTACT'				=> 'Kontakt',
 	'MP_USER_REGISTERASMEMBER'	=> 'Mitgliedsregistrierung',
 	'MP_NEWS'					=> 'Neuigkeiten',
+	'MP_GALLERY'				=> 'Galerie',
 	'MP_MODERATOR'				=> 'Moderator',
 	'MP_MODERATOR_SITE'			=> 'Seiten',
 	'MP_MODERATOR_SITECREATE'	=> 'Seite erstellen',

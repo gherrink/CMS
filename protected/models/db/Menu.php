@@ -216,7 +216,11 @@ class Menu extends CActiveRecord
 			array(
 			'label' => MsgPicker::msg()->getMessage(MSG::MP_NEWS),
 			'url' => array('/news'),
-			),	
+			),
+			array(
+				'label' => MsgPicker::msg()->getMessage(MSG::MP_GALLERY),
+				'url' => array('/gallery'),
+			),
 				
 			self::getModerator(),
 			array(	

@@ -16,4 +16,14 @@ $contents = SiteContentView::model()->findAllBySql("SELECT * FROM SiteContentVie
 
 foreach ($contents as $content)
 	$this->renderpartial('_content', array('content'=>$content, 'edit'=>$edit));
+
+if($edit)
+	echo BsHtml::button(MsgPicker::msg()->getMessage(MSG::BTN_NEW_CONTENT), array('onclick'=>'addNewContent()'))
 ?>
+
+<script type="text/javascript">
+	function addNewContent()
+	{
+
+	}
+</script>

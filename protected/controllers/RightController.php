@@ -62,6 +62,7 @@ class RightController extends Controller
 	
 	private function createOperationSite($auth)
 	{
+// 		$auth->createOperation('editSite');
 // 		$auth->createOperation('createSite');
 // 		$auth->createOperation('updateSite');
 // 		$auth->createOperation('deleteSite');
@@ -98,6 +99,7 @@ class RightController extends Controller
 	
 	private function addMsiteRights($role)
 	{
+// 		$role->addChild('editSite');
 // 		$role->addChild('createSite');
 // 		$role->addChild('updateSite');
 // 		$role->addChild('deleteSite');

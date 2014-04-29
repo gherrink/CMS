@@ -67,6 +67,7 @@ return array(
 	'BTN_UPDATE'				=> 'Ändern',
 	'BTN_DELETE'				=> 'Löschen',
 	'BTN_EXIT'					=> 'Beenden',
+	'BTN_NEW_CONTENT'			=> 'BTN_NEW_CONTENT',
 	'BTN_SITE_ADDLANGUAGE'		=> 'Neue Sprache hinzufügen',
 	/*/Buttons */
 		
@@ -132,7 +133,9 @@ return array(
 	/*/EXEPTION */
 
 	/* QUESTION */
-	'QUESTION_EXIT_SITECREATE'		=> 'Möchten Sie wirklich die Seitenbearbeitung beenden? Die Änderungen werden nicht mit übernommen.',
+	'QUESTION_EXIT_SITECREATE'		=> 'Möchten Sie wirklich die Seitenerstellung beenden? Die Seite wurde noch nicht angelegt.',
+	'QUESTION_EXIT_SITEUPDATE'		=> 'Möchten Sie wirklich die Seitenbearbeitung beenden? Die Änderungen wurden noch nicht gespeichert.',
+	'QUESTION_EXIT_CONTENTCREATE'	=> 'Möchten Sie wirklich die Inhalts-Bearbeitung beenden? Die Änderungen werden nicht übernommen.',
 	'QUESTION_DELEATE_SITE'			=> 'Möchten Sie die Seite wirklich löschen? Diese Änderung kann nicht wieder rückgänig gemacht werden.',
 	/*/QUESTION */
 		

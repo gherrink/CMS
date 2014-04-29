@@ -8,7 +8,7 @@
 
 /* 
  * @var $this SiteController
- * @var $site Site
+ * @var $model Site
  * @var $edit boolean		
  * @var $editable boolean
  */
@@ -25,11 +25,11 @@ if($edit === true && $editable === true)
 		<div class="col-sm-12">
 			<?php 
 				echo BsHtml::button(MsgPicker::msg()->getMessage(MSG::BTN_UPDATE), array(
-					'onclick' => 'showModalAjax("modal", "'.Yii::app()->createAbsoluteUrl('site/update', array('name'=>$site->siteid)).'");',
+					'onclick' => 'showModalAjax("modal", "'.Yii::app()->createAbsoluteUrl('site/update', array('name'=>$model->label)).'");',
 				));
 			?>
 			<?php 
-				$urlDelete = Yii::app()->createAbsoluteUrl('site/delete', array('name'=>$site->siteid));
+				$urlDelete = Yii::app()->createAbsoluteUrl('site/delete', array('name'=>$model->label));
 				$urlQuestionDelete = Yii::app()->createAbsoluteUrl('site/question', array(
 					'head'=>MSG::HEAD_QUESTION_REALYDELETE,
 					'question'=>MSG::QUESTION_DELEATE_SITE,
@@ -48,22 +48,22 @@ if($edit === true && $editable === true)
 <?php endif;?>
 
 <?php 
-	$language = SiteLanguage::model()->findByAttributes(array('siteid'=>$site->siteid, 'languageid'=>Yii::app()->language));
+	$language = SiteLanguage::model()->findByAttributes(array('siteid'=>$model->siteid, 'languageid'=>Yii::app()->language));
 	if($language !== null)
 		if($language->head !== null && $language->head !== '')
 			echo "<h1>{$language->head}</h1>";
 ?>
 
-<?php $this->renderPartial('_'.$site->layout, array('site'=>$site, 'edit'=>$edit))?>
+<?php $this->renderPartial('_'.$model->layout, array('site'=>$model, 'edit'=>$edit))?>
 
 <?php if($edit || $editable):?>
 	<hr>
 	<div class="row">
 		<div class="col-sm-6">
-			<p><?php MsgPicker::msg()->getMessage(MSG::CREATE_USER_TIME, array('user'=>$site->create_userid, 'time'=>$site->create_time))?></p>
+			<p><?php MsgPicker::msg()->getMessage(MSG::CREATE_USER_TIME, array('user'=>$model->create_userid, 'time'=>$model->create_time))?></p>
 		</div>
 		<div class="col-sm-6 text-right">
-			<p><?php MsgPicker::msg()->getMessage(MSG::UPDATE_USER_TIME, array('user'=>$site->update_userid, 'time'=>$site->create_time))?></p>
+			<p><?php MsgPicker::msg()->getMessage(MSG::UPDATE_USER_TIME, array('user'=>$model->update_userid, 'time'=>$model->create_time))?></p>
 		</div>
 	</div>
 <?php endif;?>

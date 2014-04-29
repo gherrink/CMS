@@ -37,16 +37,8 @@ class SiteController extends CRUDController
 		$sql = "SELECT COUNT(*) FROM SiteContentView WHERE siteid = '{$model->siteid}' AND languageid = '".Yii::app()->language."' AND {$this->getRoleaccessSQLWhere()}";
 		if(SiteContentView::model()->countBySql($sql) <= 0)
 			throw new CHttpException(500, MsgPicker::msg()->getMessage(MSG::EXCEPTION_SITE_NOCONTENT));
-	}
-	
-	protected function getCreateUrl()
-	{
-		return Yii::app()->createAbsoluteUrl('site/create');
-	}
-	
-	protected function getUpdateUrl($name)
-	{
-		return Yii::app()->createAbsoluteUrl('site/update', array('name'=>$name));
+		
+		return true;
 	}
 	
 	/**

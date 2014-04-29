@@ -64,6 +64,7 @@ return array(
 	'BTN_YES'					=> 'Ja',
 	'BTN_NO'					=> 'Nein',
 	'BTN_REGISTER'				=> 'Registrieren',
+	'BTN_EDIT'					=> 'Bearbeiten',
 	'BTN_CREATE'				=> 'Erstellen',
 	'BTN_UPDATE'				=> 'Ändern',
 	'BTN_DELETE'				=> 'Löschen',

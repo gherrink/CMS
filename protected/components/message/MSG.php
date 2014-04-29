@@ -54,6 +54,7 @@ class MSG
 	const BTN_YES					= 'BTN_YES';
 	const BTN_NO					= 'BTN_NO';
 	const BTN_REGISTER				= 'BTN_REGISTER';
+	const BTN_EDIT					= 'BTN_EDIT';
 	const BTN_CREATE				= 'BTN_CREATE';
 	const BTN_UPDATE				= 'BTN_UPDATE';
 	const BTN_DELETE				= 'BTN_DELETE';

@@ -24,11 +24,15 @@ if($edit === true && $editable === true)
 	<div class="row">
 		<div class="col-sm-12">
 			<?php 
+				if(! $edit)
+					echo BsHtml::linkButton(MsgPicker::msg()->getMessage(MSG::BTN_EDIT), array(
+						'url' => Yii::app()->createAbsoluteUrl('site/edit', array('name'=>$model->label))
+					));
+				
 				echo BsHtml::button(MsgPicker::msg()->getMessage(MSG::BTN_UPDATE), array(
 					'onclick' => 'showModalAjax("modal", "'.Yii::app()->createAbsoluteUrl('site/update', array('name'=>$model->label)).'");',
 				));
-			?>
-			<?php 
+				
 				$urlDelete = Yii::app()->createAbsoluteUrl('site/delete', array('name'=>$model->label));
 				$urlQuestionDelete = Yii::app()->createAbsoluteUrl('site/question', array(
 					'head'=>MSG::HEAD_QUESTION_REALYDELETE,

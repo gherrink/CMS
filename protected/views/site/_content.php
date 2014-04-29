@@ -5,7 +5,9 @@
  * @copyright 2014
  * @version 0.1
  */
+
 /* 
+ * @var SiteController $this
  * @var boolean $edit
  * @var SiteContentView $content 
  */

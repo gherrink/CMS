@@ -43,7 +43,13 @@ class ContentController extends CRUDController
 	 * @param CActiveRecord $dbModel
 	 * @return string Error
 	*/
-	protected abstract function modelUpdate(CActiveRecord $model, CActiveRecord $dbModel);
+	protected function modelUpdate(CActiveRecord $model, CActiveRecord $dbModel)
+	{
+		
+	}
 	
-	protected abstract function modelDelete(CActiveRecord $model);
+	protected function modelDelete(CActiveRecord $model)
+	{
+		
+	}
 }

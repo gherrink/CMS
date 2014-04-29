@@ -10,6 +10,11 @@
 class RightController extends Controller
 {
 	
+	/**
+	 * index.php/right/assign?role=MSITE&user=mrbirne
+	 * @param unknown $role
+	 * @param unknown $user
+	 */
 	public function actionAssign($role, $user)
 	{
 		Yii::app()->authManager->assign($role, $user);
@@ -23,6 +28,7 @@ class RightController extends Controller
 		$this->createOperationContact($auth);
 		$this->createOperationLogin($auth);
 		$this->createOperationSite($auth);
+		$this->createOperationNews($auth);
 		$this->createOperationContent($auth);
 		
 		//Visitor
@@ -44,6 +50,11 @@ class RightController extends Controller
 // 		$role=$auth->createRole(MSG::MSITE);
 		$role=$auth->getAuthItem(MSG::MSITE);
 		$this->addMsiteRights($role);
+		
+		//Moderator News
+// 		$role=$auth->createRole(MSG::MNEWS);
+		$role=$auth->getAuthItem(MSG::MNEWS);
+		$this->addMnewsRights($role);
 	}
 	
 	private function createOperationContact($auth)
@@ -68,6 +79,14 @@ class RightController extends Controller
 // 		$auth->createOperation('deleteSite');
 // 		$auth->createOperation('deleteSiteLanguage');
 // 		$auth->createOperation('addSiteNewLanguage');
+	}
+	
+	private function createOperationNews($auth)
+	{
+// 		$auth->createOperation('editNews');
+// 		$auth->createOperation('createNews');
+// 		$auth->createOperation('updateNews');
+// 		$auth->createOperation('deleteNews');
 	}
 	
 	private function createOperationContent($auth)
@@ -108,6 +127,14 @@ class RightController extends Controller
 // 		$role->addChild('createContent');
 // 		$role->addChild('updateContent');
 // 		$role->addChild('deleteContent');
+	}
+	
+	private function addMnewsRights($role)
+	{
+// 		$role->addChild('editNews');
+// 		$role->addChild('createNews');
+// 		$role->addChild('updateNews');
+// 		$role->addChild('deleteNews');
 	}
 	
 }

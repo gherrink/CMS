@@ -82,8 +82,8 @@ class MSG
 	/*/User */
 	
 	/* Site */
-	
 	const SITE_MSG_MATCH				= 'SITE_MSG_MATCH';
+	const SITE_MSG_LABELEXISTS			= 'SITE_MSG_LABELEXISTS';
 	const SITE_MSG_HEADLANGUAGEEXISTS	= 'SITE_MSG_HEADLANGUAGEEXISTS';
 	/*/Site */
 	

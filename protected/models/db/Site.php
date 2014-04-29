@@ -21,6 +21,8 @@
  */
 class Site extends CActiveRecord
 {
+	public $oldLabel;
+	
 	/**
 	 * @return string the associated database table name
 	 */
@@ -40,12 +42,23 @@ class Site extends CActiveRecord
 			array('label, update_userid, create_userid', 'length', 'max'=>20),
 			array('layout', 'length', 'max'=>5),
 			array('roleaccess', 'length', 'max'=>64),
-			array('create_time', 'safe'),
 			array('label', 'match', 'pattern'=>'/^[A-Za-z]+$/u',
 					'message'=>MsgPicker::msg()->getMessage(MSG::SITE_MSG_MATCH)),
 			array('label', 'unique', 'on'=>'create'),
+			array('label', 'testLabel', 'on'=>'update'),
+			array('oldLabel', 'safe', 'on'=>'update'),
 			array('siteid, label, layout, roleaccess, update_time, update_userid, create_time, create_userid', 'safe', 'on'=>'search'),
 		);
+	}
+	
+	public function testLabel($attribute, $params)
+	{
+		if($this->oldLabel === $this->label)
+			return true;
+		
+		$site = Site::model()->findByAttributes(array('label'=>$this->label));
+		if($site !== null)
+			$this->addError($attribute, MsgPicker::msg()->getMessage(MSG::SITE_MSG_LABELEXISTS));
 	}
 
 	/**

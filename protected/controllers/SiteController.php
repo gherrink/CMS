@@ -100,7 +100,7 @@ class SiteController extends CRUDController
 	 * @return string Error
 	*/
 	protected function modelUpdate(CActiveRecord $model, CActiveRecord $dbModel)
-	{
+	{	
 		$dbModel->layout = strtolower($model->layout);
 		$dbModel->roleaccess = $model->roleaccess;
 		$dbModel->label = $model->label;

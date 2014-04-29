@@ -32,10 +32,12 @@ $form = $this->beginWidget('bootstrap.widgets.BsActiveForm', array(
 		'onkeypress'=>" if(event.keyCode == 13){ submitForm('modal', 'site-form', '". $url ."'); } ",
 	),
 ));
+$model->oldLabel = $model->label;
 ?>
 	<div class="row">
 		<div class="col-sm-6">
 			<?php echo $form->textFieldControlGroup($model, 'label', array('labelOptions'=>array('class'=>'control-label required'), 'controlOptions'=>array('class'=>''))); ?>
+			<?php echo $form->hiddenField($model, 'oldLabel')?>
 		</div>
 	</div>
 	

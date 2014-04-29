@@ -9,7 +9,7 @@
  */
 abstract class CRUDController extends Controller
 {
-	private $model = null;
+	protected $model = null;
 	
 	/**
 	 * 
@@ -29,7 +29,7 @@ abstract class CRUDController extends Controller
 	}
 	
 	public abstract function findModel($name);
-	
+		
 	/**
 	 * @return string
 	 */
@@ -47,8 +47,8 @@ abstract class CRUDController extends Controller
 			$this->testMoadelRead($model);
 		
 		$params = CMap::mergeArray(
-				array('model'=>$model, 'editable'=>$editable, 'edit'=>$edit),
-				$this->getParamsRead()
+			array('model'=>$model, 'editable'=>$editable, 'edit'=>$edit),
+			$this->getParamsRead()
 		);
 		
 		$this->render(strtolower($this->getModelName()), $params);
@@ -80,15 +80,17 @@ abstract class CRUDController extends Controller
 		$modelName = $this->getModelName();
 		$formName = strtolower($modelName);
 		
-		$model = new Site('edit');
+		$class = new ReflectionClass($this->getModelName());
 		if($create)
 		{
+			$model = $class->newInstanceArgs(array('create'));
 			$url = $this->getCreateUrl();
 			$modelCheck = new ModelCheck($model, $modelName, 'create'.$modelName, $formName);
 			$questionID = 'QUESTION_EXIT_'.strtoupper($this->getModelName()).'CREATE';
 		}
 		else 
 		{
+			$model = $class->newInstanceArgs(array('update'));
 			$url = $this->getUpdateUrl($name);
 			$modelCheck = new ModelCheck($model, $modelName, 'update'.$modelName, $formName);
 			$questionID = 'QUESTION_EXIT_'.strtoupper($this->getModelName()).'UPDATE';
@@ -111,13 +113,14 @@ abstract class CRUDController extends Controller
 				$error = $this->modelUpdate($model, $this->getModel($name));
 		}
 		
-		if(! $create)
-		{
-			$button = BsHtml::button(MsgPicker::msg()->getMessage(MSG::BTN_UPDATE), array('onclick'=>"submitForm('modal', '$formName-form', '$url')"));
-			$model = $this->getModel($name);
-		}
-		else
+		if($create)
 			$button = BsHtml::button(MsgPicker::msg()->getMessage(MSG::BTN_CREATE), array('onclick'=>"submitForm('modal', '$formName-form', '$url')"));
+		else
+		{
+			if (! isset($_POST[$this->getModelName()]))
+				$model = $this->getModel($name);
+			$button = BsHtml::button(MsgPicker::msg()->getMessage(MSG::BTN_UPDATE), array('onclick'=>"submitForm('modal', '$formName-form', '$url')"));
+		}
 		
 		$urlExit = Yii::app()->createAbsoluteUrl('site/question', array(
 			'head'=>MSG::HEAD_QUESTION_REALYCLOSE,

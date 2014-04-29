@@ -92,8 +92,8 @@ return array(
 	/*/User */
 
 	/* Site */
-	
 	'SITE_MSG_MATCH'				=> 'Das Label darf nur Groß- und Kleinbuchstaben enthalten',
+	'SITE_MSG_LABELEXISTS'			=> 'Das Label existiert bereits.',
 	'SITE_MSG_HEADLANGUAGEEXISTS'	=> 'Für diese Sprache Existiert bereits eine Überschrift, bitte wählen Sie eine andere.',
 	/*/Site */
 

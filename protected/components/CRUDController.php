@@ -2,17 +2,51 @@
 /**
  * Grundimplementierung für alle Controller dessen Seiten
  * Create Read Update und Delete enthalten
+ * 
+ * Für den Controller müssen folgende Rechte angelegt werden:
+ *  - edit{modelName}
+ *  - create{modelName}
+ *  - update{modelName}
+ *  - delete{modelName}
+ *  
+ * Im Controller müssen folgende Methoden implementiert werden:
+ *  - public function getModelName();
+ *  - public function findModel($name);
+ *  - protected function getParamsRead();
+ *  - protected function testMoadelRead(CActiveRecord $model);
+ *  - protected function modelCreate(CActiveRecord $model);
+ *  - protected function modelUpdate(CActiveRecord $model, CActiveRecord $dbModel);
+ *  
+ * Für den Controller müssen folgende Views erstellt werden:
+ *  - {modelName}
+ *  - _edit
+ *  
+ * Das Model für den Controller muss folgende Attribute enthalten:
+ *  - $roleaccess
+ *  - $update_time
+ *  - $update_userid
+ *  - $create_time
+ *  - $create_userid
+ *  
+ * Im Controller stehen folgende Actions zur Verfügung:
+ *  - read($name)
+ *  - edit($name)
+ *  - create()
+ *  - update($name)
+ *  - delete($name)
+ * 
  * @author Maurice Busch <busch.maurice@gmx.net>
  * @copyright 2014
  * @version 0.1
  *
  */
+
 abstract class CRUDController extends Controller
 {
 	protected $model = null;
 	
 	/**
-	 * 
+	 * Gives back the Model.
 	 * @param string $name
 	 * @return CActiveRecord
 	 */
@@ -28,15 +62,23 @@ abstract class CRUDController extends Controller
 		return $this->model;
 	}
 	
+	/**
+	 * Searching the Model on the Database with a unique identifire.
+	 * @param string $name
+	 */
 	public abstract function findModel($name);
 		
 	/**
+	 * Gives the modelName
 	 * @return string
 	 */
 	public abstract function getModelName();
 	
-	public abstract function actionIndex();
-	
+	/**
+	 * Action to show the view of a Model
+	 * @param string $name
+	 * @param boolean $edit
+	 */
 	public function actionRead($name, $edit = false)
 	{
 		$model = $this->getModel($name);
@@ -54,10 +96,22 @@ abstract class CRUDController extends Controller
 		$this->render(strtolower($this->getModelName()), $params);
 	}
 	
+	/**
+	 * Giving additional Parameter for the view.
+	 */
 	protected abstract function getParamsRead();
 	
+	/**
+	 * Test if the model can be displeyed for the user don't effects
+	 * the displey of the edit-mode
+	 * @param CActiveRecord $model
+	 */
 	protected abstract function testMoadelRead(CActiveRecord $model);
 	
+	/**
+	 * Action to view the edit-mode of the Model
+	 * @param string $name
+	 */
 	public function actionEdit($name)
 	{
 		$this->checkAccess('edit'.$this->getModelName());
@@ -65,16 +119,28 @@ abstract class CRUDController extends Controller
 		$this->actionRead($name, true);
 	}
 	
+	/**
+	 * Action to create a new Model.
+	 */
 	public function actionCreate()
 	{
 		$this->editForm(true);	
 	}
 	
+	/**
+	 * Update action to update a Model with the $name.
+	 * @param string $name
+	 */
 	public function actionUpdate($name)
 	{
 		$this->editForm(false, $name);
 	}
 	
+	/**
+	 * Create the Data for the Modal to create or update a Model.
+	 * @param boolean $create
+	 * @param string $name
+	 */
 	private function editForm($create, $name = '')
 	{
 		$modelName = $this->getModelName();
@@ -84,14 +150,14 @@ abstract class CRUDController extends Controller
 		if($create)
 		{
 			$model = $class->newInstanceArgs(array('create'));
-			$url = $this->getCreateUrl();
+			$url = Yii::app()->createAbsoluteUrl(strtolower($this->getModelName()).'/create');
 			$modelCheck = new ModelCheck($model, $modelName, 'create'.$modelName, $formName);
 			$questionID = 'QUESTION_EXIT_'.strtoupper($this->getModelName()).'CREATE';
 		}
 		else 
 		{
 			$model = $class->newInstanceArgs(array('update'));
-			$url = $this->getUpdateUrl($name);
+			$url = Yii::app()->createAbsoluteUrl(strtolower($this->getModelName()).'/update', array('name'=>$name));
 			$modelCheck = new ModelCheck($model, $modelName, 'update'.$modelName, $formName);
 			$questionID = 'QUESTION_EXIT_'.strtoupper($this->getModelName()).'UPDATE';
 		}
@@ -139,26 +205,26 @@ abstract class CRUDController extends Controller
 		
 		echo json_encode($content);
 	}
-	
-	protected abstract function getCreateUrl();
-	
-	protected abstract function getUpdateUrl($name);
 		
 	/**
-	 * 
+	 * Creating the Model on the DB.
 	 * @param CActiveRecord $model
 	 * @return string Error
 	 */
 	protected abstract function modelCreate(CActiveRecord $model);
 	
 	/**
-	 * 
+	 * Writing the updates to the Database
 	 * @param CActiveRecord $model
 	 * @param CActiveRecord $dbModel
 	 * @return string Error
 	 */
 	protected abstract function modelUpdate(CActiveRecord $model, CActiveRecord $dbModel);
 	
+	/**
+	 * Delete Model from the DB.
+	 * @param string $name
+	 */
 	public function actionDelete($name)
 	{
 		$this->checkAccess('delete'.$this->getModelName());

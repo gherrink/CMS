@@ -97,6 +97,7 @@ class RightController extends Controller
 	
 	private function createOperationContent($auth)
 	{
+		$auth->createOperation('editContent');
 // 		$auth->createOperation('createContent');
 // 		$auth->createOperation('updateContent');
 // 		$auth->createOperation('deleteContent');
@@ -138,6 +139,7 @@ class RightController extends Controller
 // 		$role->addChild('deleteSite');
 // 		$role->addChild('deleteSiteLanguage');
 // 		$role->addChild('addSiteNewLanguage');
+		$role->addChild('editContent');
 // 		$role->addChild('createContent');
 // 		$role->addChild('updateContent');
 // 		$role->addChild('deleteContent');

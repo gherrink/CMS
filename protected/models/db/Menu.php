@@ -209,9 +209,17 @@ class Menu extends CActiveRecord
 		// 			array(
 				// 				'label' => MSG::msg()->getMsg(MSG::MP_GALLERY),
 				// 				'url' => array('/gallery/gallery'),
-				// 			),
-			self::getModerator(),
+				// 			),	
+			
+				
+			// news Objekt in Leiste von Lukas 28.04
 			array(
+			'label' => MsgPicker::msg()->getMessage(MSG::MP_NEWS),
+			'url' => array('/news'),
+			),	
+				
+			self::getModerator(),
+			array(	
 				'label' => MsgPicker::msg()->getMessage(MSG::MP_CONTACT),
 				'url' => array('/contact/contact'),
 			),

@@ -24,7 +24,7 @@ if($edit === true && $editable === true)
 	<div class="row">
 		<div class="col-sm-12">
 			<?php 
-				if(! $edit)
+				if($editable)
 					echo BsHtml::linkButton(MsgPicker::msg()->getMessage(MSG::BTN_EDIT), array(
 						'url' => Yii::app()->createAbsoluteUrl('site/edit', array('name'=>$model->label))
 					));
@@ -42,7 +42,7 @@ if($edit === true && $editable === true)
 					MSG::BTN_YES => "deleteAjax('$urlDelete'); $('#modalmsg').modal('hide');",
 					MSG::BTN_NO => "$('#modalmsg').modal('hide');",
 				)));
-				echo BSHtml::button(MsgPicker::msg()->getMessage(MSG::BTN_DELETE), array(
+				echo BsHtml::button(MsgPicker::msg()->getMessage(MSG::BTN_DELETE), array(
 					'onclick'=>"showModalAjax('modalmsg', '$urlQuestionDelete', $json);")
 				);
 			?>
@@ -71,3 +71,7 @@ if($edit === true && $editable === true)
 		</div>
 	</div>
 <?php endif;?>
+<?php 
+	if($edit)
+		$this->renderPartial('../content/_aloha');
+?>

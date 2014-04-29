@@ -15,7 +15,7 @@ $language = Yii::app()->language;
 $contents = SiteContentView::model()->findAllBySql("SELECT * FROM SiteContentView WHERE siteid = '{$site->siteid}' AND languageid = '$language' AND col = $col AND {$this->getRoleaccessSQLWhere()} ORDER BY position");
 
 foreach ($contents as $content)
-	$this->renderpartial('_content', array('content'=>$content, 'edit'=>$edit));
+	$this->renderPartial('../content/_content', array('content'=>$content, 'edit'=>$edit, 'editable'=>false));
 
 if($edit)
 	echo BsHtml::button(MsgPicker::msg()->getMessage(MSG::BTN_NEW_CONTENT), array('onclick'=>'addNewContent()'))

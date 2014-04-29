@@ -27,29 +27,38 @@ class ContentController extends CRUDController
 		return true;
 	}
 	
-	/**
-	 *
-	 * @param CActiveRecord $model
-	 * @return string Error
-	*/
 	protected function modelCreate(CActiveRecord $model)
 	{
+		$model->contentid = Yii::app()->keygen->getUniquKey();
 		
+		if($model->insert())
+		{
+			$url = Yii::app()->createAbsoluteUrl('content/edit', array('name'=>$model->label));
+			echo json_encode(array('success'=>$url));
+			Yii::app()->end();
+		}
 	}
 	
-	/**
-	 *
-	 * @param CActiveRecord $model
-	 * @param CActiveRecord $dbModel
-	 * @return string Error
-	*/
 	protected function modelUpdate(CActiveRecord $model, CActiveRecord $dbModel)
 	{
+		$dbModel->roleaccess = $model->roleaccess;
+		$dbModel->label = $model->label;
+		$dbModel->languageid = $model->languageid;
 		
+		if($dbModel->update())
+		{
+			$url = Yii::app()->createAbsoluteUrl('content/edit', array('name'=>$dbModel->label));
+			echo json_encode(array('success'=>$url));
+			Yii::app()->end();
+		}
 	}
 	
 	protected function modelDelete(CActiveRecord $model)
 	{
-		
+		if($model->delete())
+		{
+			echo json_encode(array('success'=>Yii::app()->createAbsoluteUrl('site')));
+			Yii::app()->end();
+		}
 	}
 }

@@ -56,7 +56,6 @@ class SiteController extends CRUDController
 			try
 			{
 				$transaktion->commit();
-				$this->addSuccessMessage(new Message(MSG::SUCCESS_SITE_CREATE));
 				$content['success'] = Yii::app()->createAbsoluteUrl('site/edit', array('name'=>$model->label));
 				echo json_encode($content);
 				Yii::app()->end();
@@ -65,7 +64,6 @@ class SiteController extends CRUDController
 			{}
 		
 		$transaktion->rollBack();
-		return BsHtml::alert(BsHtml::ALERT_COLOR_ERROR, MsgPicker::msg()->getMessage(MSG::ERROR_SITE_NOTCREATE));
 	}
 	
 	private function createSiteHeader(Site $site)
@@ -101,8 +99,6 @@ class SiteController extends CRUDController
 		if($dbModel->update() && $this->updateSiteHeader($dbModel))
 			try
 			{
-				$transaktion->commit();
-				$this->addSuccessMessage(new Message(MSG::SUCCESS_SITE_UPDATE));
 				$content['success'] = Yii::app()->createAbsoluteUrl('site/edit', array('name'=>$dbModel->label));
 				echo json_encode($content);
 				Yii::app()->end();
@@ -143,10 +139,11 @@ class SiteController extends CRUDController
 	
 	protected function modelDelete(CActiveRecord $model)
 	{
-		if(! $model->delete())
-			throw new CHttpException(500, MsgPicker::msg()->getMessage(MSG::EXCEPTION_SITE_NOTDELETE));
-	
-		echo json_encode(array('success'=>Yii::app()->createAbsoluteUrl('site')));
+		if($model->delete())
+		{
+			echo json_encode(array('success'=>Yii::app()->createAbsoluteUrl('site')));
+			Yii::app()->end();
+		}
 	}
 	
 	/**

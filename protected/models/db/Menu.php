@@ -296,6 +296,10 @@ class Menu extends CActiveRecord
 						'label' => MsgPicker::msg()->getMessage(MSG::MP_MODERATOR_SITECREATE),
 						'ajax' => 'showModalAjax("modal", "'.Yii::app()->createAbsoluteUrl('site/create').'");',
 					),
+					array(
+						'label' => MsgPicker::msg()->getMessage(MSG::MP_MODERATOR_CONTENTCREATE),
+						'ajax' => 'showModalAjax("modal", "'.Yii::app()->createAbsoluteUrl('content/create').'");',
+					),
 				),
 			);
 	}

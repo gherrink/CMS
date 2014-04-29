@@ -82,14 +82,9 @@ class Site extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'siteid' => 'Siteid',
-			'label' => 'Label',
-			'layout' => 'Layout',
-			'roleaccess' => 'Roleaccess',
-			'update_time' => 'Update Time',
-			'update_userid' => 'Update Userid',
-			'create_time' => 'Create Time',
-			'create_userid' => 'Create Userid',
+			'label' 		=> MsgPicker::msg()->getMessage(MSG::MODEL_LABEL),
+			'layout' 		=> MsgPicker::msg()->getMessage(MSG::SITE_LAYOUT),
+			'roleaccess' 	=> MsgPicker::msg()->getMessage(MSG::MODEL_ROLE),
 		);
 	}
 

@@ -36,15 +36,16 @@ return array(
 	/*/Layouts */
 		
 	/* Menu Punkte */
-	'MP_LOGIN'					=> 'Anmelden',
-	'MP_LOGOUT'					=> 'Abmelden',
-	'MP_CONTACT'				=> 'Kontakt',
-	'MP_USER_REGISTERASMEMBER'	=> 'Mitgliedsregistrierung',
-	'MP_NEWS'					=> 'Neuigkeiten',
-	'MP_GALLERY'				=> 'Galerie',
-	'MP_MODERATOR'				=> 'Moderator',
-	'MP_MODERATOR_SITE'			=> 'Seiten',
-	'MP_MODERATOR_SITECREATE'	=> 'Seite erstellen',
+	'MP_LOGIN'						=> 'Anmelden',
+	'MP_LOGOUT'						=> 'Abmelden',
+	'MP_CONTACT'					=> 'Kontakt',
+	'MP_USER_REGISTERASMEMBER'		=> 'Mitgliedsregistrierung',
+	'MP_NEWS'						=> 'Neuigkeiten',
+	'MP_GALLERY'					=> 'Galerie',
+	'MP_MODERATOR'					=> 'Moderator',
+	'MP_MODERATOR_SITE'				=> 'Seiten',
+	'MP_MODERATOR_SITECREATE'		=> 'Seite erstellen',
+	'MP_MODERATOR_CONTENTCREATE'	=> 'Inhalt erstellen',
 	/*/Menu Punkte */
 		
 	/* Ueberschriften */
@@ -58,6 +59,8 @@ return array(
 	'HEAD_SITE_CREATE'					=> 'Seite erstellen',
 	'HEAD_SITE_CREATELANGUAGE'			=> 'Sprache und Überschriften',
 	'HEAD_SITE_UPDATE'					=> 'Seite bearbeiten',
+	'HEAD_CONTENT_CREATE'				=> 'Inhalt erstellen',
+	'HEAD_CONTENT_UPDATE'				=> 'Inhalt bearbeiten',
 	/*/Ueberschriften */
 		
 	/* Buttons */
@@ -73,7 +76,13 @@ return array(
 	'BTN_NEW_CONTENT'			=> 'BTN_NEW_CONTENT',
 	'BTN_SITE_ADDLANGUAGE'		=> 'Neue Sprache hinzufügen',
 	/*/Buttons */
-		
+	
+	/* Models */
+	'MODEL_LABEL' 		=> 'Identifikation',
+	'MODEL_ROLE'		=> 'Zugriffsrechte',
+	'MODEL_LANGUAGE'	=> 'Sprache',
+	/*/Models */
+	
 	/* Contact */
 	'CONTACT_INFO'		=> 'Wenn Sie fragen oder Anmerkungen haben, f&uuml;llen Sie bitte das folgende Formular aus, um uns zu kontaktieren. Wir danken f&uuml;r Ihre Angaschma.',
 	'CONTACT_NAME'		=> 'Name',
@@ -94,6 +103,7 @@ return array(
 	/*/User */
 
 	/* Site */
+	'SITE_LAYOUT'					=> 'Layout',
 	'SITE_MSG_MATCH'				=> 'Das Label darf nur Groß- und Kleinbuchstaben enthalten',
 	'SITE_MSG_LABELEXISTS'			=> 'Das Label existiert bereits.',
 	'SITE_MSG_HEADLANGUAGEEXISTS'	=> 'Für diese Sprache Existiert bereits eine Überschrift, bitte wählen Sie eine andere.',
@@ -125,6 +135,8 @@ return array(
 	'ERROR_LOGIN_MAILCHANGE'		=> 'Ihre E-Mail-Addresse konnte leider nicht geändert werden, bitte versuchen Sie es erneut.',
 	'ERROR_SITE_NOTCREATE'			=> 'Die Seite konnte nicht erstellt werden, bitte versuchen Sie es erneut.',
 	'ERROR_SITE_NOTUPDATE'			=> 'Die Seite konnte nicht geändert werden, bitte versuchen Sie es erneut.',
+	'ERROR_CONTENT_NOTCREATE'		=> 'Der Inhalt konnte leider nicht erstellt werden, bitte versuchen Sie es erneut.',
+	'ERROR_CONTENT_NOTUPDATE'		=> 'Der Inhalt konnte leider nicht geändert werden, bitte versuchen Sie es erneut.',
 	/*/MSG ERROR */
 
 	/* EXEPTION */
@@ -133,13 +145,17 @@ return array(
 	'EXCEPTION_SITE_NOCONTENT'			=> 'Die Seite hat noch keinen Inhalt',
 	'EXCEPTION_SITE_LANGUAGENOTDELETE'	=> 'Die Sprache konnte nicht gelöscht werden, bitte versuchen Sie es erneut.',
 	'EXCEPTION_SITE_NOTDELETE'			=> 'Die Seite konnte leider nicht gelöscht werden, bitte versuchen Sie es erneut.',
+	'EXCEPTION_CONTENT_NOTFOUND'		=> 'Der Inhalt konnte leider nicht gefunden werden.',
+	'EXCEPTION_CONTENT_NOTDELETE'		=> 'Der Inhalt konnte nicht gelöscht werden, bitte verscuehn Sie es erneut.',
 	/*/EXEPTION */
 
 	/* QUESTION */
 	'QUESTION_EXIT_SITECREATE'		=> 'Möchten Sie wirklich die Seitenerstellung beenden? Die Seite wurde noch nicht angelegt.',
 	'QUESTION_EXIT_SITEUPDATE'		=> 'Möchten Sie wirklich die Seitenbearbeitung beenden? Die Änderungen wurden noch nicht gespeichert.',
 	'QUESTION_EXIT_CONTENTCREATE'	=> 'Möchten Sie wirklich die Inhalts-Bearbeitung beenden? Die Änderungen werden nicht übernommen.',
+	'QUESTION_EXIT_CONTENTUPDATE'	=> 'Möchten Sie wirklich die Inhalts-Bearbeitung beenden? Alle Änderungen verloren.',
 	'QUESTION_DELEATE_SITE'			=> 'Möchten Sie die Seite wirklich löschen? Diese Änderung kann nicht wieder rückgänig gemacht werden.',
+	'QUESTION_DELEATE_CONTENT'		=> 'Möchten Sie den Inhalt wirklich löschen? Diese Änderungen kann nichtmehr rückgänig gemacht werden.',
 	/*/QUESTION */
 		
 	/* MAIL */

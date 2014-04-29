@@ -13,7 +13,7 @@
  * @var $editable boolean
  */
 
-if($edit === null || ! $editable)
+if($edit === null)
 	$edit = false;
 
 if($edit === true && $editable === true)
@@ -67,7 +67,7 @@ if($edit === true && $editable === true)
 			<p><?php MsgPicker::msg()->getMessage(MSG::CREATE_USER_TIME, array('user'=>$model->create_userid, 'time'=>$model->create_time))?></p>
 		</div>
 		<div class="col-sm-6 text-right">
-			<p><?php MsgPicker::msg()->getMessage(MSG::UPDATE_USER_TIME, array('user'=>$model->update_userid, 'time'=>$model->create_time))?></p>
+			<p><?php MsgPicker::msg()->getMessage(MSG::UPDATE_USER_TIME, array('user'=>$model->update_userid, 'time'=>$model->update_time))?></p>
 		</div>
 	</div>
 <?php endif;?>

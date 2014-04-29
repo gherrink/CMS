@@ -10,9 +10,9 @@
  * @var ContentController $this
  * @var boolean $editable
  * @var boolean $edit
- * @var SiteContentView $content
+ * @var Content $model
  */
 
-$this->renderPartial('_content', array('editable'=>$editable, 'edit'=>$edit, 'content'=>$content));
+$this->renderPartial('_content', array('editable'=>$editable, 'edit'=>$edit, 'model'=>$model));
 $this->renderPartial('_aloha');
 ?>

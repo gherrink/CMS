@@ -22,11 +22,22 @@
  *  - _edit
  *  
  * Das Model für den Controller muss folgende Attribute enthalten:
+ *  - eine eindeutige ID
  *  - $roleaccess
  *  - $update_time
  *  - $update_userid
  *  - $create_time
  *  - $create_userid
+ * 
+ * In die Sprachdatei müssen folgende Meldungen eingefügt werden:
+ *  - HEAD_{modelName}_CREATE
+ *  - HEAD_{modelName}_UPDATE
+ *  - QUESTION_EXIT_{modelName}CREATE
+ *  - QUESTION_EXIT_{modelName}UPDATE
+ *  - ERROR_{modelName}_NOTCREATE
+ *  - ERROR_{modelName}_NOTUPDATE
+ *  - EXCEPTION_{modelName}_NOTFOUND
+ *  - EXCEPTION_{modelName}_NOTDELETE
  *  
  * Im Controller stehen folgende Actions zur Verfügung:
  *  - read($name)
@@ -173,19 +184,27 @@ abstract class CRUDController extends Controller
 			{
 				$model->create_userid = Yii::app()->user->getID();
 				$model->create_time = date('Y-m-d H:i:s', time());
-				$error = $this->modelCreate($model);
+				$this->modelCreate($model);
+				$error = BsHtml::alert(BsHtml::ALERT_COLOR_ERROR, MsgPicker::msg()->getMessage('ERROR_'.strtoupper($this->getModelName()).'_NOTCREATE'));
 			}
 			else
-				$error = $this->modelUpdate($model, $this->getModel($name));
+			{
+				$this->modelUpdate($model, $this->getModel($name));
+				$error = BsHtml::alert(BsHtml::ALERT_COLOR_ERROR, MsgPicker::msg()->getMessage('ERROR_'.strtoupper($this->getModelName()).'_NOTUPDATE'));
+			}
 		}
 		
 		if($create)
+		{
 			$button = BsHtml::button(MsgPicker::msg()->getMessage(MSG::BTN_CREATE), array('onclick'=>"submitForm('modal', '$formName-form', '$url')"));
+			$head = MsgPicker::msg()->getMessage('HEAD_'.strtoupper($this->getModelName()).'_CREATE');
+		}
 		else
 		{
 			if (! isset($_POST[$this->getModelName()]))
 				$model = $this->getModel($name);
 			$button = BsHtml::button(MsgPicker::msg()->getMessage(MSG::BTN_UPDATE), array('onclick'=>"submitForm('modal', '$formName-form', '$url')"));
+			$head = MsgPicker::msg()->getMessage('HEAD_'.strtoupper($this->getModelName()).'_UPDATE');
 		}
 		
 		$urlExit = Yii::app()->createAbsoluteUrl('site/question', array(
@@ -197,7 +216,7 @@ abstract class CRUDController extends Controller
 			MSG::BTN_NO => "$('#modalmsg').modal('hide');",
 		)));
 		
-		$content['header'] = MsgPicker::msg()->getMessage(MSG::HEAD_SITE_CREATE);
+		$content['header'] = $head;
 		$content['body'] = $error . $this->renderPartial('_edit', array('model'=>$model, 'url'=>$url), true);
 		$content['footer'] =
 			BSHtml::button(MsgPicker::msg()->getMessage(MSG::BTN_EXIT), array('onclick'=>"showModalAjax('modalmsg', '".$urlExit."', $json);")).
@@ -207,14 +226,26 @@ abstract class CRUDController extends Controller
 	}
 		
 	/**
-	 * Creating the Model on the DB.
+	 * Creating the Model on the DB. On success you have to json_encode an
+	 * array with the key success with an url whitch site shoud be displeyed and
+	 * the method Yii::app()->end(); have to be called. 
+	 * 
+	 * echo json_encode(array('success'=>$url));
+	 * Yii::app()->end();
+	 * 
 	 * @param CActiveRecord $model
 	 * @return string Error
 	 */
 	protected abstract function modelCreate(CActiveRecord $model);
 	
 	/**
-	 * Writing the updates to the Database
+	 * Writing the updates to the Database. On success you have to json_encode an
+	 * array with the key success with an url whitch site shoud be displeyed and
+	 * the method Yii::app()->end(); have to be called. 
+	 * 
+	 * echo json_encode(array('success'=>$url));
+	 * Yii::app()->end();
+	 * 
 	 * @param CActiveRecord $model
 	 * @param CActiveRecord $dbModel
 	 * @return string Error
@@ -222,13 +253,20 @@ abstract class CRUDController extends Controller
 	protected abstract function modelUpdate(CActiveRecord $model, CActiveRecord $dbModel);
 	
 	/**
-	 * Delete Model from the DB.
+	 * Delete Model from the DB.On success you have to json_encode an
+	 * array with the key success with an url whitch site shoud be displeyed and
+	 * the method Yii::app()->end(); have to be called. 
+	 * 
+	 * echo json_encode(array('success'=>$url));
+	 * Yii::app()->end();
+	 * 
 	 * @param string $name
 	 */
 	public function actionDelete($name)
 	{
 		$this->checkAccess('delete'.$this->getModelName());
 		$this->modelDelete($this->findModel($name));
+		throw new CHttpException(500, MsgPicker::msg()->getMessage('EXCEPTION_'.strtoupper($this->getModelName()).'_NOTDELETE'));
 	}
 	
 	protected abstract function modelDelete(CActiveRecord $model);

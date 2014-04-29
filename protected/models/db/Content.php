@@ -23,6 +23,8 @@
  */
 class Content extends CActiveRecord
 {
+	public $oldLabel;
+	
 	/**
 	 * @return string the associated database table name
 	 */
@@ -39,16 +41,28 @@ class Content extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('contentid, label, text, languageid, roleaccess, update_time, update_userid, create_userid', 'required'),
+			array('label, languageid, roleaccess', 'required', 'on'=>'create, update'),
 			array('contentid', 'length', 'max'=>32),
 			array('label, update_userid, create_userid', 'length', 'max'=>20),
 			array('languageid', 'length', 'max'=>2),
 			array('roleaccess', 'length', 'max'=>64),
-			array('create_time', 'safe'),
-			// The following rule is used by search().
-			// @todo Please remove those attributes that should not be searched.
+			array('label', 'match', 'pattern'=>'/^[A-Za-z]+$/u',
+					'message'=>MsgPicker::msg()->getMessage(MSG::SITE_MSG_MATCH)),
+			array('label', 'unique', 'on'=>'create'),
+			array('label', 'testLabel', 'on'=>'update'),
+			array('oldLabel', 'safe', 'on'=>'update'),
 			array('contentid, label, text, languageid, roleaccess, update_time, update_userid, create_time, create_userid', 'safe', 'on'=>'search'),
 		);
+	}
+	
+	public function testLabel($attribute, $params)
+	{
+		if($this->oldLabel === $this->label)
+			return true;
+	
+		$content = Content::model()->findByAttributes(array('label'=>$this->label));
+		if($content !== null)
+			$this->addError($attribute, MsgPicker::msg()->getMessage(MSG::SITE_MSG_LABELEXISTS));
 	}
 
 	/**
@@ -56,8 +70,6 @@ class Content extends CActiveRecord
 	 */
 	public function relations()
 	{
-		// NOTE: you may need to adjust the relation name and the related
-		// class name for the relations automatically generated below.
 		return array(
 			'language' => array(self::BELONGS_TO, 'Language', 'languageid'),
 			'roleaccess0' => array(self::BELONGS_TO, 'AuthItem', 'roleaccess'),
@@ -73,15 +85,9 @@ class Content extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'contentid' => 'Contentid',
-			'label' => 'Label',
-			'text' => 'Text',
-			'languageid' => 'Languageid',
-			'roleaccess' => 'Roleaccess',
-			'update_time' => 'Update Time',
-			'update_userid' => 'update Userid',
-			'create_time' => 'Create Time',
-			'create_userid' => 'Create Userid',
+			'label' 		=> MsgPicker::msg()->getMessage(MSG::MODEL_LABEL),
+			'languageid' 	=> MsgPicker::msg()->getMessage(MSG::MODEL_LANGUAGE),
+			'roleaccess' 	=> MsgPicker::msg()->getMessage(MSG::MODEL_ROLE),
 		);
 	}
 

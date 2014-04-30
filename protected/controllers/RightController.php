@@ -85,6 +85,17 @@ class RightController extends Controller
 // 		$auth->createOperation('deleteSite');
 // 		$auth->createOperation('deleteSiteLanguage');
 // 		$auth->createOperation('addSiteNewLanguage');
+// 		$auth->createOperation('addSiteContent');
+// 		$auth->createOperation('deleteSiteContent');
+	}
+	
+	private function createOperationContent($auth)
+	{
+// 		$auth->createOperation('editContent');
+// 		$auth->createOperation('createContent');
+// 		$auth->createOperation('updateContent');
+// 		$auth->createOperation('updateContentText');
+// 		$auth->createOperation('deleteContent');
 	}
 	
 	private function createOperationNews($auth)
@@ -93,14 +104,6 @@ class RightController extends Controller
 // 		$auth->createOperation('createNews');
 // 		$auth->createOperation('updateNews');
 // 		$auth->createOperation('deleteNews');
-	}
-	
-	private function createOperationContent($auth)
-	{
-// 		$auth->createOperation('editContent');
-// 		$auth->createOperation('createContent');
-// 		$auth->createOperation('updateContent');
-// 		$auth->createOperation('deleteContent');
 	}
 	
 	private function createOperationGallery($auth)
@@ -139,9 +142,12 @@ class RightController extends Controller
 // 		$role->addChild('deleteSite');
 // 		$role->addChild('deleteSiteLanguage');
 // 		$role->addChild('addSiteNewLanguage');
+// 		$role->addChild('addSiteContent');
+// 		$role->addChild('deleteSiteContent');
 // 		$role->addChild('editContent');
 // 		$role->addChild('createContent');
 // 		$role->addChild('updateContent');
+// 		$role->addChild('updateContentText');
 // 		$role->addChild('deleteContent');
 	}
 	

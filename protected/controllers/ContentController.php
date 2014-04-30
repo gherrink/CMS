@@ -61,4 +61,24 @@ class ContentController extends CRUDController
 			Yii::app()->end();
 		}
 	}
+	
+	/**
+	 * 
+	 * @param string $name
+	 */
+	public function actionSaveContent($name)
+	{
+		$this->checkAccess('updateContentText');
+		
+		if(! in_array('content', $_POST))
+			throw new CHttpException(400, MsgPicker::msg()->getMessage(MSG::EXCEPTION_CONTENT_NOCONTENT));
+		
+		$content = Content::model()->findByPk($name);
+		if($content === null)
+			throw new CHttpException(400, MsgPicker::msg()->getMessage(MSG::EXCEPTION_CONTENT_NOTFOUND));
+		
+		$content->text = $_POST['content'];
+		if(! $content->update())
+			throw new CHttpException(400, MsgPicker::msg()->getMessage(MSG::EXCEPTION_CONTENT_TEXTNOTUPDATE));
+	}
 }

@@ -147,6 +147,8 @@ return array(
 	'EXCEPTION_SITE_NOTDELETE'			=> 'Die Seite konnte leider nicht gelöscht werden, bitte versuchen Sie es erneut.',
 	'EXCEPTION_CONTENT_NOTFOUND'		=> 'Der Inhalt konnte leider nicht gefunden werden.',
 	'EXCEPTION_CONTENT_NOTDELETE'		=> 'Der Inhalt konnte nicht gelöscht werden, bitte verscuehn Sie es erneut.',
+	'EXCEPTION_CONTENT_NOCONTENT'		=> 'Es wurde kein Kontent übertragen, der gespeichert werden soll.',
+	'EXCEPTION_CONTENT_TEXTNOTUPDATE'	=> 'Die Änderungen konnten leider nicht gespeichert werden, bitte versuchen Sie es erneut.',
 	/*/EXEPTION */
 
 	/* QUESTION */

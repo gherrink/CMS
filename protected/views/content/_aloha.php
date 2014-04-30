@@ -36,15 +36,12 @@ function alohaSave()
 		data: {
 			content : content
 		},
+		success: function(data, textStatus, jqXHR){
+		},
+		error: function(jqXHR, textStatus, errorThrown) {
+			showErrorModal(modelid, jqXHR, textStatus, errorThrown);
+		},
 		dataType: "html"
-	});
-
-	request.done(function(msg) {
-		
-	});
-
-	request.error(function(jqXHR, textStatus) {
-		alert( jqXHR.responseText );
 	});
 }
 </script>

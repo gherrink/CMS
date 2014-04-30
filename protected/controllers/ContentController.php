@@ -66,11 +66,11 @@ class ContentController extends CRUDController
 	 * 
 	 * @param string $name
 	 */
-	public function actionSaveContent($name)
+	public function actionSaveText($name)
 	{
 		$this->checkAccess('updateContentText');
 		
-		if(! in_array('content', $_POST))
+		if(! isset($_POST['content']))
 			throw new CHttpException(400, MsgPicker::msg()->getMessage(MSG::EXCEPTION_CONTENT_NOCONTENT));
 		
 		$content = Content::model()->findByPk($name);

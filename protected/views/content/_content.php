@@ -43,7 +43,7 @@ if($edit === true && $editable === true)
 					'question'=>MSG::QUESTION_DELEATE_CONTENT,
 				));
 				$json = json_encode(array('buttons'=>array(
-					MSG::BTN_YES => "deleteAjax('$urlDelete'); $('#modalmsg').modal('hide');",
+					MSG::BTN_YES => "doAjax('$urlDelete'); $('#modalmsg').modal('hide');",
 					MSG::BTN_NO => "$('#modalmsg').modal('hide');",
 				)));
 				echo BsHtml::button(MsgPicker::msg()->getMessage(MSG::BTN_DELETE), array(
@@ -53,16 +53,21 @@ if($edit === true && $editable === true)
 				if($onSite)
 					echo BsHtml::button('delFromSite');
 				else 
-					echo BsHtml::button('add2Site');
+					echo BsHtml::button('add2site', array(
+						'onclick' => 'showModalAjax("modal", "'.Yii::app()->createAbsoluteUrl('content/add2site').'");',
+					));
 			?>
 		</div>
 	</div>
 	<hr>
 <?php endif;?>
-
-<div <?php echo $edit?'class="edit"':''; ?> id="<?php echo $model->contentid ?>">
+<?php if($edit):?>
+<div class="edit" id="<?php echo $model->contentid ?>">
 	<?php echo $model->text?>
 </div>
+<?php else:?>
+	<?php echo $model->text?>
+<?php endif;?>
 
 <?php if($edit):?>
 	<hr>

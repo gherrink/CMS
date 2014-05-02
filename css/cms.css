@@ -1,0 +1,13 @@
+@CHARSET "UTF-8";
+
+.grid-view table.items tr.even {
+	background-color: #EEEEEE;
+}
+
+.grid-view table.items tr.odd {
+	background-color: #FFFFFF;
+}
+
+.grid-view table.items tr.selected {
+	background-color: #DDDDDD;
+}

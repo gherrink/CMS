@@ -110,4 +110,14 @@ class SiteContent extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+	
+	/**
+	 * 
+	 * @param unknown $siteid
+	 * @return Ambigous <string, mixed, unknown>
+	 */
+	public static function getLastPosition($siteid, $col = 1)
+	{
+		return SiteContent::model()->count("siteid = '$siteid' AND col = $col");
+	}
 }

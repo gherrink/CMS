@@ -47,7 +47,7 @@ class Site extends CActiveRecord
 			array('label', 'unique', 'on'=>'create'),
 			array('label', 'testLabel', 'on'=>'update'),
 			array('oldLabel', 'safe', 'on'=>'update'),
-			array('siteid, label, layout, roleaccess, update_time, update_userid, create_time, create_userid', 'safe', 'on'=>'search'),
+			array('label, layout, roleaccess', 'safe', 'on'=>'search'),
 		);
 	}
 	
@@ -106,15 +106,10 @@ class Site extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('siteid',$this->siteid,true);
 		$criteria->compare('label',$this->label,true);
 		$criteria->compare('layout',$this->layout,true);
 		$criteria->compare('roleaccess',$this->roleaccess,true);
-		$criteria->compare('update_time',$this->update_time,true);
-		$criteria->compare('update_userid',$this->update_userid,true);
-		$criteria->compare('create_time',$this->create_time,true);
-		$criteria->compare('create_userid',$this->create_userid,true);
-
+		
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));

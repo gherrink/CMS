@@ -14,6 +14,7 @@
 		 */
 		$cs->registerCssFile($path . '/css/bootstrap/css/bootstrap.min.css');
 		$cs->registerCssFile($themePath . '/css/bootstrap-theme.css');
+		$cs->registerCssFile($path . '/css/cms.css');
 	
 		/**
 		 * JavaScripts

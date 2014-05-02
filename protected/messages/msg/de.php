@@ -61,6 +61,7 @@ return array(
 	'HEAD_SITE_UPDATE'					=> 'Seite bearbeiten',
 	'HEAD_CONTENT_CREATE'				=> 'Inhalt erstellen',
 	'HEAD_CONTENT_UPDATE'				=> 'Inhalt bearbeiten',
+	'HEAD_CONTENT_ADD2SITE'				=> 'Inhalt zur Seite hinzufügen',
 	/*/Ueberschriften */
 		
 	/* Buttons */
@@ -149,6 +150,7 @@ return array(
 	'EXCEPTION_CONTENT_NOTDELETE'		=> 'Der Inhalt konnte nicht gelöscht werden, bitte verscuehn Sie es erneut.',
 	'EXCEPTION_CONTENT_NOCONTENT'		=> 'Es wurde kein Kontent übertragen, der gespeichert werden soll.',
 	'EXCEPTION_CONTENT_TEXTNOTUPDATE'	=> 'Die Änderungen konnten leider nicht gespeichert werden, bitte versuchen Sie es erneut.',
+	'EXCEPTION_CONTENT_NOTADD2SITE'		=> 'EXCEPTION_CONTENT_NOTADD2SITE',
 	/*/EXEPTION */
 
 	/* QUESTION */

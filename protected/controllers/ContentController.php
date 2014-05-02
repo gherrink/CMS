@@ -81,4 +81,55 @@ class ContentController extends CRUDController
 		if(! $content->update())
 			throw new CHttpException(400, MsgPicker::msg()->getMessage(MSG::EXCEPTION_CONTENT_TEXTNOTUPDATE));
 	}
+	
+	public function actionAdd2Site()
+	{	
+		Yii::app()->clientscript->scriptMap['jquery.js'] = false;
+		
+		$content['header'] = MsgPicker::msg()->getMessage(MSG::HEAD_CONTENT_ADD2SITE);
+		$content['body'] = $this->renderPartial('_add2site', array(), true, true);
+		$content['footer'] = BsHtml::button(MsgPicker::msg()->getMessage(MSG::BTN_OK), array('onclick'=>"addContent2Site();")).
+		BSHtml::button(MsgPicker::msg()->getMessage(MSG::BTN_EXIT), array('onclick'=>"$('#modal').modal('hide');"));		
+		echo json_encode($content);
+	}
+		
+	public function actionUpdateAdd2Site()
+	{
+		$model = new Site('search');
+		if(isset($_GET['Site']))
+			$model->attributes = $_GET['Site'];
+		
+		$this->renderPartial('_add2site', array(
+			'model' => $model,
+		));
+	}
+	
+	public function actionAddContent2Site($content, $site, $col = 1)
+	{
+		$this->checkAccess('addSiteContent');
+		
+		$mSite = Site::model()->findByAttributes(array('label'=>$site));
+		if($mSite === null)
+			throw new CHttpException(400, MsgPicker::msg()->getMessage(MSG::EXCEPTION_SITE_NOTFOUND));
+		
+		$mContent = Content::model()->findByAttributes(array('label'=>$content));
+		if($mContent === null)
+			throw new CHttpException(400, MsgPicker::msg()->getMessage(MSG::EXCEPTION_CONTENT_NOTFOUND));
+		
+		$siteContent = new SiteContent();
+		$siteContent->siteid = $mSite->siteid;
+		$siteContent->contentid = $mContent->contentid;
+		$siteContent->languageid = $mContent->languageid;
+		$siteContent->position = SiteContent::getLastPosition($site) + 1;
+		$siteContent->col = $col;
+		
+		/*
+		 * @todo Content einer gewissen spalte hinzufügen
+		 */
+		
+		if(! $siteContent->insert())
+			throw new CHttpException(500, MsgPicker::msg()->getMessage(MSG::EXCEPTION_CONTENT_NOTADD2SITE));
+		
+		echo json_encode(array('success'=>Yii::app()->createAbsoluteUrl('site/edit', array('name'=>$site))));
+	}
 }

@@ -13,7 +13,7 @@
  * @var $editable boolean
  */
 
-if($edit === null)
+if(! isset($edit))
 	$edit = false;
 
 if($edit === true && $editable === true)
@@ -39,7 +39,7 @@ if($edit === true && $editable === true)
 					'question'=>MSG::QUESTION_DELEATE_SITE,
 				));
 				$json = json_encode(array('buttons'=>array(
-					MSG::BTN_YES => "deleteAjax('$urlDelete'); $('#modalmsg').modal('hide');",
+					MSG::BTN_YES => "doAjax('$urlDelete'); $('#modalmsg').modal('hide');",
 					MSG::BTN_NO => "$('#modalmsg').modal('hide');",
 				)));
 				echo BsHtml::button(MsgPicker::msg()->getMessage(MSG::BTN_DELETE), array(

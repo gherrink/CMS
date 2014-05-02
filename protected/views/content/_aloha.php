@@ -1,6 +1,6 @@
 <?php
 /**
- * Creates a content of a site.
+ * Creates the javascript for the Aloha-Editor.
  * @author Maurice Busch
  * @copyright 2014
  * @version 0.1
@@ -24,11 +24,6 @@ function alohaSave()
 {
 	var content = Aloha.activeEditable.getContents();
 	var contentId = Aloha.activeEditable.obj[0].id;
-	
-// 	// textarea handling -- html id is "xy" and will be "xy-aloha" for the aloha editable
-// 	if ( contentId.match(/-aloha$/gi) ) {
-// 		contentId = contentId.replace( /-aloha/gi, '' );
-// 	}
 
 	var request = jQuery.ajax({
 		url: '<?php echo Yii::app()->createAbsoluteUrl('content/saveText'); ?>?name='+contentId,

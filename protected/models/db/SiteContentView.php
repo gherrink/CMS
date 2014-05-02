@@ -7,6 +7,7 @@
  * @property string $siteid
  * @property string $languageid
  * @property string $contentid
+ * @property string $label
  * @property integer $col
  * @property integer $position
  * @property string $text

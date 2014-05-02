@@ -148,28 +148,30 @@ class Controller extends CController
 		if($this->roleaccessSql !== null)
 			return $this->roleaccessSql;
 		
-		$sql = $colName ." = '". MSG::VISITOR."'";
+		$sql = "(". $colName ." = '". MSG::VISITOR."'";
 		
 		if(Yii::app()->user->checkAccess(MSG::USER))
-			$sql = $sql ." AND $colName = '" .MSG::USER. "'";
+			$sql .= " OR $colName = '" .MSG::USER. "'";
 		
 		if(Yii::app()->user->checkAccess(MSG::MEMBER))
-			$sql = $sql ." AND $colName = '" .MSG::MEMBER. "'";
+			$sql .= " OR $colName = '" .MSG::MEMBER. "'";
 		
 		if(Yii::app()->user->checkAccess(MSG::MSITE))
-			$sql = $sql ." AND $colName = '" .MSG::MSITE. "'";
+			$sql .= " OR $colName = '" .MSG::MSITE. "'";
 		
 		if(Yii::app()->user->checkAccess(MSG::MMENU))
-			$sql = $sql ." AND $colName = '" .MSG::MMENU. "'";
+			$sql .= " OR $colName = '" .MSG::MMENU. "'";
 		
 		if(Yii::app()->user->checkAccess(MSG::MGALLERY))
-			$sql = $sql ." AND $colName = '" .MSG::MGALLERY. "'";
+			$sql .= " OR $colName = '" .MSG::MGALLERY. "'";
 		
 		if(Yii::app()->user->checkAccess(MSG::MNEWS))
-			$sql = $sql ." AND $colName = '" .MSG::MNEWS. "'";
+			$sql .= " OR $colName = '" .MSG::MNEWS. "'";
 		
 		if(Yii::app()->user->checkAccess(MSG::ADMIN))
-			$sql = $sql ." AND $colName = '" .MSG::ADMIN. "'";
+			$sql .= " OR $colName = '" .MSG::ADMIN. "'";
+		
+		$sql .= ")";
 		
 		$this->roleaccessSql = $sql;
 		return $sql;

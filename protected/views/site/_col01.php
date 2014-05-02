@@ -10,10 +10,12 @@
  * @var $edit boolean
  */
 
-if($edit === null || ! Yii::app()->user->checkAccess('contentEdit'))
+if($edit === null || ! Yii::app()->user->checkAccess('editContent'))
 	$edit = false;
 ?>
 
-<div class="col-sm-12">
-	<?php $this->renderPartial('_contents', array('site'=>$site, 'edit'=>$edit, 'col'=>1));?>
+<div class="row">
+	<div class="col-sm-12">
+		<?php $this->renderPartial('_contents', array('site'=>$site, 'edit'=>$edit, 'col'=>1));?>
+	</div>
 </div>

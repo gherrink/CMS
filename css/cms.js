@@ -1,4 +1,4 @@
-function deleteAjax(url)
+function doAjax(url)
 {
 	$.ajax({
 		type: 'POST',
@@ -8,7 +8,7 @@ function deleteAjax(url)
 				window.location = data['success'];
 		},
 		error: function(jqXHR, textStatus, errorThrown) {
-			showErrorModal(modelid, jqXHR, textStatus, errorThrown);
+			showErrorModal('modalmsg', jqXHR, textStatus, errorThrown);
 		},
 			
 		dataType:'json'
@@ -32,6 +32,25 @@ function submitForm(modelid, formid, url)
 		},
 		error: function(jqXHR, textStatus, errorThrown) {
 			showErrorModal(modelid, jqXHR, textStatus, errorThrown);
+		},
+			
+		dataType:'json'
+	});
+}
+
+function updateModalAjax(id, url)
+{
+	$.ajax({
+		type: 'POST',
+		url: url,
+		data: post,
+	
+		success:function(data, textStatus, jqXHR){
+			if('body' in data)
+				$('#'+id+' .modal-body').html(data['body']);
+		},
+		error: function(jqXHR, textStatus, errorThrown) {
+			showErrorModal(id, jqXHR, textStatus, errorThrown);
 		},
 			
 		dataType:'json'

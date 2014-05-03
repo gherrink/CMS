@@ -7,6 +7,8 @@ php:
   - 5.5
 
 before_script:
+  - chmod -x ./travis_scripts/create_mysql.sh
+  - chmod -x ./travis_scripts/create_dir.sh
   - curl -sS https://getcomposer.org/installer | php
   - php composer.phar install
   - ./travis_scripts/create_mysql.sh

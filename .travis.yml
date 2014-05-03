@@ -17,4 +17,4 @@ before_script:
 
 script:
   - cd ./protected/tests
-  - php phpunit unit
+  - phpunit unit/

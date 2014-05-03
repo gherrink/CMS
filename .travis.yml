@@ -5,6 +5,7 @@ php:
 
 before_script:
   - composer install
+  - export PATH=../../vendor/bin:$PATH
   - mkdir ./assets
   - mkdir ./protected/runtime
   - mysql -u root -e "CREATE DATABASE IF NOT EXISTS cmstest DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;"
@@ -15,4 +16,5 @@ before_script:
   - mysql -u root cmstest < ./sql/rights/create.sql
 
 script:
-  - php ./vendor/bin/phpunit ./protected/tests/unit
+  - cd ./protected/tests
+  - php phpunit unit

@@ -19,9 +19,8 @@ before_script:
 
 script:
   - cd ./protected/tests
-  - phpunit --coverage-php ../../coverage.cov unit/
+  - phpunit --coverage-clover ../../clover.xml unit/
 
 after_script:
-  - ls -la
   - cd ../..
   - php vendor/bin/coveralls -v

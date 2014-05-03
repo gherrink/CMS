@@ -6,7 +6,7 @@
 		stopOnFailure="false">
 	
 	<logging>
-        <log type="coverage-php" target="build/cov/coverage.cov"/>
+        <log type="coverage-php" target="coverage.cov"/>
     </logging>
 
 	<selenium>

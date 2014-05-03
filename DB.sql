@@ -630,7 +630,7 @@ ALTER TABLE SiteContent
 
 /* Create Views */
 
-CREATE VIEW SiteContentView AS SELECT site.siteid as siteid, site.languageid as languageid, site.contentid as contentid, site.col as col, content.label as label, site.position as position, con.text as text, con.roleaccess as roleaccess, con.update_time as update_time, con.update_userid as update_userid, con.create_time as create_time, con.create_userid as create_userid
+CREATE VIEW SiteContentView AS SELECT site.siteid as siteid, site.languageid as languageid, site.contentid as contentid, site.col as col, con.label as label, site.position as position, con.text as text, con.roleaccess as roleaccess, con.update_time as update_time, con.update_userid as update_userid, con.create_time as create_time, con.create_userid as create_userid
 FROM SiteContent as site
 LEFT JOIN Content as con ON site.contentid = con.contentid
 ORDER BY contentid, col, position;

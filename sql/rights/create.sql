@@ -11,7 +11,7 @@ INSERT INTO `AuthItem` (`name`, `type`, `description`, `bizrule`, `data`) VALUES
 ('deleteSiteLanguage', 0, '', NULL, 'N;'),
 ('editNews', 0, '', NULL, 'N;'),
 ('editSite', 0, '', NULL, 'N;'),
-('editContent', 0, '', NULL, 'N;');
+('editContent', 0, '', NULL, 'N;'),
 ('login', 0, '', NULL, 'N;'),
 ('logout', 0, '', NULL, 'N;'),
 ('MEMBER', 2, '', NULL, 'N;'),

@@ -9,5 +9,20 @@
 		<browser name="Internet Explorer" browser="*iexplore" />
 		<browser name="Firefox" browser="*firefox" />
 	</selenium>
-
+	
+	<filter>
+	<!--
+		<blacklist>
+			<directory suffix=".php">../../framework</directory>
+			<directory suffix=".php">../../vendor</directory>
+		</blacklist>
+	-->
+	<whitelist processUncoveredFilesFromWhitelist="true">
+		<directory suffix=".php">.</directory>
+		<exclude>
+			<file>./WebTestCase.php</file>
+		</exclude>
+	</whitelist>
+	</filter>
+	
 </phpunit>

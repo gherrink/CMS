@@ -24,4 +24,4 @@ script:
 after_script:
   - ls -la
   - cd ../..
-  - php vendor/bin/coveralls -v -c .coveralls.yml
+  - php vendor/bin/coveralls -v

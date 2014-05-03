@@ -19,6 +19,7 @@ before_script:
 
 script:
   - cd ./protected/tests
+  - mkdir build/cov/
   - phpunit unit/
 
 after_script:

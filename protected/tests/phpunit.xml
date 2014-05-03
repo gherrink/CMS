@@ -4,10 +4,6 @@
 		convertNoticesToExceptions="true"
 		convertWarningsToExceptions="true"
 		stopOnFailure="false">
-	
-	<logging>
-        <log type="coverage-php" target="coverage.cov"/>
-    </logging>
 
 	<selenium>
 		<browser name="Internet Explorer" browser="*iexplore" />

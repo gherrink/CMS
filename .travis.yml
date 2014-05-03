@@ -19,7 +19,7 @@ before_script:
 
 script:
   - cd ./protected/tests
-  - phpunit unit/
+  - phpunit --coverage-php coverage.cov unit/
 
 after_script:
   - coveralls -v

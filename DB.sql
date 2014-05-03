@@ -2,8 +2,8 @@ SET SESSION FOREIGN_KEY_CHECKS=0;
 
 /* Drop Views */
 
-DROP VIEW SiteContentView;
-DROP VIEW VisitUserSite;
+DROP VIEW IF EXISTS SiteContentView;
+DROP VIEW IF EXISTS VisitUserSite;
 
 
 

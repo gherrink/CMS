@@ -23,4 +23,5 @@ script:
 
 after_script:
   - ls -la
-  - coveralls -v
+  - cd ../..
+  - coveralls -v -c .coveralls.yml

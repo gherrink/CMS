@@ -21,6 +21,7 @@
 		<directory suffix=".php">.</directory>
 		<exclude>
 			<file>./WebTestCase.php</file>
+			<directory suffix=".php">functional</directory>
 		</exclude>
 	</whitelist>
 	</filter>

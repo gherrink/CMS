@@ -5,11 +5,9 @@
 		convertWarningsToExceptions="true"
 		stopOnFailure="false">
 	
-	<php>
-		<var name="db_dsn" value="mysql:dbname=cmstest;host=localhost"/>
-		<var name="db_username" value="root"/>
-		<var name="db_password" value=""/>
-	</php>
+	<logging>
+        <log type="coverage-php" target="build/cov/coverage.cov"/>
+    </logging>
 
 	<selenium>
 		<browser name="Internet Explorer" browser="*iexplore" />

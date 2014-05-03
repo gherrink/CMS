@@ -9,8 +9,8 @@ php:
 before_script:
   - curl -sS https://getcomposer.org/installer | php
   - php composer.phar install
-  - mkdir ../assets
-  - mkdir ../protected/runtime
+  - mkdir ./assets
+  - mkdir ./protected/runtime
   - mysql -u root -e "CREATE DATABASE IF NOT EXISTS `cmstest` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;"
   - mysql -u root -e "CREATE USER 'cms'@'localhost' IDENTIFIED BY 'BCv4r2hrfhw4ahrc';"
   - mysql -u root -e "GRANT USAGE ON * . * TO 'cms'@'localhost' IDENTIFIED BY 'BCv4r2hrfhw4ahrc' WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0 ;"

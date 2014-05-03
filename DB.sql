@@ -7,32 +7,29 @@ DROP VIEW VisitUserSite;
 
 
 
-/* Drop Tables */
+/* DROP TABLE IF EXISTSs */
 
-DROP TABLE AuthItemChild;
-DROP TABLE GalleryImage;
-DROP TABLE GalleryLanguage;
-DROP TABLE Gallery;
-DROP TABLE NewsLanguage;
-DROP TABLE News;
-DROP TABLE ImageLanguage;
-DROP TABLE Image;
-DROP TABLE AuthAssignment;
-DROP TABLE Menu;
-DROP TABLE VisitSite;
-DROP TABLE SiteContent;
-DROP TABLE SiteLanguage;
-DROP TABLE Site;
-DROP TABLE Content;
-DROP TABLE AuthItem;
-DROP TABLE VisitUser;
-DROP TABLE Visit;
-DROP TABLE UserValidate;
-DROP TABLE Language;
-DROP TABLE User;
-
-
-
+DROP TABLE IF EXISTS AuthItemChild;
+DROP TABLE IF EXISTS GalleryImage;
+DROP TABLE IF EXISTS GalleryLanguage;
+DROP TABLE IF EXISTS Gallery;
+DROP TABLE IF EXISTS NewsLanguage;
+DROP TABLE IF EXISTS News;
+DROP TABLE IF EXISTS ImageLanguage;
+DROP TABLE IF EXISTS Image;
+DROP TABLE IF EXISTS AuthAssignment;
+DROP TABLE IF EXISTS Menu;
+DROP TABLE IF EXISTS VisitSite;
+DROP TABLE IF EXISTS SiteContent;
+DROP TABLE IF EXISTS SiteLanguage;
+DROP TABLE IF EXISTS Site;
+DROP TABLE IF EXISTS Content;
+DROP TABLE IF EXISTS AuthItem;
+DROP TABLE IF EXISTS VisitUser;
+DROP TABLE IF EXISTS Visit;
+DROP TABLE IF EXISTS UserValidate;
+DROP TABLE IF EXISTS Language;
+DROP TABLE IF EXISTS User;
 
 /* Create Tables */
 

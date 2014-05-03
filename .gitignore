@@ -1,7 +1,6 @@
 .settings/
 assets/
 protected/runtime/
-framework/
 Behat
 *.*~
 .project
@@ -10,3 +9,5 @@ images-edit/
 *.xcf
 .git
 .buildpath
+vendor/
+composer.lock

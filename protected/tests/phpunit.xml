@@ -1,5 +1,5 @@
 <phpunit bootstrap="bootstrap.php"
-		colors="false"
+		colors="true"
 		convertErrorsToExceptions="true"
 		convertNoticesToExceptions="true"
 		convertWarningsToExceptions="true"
@@ -11,19 +11,13 @@
 	</selenium>
 	
 	<filter>
-	<!--
-		<blacklist>
-			<directory suffix=".php">../../framework</directory>
-			<directory suffix=".php">../../vendor</directory>
-		</blacklist>
-	-->
-	<whitelist processUncoveredFilesFromWhitelist="true">
-		<directory suffix=".php">.</directory>
-		<exclude>
-			<file>./WebTestCase.php</file>
-			<directory suffix=".php">functional</directory>
-		</exclude>
-	</whitelist>
+		<whitelist processUncoveredFilesFromWhitelist="true">
+		    <directory suffix=".php">.</directory>
+			<exclude>
+				<file>./WebTestCase.php</file>
+				<directory suffix=".php">functional</directory>
+			</exclude>
+		</whitelist>
 	</filter>
 	
 </phpunit>

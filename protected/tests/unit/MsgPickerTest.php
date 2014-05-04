@@ -14,4 +14,19 @@ class MsgPickerTest extends CTestCase
 	{
 		
 	}
+	
+	public function testCeckGRUDControllerConsts()
+	{
+		
+	}
+	
+	public function testAllMsgConstsHaveArrayKeys()
+	{
+		
+	}
+	
+	public function testAllArrayKeysHaveMsgConsts()
+	{
+		
+	}
 }

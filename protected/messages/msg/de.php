@@ -181,5 +181,6 @@ return array(
 	'FOOTER' => 'Copyright &copy; ###year### bei CollectMySociety.<br/>
 		Alle Rechte Vorbehalten.</br>
 		Entwickelt von Maurice Busch.</br>',
-	'MSG_TEST' => 'Das ist ein Test',
+	'TEST' 			=> 'This is a Test',
+	'TEST_PARM'		=> 'Test with params ###par1### and ###par2###',
 );

@@ -16,9 +16,9 @@ class MsgPicker {
 	const ERROR_NO_LANGUAGE_FOUND	= 'The language array was not found';
 	const ERROR_MSG_NOT_FOUND		= 'ERROR_MSG_NOT_FOUND';
 	
-	private $defaultLanguage = 'de';
-	private $availableLanguages = array('de'=>'de', 'en'=>'en');
-	private $msgPath = 'messages/msg';
+	private static $defaultLanguage = 'de';
+	private static $availableLanguages = array('de'=>'de');
+	private static $msgPath = 'messages/msg';
 	private $messages = array();
 	
 	private static $instance;
@@ -97,6 +97,16 @@ class MsgPicker {
 			next($params);
 		}
 		return $msg;
+	}
+	
+	public static function getAvailableLanguages()
+	{
+		return self::$availableLanguages;
+	}
+	
+	public static function getMsgPath()
+	{
+		return self::$msgPath;
 	}
 	
 }

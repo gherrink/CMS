@@ -10,57 +10,95 @@
 
 class KeyGeneratorTest extends CDbTestCase
 {
-	private $gen;
-	
-// 	public function __construct()
-// 	{
 		
-// // 		Yii::app()->db = $connection;
-// 		$this->gen = Yii::app()->keygen;
-// 	}
-	
 	public function testGetPasswordKey()
 	{
-		$db = Yii::app()->db;
-// 		echo $db->createUrl('site/site', array('bla'=>'bal'));
-		
-// 		$url = Yii::app()->urlManeger;
-// 		$this->assertTrue(! ($url === null));
-		
-// 		$db = Yii::app()->db;
-// 		$pwKeys = array();
-// 		foreach ($this->dataUser() as $usrData)
-// 		{
-// 			$user = new User();
-// 			$user->userid = $usrData[0];
-// 			$user->password = $usrData[1];
-// 			$key = $gen->getPasswordKey($user);
-// 			$this->assertTrue(! array_key_exists($key, $pwKeys));
-// 			$pwKeys[$key] = 1;
-// 		}
+		$gen = Yii::app()->keygen;
+		$pwKeys = array();
+		foreach ($this->dataUser() as $usrData)
+		{
+			$user = new User();
+			$user->userid = $usrData[0];
+			$user->password = $usrData[1];
+			$key = $gen->getPasswordKey($user);
+			$this->assertTrue(! array_key_exists($key, $pwKeys));
+			$pwKeys[$key] = 1;
+		}
 	}
 	
-	public function dataUser()
+	private function dataUser()
 	{
 		return array(
 			array('bob', '1234'),
-			array('doo', '1234'),
+			array('doodu', '1234'),
+			array('mrbirne', '1234'),
+			array('ace', '1234'),
+			array('blub', '1234')
 		);
 	}
 	
 	public function testGetMailKey()
 	{
-// 	public function getMailKey($mail)
-// 	{
-// 		return hash('sha256', $this->userKey.$mail);
-// 	}
+		$gen = Yii::app()->keygen;
+		$mailKeys = array();
+		
+		foreach($this->dataFirstname() as $firstname)
+		{
+			foreach ($this->dataLastname() as $lastname)
+			{
+				foreach ($this->dataDomain() as $domain)
+				{
+					$key = $gen->getMailKey($firstname.".".$lastname."@".$domain);
+					$this->assertTrue(! array_key_exists($key, $mailKeys));
+					$mailKeys[$key] = 1;
+					$key = $gen->getMailKey($firstname.$lastname."@".$domain);
+					$this->assertTrue(! array_key_exists($key, $mailKeys));
+					$mailKeys[$key] = 1;
+				}
+			}
+		}
+	}
+	
+	private function dataFirstname()
+	{
+		return array(
+			'bob',
+			'peter',
+			'heinz',
+			'dodu',
+		);
+	}
+	
+	private function dataLastname()
+	{
+		return array(
+			'affe',
+			'baecker',
+			'doofenschmirz',
+		);
+	}
+	
+	private function dataDomain()
+	{
+		return array(
+			'googlemail.com',
+			'gmail.de',
+			'gmail.com',
+			'gmx.de',
+			'gmx.net',
+			'gmx.com',
+		);
 	}
 	
 	public function testGetUniquKey()
 	{
-// 	public function getUniquKey()
-// 	{
-// 		return md5(uniqid(rand(), TRUE));
-// 	}
+		$gen = Yii::app()->keygen;
+		$keys = array();
+		for($i = 0; $i < 1000; $i++)
+		{
+			$key = $gen->getUniquKey();
+			$this->assertTrue(! array_key_exists($key, $keys));
+			$keys[$key] = 1;
+		}
 	}
 }

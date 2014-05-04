@@ -171,4 +171,19 @@ class MsgPickerTest extends CTestCase
 			array(MSG::TEST_PARAM, array('par1'=>'param1', 'par2'=>'param2'), 'Test with params param1 and param2'),
 		);
 	}
+	
+	/**
+	 * @depends testGetMessage
+	 */
+	public function testMsgNotFound()
+	{
+		try {
+			$msg = MsgPicker::msg()->getMessage('THIS_KEY_DOSE_NOT_EXISTS');
+			$this->assertTrue(false, "this must throw an exception");
+		} 
+		catch (Exception $e)
+		{
+			$this->assertTrue(true);
+		}
+	}
 }

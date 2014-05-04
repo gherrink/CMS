@@ -5,7 +5,7 @@
  */
 
 return array(
-	'ERROR_MSG_NOT_FOUND'=>'Die Message ###msg### wurde nicht gefunden.',
+	'EXCEPTION_MSG_NOTFOUND'=>'Die Message ###msg### wurde nicht gefunden.',
 	
 	/* Sprachen */
 	'DE'	=> 'Deutsch',
@@ -51,14 +51,13 @@ return array(
 	/* Ueberschriften */
 	'HEAD_QUESTION_REALYCLOSE'			=> 'Wirklich Schließen?',
 	'HEAD_QUESTION_REALYDELETE'			=> 'Wirklich Löschen?',
-	'HEAD_QUESTION'						=> 'Frage',
 	'HEAD_CONTACT'						=> 'Kontakt',
 	'HEAD_LOGIN'						=> 'Anmelden',
 	'HEAD_REGISTER'						=> 'Registrieren',
 	'HEAD_CHANGEMAIL'					=> 'E-Mail ändern',
 	'HEAD_SITE_CREATE'					=> 'Seite erstellen',
-	'HEAD_SITE_CREATELANGUAGE'			=> 'Sprache und Überschriften',
 	'HEAD_SITE_UPDATE'					=> 'Seite bearbeiten',
+	'HEAD_SITE_CREATELANGUAGE'			=> 'Sprache und Überschriften',
 	'HEAD_CONTENT_CREATE'				=> 'Inhalt erstellen',
 	'HEAD_CONTENT_UPDATE'				=> 'Inhalt bearbeiten',
 	'HEAD_CONTENT_ADD2SITE'				=> 'Inhalt zur Seite hinzufügen',
@@ -143,9 +142,9 @@ return array(
 	/* EXEPTION */
 	'EXCEPTION_NOBUTTONS'				=> 'Es wurden keine Buttons gesetzt.',
 	'EXCEPTION_SITE_NOTFOUND' 			=> 'Die Angeforderte Seite konnte leider nicht gefunden werden.',
+	'EXCEPTION_SITE_NOTDELETE'			=> 'Die Seite konnte leider nicht gelöscht werden, bitte versuchen Sie es erneut.',
 	'EXCEPTION_SITE_NOCONTENT'			=> 'Die Seite hat noch keinen Inhalt',
 	'EXCEPTION_SITE_LANGUAGENOTDELETE'	=> 'Die Sprache konnte nicht gelöscht werden, bitte versuchen Sie es erneut.',
-	'EXCEPTION_SITE_NOTDELETE'			=> 'Die Seite konnte leider nicht gelöscht werden, bitte versuchen Sie es erneut.',
 	'EXCEPTION_CONTENT_NOTFOUND'		=> 'Der Inhalt konnte leider nicht gefunden werden.',
 	'EXCEPTION_CONTENT_NOTDELETE'		=> 'Der Inhalt konnte nicht gelöscht werden, bitte verscuehn Sie es erneut.',
 	'EXCEPTION_CONTENT_NOCONTENT'		=> 'Es wurde kein Kontent übertragen, der gespeichert werden soll.',
@@ -182,5 +181,5 @@ return array(
 		Alle Rechte Vorbehalten.</br>
 		Entwickelt von Maurice Busch.</br>',
 	'TEST' 			=> 'This is a Test',
-	'TEST_PARM'		=> 'Test with params ###par1### and ###par2###',
+	'TEST_PARAM'		=> 'Test with params ###par1### and ###par2###',
 );

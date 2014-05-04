@@ -14,7 +14,6 @@
 class MsgPicker {
 	
 	const ERROR_NO_LANGUAGE_FOUND	= 'The language array was not found';
-	const ERROR_MSG_NOT_FOUND		= 'ERROR_MSG_NOT_FOUND';
 	
 	private static $defaultLanguage = 'de';
 	private static $availableLanguages = array('de'=>'de');
@@ -57,7 +56,7 @@ class MsgPicker {
 		{
 			$app->language = $app->session['language'];
 		}
-		else 
+		else if (array_key_exists('HTTP_ACCEPT_LANGUAGE', $_SERVER))
 		{
 			$app->language = $_SERVER["HTTP_ACCEPT_LANGUAGE"];
 		}
@@ -66,7 +65,7 @@ class MsgPicker {
 				|| ! array_key_exists($app->language, $this->availableLanguages)
 				|| ! Language::isLanguageActive($app->language))
 		{
-			$app->language = $this->defaultLanguage;
+			$app->language = self::$defaultLanguage;
 		}
 		
 		$this->setMessages();
@@ -77,19 +76,26 @@ class MsgPicker {
 	 */
 	private function setMessages()
 	{
-		$file = Yii::app()->basePath .'/'. $this->msgPath .'/'. Yii::app()->language .'.php';
+		$file = Yii::app()->basePath .'/'. self::$msgPath .'/'. Yii::app()->language .'.php';
 		if(file_exists($file))
 		{
-			$this->messages = include_once $file;
+			$this->messages = include $file;
 		}
 		else 
 			throw new CHttpException(500, MsgPicker::ERROR_NO_LANGUAGE_FOUND);
 	}
 	
+	/**
+	 * @todo exception if $param key not exists and if in $param not enath keys
+	 * @param unknown $code
+	 * @param unknown $params
+	 * @throws CHttpException
+	 * @return Ambigous <mixed, multitype:>
+	 */
 	public function getMessage($code, $params = array())
 	{
 		if(! array_key_exists($code, $this->messages))
-			throw new CHttpException(400, $this->getMessage(self::ERROR_MSG_NOT_FOUND, array('msg'=>$code)));
+			throw new CHttpException(400, $this->getMessage(MSG::EXCEPTION_MSG_NOTFOUND, array('msg'=>$code)));
 		
 		$msg = $this->messages[$code];
 		while ( ($str = current($params)) !== FALSE ) {

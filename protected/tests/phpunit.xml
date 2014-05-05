@@ -13,6 +13,10 @@
 	<filter>
 		<whitelist processUncoveredFilesFromWhitelist="true">
 		    <directory suffix=".php">.</directory>
+		    <directory suffix=".php">../components</directory>
+		    <directory suffix=".php">../controllers</directory>
+		    <directory suffix=".php">../models</directory>
+		    <directory suffix=".php">../widgets</directory>
 			<exclude>
 				<file>./WebTestCase.php</file>
 				<directory suffix=".php">functional</directory>

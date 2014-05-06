@@ -12,7 +12,7 @@ class WebTestCase extends CWebTestCase
 				'name'    => 'Firefox on Linux',
 				'browser' => '*firefox',
 				'host'    => 'localhost',
-				'port'    => 4444,
+				'port'    => TEST_PORT,
 				'timeout' => 30000,
 			),
 	);

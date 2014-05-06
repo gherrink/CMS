@@ -11,3 +11,4 @@ images-edit/
 .buildpath
 vendor/
 composer.lock
+selenium-server.jar

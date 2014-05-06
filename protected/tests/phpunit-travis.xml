@@ -1,0 +1,28 @@
+<phpunit bootstrap="bootstrap.php"
+		colors="true"
+		convertErrorsToExceptions="true"
+		convertNoticesToExceptions="true"
+		convertWarningsToExceptions="true"
+		stopOnFailure="false">
+	
+	<php>
+		<const name="TEST_BASE_URL" value="http://localhost/cms/index-travis.php/"/>
+	</php>
+	
+	<selenium>
+		<browser name="Firefox" browser="*firefox" />
+	</selenium>
+	
+	<filter>
+		<whitelist processUncoveredFilesFromWhitelist="true">
+		    <directory suffix=".php">../components</directory>
+		    <directory suffix=".php">../controllers</directory>
+		    <directory suffix=".php">../models</directory>
+			<exclude>
+				<file>./WebTestCase.php</file>
+				<directory suffix=".php">functional</directory>
+			</exclude>
+		</whitelist>
+	</filter>
+	
+</phpunit>

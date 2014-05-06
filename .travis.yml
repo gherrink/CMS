@@ -5,6 +5,10 @@ php:
   - 5.4
   - 5.5
 
+before_install:
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
+
 before_script:
   - composer install
   - export PATH=../../vendor/bin:$PATH
@@ -16,10 +20,11 @@ before_script:
   - mysql -u root -e "GRANT ALL PRIVILEGES ON cmstest . * TO 'cms'@'localhost';"
   - mysql -u root cmstest < ./DB.sql
   - mysql -u root cmstest < ./sql/rights/create.sql
+  - java -jar selenium-server.jar &
 
 script:
   - cd ./protected/tests
-  - phpunit --coverage-clover ../../clover.xml unit/
+  - phpunit --coverage-clover ../../clover.xml -c phpunit-travis.xml .
 
 after_script:
   - cd ../..

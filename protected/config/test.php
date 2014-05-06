@@ -8,7 +8,7 @@ return CMap::mergeArray(
 				'class'=>'system.test.CDbFixtureManager',
 			),
 			'db'=>array(
-				'connectionString' => 'mysql:host=localhost;dbname=cmstest',
+				'connectionString' => 'mysql:host=localhost;dbname=cmstest;unix_socket=/opt/lampp/var/mysql/mysql.sock',
 			),
 		),
 	)

@@ -5,6 +5,8 @@
 	"phpunit/php-invoker": "*",
 	"phpunit/dbunit": ">=1.2",
 	"phpunit/phpunit-selenium": ">=1.2",
-	"phpunit/phpunit-story": "*"
+	"phpunit/phpunit-story": "*",
+	"behat/behat": "2.4.*@stable",
+	"behat/yii-extension":  "~1.0"
     }
 }

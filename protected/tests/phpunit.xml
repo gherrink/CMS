@@ -4,15 +4,17 @@
 		convertNoticesToExceptions="true"
 		convertWarningsToExceptions="true"
 		stopOnFailure="false">
-
+	
+	<php>
+		<const name="TEST_BASE_URL" value="http://localhost/cms/index-test.php/"/>
+	</php>
+	
 	<selenium>
-		<browser name="Internet Explorer" browser="*iexplore" />
-		<browser name="Firefox" browser="*firefox" />
+		<browser name="Firefox" browser="*firefox"/>
 	</selenium>
 	
 	<filter>
 		<whitelist processUncoveredFilesFromWhitelist="true">
-		    <directory suffix=".php">.</directory>
 		    <directory suffix=".php">../components</directory>
 		    <directory suffix=".php">../controllers</directory>
 		    <directory suffix=".php">../models</directory>

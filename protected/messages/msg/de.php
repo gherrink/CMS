@@ -75,6 +75,7 @@ return array(
 	'BTN_EXIT'					=> 'Beenden',
 	'BTN_NEW_CONTENT'			=> 'BTN_NEW_CONTENT',
 	'BTN_SITE_ADDLANGUAGE'		=> 'Neue Sprache hinzufügen',
+	'BTN_NEWS'					=> 'Neuigkeit hinzufügen',
 	/*/Buttons */
 	
 	/* Models */

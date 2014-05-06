@@ -4,9 +4,13 @@
 		convertNoticesToExceptions="true"
 		convertWarningsToExceptions="true"
 		stopOnFailure="false">
-
+	
+	<php>
+		<const name="TEST_BASE_URL" value="http://localhost/cms/index-travis.php/"/>
+	</php>
+	
 	<selenium>
-		<browser name="Firefox" browser="*firefox" port="4445" host="mrbirne:930becfc-4cda-4152-a309-3fa01a078814@localhost" />
+		<browser name="Firefox" browser="*firefox" />
 	</selenium>
 	
 	<filter>

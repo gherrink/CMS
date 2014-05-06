@@ -6,7 +6,7 @@
  * We also provide some common methods to be used by concrete test classes.
  */
 
-if(false)
+if(defined(TEST_ON_TRAVIS) && TEST_ON_TRAVIS === "TRUE")
 	require_once 'CWebTestCase.php';
 else
 	Yii::import('system.test.CWebTestCase');

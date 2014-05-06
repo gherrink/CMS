@@ -5,6 +5,11 @@ php:
   - 5.4
   - 5.5
 
+addons:
+  sauce_connect:
+    username: "mrbirne"
+    access_key: "CMStesting1337"
+
 before_script:
   - composer install
   - export PATH=../../vendor/bin:$PATH
@@ -16,10 +21,11 @@ before_script:
   - mysql -u root -e "GRANT ALL PRIVILEGES ON cmstest . * TO 'cms'@'localhost';"
   - mysql -u root cmstest < ./DB.sql
   - mysql -u root cmstest < ./sql/rights/create.sql
+  - http://selenium-release.storage.googleapis.com/2.41/selenium-server-standalone-2.41.0.jar
 
 script:
   - cd ./protected/tests
-  - phpunit --coverage-clover ../../clover.xml unit/
+  - phpunit --coverage-clover ../../clover.xml .
 
 after_script:
   - cd ../..

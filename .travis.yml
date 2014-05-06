@@ -28,7 +28,7 @@ before_script:
 
 script:
   - cd ./protected/tests
-  - phpunit --coverage-clover ../../clover.xml .
+  - phpunit --coverage-clover ../../clover.xml -c phpunit-travis.xml .
 
 after_script:
   - cd ../..

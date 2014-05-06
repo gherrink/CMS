@@ -6,7 +6,8 @@
 		stopOnFailure="false">
 
 	<selenium>
-		<browser name="Firefox" browser="*firefox" />
+		<!-- <browser name="Firefox" browser="*firefox" port="4445" host="mrbirne:930becfc-4cda-4152-a309-3fa01a078814@localhost" />  -->
+		<browser name="Firefox" browser="*firefox"/>
 	</selenium>
 	
 	<filter>

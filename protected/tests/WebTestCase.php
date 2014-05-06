@@ -21,11 +21,12 @@ class WebTestCase extends CWebTestCase
 	{
 		parent::setUp();
 		$this->setBrowserUrl(TEST_BASE_URL);
+		
 	}
 	
 	public function config4Behat()
 	{
-		$this->setBrowserUrl('http://localhost/cms/index-test.php');
+		$this->setBrowserUrl(TEST_BASE_URL);
 		$this->prepareTestSession();
 		$this->shareSession(true);
 	}

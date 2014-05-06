@@ -8,7 +8,7 @@ php:
 addons:
   sauce_connect:
     username: "mrbirne"
-    access_key: "CMStesting1337"
+    access_key: "930becfc-4cda-4152-a309-3fa01a078814"
 
 before_script:
   - composer install

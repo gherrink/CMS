@@ -19,7 +19,8 @@ class WebTestCase extends CWebTestCase
             'name'           => 'Firefox 3.6 on Windows',
             'os'             => 'Windows 2003',
             'browser'        => 'firefox',
-            'browserVersion' => '3.6.'
+            'browserVersion' => '3.6.',
+        	'port'			 => '4445',
         ),
 	);
 	

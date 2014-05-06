@@ -7,7 +7,7 @@
  */
 
 if(defined('TEST_ON_TRAVIS'))
-	require_once 'SauceWebTestCase.php';
+	require_once dirname(__FILE__).'/SauceWebTestCase.php';
 else
 	Yii::import('system.test.CWebTestCase');
 

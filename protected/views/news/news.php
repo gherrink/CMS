@@ -7,14 +7,16 @@
  */
 
 /*
- * @var $this SiteController
-* @var $site Site
-* @var $edit boolean
-* @var $editable boolean
+ * @var $DINO
+ * @var $ID
 */
+
 ?>
-<p>Hello World</p>
-<p><?php echo $DINO?></p>
+
+
+<button type="submit" class="btn btn-success" value="addNews"><?php echo MsgPicker::msg()->getMessage(MSG::BTN_NEWS)?></button>
+<?php $this->renderPartial('_news',array('head'=>'Testüberschrift','user'=>'Lukas','date'=>'10.11.1992','text'=>'abcd'))?>
+
 
 
 

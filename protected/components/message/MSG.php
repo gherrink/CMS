@@ -79,6 +79,7 @@ class MSG
 	const BTN_EXIT					= 'BTN_EXIT';
 	const BTN_NEW_CONTENT			= 'BTN_NEW_CONTENT';
 	const BTN_SITE_ADDLANGUAGE		= 'BTN_SITE_ADDLANGUAGE';
+	const BTN_NEWS					= 'BTN_NEWS';
 	/*/Buttons */
 	
 	/* Models */

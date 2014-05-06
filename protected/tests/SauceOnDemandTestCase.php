@@ -75,7 +75,7 @@ abstract class SauceOnDemandTestCase extends PHPUnit_Extensions_SeleniumTestCase
      */
     protected function getDriver(array $browser)
     {
-        if (isset($browser['name'])) {
+    	if (isset($browser['name'])) {
             if (!is_string($browser['name'])) {
                 throw new InvalidArgumentException(
                   'Array element "name" is not an string.'

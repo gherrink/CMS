@@ -6,10 +6,11 @@
  * We also provide some common methods to be used by concrete test classes.
  */
 
-if(defined(TEST_ON_TRAVIS) && TEST_ON_TRAVIS === "TRUE")
-	require_once 'CWebTestCase.php';
+if(defined('TEST_ON_TRAVIS'))
+	require_once 'SauceWebTestCase.php';
 else
 	Yii::import('system.test.CWebTestCase');
+
 
 class WebTestCase extends CWebTestCase
 {	
@@ -20,7 +21,7 @@ class WebTestCase extends CWebTestCase
             'os'             => 'Windows 2003',
             'browser'        => 'firefox',
             'browserVersion' => '3.6.',
-        	'port'			 => 4445,
+        	'port'			 => 4444,
         ),
 	);
 	
@@ -40,10 +41,5 @@ class WebTestCase extends CWebTestCase
 		$this->setBrowserUrl('http://localhost/cms/index-test.php/');
 		$this->prepareTestSession();
 		$this->shareSession(true);
-	}
-	
-	protected function getDriver(array $browser)
-	{
-		parent::getDriver($browser);
 	}
 }

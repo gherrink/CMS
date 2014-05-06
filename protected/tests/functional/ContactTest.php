@@ -4,7 +4,7 @@ class ContactTest extends WebTestCase
 {
 	
 	public function testBala()
-	{
+	{	
 		$this->open('');
 		$this->assertTextPresent('Welcome to');
 	}

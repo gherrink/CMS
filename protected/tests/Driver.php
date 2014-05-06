@@ -212,7 +212,9 @@ class PHPUnit_Extensions_SeleniumTestCase_SauceOnDemandTestCase_Driver extends P
             'browser'         => $this->browser,
             'browser-version' => $this->browserVersion,
         );
-
+		
+        print_r($data);
+        
         if ($this->jobName !== NULL) { // backwards compatibility
             $data['name'] = $this->jobName;
         } elseif ($this->name !== NULL) {

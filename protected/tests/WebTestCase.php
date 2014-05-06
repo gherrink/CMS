@@ -44,6 +44,5 @@ class WebTestCase extends CWebTestCase
 	protected function getDriver(array $browser)
 	{
 		parent::getDriver($browser);
-		print_r($browser);
 	}
 }

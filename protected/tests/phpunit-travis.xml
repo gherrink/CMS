@@ -11,7 +11,8 @@
 	</php>
 	
 	<selenium>
-		<browser name="Firefox 4 Linux" browser="*firefox" port="4445" host="mrbirne:930becfc-4cda-4152-a309-3fa01a078814@localhost"/>
+		<browser name="Firefox 4 Linux" browser="*firefox" port="4445"/>
+		<browser name="Firefox 4 Linux" browser="*firefox" port="4444"/>
 	</selenium>
 	
 	<filter>

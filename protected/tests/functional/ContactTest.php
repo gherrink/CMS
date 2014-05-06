@@ -9,9 +9,9 @@ class ContactTest extends WebTestCase
 		$this->assertTextPresent('Welcome to');
 	}
 	
-	public function testTest()
-	{
-		$this->assertTextPresent('Welcome to');
-	}
+// 	public function testTest()
+// 	{
+// 		$this->assertTextPresent('Welcome to');
+// 	}
 	
 }

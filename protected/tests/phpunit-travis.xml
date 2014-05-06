@@ -8,11 +8,10 @@
 	<php>
 		<const name="TEST_BASE_URL" value="http://localhost/cms/index-test.php/"/>
 		<const name="TEST_CONFIG" value="travis.php"/>
-		<const name="TEST_PORT" value="4445"/>
 	</php>
 	
 	<selenium>
-		<browser name="Firefox" browser="*firefox" />
+		<browser name="Firefox" browser="*firefox" port="4445"/>
 	</selenium>
 	
 	<filter>

@@ -6,17 +6,7 @@
  * We also provide some common methods to be used by concrete test classes.
  */
 class WebTestCase extends CWebTestCase
-{
-	public static $browsers = array(
-			array(
-				'name'    => 'Firefox on Linux',
-				'browser' => '*firefox',
-				'host'    => 'localhost',
-				'port'    => TEST_PORT,
-				'timeout' => 30000,
-			),
-	);
-	
+{	
 	/**
 	 * Sets up before each test method runs.
 	 * This mainly sets the base URL for the test application.
@@ -33,5 +23,11 @@ class WebTestCase extends CWebTestCase
 		$this->setBrowserUrl('http://localhost/cms/index-test.php/');
 		$this->prepareTestSession();
 		$this->shareSession(true);
+	}
+	
+	protected function getDriver(array $browser)
+	{
+		parent::getDriver($browser);
+		print_r($browser);
 	}
 }

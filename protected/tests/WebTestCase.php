@@ -7,6 +7,16 @@
  */
 class WebTestCase extends CWebTestCase
 {
+	public static $browsers = array(
+			array(
+				'name'    => 'Firefox on Linux',
+				'browser' => '*firefox',
+				'host'    => 'localhost',
+				'port'    => 4444,
+				'timeout' => 30000,
+			),
+	);
+	
 	/**
 	 * Sets up before each test method runs.
 	 * This mainly sets the base URL for the test application.
@@ -20,7 +30,7 @@ class WebTestCase extends CWebTestCase
 	
 	public function config4Behat()
 	{
-		$this->setBrowserUrl(TEST_BASE_URL);
+		$this->setBrowserUrl('http://localhost/cms/index-test.php/');
 		$this->prepareTestSession();
 		$this->shareSession(true);
 	}

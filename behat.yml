@@ -1,0 +1,7 @@
+# behat.yml
+default:
+    extensions:
+        Behat\YiiExtension\Extension:
+            framework_script: ./framework/yiit.php
+            config_script: ./protected/config/test.php
+            mink_driver: false

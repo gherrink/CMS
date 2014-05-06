@@ -1,89 +1,58 @@
 <?php
 
-use Behat\Behat\Context\ClosuredContextInterface,
+use Behat\Behat\Context\ContextInterface,
+    Behat\Behat\Context\ClosuredContextInterface,
 	Behat\Behat\Context\TranslatedContextInterface,
 	Behat\Behat\Context\BehatContext,
 	Behat\Behat\Exception\PendingException;
 use Behat\Gherkin\Node\PyStringNode,
 	Behat\Gherkin\Node\TableNode;
-
-use Behat\MinkExtension\Context\MinkContext;
-
-require_once 'protected/components/MSG.php';
+use Behat\YiiExtension\Context\Initializer\YiiAwareInitializer;
 
 /**
  * Features context.
  */
-class FeatureContext extends MinkContext
+// class FeatureContext extends YiiAwareInitializer implements ContextInterface
+class FeatureContext implements ContextInterface
 {
-    /**
-     * @When /^login "([^"]*)" with "([^"]*)"$/
-     */
-    public function loginWith($usr, $pw)
-    {
-     	$this->getSession()->visit('http://localhost/CMS/index.php/login/login');
-    	
-     	$page = $this->getSession()->getPage();
-    	$page->fillField('Usr_usrname', $usr);
-    	$page->fillField('Usr_password', $usr);
-     	$page->findButton(MSG::get('de')->getMessage(MSG::BTN_OK))->click();
-    	
-    	//throw new PendingException();
-    	return true;
-    }
-    
-    /**
-     * @Then /^you soud see error Message "([^"]*)"$/
-     */
-    public function youSoudSeeErrorMessage($msg)
-    {
-    	$page = $this->getSession()->getPage();
-//     	echo $page->getHtml();
-    	$message = $page->find('css', 'alert-danger');
-    	echo $message;
-    	return false;
-    }
-    
-    /**
-     * @Then /^you soud be loged in$/
-     */
-    public function youSoudBeLoggedIn()
-    {
-    	throw new PendingException();
-    }
-    
-    /**
-     * @Then /^you soud see success Message "([^"]*)"$/
-     */
-    public function youSoudSeeSuccessMessage($msg)
-    {
-    	throw new PendingException();
-    }
-    
-    /**
-     * @Given /^logout$/
-     */
-    public function logout()
-    {
-    	throw new PendingException();
-    }
-    
-    /**
-     * @Then /^you soud be loged out$/
-     */
-    public function youSoudBeLogedOut()
-    {
-    	throw new PendingException();
-    }
+	private $browser = array(
+					'name'    => 'Firefox on Linux',
+					'browser' => '*firefox',
+					'host'    => 'localhost',
+					'port'    => 4444,
+					'timeout' => 30000,
+				);
+	
+	private $contact = null;
+	
+	private function getContact()
+	{
+		if($this->contact === null)
+		{
+			Yii::import('application.tests.functional.*');
+			Yii::import('application.tests.*');
+			$this->contact = new ContactTest('Test', array(), 'Array', $this->browser);
+			$this->contact->config4Behat();
+		}
+		
+		return $this->contact;
+	}
 	
 	/**
-	 * @Then /^I wait for the suggestion box to appear$/
+	 * @When /^I do something$/
 	 */
-	public function iWaitForTheSuggestionBoxToAppear()
+	public function iDoSomething()
 	{
-		$this->getSession()->wait(5000,
-				"$('.suggestions-results').children().length > 0"
-		);
+		$this->getContact()->testBala();
+		$this->getContact()->testTest();
+	}
+	
+	/**
+	 * @Then /^I should see something$/
+	 */
+	public function iShouldSeeSomething()
+	{
+		throw new PendingException();
 	}
 	
 }

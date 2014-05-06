@@ -1,0 +1,24 @@
+<phpunit bootstrap="bootstrap.php"
+		colors="true"
+		convertErrorsToExceptions="true"
+		convertNoticesToExceptions="true"
+		convertWarningsToExceptions="true"
+		stopOnFailure="false">
+
+	<selenium>
+		<browser name="Firefox" browser="*firefox" port="4445" host="mrbirne:930becfc-4cda-4152-a309-3fa01a078814@localhost" />
+	</selenium>
+	
+	<filter>
+		<whitelist processUncoveredFilesFromWhitelist="true">
+		    <directory suffix=".php">../components</directory>
+		    <directory suffix=".php">../controllers</directory>
+		    <directory suffix=".php">../models</directory>
+			<exclude>
+				<file>./WebTestCase.php</file>
+				<directory suffix=".php">functional</directory>
+			</exclude>
+		</whitelist>
+	</filter>
+	
+</phpunit>

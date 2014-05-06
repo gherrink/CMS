@@ -7,6 +7,7 @@
 	
 	<php>
 		<const name="TEST_BASE_URL" value="http://localhost/cms/index-test.php/"/>
+		<const name="TEST_CONFIG" value="test.php"/>
 	</php>
 	
 	<selenium>

@@ -20,7 +20,9 @@ before_script:
   - mysql -u root -e "GRANT ALL PRIVILEGES ON cmstest . * TO 'cms'@'localhost';"
   - mysql -u root cmstest < ./DB.sql
   - mysql -u root cmstest < ./sql/rights/create.sql
-  - java -jar selenium-server.jar &
+  - "wget http://selenium-release.storage.googleapis.com/2.41/selenium-server-standalone-2.41.0.jar"
+  - "java -jar selenium-server-standalone-2.41.0.jar > /dev/null &"
+  - sleep 5
 
 script:
   - cd ./protected/tests

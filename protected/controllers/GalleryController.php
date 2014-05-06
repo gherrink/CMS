@@ -1,6 +1,11 @@
 <?php
 class GalleryController extends CRUDController
 {
+	public function actionIndex()
+	{
+		$this->render('gallery');
+	}
+	
 	public function findModel($name)
 	{
 		return Gallery::model()->findByAttributes(array('label'=>$name));

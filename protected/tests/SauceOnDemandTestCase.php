@@ -42,9 +42,9 @@
  * @since      File available since Release 3.5.0
  */
 
-require_once 'PHPUnit/Extensions/SeleniumTestCase/SauceOnDemandTestCase/Driver.php';
+require_once 'Driver.php';
 require_once 'PHPUnit/Extensions/SeleniumTestCase.php';
-require_once('SymfonyComponents/YAML/sfYamlParser.php');
+// require_once('SymfonyComponents/YAML/sfYamlParser.php');
 
 /**
  * TestCase class that uses Sauce OnDemand to provide
@@ -442,4 +442,5 @@ abstract class SauceOnDemandTestCase extends PHPUnit_Extensions_SeleniumTestCase
 
         throw new PHPUnit_Framework_Exception($buffer);
     }
+    
 }

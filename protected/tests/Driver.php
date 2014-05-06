@@ -60,12 +60,12 @@ class PHPUnit_Extensions_SeleniumTestCase_SauceOnDemandTestCase_Driver extends P
     /**
      * @var string
      */
-    protected $username;
+    protected $username = SAUCEONDEMAND_USERNAME;
 
     /**
      * @var string
      */
-    protected $accessKey;
+    protected $accessKey = SAUCEONDEMAND_ACCESSKEY;
 
     /**
      * @var string

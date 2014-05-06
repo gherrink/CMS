@@ -9,7 +9,6 @@
  */
 
 Yii::import('system.test.CTestCase');
-Yii::import('application.tests.SauceOnDemandTestCase');
 
 /**
  * CWebTestCase is the base class for Web-based functional test case classes.

@@ -6,15 +6,11 @@
 		stopOnFailure="false">
 	
 	<php>
-		<const name="PHPUNIT_TESTSUITE_EXTENSION_SELENIUM_SAUCEONDEMAND_USERNAME" value="mrbirne"/>
-		<const name="PHPUNIT_TESTSUITE_EXTENSION_SELENIUM_SAUCEONDEMAND_ACCESSKEY" value="930becfc-4cda-4152-a309-3fa01a078814"/>
+		<const name="SAUCEONDEMAND_USERNAME" value="mrbirne"/>
+		<const name="SAUCEONDEMAND_ACCESSKEY" value="930becfc-4cda-4152-a309-3fa01a078814"/>
 		<const name="TEST_BASE_URL" value="http://localhost/cms/index-test.php/"/>
 		<const name="TEST_CONFIG" value="travis.php"/>
 	</php>
-	
-	<selenium>
-		<browser name="Firefox 4 Linux" browser="*firefox"/>
-	</selenium>
 	
 	<filter>
 		<whitelist processUncoveredFilesFromWhitelist="true">

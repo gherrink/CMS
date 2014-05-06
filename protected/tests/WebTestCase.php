@@ -5,8 +5,24 @@
  * In this class, we set the base URL for the test application.
  * We also provide some common methods to be used by concrete test classes.
  */
+
+if(false)
+	require_once 'CWebTestCase.php';
+else
+	Yii::import('system.test.CWebTestCase');
+
 class WebTestCase extends CWebTestCase
 {	
+	
+	public static $browsers = array(
+        array(
+            'name'           => 'Firefox 3.6 on Windows',
+            'os'             => 'Windows 2003',
+            'browser'        => 'firefox',
+            'browserVersion' => '3.6.'
+        ),
+	);
+	
 	/**
 	 * Sets up before each test method runs.
 	 * This mainly sets the base URL for the test application.

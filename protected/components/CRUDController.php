@@ -196,14 +196,14 @@ abstract class CRUDController extends Controller
 		
 		if($create)
 		{
-			$button = BsHtml::button(MsgPicker::msg()->getMessage(MSG::BTN_CREATE), array('onclick'=>"submitForm('modal', '$formName-form', '$url')"));
+			$button = BsHtml::button(MsgPicker::msg()->getMessage(MSG::BTN_CREATE), array('onclick'=>"cmsSubmitForm('modal', '$formName-form', '$url')"));
 			$head = MsgPicker::msg()->getMessage('HEAD_'.strtoupper($this->getModelName()).'_CREATE');
 		}
 		else
 		{
 			if (! isset($_POST[$this->getModelName()]))
 				$model = $this->getModel($name);
-			$button = BsHtml::button(MsgPicker::msg()->getMessage(MSG::BTN_UPDATE), array('onclick'=>"submitForm('modal', '$formName-form', '$url')"));
+			$button = BsHtml::button(MsgPicker::msg()->getMessage(MSG::BTN_UPDATE), array('onclick'=>"cmsSubmitForm('modal', '$formName-form', '$url')"));
 			$head = MsgPicker::msg()->getMessage('HEAD_'.strtoupper($this->getModelName()).'_UPDATE');
 		}
 		
@@ -219,7 +219,7 @@ abstract class CRUDController extends Controller
 		$content['header'] = $head;
 		$content['body'] = $error . $this->renderPartial('_edit', array('model'=>$model, 'url'=>$url), true);
 		$content['footer'] =
-			BSHtml::button(MsgPicker::msg()->getMessage(MSG::BTN_EXIT), array('onclick'=>"showModalAjax('modalmsg', '".$urlExit."', $json);")).
+			BSHtml::button(MsgPicker::msg()->getMessage(MSG::BTN_EXIT), array('onclick'=>"cmsShowModalAjax('modalmsg', '".$urlExit."', $json);")).
 			$button;
 		
 		echo json_encode($content);

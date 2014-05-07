@@ -1,4 +1,9 @@
-function doAjax(url)
+function testen()
+{
+alert("hallo");	
+}
+
+function cmsAjax(url)
 {
 	$.ajax({
 		type: 'POST',
@@ -8,14 +13,14 @@ function doAjax(url)
 				window.location = data['success'];
 		},
 		error: function(jqXHR, textStatus, errorThrown) {
-			showErrorModal('modalmsg', jqXHR, textStatus, errorThrown);
+			cmsShowErrorModal('modalmsg', jqXHR, textStatus, errorThrown);
 		},
 			
 		dataType:'json'
 	});
 }
 
-function submitForm(modelid, formid, url)
+function cmsSubmitForm(modelid, formid, url)
 {
 	var post = $('#'+formid).serialize();
 	
@@ -25,20 +30,20 @@ function submitForm(modelid, formid, url)
 		data: post,
 		success: function(data, textStatus, jqXHR){
 			if('header' in data && 'body' in data && 'footer' in data)
-				showModal(modelid, data['header'], data['body'], data['footer']);
+				cmsShowModal(modelid, data['header'], data['body'], data['footer']);
 			else
 				window.location = data['success'];
 				
 		},
 		error: function(jqXHR, textStatus, errorThrown) {
-			showErrorModal(modelid, jqXHR, textStatus, errorThrown);
+			cmsShowErrorModal(modelid, jqXHR, textStatus, errorThrown);
 		},
 			
 		dataType:'json'
 	});
 }
 
-function updateModalAjax(id, url)
+function cmsUpdateModalAjax(id, url)
 {
 	$.ajax({
 		type: 'POST',
@@ -50,15 +55,17 @@ function updateModalAjax(id, url)
 				$('#'+id+' .modal-body').html(data['body']);
 		},
 		error: function(jqXHR, textStatus, errorThrown) {
-			showErrorModal(id, jqXHR, textStatus, errorThrown);
+			cmsShowErrorModal(id, jqXHR, textStatus, errorThrown);
 		},
 			
 		dataType:'json'
 	});
 }
 
-function showModalAjax(id, url, post = {})
+//function cmsShowModalAjax(id, url, post = {})
+function cmsShowModalAjax(id, url, post)
 {
+	var andClose = andClose || {};
 	$.ajax({
 		type: 'POST',
 		url: url,
@@ -66,22 +73,22 @@ function showModalAjax(id, url, post = {})
 	
 		success:function(data, textStatus, jqXHR){
 			if('header' in data && 'body' in data && 'footer' in data)
-				showModal(id, data['header'], data['body'], data['footer']);
+				cmsShowModal(id, data['header'], data['body'], data['footer']);
 		},
 		error: function(jqXHR, textStatus, errorThrown) {
-			showErrorModal(id, jqXHR, textStatus, errorThrown);
+			cmsShowErrorModal(id, jqXHR, textStatus, errorThrown);
 		},
 			
 		dataType:'json'
 	});
 }
 
-function showErrorModal(id, jqXHR, textStatus, errorThrown)
+function cmsShowErrorModal(id, jqXHR, textStatus, errorThrown)
 {
-	showModal(id, errorThrown, jqXHR.responseText, '<button class="btn btn-default" onclick="$(\'#'+id+'\').modal(\'hide\');" type="button">OK</button>');
+	cmsShowModal(id, errorThrown, jqXHR.responseText, '<button class="btn btn-default" onclick="$(\'#'+id+'\').modal(\'hide\');" type="button">OK</button>');
 }
 
-function showModal(id, header, body, footer)
+function cmsShowModal(id, header, body, footer)
 {
 	$('#'+id+' .modal-header').html('<h3>'+header+'</h3>');
 	$('#'+id+' .modal-body').html(body);

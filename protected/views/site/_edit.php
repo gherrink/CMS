@@ -29,7 +29,7 @@ $form = $this->beginWidget('bootstrap.widgets.BsActiveForm', array(
 	'id' => 'site-form',
 	'htmlOptions'=>array(
 		'onsubmit'=>"return false;",
-		'onkeypress'=>" if(event.keyCode == 13){ submitForm('modal', 'site-form', '". $url ."'); } ",
+		'onkeypress'=>" if(event.keyCode == 13){ cmsSubmitForm('modal', 'site-form', '". $url ."'); } ",
 	),
 ));
 $model->oldLabel = $model->label;

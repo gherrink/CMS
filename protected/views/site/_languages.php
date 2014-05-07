@@ -73,7 +73,7 @@ else if($model->siteid !== null && $model->siteid !== "")
 					$('#language-counter').val(counter);
 				},
 				error: function(jqXHR, textStatus, errorThrown) {
-					showErrorModal('modalmsg', jqXHR, textStatus, errorThrown);
+					cmsShowErrorModal('modalmsg', jqXHR, textStatus, errorThrown);
 				},
 					
 				dataType:'html'
@@ -101,7 +101,7 @@ else if($model->siteid !== null && $model->siteid !== "")
 				removeLanguage(language);
 			},
 			error: function(jqXHR, textStatus, errorThrown) {
-				showErrorModal('modalmsg', jqXHR, textStatus, errorThrown);
+				cmsShowErrorModal('modalmsg', jqXHR, textStatus, errorThrown);
 			},
 				
 			dataType:'html'

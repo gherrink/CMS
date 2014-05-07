@@ -4,6 +4,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="language" content="<?php echo Yii::app()->language ?>" />
+	<script src="/cms/css/cms.js" type="text/javascript"></script>
 	<?php
 		$cs			= Yii::app()->clientScript;
 		$path		= Yii::app()->baseUrl;
@@ -23,7 +24,7 @@
 		$cs->registerCoreScript('jquery.ui', CClientScript::POS_END);
 		$cs->registerScriptFile($path . '/css/bootstrap/js/bootstrap.min.js', CClientScript::POS_END);
 		$cs->registerScript('tooltip', "$('[data-toggle=\"tooltip\"]').tooltip();$('[data-toggle=\"popover\"]').tooltip()", CClientScript::POS_READY);
-		$cs->registerScriptFile($path . '/css/cms.js')
+// 		$cs->registerScriptFile($path . '/css/cms.js');
 	?>
 	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!--[if lt IE 9]>

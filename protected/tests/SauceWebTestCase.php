@@ -24,6 +24,17 @@ Yii::import('system.test.CTestCase');
  */
 abstract class CWebTestCase extends SauceOnDemandTestCase
 {
+	public static $browsers = array(
+        array(
+            'name'           => 'Firefox 3.6 on Windows',
+            'os'             => 'Windows 2003',
+            'browser'        => 'firefox',
+            'browserVersion' => '3.6.',
+        	'port'			 => 4445,
+        	'host'			 => 'localhost'
+        ),
+	);
+	
 	/**
 	 * @var array a list of fixtures that should be loaded before each test method executes.
 	 * The array keys are fixture names, and the array values are either AR class names

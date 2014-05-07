@@ -294,12 +294,16 @@ class Menu extends CActiveRecord
 				'items' => array(
 					array(
 						'label' => MsgPicker::msg()->getMessage(MSG::MP_MODERATOR_SITECREATE),
-						'ajax' => 'showModalAjax("modal", "'.Yii::app()->createAbsoluteUrl('site/create').'");',
+						'ajax' => "cmsShowModalAjax('modal', '".Yii::app()->createAbsoluteUrl('site/create')."');",
 					),
 					array(
 						'label' => MsgPicker::msg()->getMessage(MSG::MP_MODERATOR_CONTENTCREATE),
-						'ajax' => 'showModalAjax("modal", "'.Yii::app()->createAbsoluteUrl('content/create').'");',
+						'ajax' => "cmsShowModalAjax('modal', '".Yii::app()->createAbsoluteUrl('content/create')."');",
 					),
+					array(
+						'label' => 'test',
+						'ajax' => "testen()",
+					)
 				),
 			);
 	}

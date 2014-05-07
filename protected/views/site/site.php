@@ -30,7 +30,7 @@ if($edit === true && $editable === true)
 					));
 				
 				echo BsHtml::button(MsgPicker::msg()->getMessage(MSG::BTN_UPDATE), array(
-					'onclick' => 'showModalAjax("modal", "'.Yii::app()->createAbsoluteUrl('site/update', array('name'=>$model->label)).'");',
+					'onclick' => 'cmsShowModalAjax("modal", "'.Yii::app()->createAbsoluteUrl('site/update', array('name'=>$model->label)).'");',
 				));
 				
 				$urlDelete = Yii::app()->createAbsoluteUrl('site/delete', array('name'=>$model->label));
@@ -39,11 +39,11 @@ if($edit === true && $editable === true)
 					'question'=>MSG::QUESTION_DELEATE_SITE,
 				));
 				$json = json_encode(array('buttons'=>array(
-					MSG::BTN_YES => "doAjax('$urlDelete'); $('#modalmsg').modal('hide');",
+					MSG::BTN_YES => "cmsAjax('$urlDelete'); $('#modalmsg').modal('hide');",
 					MSG::BTN_NO => "$('#modalmsg').modal('hide');",
 				)));
 				echo BsHtml::button(MsgPicker::msg()->getMessage(MSG::BTN_DELETE), array(
-					'onclick'=>"showModalAjax('modalmsg', '$urlQuestionDelete', $json);")
+					'onclick'=>"cmsShowModalAjax('modalmsg', '$urlQuestionDelete', $json);")
 				);
 			?>
 		</div>

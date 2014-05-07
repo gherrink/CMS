@@ -34,7 +34,7 @@ function alohaSave()
 		success: function(data, textStatus, jqXHR){
 		},
 		error: function(jqXHR, textStatus, errorThrown) {
-			showErrorModal(modelid, jqXHR, textStatus, errorThrown);
+			cmsShowErrorModal(modelid, jqXHR, textStatus, errorThrown);
 		},
 		dataType: "html"
 	});

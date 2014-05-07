@@ -13,18 +13,7 @@ else
 
 
 class WebTestCase extends CWebTestCase
-{	
-	
-	public static $browsers = array(
-        array(
-            'name'           => 'Firefox 3.6 on Windows',
-            'os'             => 'Windows 2003',
-            'browser'        => 'firefox',
-            'browserVersion' => '3.6.',
-        	'port'			 => 4445,
-        	'host'			 => 'localhost'
-        ),
-	);
+{
 	
 	/**
 	 * Sets up before each test method runs.
@@ -41,5 +30,11 @@ class WebTestCase extends CWebTestCase
 		$this->setBrowserUrl('http://localhost/cms/index-test.php/');
 		$this->prepareTestSession();
 		$this->shareSession(true);
+	}
+	
+	public function visit($url, $see)
+	{
+		$this->open($url);
+		$this->assertTextPresent($see);
 	}
 }

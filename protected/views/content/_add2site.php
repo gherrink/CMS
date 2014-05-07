@@ -62,6 +62,6 @@ function addContent2Site()
 {
 	var site = $('#site-table .selected').attr('name');
 	var content = location.search.split('name=')[1];
-	doAjax('<?php echo Yii::app()->createAbsoluteUrl('content/addContent2Site')?>?site='+site+'&content='+content);
+	cmsAjax('<?php echo Yii::app()->createAbsoluteUrl('content/addContent2Site')?>?site='+site+'&content='+content);
 }
 </script>

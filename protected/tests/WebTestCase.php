@@ -32,6 +32,11 @@ class WebTestCase extends CWebTestCase
 		$this->shareSession(true);
 	}
 	
+	/**
+	 * Open $url and test if you can see $see
+	 * @param string $url
+	 * @param string $see
+	 */
 	public function visit($url, $see)
 	{
 		$this->open($url);

@@ -25,31 +25,34 @@ class MsgPicker {
 	/**
 	 * 
 	 */
-	private function __construct()
+	private function __construct($language = '')
 	{
-		$this->pickLanguage();
+		$this->pickLanguage($language);
 	}
 	
 	/**
 	 * Verwalten der Instance
 	 * @return MsgPicker
 	 */
-	public static function msg()
+	public static function msg($language = '')
 	{
 		if (! isset(self::$instance))
-			self::$instance = new MsgPicker();
+			self::$instance = new MsgPicker($language);
 		return self::$instance;
 	}
 	
 	/**
 	 * Waehlt die aktuelle Sprache die vom Browser uebermittelt wurde
 	 */
-	private function pickLanguage()
+	private function pickLanguage($language = '')
 	{
 		$app = Yii::app();
-		if (isset($_POST['language']))
+		if($language !== '') {
+			$app->language;
+		}
+		else if (isset($_GET['language']))
 		{
-			$app->language = $_POST['language'];
+			$app->language = $_GET['language'];
 			$app->session['language'] = $app->language;
 		}
 		else if (isset($app->session['language']))
@@ -76,7 +79,7 @@ class MsgPicker {
 	 */
 	private function setMessages()
 	{
-		$file = Yii::app()->basePath .'/'. self::$msgPath .'/'. Yii::app()->language .'.php';
+		$file = dirname(__FILE__) .'/../../'. self::$msgPath .'/'. Yii::app()->language .'.php';
 		if(file_exists($file))
 		{
 			$this->messages = include $file;

@@ -4,7 +4,7 @@ class SiteTest extends WebTestCase
 {
 	public function testIndex()
 	{
-		
+		$this->visit('', 'Welcome');
 	}
 
 // 	public function testContact()

@@ -5,11 +5,14 @@
 
 // This is the main Web application configuration. Any writable
 // CWebApplication properties can be configured here.
+$path = dirname(__FILE__).'/..';
+include_once $path . '/components/message/MsgPicker.php';
+MsgPicker::msg('de');
+
 return array(
-	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
+	'basePath'=>$path,
 	'name'=>'CMS',
-	'language'=>'de', //Benutzer Sprache (for Locale)
-	'sourceLanguage'=>'de', //Sprache f�r Messages und Views
+	'language'=>'de',
 	'charset'=>'utf-8',
 		
 	'theme'=>'classic',
@@ -68,10 +71,14 @@ return array(
 		),
 		'urlManager'=>array(
 			'urlFormat'=>'path',
+			'class'=>'UrlManager',
 			'rules'=>array(
-				'<controller:\w+>/<id:\d+>'=>'<controller>/view',
-				'<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
-				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
+				'<language:[a-z]{2}>/<_m>/<_c>' 		=> '<_m>/<_c>',
+				'<language:[a-z]{2}>/<_m>/<_c>/<_a>*' 	=> '<_m>/<_c>/<_a>',
+				'<language:[a-z]{2}>/<_m>/<_a>' 		=> '<_m>/<_a>',
+				'<language:[a-z]{2}>/<_c>' 				=> '<_c>',
+				'<language:[a-z]{2}>/<_c>/<_a>' 		=> '<_c>/<_a>',
+				'<language:[a-z]{2}>' 					=> '',
 			),
 		),
 		'db'=>array(

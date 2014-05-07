@@ -61,6 +61,8 @@ return array(
 	'HEAD_CONTENT_CREATE'				=> 'Inhalt erstellen',
 	'HEAD_CONTENT_UPDATE'				=> 'Inhalt bearbeiten',
 	'HEAD_CONTENT_ADD2SITE'				=> 'Inhalt zur Seite hinzufügen',
+	'HEAD_NEWS_CREATE'					=> 'Neuigkeit erstellen',
+	'HEAD_NEWS_UPDATE'					=> 'Neuigkeit bearbeiten',
 	/*/Ueberschriften */
 		
 	/* Buttons */
@@ -138,6 +140,8 @@ return array(
 	'ERROR_SITE_NOTUPDATE'			=> 'Die Seite konnte nicht geändert werden, bitte versuchen Sie es erneut.',
 	'ERROR_CONTENT_NOTCREATE'		=> 'Der Inhalt konnte leider nicht erstellt werden, bitte versuchen Sie es erneut.',
 	'ERROR_CONTENT_NOTUPDATE'		=> 'Der Inhalt konnte leider nicht geändert werden, bitte versuchen Sie es erneut.',
+	'ERROR_NEWS_NOTCREATE'			=> 'Die Neuigkeit konnte leider nichterstellt werden, bitte versuchen Sie es erneut',
+	'ERROR_NEWS_NOTUPDATE'			=> 'Die Neuigkeit konnte leider nicht geändert werden, bitte versuchen Sie es erneut!',
 	/*/MSG ERROR */
 
 	/* EXEPTION */
@@ -147,10 +151,12 @@ return array(
 	'EXCEPTION_SITE_NOCONTENT'			=> 'Die Seite hat noch keinen Inhalt',
 	'EXCEPTION_SITE_LANGUAGENOTDELETE'	=> 'Die Sprache konnte nicht gelöscht werden, bitte versuchen Sie es erneut.',
 	'EXCEPTION_CONTENT_NOTFOUND'		=> 'Der Inhalt konnte leider nicht gefunden werden.',
-	'EXCEPTION_CONTENT_NOTDELETE'		=> 'Der Inhalt konnte nicht gelöscht werden, bitte verscuehn Sie es erneut.',
+	'EXCEPTION_CONTENT_NOTDELETE'		=> 'Der Inhalt konnte nicht gelöscht werden, bitte versuchen Sie es erneut.',
 	'EXCEPTION_CONTENT_NOCONTENT'		=> 'Es wurde kein Kontent übertragen, der gespeichert werden soll.',
 	'EXCEPTION_CONTENT_TEXTNOTUPDATE'	=> 'Die Änderungen konnten leider nicht gespeichert werden, bitte versuchen Sie es erneut.',
 	'EXCEPTION_CONTENT_NOTADD2SITE'		=> 'EXCEPTION_CONTENT_NOTADD2SITE',
+	'EXCEPTION_NEWS_NOTFOUND'			=> 'Die Neuigkeit konnte leider nicht gefunden werden',
+	'EXCEPTION_NEWS_NOTDELETE'			=> 'Die Neuigeit konnte nicht gelöscht werden, versuchen Sie es erneut!',
 	/*/EXEPTION */
 
 	/* QUESTION */
@@ -160,6 +166,8 @@ return array(
 	'QUESTION_EXIT_CONTENTUPDATE'	=> 'Möchten Sie wirklich die Inhalts-Bearbeitung beenden? Alle Änderungen verloren.',
 	'QUESTION_DELEATE_SITE'			=> 'Möchten Sie die Seite wirklich löschen? Diese Änderung kann nicht wieder rückgänig gemacht werden.',
 	'QUESTION_DELEATE_CONTENT'		=> 'Möchten Sie den Inhalt wirklich löschen? Diese Änderungen kann nichtmehr rückgänig gemacht werden.',
+	'QUESTION_EXIT_NEWSCREATE'		=> 'Möchten Sie wirklich die Neuigkeiten-Erstellung beenden? Die Neuigkeit wurde noch nicht erstellt!',
+	'QUESTION_EXIT_NEWSUPDATE'		=> 'Möchten Sie wirklich die Neuigkeiten-Bearbeitung beenden? Die Änderungen wurden noch nicht gespeichert!',
 	/*/QUESTION */
 		
 	/* MAIL */
@@ -180,7 +188,7 @@ return array(
 	
 	'FOOTER' => 'Copyright &copy; ###year### bei CollectMySociety.<br/>
 		Alle Rechte Vorbehalten.</br>
-		Entwickelt von Maurice Busch.</br>',
+		Entwickelt von Maurice Busch, Alessio Bisgen, Lukas Schreck, Angela Gerstner.</br>',
 	'TEST' 			=> 'This is a Test',
 	'TEST_PARAM'		=> 'Test with params ###par1### and ###par2###',
 );

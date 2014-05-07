@@ -22,6 +22,7 @@ class WebTestCase extends CWebTestCase
             'browser'        => 'firefox',
             'browserVersion' => '3.6.',
         	'port'			 => 4445,
+        	'host'			 => 'localhost'
         ),
 	);
 	

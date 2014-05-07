@@ -33,7 +33,10 @@ class WebTestCase extends CWebTestCase
 	{
 		parent::setUp();
 		$this->setBrowserUrl(TEST_BASE_URL);
-		
+		if(defined('TEST_ON_TRAVIS'))
+		{
+			
+		}
 	}
 	
 	public function config4Behat()

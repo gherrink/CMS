@@ -170,6 +170,8 @@ abstract class SauceOnDemandTestCase extends PHPUnit_Extensions_SeleniumTestCase
             $driver->setUsername($browser['username']);
         } elseif($yml_found && isset($pearsauce_config['username'])) {
             $driver->setUsername($pearsauce_config['username']);
+        } elseif(defined('SAUCEONDEMAND_USERNAME')) {
+			$driver->setUsername(SAUCEONDEMAND_USERNAME);
         } else {
             error_log('Warning: no username provided. This may result in "Could not connect to Selenium RC serve".  Run "sauce configure <username> <accesskey>" or call $this->setUsername to fix');
         }
@@ -184,6 +186,8 @@ abstract class SauceOnDemandTestCase extends PHPUnit_Extensions_SeleniumTestCase
             $driver->setAccessKey($browser['accessKey']);
         } elseif($yml_found && isset($pearsauce_config['access_key'])) {
             $driver->setAccessKey($pearsauce_config['access_key']);
+        } elseif(defined('SAUCEONDEMAND_ACCESSKEY')) {
+        	$driver->setAccessKey(SAUCEONDEMAND_ACCESSKEY);
         } else {
             error_log('Warning: no access key provided. This may result in "Could not connect to Selenium RC serve".  Run "sauce configure <username> <accesskey>" or call $this->setAccessKey to fix');
         }

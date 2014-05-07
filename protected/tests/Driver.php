@@ -60,12 +60,12 @@ class PHPUnit_Extensions_SeleniumTestCase_SauceOnDemandTestCase_Driver extends P
     /**
      * @var string
      */
-    protected $username = SAUCEONDEMAND_USERNAME;
+    protected $username;
 
     /**
      * @var string
      */
-    protected $accessKey = SAUCEONDEMAND_ACCESSKEY;
+    protected $accessKey;
 
     /**
      * @var string
@@ -176,15 +176,21 @@ class PHPUnit_Extensions_SeleniumTestCase_SauceOnDemandTestCase_Driver extends P
         }
 
         if ($this->username === NULL) {
-            throw new PHPUnit_Framework_Exception(
-              'setUsername() needs to be called before start().'
-            );
+        	if(defined('SAUCEONDEMAND_USERNAME'))
+        		$this->username = SAUCEONDEMAND_USERNAME;
+        	else
+	            throw new PHPUnit_Framework_Exception(
+	              'setUsername() needs to be called before start().'
+	            );
         }
 
         if ($this->accessKey === NULL) {
-            throw new PHPUnit_Framework_Exception(
-              'setAccessKey() needs to be called before start().'
-            );
+        	if(defined('SAUCEONDEMAND_ACCESSKEY'))
+        		$this->accessKey = SAUCEONDEMAND_ACCESSKEY;
+        	else
+	            throw new PHPUnit_Framework_Exception(
+	              'setAccessKey() needs to be called before start().'
+	            );
         }
 
         if ($this->os === NULL) {
@@ -598,7 +604,7 @@ class PHPUnit_Extensions_SeleniumTestCase_SauceOnDemandTestCase_Driver extends P
      * @author Shin Ohno <ganchiku@gmail.com>
      * @author Bjoern Schotte <schotte@mayflower.de>
      */
-    protected function doCommand($command, array $arguments = array())
+    protected function doCommand($command, array $arguments = array(), array $namedArguments = array())
     {
         if (!ini_get('allow_url_fopen')) {
             throw new PHPUnit_Framework_Exception(
@@ -618,6 +624,10 @@ class PHPUnit_Extensions_SeleniumTestCase_SauceOnDemandTestCase_Driver extends P
         for ($i = 0; $i < $numArguments; $i++) {
             $argNum = strval($i + 1);
             $url .= sprintf('&%s=%s', $argNum, urlencode(trim($arguments[$i])));
+        }
+        
+        foreach ($namedArguments as $key => $value) {
+        	$postData .= sprintf('&%s=%s', $key, urlencode($value));
         }
 
         if (isset($this->sessionId)) {

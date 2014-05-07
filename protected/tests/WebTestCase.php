@@ -21,7 +21,7 @@ class WebTestCase extends CWebTestCase
             'os'             => 'Windows 2003',
             'browser'        => 'firefox',
             'browserVersion' => '3.6.',
-        	'port'			 => 4444,
+        	'port'			 => 4445,
         ),
 	);
 	

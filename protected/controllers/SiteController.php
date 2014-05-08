@@ -12,9 +12,10 @@ class SiteController extends CRUDController
 	/**
 	 *
 	 * @param string $name
+	 * @param string $editLng
 	 * @return CActiveRecord
 	 */
-	public function findModel($name = '')
+	public function findModel($name = '', $editLng = '')
 	{
 		return Site::model()->findByAttributes(array('label'=>$name));
 	}
@@ -184,6 +185,11 @@ class SiteController extends CRUDController
 	
 		if(! SiteLanguage::model()->deleteAllByAttributes(array('siteid'=>$name, 'languageid'=>$language)))
 			throw new CHttpException(500, MsgPicker::msg()->getMessage(MSG::EXCEPTION_SITE_LANGUAGENOTDELETE));
+	}
+	
+	public function actionDeleteContent($site, $con, $lng)
+	{
+		SiteContent::model()->findByAttributes('');
 	}
 	
 	/**

@@ -164,8 +164,8 @@ return array(
 	'QUESTION_EXIT_SITEUPDATE'		=> 'Möchten Sie wirklich die Seitenbearbeitung beenden? Die Änderungen wurden noch nicht gespeichert.',
 	'QUESTION_EXIT_CONTENTCREATE'	=> 'Möchten Sie wirklich die Inhalts-Bearbeitung beenden? Die Änderungen werden nicht übernommen.',
 	'QUESTION_EXIT_CONTENTUPDATE'	=> 'Möchten Sie wirklich die Inhalts-Bearbeitung beenden? Alle Änderungen verloren.',
-	'QUESTION_DELEATE_SITE'			=> 'Möchten Sie die Seite wirklich löschen? Diese Änderung kann nicht wieder rückgänig gemacht werden.',
-	'QUESTION_DELEATE_CONTENT'		=> 'Möchten Sie den Inhalt wirklich löschen? Diese Änderungen kann nichtmehr rückgänig gemacht werden.',
+	'QUESTION_DELETE_SITE'			=> 'Möchten Sie die Seite wirklich löschen? Diese Änderung kann nicht wieder rückgänig gemacht werden.',
+	'QUESTION_DELETE_CONTENT'		=> 'Möchten Sie den Inhalt wirklich löschen? Diese Änderungen kann nichtmehr rückgänig gemacht werden.',
 	'QUESTION_EXIT_NEWSCREATE'		=> 'Möchten Sie wirklich die Neuigkeiten-Erstellung beenden? Die Neuigkeit wurde noch nicht erstellt!',
 	'QUESTION_EXIT_NEWSUPDATE'		=> 'Möchten Sie wirklich die Neuigkeiten-Bearbeitung beenden? Die Änderungen wurden noch nicht gespeichert!',
 	/*/QUESTION */

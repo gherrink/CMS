@@ -47,12 +47,9 @@ else if($model->siteid !== null && $model->siteid !== "")
 	</div>
 	<div class="col-sm-6">
 		<?php 
-			echo BsHtml::button(
-				MsgPicker::msg()->getMessage(MSG::BTN_SITE_ADDLANGUAGE),
-				array(
+			echo BsHtml::button(MsgPicker::msg()->getMessage(MSG::BTN_SITE_ADDLANGUAGE), array(
 					'onclick'=>'addLanguage()'
-				)
-			)
+				));
 		?>
 	</div>
 </div>

@@ -231,6 +231,7 @@ CREATE TABLE Gallery
 	imageid char(32) NOT NULL,
 	parent_galleryid char(32),
 	roleaccess varchar(64) NOT NULL,
+	position smallint NOT NULL,
 	update_userid varchar(20) NOT NULL,
 	update_time timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL,
 	create_userid varchar(20) NOT NULL,

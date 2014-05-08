@@ -300,10 +300,6 @@ class Menu extends CActiveRecord
 						'label' => MsgPicker::msg()->getMessage(MSG::MP_MODERATOR_CONTENTCREATE),
 						'ajax' => "cmsShowModalAjax('modal', '".Yii::app()->createAbsoluteUrl('content/create')."');",
 					),
-					array(
-						'label' => 'test',
-						'ajax' => "testen()",
-					)
 				),
 			);
 	}

@@ -7,10 +7,11 @@
  */
 
 /* 
- * @var $this SiteController
- * @var $model Site
- * @var $edit boolean		
- * @var $editable boolean
+ * @var SiteController $this
+ * @var Site $model
+ * @var boolean $edit		
+ * @var boolean $editable
+ * @var string $editLng
  */
 
 if(! isset($edit))
@@ -22,11 +23,15 @@ if($edit === true && $editable === true)
 
 <?php if($edit || $editable):?>
 	<div class="row">
-		<div class="col-sm-12">
+		<div class="col-sm-12 btn-group">
 			<?php 
 				if($editable)
 					echo BsHtml::linkButton(MsgPicker::msg()->getMessage(MSG::BTN_EDIT), array(
 						'url' => Yii::app()->createAbsoluteUrl('site/edit', array('name'=>$model->label))
+					));
+				else 
+					echo BsHtml::linkButton(MsgPicker::msg()->getMessage(MSG::BTN_READ), array(
+							'url' => Yii::app()->createAbsoluteUrl('site/read', array('name'=>$model->label))
 					));
 				
 				echo BsHtml::button(MsgPicker::msg()->getMessage(MSG::BTN_UPDATE), array(
@@ -36,7 +41,7 @@ if($edit === true && $editable === true)
 				$urlDelete = Yii::app()->createAbsoluteUrl('site/delete', array('name'=>$model->label));
 				$urlQuestionDelete = Yii::app()->createAbsoluteUrl('site/question', array(
 					'head'=>MSG::HEAD_QUESTION_REALYDELETE,
-					'question'=>MSG::QUESTION_DELEATE_SITE,
+					'question'=>MSG::QUESTION_DELETE_SITE,
 				));
 				$json = json_encode(array('buttons'=>array(
 					MSG::BTN_YES => "cmsAjax('$urlDelete'); $('#modalmsg').modal('hide');",
@@ -45,6 +50,7 @@ if($edit === true && $editable === true)
 				echo BsHtml::button(MsgPicker::msg()->getMessage(MSG::BTN_DELETE), array(
 					'onclick'=>"cmsShowModalAjax('modalmsg', '$urlQuestionDelete', $json);")
 				);
+				$this->widget('application.widgets.language.LanguageSelector', array('translate'=>true, 'languageid'=>'editLng', 'selectedLanguage'=>$editLng));
 			?>
 		</div>
 	</div>
@@ -52,13 +58,18 @@ if($edit === true && $editable === true)
 <?php endif;?>
 
 <?php 
-	$language = SiteLanguage::model()->findByAttributes(array('siteid'=>$model->siteid, 'languageid'=>Yii::app()->language));
+	if($editLng !== '')
+		$lng = $editLng;
+	else
+		$lng = Yii::app()->language;
+	
+	$language = SiteLanguage::model()->findByAttributes(array('siteid'=>$model->siteid, 'languageid'=>$lng));
 	if($language !== null)
 		if($language->head !== null && $language->head !== '')
 			echo "<h1>{$language->head}</h1>";
 ?>
 
-<?php $this->renderPartial('_'.$model->layout, array('site'=>$model, 'edit'=>$edit))?>
+<?php $this->renderPartial('_'.$model->layout, array('site'=>$model, 'edit'=>$edit, 'editLng'=>$editLng))?>
 
 <?php if($edit || $editable):?>
 	<hr>

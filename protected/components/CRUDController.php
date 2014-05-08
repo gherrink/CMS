@@ -59,13 +59,14 @@ abstract class CRUDController extends Controller
 	/**
 	 * Gives back the Model.
 	 * @param string $name
+	 * @param string $editLng
 	 * @return CActiveRecord
 	 */
-	public function getModel($name = '')
+	public function getModel($name = '', $editLng = '')
 	{
 		if($this->model === null)
 		{
-			$this->model = $this->findModel($name);
+			$this->model = $this->findModel($name, $editLng);
 			if($this->model === null)
 				throw new CHttpException(500, MsgPicker::msg()->getMessage('EXCEPTION_'.strtoupper($this->getModelName()).'_NOTFOUND'));
 		}
@@ -76,8 +77,10 @@ abstract class CRUDController extends Controller
 	/**
 	 * Searching the Model on the Database with a unique identifire.
 	 * @param string $name
+	 * @param string $editLng
+	 * @return CActiveRecord
 	 */
-	public abstract function findModel($name);
+	public abstract function findModel($name, $editLng);
 		
 	/**
 	 * Gives the modelName
@@ -90,9 +93,18 @@ abstract class CRUDController extends Controller
 	 * @param string $name
 	 * @param boolean $edit
 	 */
-	public function actionRead($name, $edit = false)
+	public function actionRead($name, $edit = false, $editLng = '')
 	{
-		$model = $this->getModel($name);
+		if($editLng !== '')
+		{
+			if(! MsgPicker::isAvailable($editLng) ||
+			! Language::isLanguageActive($editLng))
+			{
+				$editLng = Yii::app()->language;
+			}
+		}
+		
+		$model = $this->getModel($name, $editLng);
 				
 		$editable = Yii::app()->user->checkAccess('edit'.$this->getModelName());
 		
@@ -100,7 +112,7 @@ abstract class CRUDController extends Controller
 			$this->testMoadelRead($model);
 		
 		$params = CMap::mergeArray(
-			array('model'=>$model, 'editable'=>$editable, 'edit'=>$edit),
+			array('model'=>$model, 'editable'=>$editable, 'edit'=>$edit, 'editLng'=>$editLng),
 			$this->getParamsRead()
 		);
 		
@@ -123,11 +135,11 @@ abstract class CRUDController extends Controller
 	 * Action to view the edit-mode of the Model
 	 * @param string $name
 	 */
-	public function actionEdit($name)
+	public function actionEdit($name, $editLng = '')
 	{
 		$this->checkAccess('edit'.$this->getModelName());
 		
-		$this->actionRead($name, true);
+		$this->actionRead($name, true, $editLng);
 	}
 	
 	/**

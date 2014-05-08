@@ -45,6 +45,8 @@ class NLevelNav extends CWidget
      * @var bool
      */
     public $container = false;
+    
+    public $showLanguages = true;
 
     /**
      * Initializes the widget.
@@ -108,12 +110,12 @@ EOP;
 		
 		echo '<div id="menu-toggle" class="collapse navbar-collapse">';
 		$this->buildNav($this->items, 'nav navbar-nav', false);
-		$this->buildNav($this->menu, 'pull-right nav navbar-nav', false);
+		$this->buildNav($this->menu, 'pull-right nav navbar-nav', false, $this->showLanguages);
 		echo '</div>';
 		echo '</nav>';
     }
     
-    private function buildNav($items, $class, $submenu)
+    private function buildNav($items, $class, $submenu, $languages = false)
     {
 	    echo '<ul class="'.$class.'" role="menu">';
 	    foreach ($items as $item)
@@ -148,6 +150,10 @@ EOP;
 					echo '</li>';
 				}
 		}
+		
+		if($languages)
+			$this->widget('application.widgets.language.LanguageSelector', array('inMenu'=>true));
+		
 		echo '</ul>';
     }
 }

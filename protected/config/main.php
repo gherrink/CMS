@@ -72,10 +72,11 @@ return array(
 			'caseSensitive'=>false,
 			'rules'=>array(
 				//c = Controller; a = Action; 
-				'<language:[a-z]{2}>' 									=> '',
-				'<language:[a-z]{2}>/<c:\w+>' 							=> array('<c>', 'urlSuffix' => '.html'),
-				'<language:[a-z]{2}>/<c:\w+>/<a:\w+>' 					=> array('<c>/<a>', 'urlSuffix' => '.html'),
-				'<language:[a-z]{2}>/<c:\w+>/<a:\w+>/<name:[a-zA-Z]*>' 	=> array('<c>/<a>', 'urlSuffix' => '.html'),
+				'<language:[a-z]{2}>/<c:\w+>/<a:\w+>/<editLng:[a-z]{2}>/<name:[a-zA-Z]*>' 	=> array('<c>/<a>', 'urlSuffix' => '.html'),
+				'<language:[a-z]{2}>/<c:\w+>/<a:\w+>/<name:[a-zA-Z]*>' 						=> array('<c>/<a>', 'urlSuffix' => '.html'),
+				'<language:[a-z]{2}>/<c:\w+>/<a:\w+>' 										=> array('<c>/<a>', 'urlSuffix' => '.html'),
+				'<language:[a-z]{2}>/<c:\w+>' 												=> array('<c>', 'urlSuffix' => '.html'),
+				'<language:[a-z]{2}>' 														=> '',
 			),
 		),
 		'db'=>array(

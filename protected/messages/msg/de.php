@@ -71,12 +71,15 @@ return array(
 	'BTN_NO'					=> 'Nein',
 	'BTN_REGISTER'				=> 'Registrieren',
 	'BTN_EDIT'					=> 'Bearbeiten',
+	'BTN_READ'					=> 'Ansehen',
 	'BTN_CREATE'				=> 'Erstellen',
 	'BTN_UPDATE'				=> 'Ändern',
 	'BTN_DELETE'				=> 'Löschen',
 	'BTN_EXIT'					=> 'Beenden',
 	'BTN_NEW_CONTENT'			=> 'BTN_NEW_CONTENT',
 	'BTN_SITE_ADDLANGUAGE'		=> 'Neue Sprache hinzufügen',
+	'BTN_SITE_DELETECONTENT'	=> 'Von Seite löschen',
+	'BTN_CONTENT_ADD2SITE'		=> 'Zu Site hinzufügen',
 	'BTN_NEWS'					=> 'Neuigkeit hinzufügen',
 	/*/Buttons */
 	
@@ -164,8 +167,9 @@ return array(
 	'QUESTION_EXIT_SITEUPDATE'		=> 'Möchten Sie wirklich die Seitenbearbeitung beenden? Die Änderungen wurden noch nicht gespeichert.',
 	'QUESTION_EXIT_CONTENTCREATE'	=> 'Möchten Sie wirklich die Inhalts-Bearbeitung beenden? Die Änderungen werden nicht übernommen.',
 	'QUESTION_EXIT_CONTENTUPDATE'	=> 'Möchten Sie wirklich die Inhalts-Bearbeitung beenden? Alle Änderungen verloren.',
-	'QUESTION_DELEATE_SITE'			=> 'Möchten Sie die Seite wirklich löschen? Diese Änderung kann nicht wieder rückgänig gemacht werden.',
-	'QUESTION_DELEATE_CONTENT'		=> 'Möchten Sie den Inhalt wirklich löschen? Diese Änderungen kann nichtmehr rückgänig gemacht werden.',
+	'QUESTION_DELETE_SITE'			=> 'Möchten Sie die Seite wirklich löschen? Diese Änderung kann nicht wieder rückgänig gemacht werden.',
+	'QUESTION_DELETE_SITECONTENT'	=> 'Möchten Sie den Inhalt wirklich von der Seite löschen? Der Inhalt wird nicht glöscht.',
+	'QUESTION_DELETE_CONTENT'		=> 'Möchten Sie den Inhalt wirklich löschen? Diese Änderungen kann nichtmehr rückgänig gemacht werden.',
 	'QUESTION_EXIT_NEWSCREATE'		=> 'Möchten Sie wirklich die Neuigkeiten-Erstellung beenden? Die Neuigkeit wurde noch nicht erstellt!',
 	'QUESTION_EXIT_NEWSUPDATE'		=> 'Möchten Sie wirklich die Neuigkeiten-Bearbeitung beenden? Die Änderungen wurden noch nicht gespeichert!',
 	/*/QUESTION */

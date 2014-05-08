@@ -8,10 +8,15 @@
 /*
  * @var Site $site
  * @var boolean $edit
+ * @var string $editLng
  * @var int $col
  */
 
-$language = Yii::app()->language;
+if($editLng === '')
+	$language = Yii::app()->language;
+else
+	$language = $editLng;
+
 $contents = SiteContentView::model()->findAllBySql("SELECT * FROM SiteContentView WHERE siteid = '{$site->siteid}' AND languageid = '$language' AND col = $col AND {$this->getRoleaccessSQLWhere()} ORDER BY position");
 
 foreach ($contents as $content)

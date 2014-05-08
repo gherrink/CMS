@@ -65,7 +65,7 @@ class MsgPicker {
 		}
 		
 		if($app->language === null || $app->language === ""
-				|| ! array_key_exists($app->language, self::$availableLanguages)
+				|| ! self::isAvailable($app->language)
 				|| ! Language::isLanguageActive($app->language))
 		{
 			$app->setLanguage(self::$defaultLanguage);
@@ -116,6 +116,11 @@ class MsgPicker {
 	public static function getMsgPath()
 	{
 		return self::$msgPath;
+	}
+	
+	public static function isAvailable($language)
+	{
+		return array_key_exists($language, self::$availableLanguages);
 	}
 	
 }

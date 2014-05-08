@@ -1,8 +1,3 @@
-function testen()
-{
-alert("hallo");	
-}
-
 function cmsAjax(url)
 {
 	$.ajax({

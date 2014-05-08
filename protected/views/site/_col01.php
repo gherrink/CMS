@@ -6,8 +6,9 @@
  * @version 0.1
  */
 /* 
- * @var $site Site
- * @var $edit boolean
+ * @var Site $site
+ * @var boolean $edit
+ * @var string $editLng
  */
 
 if($edit === null || ! Yii::app()->user->checkAccess('editContent'))
@@ -16,6 +17,6 @@ if($edit === null || ! Yii::app()->user->checkAccess('editContent'))
 
 <div class="row">
 	<div class="col-sm-12">
-		<?php $this->renderPartial('_contents', array('site'=>$site, 'edit'=>$edit, 'col'=>1));?>
+		<?php $this->renderPartial('_contents', array('site'=>$site, 'edit'=>$edit, 'col'=>1, 'editLng'=>$editLng));?>
 	</div>
 </div>

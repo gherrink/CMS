@@ -62,10 +62,9 @@ function cmsUpdateModalAjax(id, url)
 	});
 }
 
-//function cmsShowModalAjax(id, url, post = {})
 function cmsShowModalAjax(id, url, post)
 {
-	var andClose = andClose || {};
+	var post = post || {};
 	$.ajax({
 		type: 'POST',
 		url: url,

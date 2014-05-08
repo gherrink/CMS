@@ -16,7 +16,8 @@ class ContactTest extends WebTestCase
 
 	public function testContact()
 	{
-		$this->open('?r=site/contact');
+		$this->visit('/contact', $see)
+		$this->open('/contact');
 		// 		$this->assertTextPresent('Contact Us');
 		// 		$this->assertElementPresent('name=ContactForm[name]');
 		

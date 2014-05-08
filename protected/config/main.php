@@ -5,12 +5,8 @@
 
 // This is the main Web application configuration. Any writable
 // CWebApplication properties can be configured here.
-$path = dirname(__FILE__).'/..';
-include_once $path . '/components/message/MsgPicker.php';
-MsgPicker::msg('de');
-
 return array(
-	'basePath'=>$path,
+	'basePath'=>dirname(__FILE__).'/..',
 	'name'=>'CMS',
 	'language'=>'de',
 	'charset'=>'utf-8',
@@ -72,13 +68,14 @@ return array(
 		'urlManager'=>array(
 			'urlFormat'=>'path',
 			'class'=>'UrlManager',
+			'showScriptName'=>false,
+			'caseSensitive'=>false,
 			'rules'=>array(
-				'<language:[a-z]{2}>/<_m>/<_c>' 		=> '<_m>/<_c>',
-				'<language:[a-z]{2}>/<_m>/<_c>/<_a>*' 	=> '<_m>/<_c>/<_a>',
-				'<language:[a-z]{2}>/<_m>/<_a>' 		=> '<_m>/<_a>',
-				'<language:[a-z]{2}>/<_c>' 				=> '<_c>',
-				'<language:[a-z]{2}>/<_c>/<_a>' 		=> '<_c>/<_a>',
-				'<language:[a-z]{2}>' 					=> '',
+				//c = Controller; a = Action; 
+				'<language:[a-z]{2}>' 									=> '',
+				'<language:[a-z]{2}>/<c:\w+>' 							=> array('<c>', 'urlSuffix' => '.html'),
+				'<language:[a-z]{2}>/<c:\w+>/<a:\w+>' 					=> array('<c>/<a>', 'urlSuffix' => '.html'),
+				'<language:[a-z]{2}>/<c:\w+>/<a:\w+>/<name:[a-zA-Z]*>' 	=> array('<c>/<a>', 'urlSuffix' => '.html'),
 			),
 		),
 		'db'=>array(

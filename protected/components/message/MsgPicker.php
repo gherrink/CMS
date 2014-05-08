@@ -16,7 +16,7 @@ class MsgPicker {
 	const ERROR_NO_LANGUAGE_FOUND	= 'The language array was not found';
 	
 	private static $defaultLanguage = 'de';
-	private static $availableLanguages = array('de'=>'de');
+	private static $availableLanguages = array('de'=>'de', 'en'=>'en');
 	private static $msgPath = 'messages/msg';
 	private $messages = array();
 	
@@ -38,6 +38,10 @@ class MsgPicker {
 	{
 		if (! isset(self::$instance))
 			self::$instance = new MsgPicker($language);
+		else 
+			if($language !== '' && Yii::app()->language !== $language)
+				$this->pickLanguage($language);
+			
 		return self::$instance;
 	}
 	
@@ -47,28 +51,24 @@ class MsgPicker {
 	private function pickLanguage($language = '')
 	{
 		$app = Yii::app();
-		if($language !== '') {
-			$app->language;
+		if($language !== '')
+		{
+			$app->setLanguage($language);
 		}
 		else if (isset($_GET['language']))
 		{
-			$app->language = $_GET['language'];
-			$app->session['language'] = $app->language;
-		}
-		else if (isset($app->session['language']))
-		{
-			$app->language = $app->session['language'];
+			$app->setLanguage($_GET['language']);
 		}
 		else if (array_key_exists('HTTP_ACCEPT_LANGUAGE', $_SERVER))
 		{
-			$app->language = $_SERVER["HTTP_ACCEPT_LANGUAGE"];
+			$app->setLanguage(substr($_SERVER["HTTP_ACCEPT_LANGUAGE"], 0,2));
 		}
 		
-		if($app->language != null || $app->lanauge === ""
-				|| ! array_key_exists($app->language, $this->availableLanguages)
+		if($app->language === null || $app->language === ""
+				|| ! array_key_exists($app->language, self::$availableLanguages)
 				|| ! Language::isLanguageActive($app->language))
 		{
-			$app->language = self::$defaultLanguage;
+			$app->setLanguage(self::$defaultLanguage);
 		}
 		
 		$this->setMessages();

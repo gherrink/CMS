@@ -11,28 +11,26 @@ DROP VIEW IF EXISTS VisitUserSite;
 /* DROP TABLE IF EXISTSs */
 
 DROP TABLE IF EXISTS AuthItemChild;
-DROP TABLE IF EXISTS GalleryImage;
+DROP TABLE IF EXISTS AuthAssignment;
+DROP TABLE IF EXISTS ImageLanguage;
 DROP TABLE IF EXISTS GalleryLanguage;
+DROP TABLE IF EXISTS GalleryImage;
 DROP TABLE IF EXISTS Gallery;
+DROP TABLE IF EXISTS Image;
+DROP TABLE IF EXISTS Menu;
+DROP TABLE IF EXISTS SiteLanguage;
 DROP TABLE IF EXISTS SiteContent;
-DROP TABLE IF EXISTS Content;
+DROP TABLE IF EXISTS VisitSite;
+DROP TABLE IF EXISTS Site;
 DROP TABLE IF EXISTS NewsLanguage;
 DROP TABLE IF EXISTS News;
-DROP TABLE IF EXISTS AuthAssignment;
-DROP TABLE IF EXISTS Menu;
-DROP TABLE IF EXISTS VisitSite;
-DROP TABLE IF EXISTS SiteLanguage;
-DROP TABLE IF EXISTS Site;
-DROP TABLE IF EXISTS ImageLanguage;
-DROP TABLE IF EXISTS Image;
+DROP TABLE IF EXISTS Content;
 DROP TABLE IF EXISTS AuthItem;
 DROP TABLE IF EXISTS VisitUser;
 DROP TABLE IF EXISTS Visit;
 DROP TABLE IF EXISTS UserValidate;
 DROP TABLE IF EXISTS Language;
 DROP TABLE IF EXISTS User;
-
-
 
 
 /* Create Tables */
@@ -118,11 +116,10 @@ CREATE TABLE UserValidate
 CREATE TABLE SiteContent
 (
 	siteid char(32) NOT NULL,
-	languageid char(2) NOT NULL,
 	contentid char(32) NOT NULL,
 	col smallint NOT NULL,
 	position smallint NOT NULL,
-	PRIMARY KEY (siteid, languageid, contentid)
+	PRIMARY KEY (siteid, contentid)
 );
 
 
@@ -280,35 +277,11 @@ CREATE TABLE Content
 
 /* Create Foreign Keys */
 
-ALTER TABLE Gallery
-	ADD FOREIGN KEY (roleaccess)
-	REFERENCES AuthItem (name)
-	ON UPDATE RESTRICT
-	ON DELETE RESTRICT
-;
-
-
 ALTER TABLE AuthItemChild
-	ADD CONSTRAINT AuthItemChild_ibfk_2 FOREIGN KEY (child)
+	ADD CONSTRAINT AuthItemChild_ibfk_1 FOREIGN KEY (parent)
 	REFERENCES AuthItem (name)
 	ON UPDATE CASCADE
 	ON DELETE CASCADE
-;
-
-
-ALTER TABLE Content
-	ADD FOREIGN KEY (roleaccess)
-	REFERENCES AuthItem (name)
-	ON UPDATE RESTRICT
-	ON DELETE RESTRICT
-;
-
-
-ALTER TABLE News
-	ADD FOREIGN KEY (roleaccess)
-	REFERENCES AuthItem (name)
-	ON UPDATE RESTRICT
-	ON DELETE RESTRICT
 ;
 
 
@@ -320,11 +293,11 @@ ALTER TABLE AuthAssignment
 ;
 
 
-ALTER TABLE AuthItemChild
-	ADD CONSTRAINT AuthItemChild_ibfk_1 FOREIGN KEY (parent)
+ALTER TABLE Image
+	ADD FOREIGN KEY (roleaccess)
 	REFERENCES AuthItem (name)
-	ON UPDATE CASCADE
-	ON DELETE CASCADE
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
 ;
 
 
@@ -344,7 +317,15 @@ ALTER TABLE Site
 ;
 
 
-ALTER TABLE Image
+ALTER TABLE AuthItemChild
+	ADD CONSTRAINT AuthItemChild_ibfk_2 FOREIGN KEY (child)
+	REFERENCES AuthItem (name)
+	ON UPDATE CASCADE
+	ON DELETE CASCADE
+;
+
+
+ALTER TABLE News
 	ADD FOREIGN KEY (roleaccess)
 	REFERENCES AuthItem (name)
 	ON UPDATE RESTRICT
@@ -352,10 +333,18 @@ ALTER TABLE Image
 ;
 
 
-ALTER TABLE VisitSite
-	ADD FOREIGN KEY (visitid)
-	REFERENCES Visit (visitid)
-	ON UPDATE CASCADE
+ALTER TABLE Gallery
+	ADD FOREIGN KEY (roleaccess)
+	REFERENCES AuthItem (name)
+	ON UPDATE RESTRICT
+	ON DELETE RESTRICT
+;
+
+
+ALTER TABLE Content
+	ADD FOREIGN KEY (roleaccess)
+	REFERENCES AuthItem (name)
+	ON UPDATE RESTRICT
 	ON DELETE RESTRICT
 ;
 
@@ -368,17 +357,9 @@ ALTER TABLE VisitUser
 ;
 
 
-ALTER TABLE SiteContent
-	ADD FOREIGN KEY (siteid, languageid)
-	REFERENCES SiteLanguage (siteid, languageid)
-	ON UPDATE CASCADE
-	ON DELETE CASCADE
-;
-
-
 ALTER TABLE VisitSite
-	ADD FOREIGN KEY (siteid, languageid)
-	REFERENCES SiteLanguage (siteid, languageid)
+	ADD FOREIGN KEY (visitid)
+	REFERENCES Visit (visitid)
 	ON UPDATE CASCADE
 	ON DELETE RESTRICT
 ;
@@ -400,7 +381,39 @@ ALTER TABLE NewsLanguage
 ;
 
 
+ALTER TABLE ImageLanguage
+	ADD FOREIGN KEY (languageid)
+	REFERENCES Language (languageid)
+	ON UPDATE CASCADE
+	ON DELETE RESTRICT
+;
+
+
 ALTER TABLE GalleryLanguage
+	ADD FOREIGN KEY (languageid)
+	REFERENCES Language (languageid)
+	ON UPDATE CASCADE
+	ON DELETE RESTRICT
+;
+
+
+ALTER TABLE Content
+	ADD FOREIGN KEY (languageid)
+	REFERENCES Language (languageid)
+	ON UPDATE CASCADE
+	ON DELETE RESTRICT
+;
+
+
+ALTER TABLE Menu
+	ADD FOREIGN KEY (languageid)
+	REFERENCES Language (languageid)
+	ON UPDATE CASCADE
+	ON DELETE RESTRICT
+;
+
+
+ALTER TABLE SiteLanguage
 	ADD FOREIGN KEY (languageid)
 	REFERENCES Language (languageid)
 	ON UPDATE CASCADE
@@ -416,7 +429,7 @@ ALTER TABLE NewsLanguage
 ;
 
 
-ALTER TABLE SiteLanguage
+ALTER TABLE VisitSite
 	ADD FOREIGN KEY (languageid)
 	REFERENCES Language (languageid)
 	ON UPDATE CASCADE
@@ -424,88 +437,16 @@ ALTER TABLE SiteLanguage
 ;
 
 
-ALTER TABLE Content
-	ADD FOREIGN KEY (languageid)
-	REFERENCES Language (languageid)
-	ON UPDATE CASCADE
-	ON DELETE RESTRICT
-;
-
-
-ALTER TABLE Menu
-	ADD FOREIGN KEY (languageid)
-	REFERENCES Language (languageid)
-	ON UPDATE CASCADE
-	ON DELETE RESTRICT
-;
-
-
-ALTER TABLE ImageLanguage
-	ADD FOREIGN KEY (languageid)
-	REFERENCES Language (languageid)
-	ON UPDATE CASCADE
-	ON DELETE RESTRICT
-;
-
-
-ALTER TABLE Site
-	ADD FOREIGN KEY (update_userid)
-	REFERENCES User (userid)
-	ON UPDATE CASCADE
-	ON DELETE RESTRICT
-;
-
-
-ALTER TABLE News
-	ADD FOREIGN KEY (create_userid)
-	REFERENCES User (userid)
-	ON UPDATE CASCADE
-	ON DELETE RESTRICT
-;
-
-
-ALTER TABLE News
-	ADD FOREIGN KEY (update_userid)
-	REFERENCES User (userid)
-	ON UPDATE CASCADE
-	ON DELETE RESTRICT
-;
-
-
-ALTER TABLE Site
-	ADD FOREIGN KEY (create_userid)
-	REFERENCES User (userid)
-	ON UPDATE CASCADE
-	ON DELETE RESTRICT
-;
-
-
-ALTER TABLE Image
-	ADD FOREIGN KEY (create_userid)
-	REFERENCES User (userid)
-	ON UPDATE CASCADE
-	ON DELETE RESTRICT
-;
-
-
-ALTER TABLE Menu
-	ADD FOREIGN KEY (update_userid)
-	REFERENCES User (userid)
-	ON UPDATE CASCADE
-	ON DELETE RESTRICT
-;
-
-
-ALTER TABLE VisitUser
+ALTER TABLE AuthAssignment
 	ADD FOREIGN KEY (userid)
 	REFERENCES User (userid)
 	ON UPDATE CASCADE
-	ON DELETE RESTRICT
+	ON DELETE CASCADE
 ;
 
 
-ALTER TABLE Gallery
-	ADD FOREIGN KEY (create_userid)
+ALTER TABLE Menu
+	ADD FOREIGN KEY (update_userid)
 	REFERENCES User (userid)
 	ON UPDATE CASCADE
 	ON DELETE RESTRICT
@@ -513,15 +454,15 @@ ALTER TABLE Gallery
 
 
 ALTER TABLE Image
-	ADD FOREIGN KEY (update_userid)
+	ADD FOREIGN KEY (create_userid)
 	REFERENCES User (userid)
 	ON UPDATE CASCADE
 	ON DELETE RESTRICT
 ;
 
 
-ALTER TABLE Gallery
-	ADD FOREIGN KEY (update_userid)
+ALTER TABLE Menu
+	ADD FOREIGN KEY (create_userid)
 	REFERENCES User (userid)
 	ON UPDATE CASCADE
 	ON DELETE RESTRICT
@@ -530,6 +471,30 @@ ALTER TABLE Gallery
 
 ALTER TABLE Content
 	ADD FOREIGN KEY (update_userid)
+	REFERENCES User (userid)
+	ON UPDATE CASCADE
+	ON DELETE RESTRICT
+;
+
+
+ALTER TABLE Content
+	ADD FOREIGN KEY (create_userid)
+	REFERENCES User (userid)
+	ON UPDATE CASCADE
+	ON DELETE RESTRICT
+;
+
+
+ALTER TABLE Gallery
+	ADD FOREIGN KEY (update_userid)
+	REFERENCES User (userid)
+	ON UPDATE CASCADE
+	ON DELETE RESTRICT
+;
+
+
+ALTER TABLE Site
+	ADD FOREIGN KEY (create_userid)
 	REFERENCES User (userid)
 	ON UPDATE CASCADE
 	ON DELETE RESTRICT
@@ -544,15 +509,23 @@ ALTER TABLE UserValidate
 ;
 
 
-ALTER TABLE AuthAssignment
-	ADD FOREIGN KEY (userid)
+ALTER TABLE Site
+	ADD FOREIGN KEY (update_userid)
 	REFERENCES User (userid)
 	ON UPDATE CASCADE
-	ON DELETE CASCADE
+	ON DELETE RESTRICT
 ;
 
 
-ALTER TABLE Menu
+ALTER TABLE Image
+	ADD FOREIGN KEY (update_userid)
+	REFERENCES User (userid)
+	ON UPDATE CASCADE
+	ON DELETE RESTRICT
+;
+
+
+ALTER TABLE Gallery
 	ADD FOREIGN KEY (create_userid)
 	REFERENCES User (userid)
 	ON UPDATE CASCADE
@@ -560,8 +533,24 @@ ALTER TABLE Menu
 ;
 
 
-ALTER TABLE Content
+ALTER TABLE News
 	ADD FOREIGN KEY (create_userid)
+	REFERENCES User (userid)
+	ON UPDATE CASCADE
+	ON DELETE RESTRICT
+;
+
+
+ALTER TABLE VisitUser
+	ADD FOREIGN KEY (userid)
+	REFERENCES User (userid)
+	ON UPDATE CASCADE
+	ON DELETE RESTRICT
+;
+
+
+ALTER TABLE News
+	ADD FOREIGN KEY (update_userid)
 	REFERENCES User (userid)
 	ON UPDATE CASCADE
 	ON DELETE RESTRICT
@@ -571,6 +560,30 @@ ALTER TABLE Content
 ALTER TABLE SiteLanguage
 	ADD FOREIGN KEY (siteid)
 	REFERENCES Site (siteid)
+	ON UPDATE CASCADE
+	ON DELETE CASCADE
+;
+
+
+ALTER TABLE SiteContent
+	ADD FOREIGN KEY (siteid)
+	REFERENCES Site (siteid)
+	ON UPDATE CASCADE
+	ON DELETE CASCADE
+;
+
+
+ALTER TABLE VisitSite
+	ADD FOREIGN KEY (siteid)
+	REFERENCES Site (siteid)
+	ON UPDATE CASCADE
+	ON DELETE CASCADE
+;
+
+
+ALTER TABLE GalleryLanguage
+	ADD FOREIGN KEY (galleryid)
+	REFERENCES Gallery (galleryid)
 	ON UPDATE CASCADE
 	ON DELETE CASCADE
 ;
@@ -592,9 +605,9 @@ ALTER TABLE Gallery
 ;
 
 
-ALTER TABLE GalleryLanguage
-	ADD FOREIGN KEY (galleryid)
-	REFERENCES Gallery (galleryid)
+ALTER TABLE ImageLanguage
+	ADD FOREIGN KEY (imageid)
+	REFERENCES Image (imageid)
 	ON UPDATE CASCADE
 	ON DELETE CASCADE
 ;
@@ -605,14 +618,6 @@ ALTER TABLE Gallery
 	REFERENCES Image (imageid)
 	ON UPDATE CASCADE
 	ON DELETE RESTRICT
-;
-
-
-ALTER TABLE ImageLanguage
-	ADD FOREIGN KEY (imageid)
-	REFERENCES Image (imageid)
-	ON UPDATE CASCADE
-	ON DELETE CASCADE
 ;
 
 
@@ -641,10 +646,10 @@ RIGHT JOIN GalleryLanguage gl ON g.galleryid = gl.galleryid
 LEFT JOIN Image i ON g.imageid = i.imageid
 LEFT JOIN Gallery gp ON g.parent_galleryid = gp.galleryid
 ORDER BY g.position;
-CREATE VIEW SiteContentView AS SELECT site.siteid as siteid, site.languageid as languageid, site.contentid as contentid, site.col as col, con.label as label, site.position as position, con.text as text, con.roleaccess as roleaccess, con.update_time as update_time, con.update_userid as update_userid, con.create_time as create_time, con.create_userid as create_userid
-FROM SiteContent as site
-LEFT JOIN Content as con ON site.contentid = con.contentid
-ORDER BY contentid, col, position;
+CREATE VIEW SiteContentView AS SELECT c.contentid, sc.siteid, c.languageid, sc.col, sc.position, c.label, c.roleaccess, c.update_time, c.update_userid, c.create_time, c.create_userid, c.text
+FROM Content c 
+RIGHT JOIN SiteContent sc ON c.contentid = sc.contentid
+ORDER BY sc.position;
 CREATE VIEW VisitUserSite AS SELECT user.visitid AS visitid, user.userid AS userid, site.siteid AS siteid, site.languageid AS languageid, site.time AS time
 FROM VisitUser user
 RIGHT JOIN VisitSite site ON user.visitid = site.visitid;

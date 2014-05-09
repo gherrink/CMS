@@ -58,6 +58,7 @@ return array(
 	'HEAD_SITE_CREATE'					=> 'Seite erstellen',
 	'HEAD_SITE_UPDATE'					=> 'Seite bearbeiten',
 	'HEAD_SITE_CREATELANGUAGE'			=> 'Sprache und Überschriften',
+	'HEAD_SITE_ADDCONTENT'				=> 'Seiteninhalt hinzufügen',
 	'HEAD_CONTENT_CREATE'				=> 'Inhalt erstellen',
 	'HEAD_CONTENT_UPDATE'				=> 'Inhalt bearbeiten',
 	'HEAD_CONTENT_ADD2SITE'				=> 'Inhalt zur Seite hinzufügen',
@@ -76,7 +77,7 @@ return array(
 	'BTN_UPDATE'				=> 'Ändern',
 	'BTN_DELETE'				=> 'Löschen',
 	'BTN_EXIT'					=> 'Beenden',
-	'BTN_NEW_CONTENT'			=> 'BTN_NEW_CONTENT',
+	'BTN_SITE_NEWCONTENT'		=> 'Neuen Inhalt hinzufügen',
 	'BTN_SITE_ADDLANGUAGE'		=> 'Neue Sprache hinzufügen',
 	'BTN_SITE_DELETECONTENT'	=> 'Von Seite löschen',
 	'BTN_CONTENT_ADD2SITE'		=> 'Zu Site hinzufügen',
@@ -148,6 +149,7 @@ return array(
 	/*/MSG ERROR */
 
 	/* EXEPTION */
+	'EXCEPTION_NOTHINGSELECTED'			=> 'Es wurde nichts ausgewählt.',
 	'EXCEPTION_NOBUTTONS'				=> 'Es wurden keine Buttons gesetzt.',
 	'EXCEPTION_SITE_NOTFOUND' 			=> 'Die Angeforderte Seite konnte leider nicht gefunden werden.',
 	'EXCEPTION_SITE_NOTDELETE'			=> 'Die Seite konnte leider nicht gelöscht werden, bitte versuchen Sie es erneut.',
@@ -157,7 +159,8 @@ return array(
 	'EXCEPTION_CONTENT_NOTDELETE'		=> 'Der Inhalt konnte nicht gelöscht werden, bitte versuchen Sie es erneut.',
 	'EXCEPTION_CONTENT_NOCONTENT'		=> 'Es wurde kein Kontent übertragen, der gespeichert werden soll.',
 	'EXCEPTION_CONTENT_TEXTNOTUPDATE'	=> 'Die Änderungen konnten leider nicht gespeichert werden, bitte versuchen Sie es erneut.',
-	'EXCEPTION_CONTENT_NOTADD2SITE'		=> 'EXCEPTION_CONTENT_NOTADD2SITE',
+	'EXCEPTION_CONTENT_NOTADD2SITE'		=> 'Der Inhalt konnte leider nicht der Seite hinzugefügt werden, bitte versuchen Sie es erneut.',
+	'EXCEPTION_SITECONTENT_EXISTS'		=> 'Der Inhalt existiert bereits auf dieser Seite und kann kein zweites mal hinzugefügt werden.',
 	'EXCEPTION_NEWS_NOTFOUND'			=> 'Die Neuigkeit konnte leider nicht gefunden werden',
 	'EXCEPTION_NEWS_NOTDELETE'			=> 'Die Neuigeit konnte nicht gelöscht werden, versuchen Sie es erneut!',
 	/*/EXEPTION */

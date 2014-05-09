@@ -11,7 +11,7 @@
  *  
  * Im Controller müssen folgende Methoden implementiert werden:
  *  - public function getModelName();
- *  - public function findModel($name);
+ *  - public function findModel($name, $editLng);
  *  - protected function getParamsRead();
  *  - protected function testMoadelRead(CActiveRecord $model);
  *  - protected function modelCreate(CActiveRecord $model);
@@ -22,7 +22,7 @@
  *  - _edit
  *  
  * Das Model für den Controller muss folgende Attribute enthalten:
- *  - eine eindeutige ID
+ *  - eine eindeutige ID wird als name im $params beim erstellen einer URL mitgegeben.
  *  - $roleaccess
  *  - $update_time
  *  - $update_userid
@@ -45,6 +45,19 @@
  *  - create()
  *  - update($name)
  *  - delete($name)
+ *  - view($head) In $_POST['buttons'] you have to give an array of Buttons
+ *  	you want to add
+ *  - viewUpdate()
+ *  - question($head, $question) In $_POST['buttons'] you have to give an array of Buttons
+ *  	you want to add
+ * 
+ * View:
+ *  - The view shows a Table of the models in Database
+ *  - you have to change the search() method in the model-class for search criterias
+ *  - if you want your own view you have to set the variable $view to your view-name
+ *  - you can set the variable $viewid to change the html-id of the view
+ *  - to edit the Colums of the view change the $viewColumns variable
+ *  - for setting the row id change $viewColumns
  * 
  * @author Maurice Busch <busch.maurice@gmx.net>
  * @copyright 2014
@@ -54,6 +67,19 @@
 
 abstract class CRUDController extends Controller
 {
+	protected $view = "../_view";
+	protected $viewid = 'view-table';
+	protected $viewColumns = array(
+		'label',
+		array(
+			'name' => 'roleaccess',
+			'type' => 'raw',
+			'value' => 'MsgPicker::msg()->getMessage($data->roleaccess)',
+		),
+	);
+	protected $rowExpression = '["id" => $data->label]';
+	protected $selectableRows = 1;
+	
 	protected $model = null;
 	
 	/**
@@ -281,5 +307,72 @@ abstract class CRUDController extends Controller
 		throw new CHttpException(500, MsgPicker::msg()->getMessage('EXCEPTION_'.strtoupper($this->getModelName()).'_NOTDELETE'));
 	}
 	
+	/**
+	 * Deletes the $model from the DB
+	 * @param CActiveRecor $model
+	 */
 	protected abstract function modelDelete(CActiveRecord $model);
+	
+	/**
+	 * echos json-data for a View over all Models in DB
+	 */
+	public function actionView($head)
+	{
+		Yii::app()->clientscript->scriptMap['jquery.js'] = false;
+		
+		$mname = $this->getModelName();
+		$model = new $mname('search');
+		$model->unsetAttributes();
+		
+		$view['header'] = MsgPicker::msg()->getMessage($head);
+		$view['body'] = $this->renderPartial($this->view, array('model'=>$model), true, true);
+		$view['footer'] = $this->createButtonFooter();
+		
+		echo json_encode($view);
+	}
+	
+	/**
+	 * Updates the View
+	 */
+	public function actionViewUpdate()
+	{
+		$mname = $this->getModelName();
+		$model = new $mname('search');
+		$model->unsetAttributes();
+		if(isset($_GET[$mname]))
+			$model->attributes = $_GET[$mname];
+		
+		$this->renderPartial($this->view, array('model' => $model));
+	}
+	
+	/**
+	 * Gives a JSON array for a Question
+	 * @param String $question
+	 */
+	public function actionQuestion($head, $question)
+	{
+		$content['header'] = MsgPicker::msg()->getMessage($head);
+		$content['body'] = MsgPicker::msg()->getMessage($question);
+		$content['footer'] = $this->createButtonFooter();
+	
+		echo json_encode($content);
+	}
+	
+	private function createButtonFooter()
+	{
+		if(in_array('buttons', $_POST))
+			throw new CHttpException(400, MsgPicker::msg()->getMessage(MSG::EXCEPTION_NOBUTTONS));
+		
+		$html = '';
+		$buttons = $_POST['buttons'];
+	
+		while ( ($buttonaction = current($buttons)) !== FALSE ) {
+			$html .= BsHtml::button(MsgPicker::msg()->getMessage(key($buttons)), array(
+				'onclick' => $buttonaction,
+			));
+			next($buttons);
+		}
+	
+		return $html;
+	}
 }

@@ -52,23 +52,31 @@ if($edit === true && $editable === true)
 				
 				if($site)
 				{
-					$urlDelete = Yii::app()->createAbsoluteUrl('site/deleteContent', array('con'=>$model->label, 'site'=>$site));
+					$urlDelete = Yii::app()->createAbsoluteUrl('site/deleteContent', array('con'=>$model->contentid, 'site'=>$site, 'lng'=>$model->languageid));
 					$urlQuestionDelete = Yii::app()->createAbsoluteUrl('site/question', array(
 							'head'=>MSG::HEAD_QUESTION_REALYDELETE,
 							'question'=>MSG::QUESTION_DELETE_SITECONTENT,
 					));
 					$json = json_encode(array('buttons'=>array(
-							MSG::BTN_YES => "cmsAjax('$urlDelete'); $('#modalmsg').modal('hide');",
-							MSG::BTN_NO => "$('#modalmsg').modal('hide');",
+							MSG::BTN_YES => "cmsAjax('$urlDelete'); $('#modal').modal('hide');",
+							MSG::BTN_NO => "$('#modal').modal('hide');",
 					)));
 					echo BsHtml::button(MsgPicker::msg()->getMessage(MSG::BTN_SITE_DELETECONTENT), array(
-						'onclick' => "cmsShowModalAjax('modalmsg', '$urlQuestionDelete', $json);",
+						'onclick' => "cmsShowModalAjax('modal', '$urlQuestionDelete', $json);",
 					));
 				}
 				else 
+				{
+					$url = Yii::app()->createAbsoluteUrl('site/view', array('head'=>MSG::HEAD_CONTENT_ADD2SITE));
+					$addUrl = Yii::app()->createAbsoluteUrl('content/addContent2Site', array('content'=>$model->label));
+					$json = json_encode(array('buttons'=>array(
+						MSG::BTN_CONTENT_ADD2SITE => "cmsAjax('$addUrl&site=' + cmsGetSelectedRow());",
+						MSG::BTN_EXIT => "$('#modal').modal('hide');",
+					)));
 					echo BsHtml::button(MsgPicker::msg()->getMessage(MSG::BTN_CONTENT_ADD2SITE), array(
-						'onclick' => 'cmsShowModalAjax("modal", "'.Yii::app()->createAbsoluteUrl('content/add2site').'");',
+						'onclick'=>"cmsShowModalAjax('modal', '$url', $json);"
 					));
+				}
 			?>
 		</div>
 	</div>
@@ -79,7 +87,9 @@ if($edit === true && $editable === true)
 	<?php echo $model->text?>
 </div>
 <?php else:?>
+<div>
 	<?php echo $model->text?>
+</div>
 <?php endif;?>
 
 <?php if($edit):?>

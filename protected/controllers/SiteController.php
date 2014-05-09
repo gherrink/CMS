@@ -157,6 +157,79 @@ class SiteController extends CRUDController
 	}
 	
 	/**
+	 * Add new Site header language
+	 * @param string $lng
+	 * @param int $counter
+	 */
+	public function actionNewLanguage($lng, $counter)
+	{
+		$this->checkAccess('addSiteNewLanguage');
+	
+		$siteLanguage = new SiteLanguage();
+		$siteLanguage->languageid = $language;
+		$this->renderPartial('_language', array('counter'=>$counter, 'model'=>$siteLanguage, 'form'=> new BsActiveForm()));
+	}
+	
+	/**
+	 * Delete Site header language
+	 * @param string $name
+	 * @param string $language
+	 * @throws CHttpException
+	 */
+	public function actionDeleteLanguage($name, $lng)
+	{
+		$this->checkAccess('deleteSiteLanguage');
+	
+		if(! SiteLanguage::model()->deleteAllByAttributes(array('siteid'=>$name, 'languageid'=>$language)))
+			throw new CHttpException(500, MsgPicker::msg()->getMessage(MSG::EXCEPTION_SITE_LANGUAGENOTDELETE));
+	}
+	
+	/**
+	 * Delets content form site
+	 * @param unknown $site
+	 * @param unknown $con
+	 * @param unknown $lng
+	 * @throws CHttpException
+	 */
+	public function actionDeleteContent($site, $con, $lng)
+	{
+		$siteCon = SiteContent::model()->findByAttributes(array('siteid'=>$site, 'languageid'=>$lng, 'contentid'=>$con));
+		
+		if($siteCon === null)
+			throw new CHttpException(500, MsgPicker::msg()->getMessage(MSG::EXCEPTION_CONTENT_NOTFOUND));
+		
+		$pos = $siteCon->position;
+		$siteLable = $siteCon->site->label;
+		
+		$transaktion = Yii::app()->db->beginTransaction();
+		if($siteCon->delete() && $this->moveContentPos($site, $lng, 'position > '.$pos, -1))
+			try
+			{
+				$transaktion->commit();
+				$content['success'] = Yii::app()->createAbsoluteUrl('site/edit', array('name'=>$siteLable));
+				echo json_encode($content);
+				Yii::app()->end();
+			}
+			catch (Exception $e)
+			{}
+		
+			$transaktion->rollBack();
+	}
+	
+	private function moveContentPos($site, $lng, $sqlPos, $move)
+	{
+		$siteContents = SiteContent::model()->findAll("siteid='$site' AND languageid='$lng' AND ". $sqlPos);
+		foreach ($siteContents as $siteContent)
+		{
+			$siteContent->position = $siteContent->position + $move;
+			if(! $siteContent->update())
+				return false;
+		}
+		
+		return true;
+	}
+	
+	/**
 	 * This is the action to handle external exceptions.
 	 */
 	public function actionError()
@@ -168,57 +241,5 @@ class SiteController extends CRUDController
 			else
 				$this->render('error', $error);
 		}
-	}
-	
-	public function actionNewLanguage($language, $counter)
-	{
-		$this->checkAccess('addSiteNewLanguage');
-	
-		$siteLanguage = new SiteLanguage();
-		$siteLanguage->languageid = $language;
-		$this->renderPartial('_language', array('counter'=>$counter, 'model'=>$siteLanguage, 'form'=> new BsActiveForm()));
-	}
-	
-	public function actionDeleteLanguage($name, $language)
-	{
-		$this->checkAccess('deleteSiteLanguage');
-	
-		if(! SiteLanguage::model()->deleteAllByAttributes(array('siteid'=>$name, 'languageid'=>$language)))
-			throw new CHttpException(500, MsgPicker::msg()->getMessage(MSG::EXCEPTION_SITE_LANGUAGENOTDELETE));
-	}
-	
-	public function actionDeleteContent($site, $con, $lng)
-	{
-		SiteContent::model()->findByAttributes('');
-	}
-	
-	/**
-	 * Gives a JSON array for a Question
-	 * @param String $question
-	 */
-	public function actionQuestion($head, $question)
-	{
-		if(in_array('buttons', $_POST))
-			throw new CHttpException(400, MsgPicker::msg()->getMessage(MSG::EXCEPTION_NOBUTTONS));
-	
-		$content['header'] = MsgPicker::msg()->getMessage($head);
-		$content['body'] = MsgPicker::msg()->getMessage($question);
-		$content['footer'] = $this->createQuestionFooter($_POST['buttons']);
-	
-		echo json_encode($content);
-	}
-	
-	private function createQuestionFooter($buttons)
-	{
-		$html = '';
-	
-		while ( ($buttonaction = current($buttons)) !== FALSE ) {
-			$html .= BsHtml::button(MsgPicker::msg()->getMessage(key($buttons)), array(
-					'onclick' => $buttonaction,
-			));
-			next($buttons);
-		}
-	
-		return $html;
 	}
 }

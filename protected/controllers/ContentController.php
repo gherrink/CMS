@@ -7,7 +7,7 @@
  */
 class ContentController extends CRUDController
 {
-	public function findModel($name)
+	public function findModel($name, $editLng)
 	{
 		return Content::model()->findByAttributes(array('label'=>$name));
 	}
@@ -82,31 +82,19 @@ class ContentController extends CRUDController
 			throw new CHttpException(400, MsgPicker::msg()->getMessage(MSG::EXCEPTION_CONTENT_TEXTNOTUPDATE));
 	}
 	
-	public function actionAdd2Site()
-	{	
-		Yii::app()->clientscript->scriptMap['jquery.js'] = false;
-		
-		$content['header'] = MsgPicker::msg()->getMessage(MSG::HEAD_CONTENT_ADD2SITE);
-		$content['body'] = $this->renderPartial('_add2site', array(), true, true);
-		$content['footer'] = BsHtml::button(MsgPicker::msg()->getMessage(MSG::BTN_OK), array('onclick'=>"addContent2Site();")).
-		BSHtml::button(MsgPicker::msg()->getMessage(MSG::BTN_EXIT), array('onclick'=>"$('#modal').modal('hide');"));		
-		echo json_encode($content);
-	}
-		
-	public function actionUpdateAdd2Site()
-	{
-		$model = new Site('search');
-		if(isset($_GET['Site']))
-			$model->attributes = $_GET['Site'];
-		
-		$this->renderPartial('_add2site', array(
-			'model' => $model,
-		));
-	}
-	
+	/**
+	 * Adds a $content to a $site
+	 * @param string $content
+	 * @param string $site
+	 * @param int $col
+	 * @throws CHttpException
+	 */
 	public function actionAddContent2Site($content, $site, $col = 1)
 	{
 		$this->checkAccess('addSiteContent');
+		
+		if($content === 'undefined' || $site === 'undefined')
+			throw new CHttpException(400, MsgPicker::msg()->getMessage(MSG::EXCEPTION_NOTHINGSELECTED));
 		
 		$mSite = Site::model()->findByAttributes(array('label'=>$site));
 		if($mSite === null)
@@ -114,18 +102,17 @@ class ContentController extends CRUDController
 		
 		$mContent = Content::model()->findByAttributes(array('label'=>$content));
 		if($mContent === null)
-			throw new CHttpException(400, MsgPicker::msg()->getMessage(MSG::EXCEPTION_CONTENT_NOTFOUND));
+			throw new CHttpException(400, MsgPicker::msg()->getMessage(MSG::EXCEPTION_CONTENT_NOTFOUND). $content);
+		
+		$conditions = "siteid = '{$mSite->siteid}' AND contentid = '{$mContent->contentid}'";
+		if(SiteContent::model()->exists($conditions))
+			throw new CHttpException(400, MsgPicker::msg()->getMessage(MSG::EXCEPTION_SITECONTENT_EXISTS));
 		
 		$siteContent = new SiteContent();
 		$siteContent->siteid = $mSite->siteid;
 		$siteContent->contentid = $mContent->contentid;
-		$siteContent->languageid = $mContent->languageid;
 		$siteContent->position = SiteContent::getLastPosition($site) + 1;
 		$siteContent->col = $col;
-		
-		/*
-		 * @todo Content einer gewissen spalte hinzufügen
-		 */
 		
 		if(! $siteContent->insert())
 			throw new CHttpException(500, MsgPicker::msg()->getMessage(MSG::EXCEPTION_CONTENT_NOTADD2SITE));

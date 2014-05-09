@@ -89,3 +89,10 @@ function cmsShowModal(id, header, body, footer)
 	$('#'+id+' .modal-footer').html(footer);
 	$('#'+id).modal('show');
 }
+
+function cmsGetSelectedRow(view, attrid)
+{
+	var view = view || 'view-table';
+	var attrid = attrid || 'id';
+	return $('#'+view+' .selected').attr(attrid);
+}

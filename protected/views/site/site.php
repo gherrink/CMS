@@ -31,7 +31,7 @@ if($edit === true && $editable === true)
 					));
 				else 
 					echo BsHtml::linkButton(MsgPicker::msg()->getMessage(MSG::BTN_READ), array(
-							'url' => Yii::app()->createAbsoluteUrl('site/read', array('name'=>$model->label))
+						'url' => Yii::app()->createAbsoluteUrl('site/read', array('name'=>$model->label))
 					));
 				
 				echo BsHtml::button(MsgPicker::msg()->getMessage(MSG::BTN_UPDATE), array(
@@ -75,10 +75,10 @@ if($edit === true && $editable === true)
 	<hr>
 	<div class="row">
 		<div class="col-sm-6">
-			<p><?php MsgPicker::msg()->getMessage(MSG::CREATE_USER_TIME, array('user'=>$model->create_userid, 'time'=>$model->create_time))?></p>
+			<p><?php echo MsgPicker::msg()->getMessage(MSG::CREATE_USER_TIME, array('user'=>$model->create_userid, 'time'=>$model->create_time))?></p>
 		</div>
 		<div class="col-sm-6 text-right">
-			<p><?php MsgPicker::msg()->getMessage(MSG::UPDATE_USER_TIME, array('user'=>$model->update_userid, 'time'=>$model->update_time))?></p>
+			<p><?php echo MsgPicker::msg()->getMessage(MSG::UPDATE_USER_TIME, array('user'=>$model->update_userid, 'time'=>$model->update_time))?></p>
 		</div>
 	</div>
 <?php endif;?>

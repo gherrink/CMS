@@ -63,7 +63,7 @@ else if($model->siteid !== null && $model->siteid !== "")
 		{
 			$.ajax({
 				type: 'POST',
-				url: '<?php echo Yii::app()->createAbsoluteUrl('site/newLanguage')?>?language=' + language + '&counter=' + counter,
+				url: '<?php echo Yii::app()->createAbsoluteUrl('site/newLanguage')?>?lng=' + language + '&counter=' + counter,
 			
 				success:function(data, textStatus, jqXHR){
 					$('#new-language').before(data);
@@ -92,7 +92,7 @@ else if($model->siteid !== null && $model->siteid !== "")
 	{
 		$.ajax({
 			type: 'POST',
-			url: '<?php echo Yii::app()->createAbsoluteUrl('site/deleteLanguage')?>?language=' + language + '&name=' + name,
+			url: '<?php echo Yii::app()->createAbsoluteUrl('site/deleteLanguage')?>?lng=' + language + '&name=' + name,
 		
 			success:function(data, textStatus, jqXHR){
 				removeLanguage(language);

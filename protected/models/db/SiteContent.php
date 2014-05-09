@@ -5,7 +5,6 @@
  *
  * The followings are the available columns in table 'SiteContent':
  * @property string $siteid
- * @property string $languageid
  * @property string $contentid
  * @property integer $col
  * @property integer $position
@@ -33,13 +32,12 @@ class SiteContent extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('siteid, languageid, contentid, col, position', 'required'),
+			array('siteid, contentid, col, position', 'required'),
 			array('col, position', 'numerical', 'integerOnly'=>true),
 			array('siteid, contentid', 'length', 'max'=>32),
-			array('languageid', 'length', 'max'=>2),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('siteid, languageid, contentid, col, position', 'safe', 'on'=>'search'),
+			array('siteid, contentid, col, position', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -51,8 +49,7 @@ class SiteContent extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'site' => array(self::BELONGS_TO, 'SiteLanguage', 'siteid'),
-			'language' => array(self::BELONGS_TO, 'SiteLanguage', 'languageid'),
+			'site' => array(self::HAS_ONE, 'Site', 'siteid'),
 			'content' => array(self::BELONGS_TO, 'Content', 'contentid'),
 		);
 	}
@@ -64,7 +61,6 @@ class SiteContent extends CActiveRecord
 	{
 		return array(
 			'siteid' => 'Siteid',
-			'languageid' => 'Languageid',
 			'contentid' => 'Contentid',
 			'col' => 'Col',
 			'position' => 'Position',
@@ -90,7 +86,6 @@ class SiteContent extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('siteid',$this->siteid,true);
-		$criteria->compare('languageid',$this->languageid,true);
 		$criteria->compare('contentid',$this->contentid,true);
 		$criteria->compare('col',$this->col);
 		$criteria->compare('position',$this->position);

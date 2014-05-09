@@ -51,7 +51,7 @@ class Content extends CActiveRecord
 			array('label', 'unique', 'on'=>'create'),
 			array('label', 'testLabel', 'on'=>'update'),
 			array('oldLabel', 'safe', 'on'=>'update'),
-			array('contentid, label, text, languageid, roleaccess, update_time, update_userid, create_time, create_userid', 'safe', 'on'=>'search'),
+			array('label, text, languageid, roleaccess, update_time, update_userid, create_time, create_userid', 'safe', 'on'=>'search'),
 		);
 	}
 	
@@ -105,22 +105,25 @@ class Content extends CActiveRecord
 	 */
 	public function search()
 	{
-		// @todo Please modify the following code to remove attributes that should not be searched.
-
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('contentid',$this->contentid,true);
 		$criteria->compare('label',$this->label,true);
-		$criteria->compare('text',$this->text,true);
 		$criteria->compare('languageid',$this->languageid,true);
 		$criteria->compare('roleaccess',$this->roleaccess,true);
 		$criteria->compare('update_time',$this->update_time,true);
 		$criteria->compare('update_userid',$this->update_userid,true);
 		$criteria->compare('create_time',$this->create_time,true);
 		$criteria->compare('create_userid',$this->create_userid,true);
-
+		
 		return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
+			'criteria' => $criteria,
+			'pagination' => array(
+				'pageSize' => 8,
+				'route'=>'content/updateView'
+			),
+			'sort'=>array(
+				'route'=>'content/updateView'
+			)
 		));
 	}
 

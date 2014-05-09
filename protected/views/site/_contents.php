@@ -20,15 +20,18 @@ else
 $contents = SiteContentView::model()->findAllBySql("SELECT * FROM SiteContentView WHERE siteid = '{$site->siteid}' AND languageid = '$language' AND col = $col AND {$this->getRoleaccessSQLWhere()} ORDER BY position");
 
 foreach ($contents as $content)
-	$this->renderPartial('../content/_content', array('model'=>$content, 'edit'=>$edit, 'editable'=>false, 'onSite'=>true));
+	$this->renderPartial('../content/_content', array('model'=>$content, 'edit'=>$edit, 'editable'=>false, 'site'=>$site->siteid));
 
 if($edit)
-	echo BsHtml::button(MsgPicker::msg()->getMessage(MSG::BTN_NEW_CONTENT), array('onclick'=>'addNewContent()'))
+{
+	$url = Yii::app()->createAbsoluteUrl('content/view', array('head'=>MSG::HEAD_CONTENT_ADD2SITE));
+	$addUrl = Yii::app()->createAbsoluteUrl('content/addContent2Site', array('col'=>$col, 'site'=>$site->label));
+	$json = json_encode(array('buttons'=>array(
+		MSG::BTN_EXIT => "$('#modal').modal('hide');",
+		MSG::BTN_SITE_NEWCONTENT => "cmsAjax('$addUrl&content=' + cmsGetSelectedRow());",
+	)));
+	echo BsHtml::button(MsgPicker::msg()->getMessage(MSG::BTN_SITE_NEWCONTENT), array(
+			'onclick'=>"cmsShowModalAjax('modal', '$url', $json);"
+	));
+}
 ?>
-
-<script type="text/javascript">
-	function addNewContent()
-	{
-
-	}
-</script>

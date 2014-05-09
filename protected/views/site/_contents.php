@@ -24,8 +24,9 @@ foreach ($contents as $content)
 
 if($edit)
 {
+	echo '<div id="newContent"></div>';
 	$url = Yii::app()->createAbsoluteUrl('content/view', array('head'=>MSG::HEAD_CONTENT_ADD2SITE));
-	$addUrl = Yii::app()->createAbsoluteUrl('content/addContent2Site', array('col'=>$col, 'site'=>$site->label));
+	$addUrl = Yii::app()->createAbsoluteUrl('content/addContent2Site', array('col'=>$col, 'site'=>$site->label, 'onSite'=>true));
 	$json = json_encode(array('buttons'=>array(
 		MSG::BTN_EXIT => "$('#modal').modal('hide');",
 		MSG::BTN_SITE_NEWCONTENT => "cmsAjax('$addUrl&content=' + cmsGetSelectedRow());",

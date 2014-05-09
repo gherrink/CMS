@@ -11,7 +11,7 @@
  * @var Content $model
  * @var boolean $editable
  * @var boolean $edit
- * @var boolean $site
+ * @var string $site
  */
 
 if(! isset($edit))
@@ -24,6 +24,7 @@ if($edit === true && $editable === true)
 	$editable = false;
 ?>
 
+<div id="<?php echo $model->contentid?>">
 <?php if($edit || $editable):?>
 	<div class="row">
 		<div class="col-sm-12 btn-group">
@@ -52,7 +53,7 @@ if($edit === true && $editable === true)
 				
 				if($site)
 				{
-					$urlDelete = Yii::app()->createAbsoluteUrl('site/deleteContent', array('con'=>$model->contentid, 'site'=>$site, 'lng'=>$model->languageid));
+					$urlDelete = Yii::app()->createAbsoluteUrl('site/deleteContent', array('con'=>$model->contentid, 'site'=>$site));
 					$urlQuestionDelete = Yii::app()->createAbsoluteUrl('site/question', array(
 							'head'=>MSG::HEAD_QUESTION_REALYDELETE,
 							'question'=>MSG::QUESTION_DELETE_SITECONTENT,
@@ -103,3 +104,4 @@ if($edit === true && $editable === true)
 		</div>
 	</div>
 <?php endif;?>
+</div>

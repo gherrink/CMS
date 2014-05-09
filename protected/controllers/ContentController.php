@@ -89,7 +89,7 @@ class ContentController extends CRUDController
 	 * @param int $col
 	 * @throws CHttpException
 	 */
-	public function actionAddContent2Site($content, $site, $col = 1)
+	public function actionAddContent2Site($content, $site, $col = 1, $onSite = false)
 	{
 		$this->checkAccess('addSiteContent');
 		
@@ -117,6 +117,15 @@ class ContentController extends CRUDController
 		if(! $siteContent->insert())
 			throw new CHttpException(500, MsgPicker::msg()->getMessage(MSG::EXCEPTION_CONTENT_NOTADD2SITE));
 		
-		echo json_encode(array('success'=>Yii::app()->createAbsoluteUrl('site/edit', array('name'=>$site))));
+		if($onSite)
+		{
+			$newContent['action'] = 'before';
+			$newContent['selector'] = '#newContent';
+			$newContent['html'] = $this->renderPartial('_content', array('model'=>$mContent, 'edit'=>true, 'editable'=>false, 'site'=>$mSite->siteid), true);
+			$newContent['aloha'] = true;
+			echo json_encode($newContent);
+		}
+		else
+			echo json_encode(array('success'=>Yii::app()->createAbsoluteUrl('site/edit', array('name'=>$site))));
 	}
 }

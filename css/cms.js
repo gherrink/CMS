@@ -6,6 +6,8 @@ function cmsAjax(url)
 		success: function(data, textStatus, jqXHR){
 			if('success' in data)
 				window.location = data['success'];
+			if('action' in data && 'selector' in data)
+				cmsDoAjaxAction(data);
 		},
 		error: function(jqXHR, textStatus, errorThrown) {
 			cmsShowErrorModal('modalmsg', jqXHR, textStatus, errorThrown);
@@ -13,6 +15,20 @@ function cmsAjax(url)
 			
 		dataType:'json'
 	});
+}
+
+function cmsDoAjaxAction(data)
+{
+	if(data['action'] == 'before' && 'html' in data)
+	{
+		$(data['selector']).before(data['html']);
+	}
+	if(data['action'] == 'remove')
+	{
+		$(data['selector']).remove();
+	}
+	if('aloha' in data)
+		Aloha.jQuery('.edit').aloha();
 }
 
 function cmsSubmitForm(modelid, formid, url)

@@ -191,22 +191,22 @@ class SiteController extends CRUDController
 	 * @param unknown $lng
 	 * @throws CHttpException
 	 */
-	public function actionDeleteContent($site, $con, $lng)
+	public function actionDeleteContent($site, $con)
 	{
-		$siteCon = SiteContent::model()->findByAttributes(array('siteid'=>$site, 'languageid'=>$lng, 'contentid'=>$con));
+		$siteCon = SiteContent::model()->findByAttributes(array('siteid'=>$site, 'contentid'=>$con));
 		
 		if($siteCon === null)
 			throw new CHttpException(500, MsgPicker::msg()->getMessage(MSG::EXCEPTION_CONTENT_NOTFOUND));
 		
 		$pos = $siteCon->position;
-		$siteLable = $siteCon->site->label;
 		
 		$transaktion = Yii::app()->db->beginTransaction();
-		if($siteCon->delete() && $this->moveContentPos($site, $lng, 'position > '.$pos, -1))
+		if($siteCon->delete() && $this->moveContentPos($site, 'position > '.$pos, -1))
 			try
 			{
 				$transaktion->commit();
-				$content['success'] = Yii::app()->createAbsoluteUrl('site/edit', array('name'=>$siteLable));
+				$content['action'] = 'remove';
+				$content['selector'] = '#'. $con;
 				echo json_encode($content);
 				Yii::app()->end();
 			}
@@ -216,9 +216,9 @@ class SiteController extends CRUDController
 			$transaktion->rollBack();
 	}
 	
-	private function moveContentPos($site, $lng, $sqlPos, $move)
+	private function moveContentPos($site, $sqlPos, $move)
 	{
-		$siteContents = SiteContent::model()->findAll("siteid='$site' AND languageid='$lng' AND ". $sqlPos);
+		$siteContents = SiteContent::model()->findAll("siteid='$site' AND ". $sqlPos);
 		foreach ($siteContents as $siteContent)
 		{
 			$siteContent->position = $siteContent->position + $move;

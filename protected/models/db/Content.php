@@ -51,7 +51,7 @@ class Content extends CActiveRecord
 			array('label', 'unique', 'on'=>'create'),
 			array('label', 'testLabel', 'on'=>'update'),
 			array('oldLabel', 'safe', 'on'=>'update'),
-			array('label, text, languageid, roleaccess, update_time, update_userid, create_time, create_userid', 'safe', 'on'=>'search'),
+			array('label, languageid, roleaccess, update_time, update_userid, create_time, create_userid', 'safe', 'on'=>'search'),
 		);
 	}
 	

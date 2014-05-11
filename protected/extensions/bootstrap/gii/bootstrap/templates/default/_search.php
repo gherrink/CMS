@@ -7,7 +7,7 @@
 <?php echo "<?php\n"; ?>
 /* @var $this <?php echo $this->getControllerClass(); ?> */
 /* @var $model <?php echo $this->getModelClass(); ?> */
-/* @var $form BsActiveForm */
+/* @var $form BSActiveForm */
 <?php echo "?>\n"; ?>
 
 <?php echo "<?php \$form=\$this->beginWidget('bootstrap.widgets.BsActiveForm', array(

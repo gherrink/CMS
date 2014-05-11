@@ -4,6 +4,7 @@
  * Create Read Update und Delete enthalten
  * 
  * Für den Controller müssen folgende Rechte angelegt werden:
+ *  - read{modelName}
  *  - edit{modelName}
  *  - create{modelName}
  *  - update{modelName}
@@ -13,9 +14,11 @@
  *  - public function getModelName();
  *  - public function findModel($name, $editLng);
  *  - protected function getParamsRead();
- *  - protected function testMoadelRead(CActiveRecord $model);
  *  - protected function modelCreate(CActiveRecord $model);
  *  - protected function modelUpdate(CActiveRecord $model, CActiveRecord $dbModel);
+ *  
+ * Es können folgende Methoden überschrieben werden:
+ *  - protected function testMoadelRead($model);
  *  
  * Für den Controller müssen folgende Views erstellt werden:
  *  - {modelName}
@@ -86,7 +89,7 @@ abstract class CRUDController extends Controller
 	 * Gives back the Model.
 	 * @param string $name
 	 * @param string $editLng
-	 * @return CActiveRecord
+	 * @return mixed
 	 */
 	public function getModel($name = '', $editLng = '')
 	{
@@ -104,7 +107,7 @@ abstract class CRUDController extends Controller
 	 * Searching the Model on the Database with a unique identifire.
 	 * @param string $name
 	 * @param string $editLng
-	 * @return CActiveRecord
+	 * @return mixed
 	 */
 	public abstract function findModel($name, $editLng);
 		
@@ -121,6 +124,8 @@ abstract class CRUDController extends Controller
 	 */
 	public function actionRead($name, $edit = false, $editLng = '')
 	{
+		$this->checkAccess('read'.$this->getModelName());
+		
 		if($editLng !== '')
 		{
 			if(! MsgPicker::isAvailable($editLng) ||
@@ -153,9 +158,12 @@ abstract class CRUDController extends Controller
 	/**
 	 * Test if the model can be displeyed for the user don't effects
 	 * the displey of the edit-mode
-	 * @param CActiveRecord $model
+	 * @param $model
 	 */
-	protected abstract function testMoadelRead(CActiveRecord $model);
+	protected function testMoadelRead($model)
+	{
+		return true;
+	}
 	
 	/**
 	 * Action to view the edit-mode of the Model
@@ -180,9 +188,9 @@ abstract class CRUDController extends Controller
 	 * Update action to update a Model with the $name.
 	 * @param string $name
 	 */
-	public function actionUpdate($name)
+	public function actionUpdate($name, $editLng = '')
 	{
-		$this->editForm(false, $name);
+		$this->editForm(false, $name, $editLng);
 	}
 	
 	/**
@@ -190,7 +198,7 @@ abstract class CRUDController extends Controller
 	 * @param boolean $create
 	 * @param string $name
 	 */
-	private function editForm($create, $name = '')
+	private function editForm($create, $name = '', $editLng = '')
 	{
 		$modelName = $this->getModelName();
 		$formName = strtolower($modelName);
@@ -227,7 +235,7 @@ abstract class CRUDController extends Controller
 			}
 			else
 			{
-				$this->modelUpdate($model, $this->getModel($name));
+				$this->modelUpdate($model, $this->getModel($name, $editLng));
 				$error = BsHtml::alert(BsHtml::ALERT_COLOR_ERROR, MsgPicker::msg()->getMessage('ERROR_'.strtoupper($this->getModelName()).'_NOTUPDATE'));
 			}
 		}
@@ -240,7 +248,7 @@ abstract class CRUDController extends Controller
 		else
 		{
 			if (! isset($_POST[$this->getModelName()]))
-				$model = $this->getModel($name);
+				$model = $this->getModel($name, $editLng);
 			$button = BsHtml::button(MsgPicker::msg()->getMessage(MSG::BTN_UPDATE), array('onclick'=>"cmsSubmitForm('modal', '$formName-form', '$url')"));
 			$head = MsgPicker::msg()->getMessage('HEAD_'.strtoupper($this->getModelName()).'_UPDATE');
 		}
@@ -300,10 +308,10 @@ abstract class CRUDController extends Controller
 	 * 
 	 * @param string $name
 	 */
-	public function actionDelete($name)
+	public function actionDelete($name, $editLng = '')
 	{
 		$this->checkAccess('delete'.$this->getModelName());
-		$this->modelDelete($this->findModel($name));
+		$this->modelDelete($this->findModel($name, $editLng));
 		throw new CHttpException(500, MsgPicker::msg()->getMessage('EXCEPTION_'.strtoupper($this->getModelName()).'_NOTDELETE'));
 	}
 	

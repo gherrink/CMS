@@ -55,6 +55,7 @@ return array(
 	'HEAD_LOGIN'						=> 'Anmelden',
 	'HEAD_REGISTER'						=> 'Registrieren',
 	'HEAD_CHANGEMAIL'					=> 'E-Mail ändern',
+	'HEAD_MENU'							=> 'Menu bearbeiten',
 	'HEAD_SITE_CREATE'					=> 'Seite erstellen',
 	'HEAD_SITE_UPDATE'					=> 'Seite bearbeiten',
 	'HEAD_SITE_CREATELANGUAGE'			=> 'Sprache und Überschriften',
@@ -64,6 +65,11 @@ return array(
 	'HEAD_CONTENT_ADD2SITE'				=> 'Inhalt zur Seite hinzufügen',
 	'HEAD_NEWS_CREATE'					=> 'Neuigkeit erstellen',
 	'HEAD_NEWS_UPDATE'					=> 'Neuigkeit bearbeiten',
+	'HEAD_MENU_CREATE'					=> 'Menüpunkt erstellen',
+	'HEAD_MENU_UPDATE'					=> 'Menüpunkt bearbeiten',
+	'HEAD_MENU_LINK2SITE'				=> 'Link zur Seite',
+	'HEAD_MENU_ICONSELECT'				=> 'Menüicon auswählen',
+	'HEAD_MENU_PARENTMENU'				=> 'Übergeordneter Menüpunkt',
 	/*/Ueberschriften */
 		
 	/* Buttons */
@@ -146,6 +152,8 @@ return array(
 	'ERROR_CONTENT_NOTUPDATE'		=> 'Der Inhalt konnte leider nicht geändert werden, bitte versuchen Sie es erneut.',
 	'ERROR_NEWS_NOTCREATE'			=> 'Die Neuigkeit konnte leider nichterstellt werden, bitte versuchen Sie es erneut',
 	'ERROR_NEWS_NOTUPDATE'			=> 'Die Neuigkeit konnte leider nicht geändert werden, bitte versuchen Sie es erneut!',
+	'ERROR_MENU_NOTCREATE'			=> 'Der Menüpunkt konnte leider nicht erstellt werden, bitte versuchen Sie es erneut.',
+	'ERROR_MENU_NOTUPDATE'			=> 'Der Menüpunkt konnte leider nicht geändert werden, bitte versucehn Sie es erneut.',
 	/*/MSG ERROR */
 
 	/* EXEPTION */
@@ -163,6 +171,9 @@ return array(
 	'EXCEPTION_SITECONTENT_EXISTS'		=> 'Der Inhalt existiert bereits auf dieser Seite und kann kein zweites mal hinzugefügt werden.',
 	'EXCEPTION_NEWS_NOTFOUND'			=> 'Die Neuigkeit konnte leider nicht gefunden werden',
 	'EXCEPTION_NEWS_NOTDELETE'			=> 'Die Neuigeit konnte nicht gelöscht werden, versuchen Sie es erneut!',
+	'EXCEPTION_MENU_NOTFOUND'			=> 'Der Menüpunkt konnte leider nicht gefunden werden.',
+	'EXCEPTION_MENU_NOTDELETE'			=> 'Der Menüpunkt konnte leider nicht gelöscht werden.',
+	'EXCEPTION_MENU_PARENTNOTFOUND'		=> 'Das Übergeordnete Menü wurde nicht gefunden.',
 	/*/EXEPTION */
 
 	/* QUESTION */
@@ -175,6 +186,9 @@ return array(
 	'QUESTION_DELETE_CONTENT'		=> 'Möchten Sie den Inhalt wirklich löschen? Diese Änderungen kann nichtmehr rückgänig gemacht werden.',
 	'QUESTION_EXIT_NEWSCREATE'		=> 'Möchten Sie wirklich die Neuigkeiten-Erstellung beenden? Die Neuigkeit wurde noch nicht erstellt!',
 	'QUESTION_EXIT_NEWSUPDATE'		=> 'Möchten Sie wirklich die Neuigkeiten-Bearbeitung beenden? Die Änderungen wurden noch nicht gespeichert!',
+	'QUESTION_EXIT_MENUCREATE'		=> 'Möchten Sie wirklich die Menüpunkt-Erstellung beenden? Der Menüpunkt wurde noch nicht erstellt!',
+	'QUESTION_EXIT_MENUUPDATE'		=> 'Möchten Sie wirklich die Menüpunkt-Bearbeitung beenden? Die Änderungen wurden noch nicht gespeichert!',
+	'QUESTION_DELETE_MENU'			=> 'Möchten Sie den Menüpunkt wirklich löschen? Alle Untergeordnetenmenüpunkte werden ebenfalls gelöscht.',
 	/*/QUESTION */
 		
 	/* MAIL */

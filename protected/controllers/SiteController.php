@@ -166,7 +166,7 @@ class SiteController extends CRUDController
 		$this->checkAccess('addSiteNewLanguage');
 	
 		$siteLanguage = new SiteLanguage();
-		$siteLanguage->languageid = $language;
+		$siteLanguage->languageid = $lng;
 		$this->renderPartial('_language', array('counter'=>$counter, 'model'=>$siteLanguage, 'form'=> new BsActiveForm()));
 	}
 	
@@ -205,8 +205,7 @@ class SiteController extends CRUDController
 			try
 			{
 				$transaktion->commit();
-				$content['action'] = 'remove';
-				$content['selector'] = '#'. $con;
+				$content['remove'] = '#'. $con;
 				echo json_encode($content);
 				Yii::app()->end();
 			}

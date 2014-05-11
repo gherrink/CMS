@@ -4,10 +4,7 @@ function cmsAjax(url)
 		type: 'POST',
 		url: url,
 		success: function(data, textStatus, jqXHR){
-			if('success' in data)
-				window.location = data['success'];
-			if('action' in data && 'selector' in data)
-				cmsDoAjaxAction(data);
+			cmsActions(data);
 		},
 		error: function(jqXHR, textStatus, errorThrown) {
 			cmsShowErrorModal('modalmsg', jqXHR, textStatus, errorThrown);
@@ -17,23 +14,35 @@ function cmsAjax(url)
 	});
 }
 
-function cmsDoAjaxAction(data)
+function cmsActions(data)
 {
-	if(data['action'] == 'before' && 'html' in data)
+	if('success' in data)
+		window.location = data['success'];
+	if('remove' in data)
 	{
-		$(data['selector']).before(data['html']);
+		$(data['remove']).remove();
 	}
-	if(data['action'] == 'remove')
+	if('html' in data)
 	{
-		$(data['selector']).remove();
+		if('replace' in data)
+			$(data['replace']).replaceWith(data['html']);
+		if('before' in data)
+			$(data['before']).before(data['html']);
 	}
 	if('aloha' in data)
 		Aloha.jQuery('.edit').aloha();
+	if('modalhide' in data)
+		$('#'+data['modalhide']).modal('hide');
 }
 
 function cmsSubmitForm(modelid, formid, url)
 {
-	var post = $('#'+formid).serialize();
+	var form = $('#'+formid);
+	form.find(':disabled').each(function() {
+        $(this).removeAttr('disabled');
+    });
+	
+	var post = form.serialize();
 	
 	$.ajax({
 		type: 'POST',
@@ -43,7 +52,7 @@ function cmsSubmitForm(modelid, formid, url)
 			if('header' in data && 'body' in data && 'footer' in data)
 				cmsShowModal(modelid, data['header'], data['body'], data['footer']);
 			else
-				window.location = data['success'];
+				cmsActions(data);
 				
 		},
 		error: function(jqXHR, textStatus, errorThrown) {

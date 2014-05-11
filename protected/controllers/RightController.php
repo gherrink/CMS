@@ -31,6 +31,7 @@ class RightController extends Controller
 		$this->createOperationNews($auth);
 		$this->createOperationContent($auth);
 		$this->createOperationGallery($auth);
+		$this->createOperationMenu($auth);
 		
 		//Visitor
 // 		$role=$auth->createRole(MSG::VISITOR);
@@ -61,6 +62,11 @@ class RightController extends Controller
 // 		$role=$auth->createRole(MSG::MGALLERY);
 		$role=$auth->getAuthItem(MSG::MGALLERY);
 		$this->addMnewsRights($role);
+		
+		//Moderator Gallery
+// 		$role=$auth->createRole(MSG::MMENU);
+		$role=$auth->getAuthItem(MSG::MMENU);
+		$this->addMmenuRights($role);
 	}
 	
 	private function createOperationContact($auth)
@@ -87,6 +93,7 @@ class RightController extends Controller
 // 		$auth->createOperation('addSiteNewLanguage');
 // 		$auth->createOperation('addSiteContent');
 // 		$auth->createOperation('deleteSiteContent');
+// 		$auth->createOperation('readSite');
 	}
 	
 	private function createOperationContent($auth)
@@ -96,6 +103,7 @@ class RightController extends Controller
 // 		$auth->createOperation('updateContent');
 // 		$auth->createOperation('updateContentText');
 // 		$auth->createOperation('deleteContent');
+// 		$auth->createOperation('readContent');
 	}
 	
 	private function createOperationNews($auth)
@@ -104,6 +112,7 @@ class RightController extends Controller
 // 		$auth->createOperation('createNews');
 // 		$auth->createOperation('updateNews');
 // 		$auth->createOperation('deleteNews');
+// 		$auth->createOperation('readNews');
 	}
 	
 	private function createOperationGallery($auth)
@@ -112,6 +121,16 @@ class RightController extends Controller
 // 		$auth->createOperation('updateGallery');
 // 		$auth->createOperation('deleteGallery');
 // 		$auth->createOperation('editGallery');
+// 		$auth->createOperation('readGallery');
+	}
+	
+	private function createOperationMenu($auth)
+	{
+// 		$auth->createOperation('createMenu');
+// 		$auth->createOperation('updateMenu');
+// 		$auth->createOperation('deleteMenu');
+// 		$auth->createOperation('editMenu');
+// 		$auth->createOperation('readMenu');
 	}
 	
 	private function addVisitorRights($role)
@@ -149,6 +168,8 @@ class RightController extends Controller
 // 		$role->addChild('updateContent');
 // 		$role->addChild('updateContentText');
 // 		$role->addChild('deleteContent');
+// 		$role->addChild('readContent');
+// 		$role->addChild('readSite');
 	}
 	
 	private function addMnewsRights($role)
@@ -157,6 +178,7 @@ class RightController extends Controller
 // 		$role->addChild('createNews');
 // 		$role->addChild('updateNews');
 // 		$role->addChild('deleteNews');
+// 		$role->addChild('readNews');
 	}
 	
 	private function addMgalleryRights($role)
@@ -165,6 +187,15 @@ class RightController extends Controller
 // 		$role->addChild('createGallery');
 // 		$role->addChild('updateGallery');
 // 		$role->addChild('deleteGallery');
+// 		$role->addChild('readGallery');
 	}
 	
+	private function addMmenuRights($role)
+	{
+// 		$role->addChild('editMenu');
+// 		$role->addChild('createMenu');
+// 		$role->addChild('updateMenu');
+// 		$role->addChild('deleteMenu');
+// 		$role->addChild('readMenu');
+	}
 }

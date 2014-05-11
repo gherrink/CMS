@@ -30,7 +30,6 @@ class ContentController extends CRUDController
 	protected function modelCreate(CActiveRecord $model)
 	{
 		$model->contentid = Yii::app()->keygen->getUniquKey();
-		
 		if($model->insert())
 		{
 			$url = Yii::app()->createAbsoluteUrl('content/edit', array('name'=>$model->label));
@@ -119,8 +118,7 @@ class ContentController extends CRUDController
 		
 		if($onSite)
 		{
-			$newContent['action'] = 'before';
-			$newContent['selector'] = '#newContent';
+			$newContent['before'] = '#newContent';
 			$newContent['html'] = $this->renderPartial('_content', array('model'=>$mContent, 'edit'=>true, 'editable'=>false, 'site'=>$mSite->siteid), true);
 			$newContent['aloha'] = true;
 			echo json_encode($newContent);

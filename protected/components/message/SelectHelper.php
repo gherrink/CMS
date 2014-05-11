@@ -20,6 +20,17 @@ class SelectHelper
 		), self::getRoles());
 	}
 	
+	/**
+	 * Alle Rollen die für die Menüadministration benötigt werden
+	 * @return string[]
+	 */
+	public static function getMenuRoles()
+	{
+		return CMap::mergeArray(array(
+				MSG::MMENU => MsgPicker::msg()->getMessage(MSG::MMENU),
+		), self::getRoles());
+	}
+	
 	private static function getRoles()
 	{
 		return array(

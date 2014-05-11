@@ -116,10 +116,10 @@ class Site extends CActiveRecord
 			'criteria' => $criteria,
 			'pagination' => array(
 				'pageSize' => 8,
-				'route'=>'site/updateView'
+				'route'=>'site/viewUpdate'
 			),
 			'sort'=>array(
-				'route'=>'site/updateView'
+				'route'=>'site/viewUpdate'
 			)
 		));
 	}

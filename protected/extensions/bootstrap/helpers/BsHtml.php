@@ -4292,7 +4292,7 @@ EOD;
      */
     public static function alert($color, $message, $htmlOptions = array())
     {
-    	self::addCssClass('alert', $htmlOptions);
+        self::addCssClass('alert', $htmlOptions);
         if (!empty($color)) {
             self::addCssClass('alert-' . $color, $htmlOptions);
         }

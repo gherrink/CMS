@@ -10,6 +10,9 @@ class UrlManager extends CUrlManager
 			$params['language'] = Yii::app()->language;
 		}
 		
+		if(! array_key_exists('editLng', $params) && array_key_exists('editLng', $_GET))
+			$params['editLng'] = $_GET['editLng'];
+		
 		return parent::createUrl($route, $params, $ampersand);
 	}
     

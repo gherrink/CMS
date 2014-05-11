@@ -119,10 +119,10 @@ class Content extends CActiveRecord
 			'criteria' => $criteria,
 			'pagination' => array(
 				'pageSize' => 8,
-				'route'=>'content/updateView'
+				'route'=>'content/viewUpdate'
 			),
 			'sort'=>array(
-				'route'=>'content/updateView'
+				'route'=>'content/viewUpdate'
 			)
 		));
 	}

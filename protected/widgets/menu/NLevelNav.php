@@ -128,25 +128,31 @@ EOP;
 					if(! array_key_exists('url', $item))
 						$item['url'] = '#';
 					
+					if(array_key_exists('icon', $item))
+						$label = BsHtml::icon($item['icon']) . $item['label'];	
+					else
+						$label = $item['label'];
+					
 					if(array_key_exists('ajax', $item))
 					{
-						echo CHtml::link($item['label'], '', array('onclick' => $item['ajax']));
+						echo CHtml::link($label, '', array('onclick' => $item['ajax']));
 					}
 					else
 					{
 						if(! array_key_exists('items', $item) || (count($item) <= 0))
-							echo CHtml::link($item['label'], $item['url']);
+							echo CHtml::link($label, $item['url']);
 						else 
 						{
 							if($submenu)
-								echo CHtml::link($item['label'], '#', array('class'=>'trigger right-caret', 'data-toggle'=>'dropdown'));
+								echo CHtml::link($label, '#', array('class'=>'trigger right-caret', 'data-toggle'=>'dropdown'));
 							else
-								echo CHtml::link($item['label'].'<span class="caret"></span>', '#', array('class'=>'dropdown-toggle', 'data-toggle'=>'dropdown'));
+								echo CHtml::link($label.'<span class="caret"></span>', '#', array('class'=>'dropdown-toggle', 'data-toggle'=>'dropdown'));
 							
 							if(count($item['items']) > 0)
 								$this->buildNav($item['items'], 'dropdown-menu sub-menu', true);
 						}
 					}
+					
 					echo '</li>';
 				}
 		}

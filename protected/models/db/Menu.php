@@ -9,7 +9,7 @@
  * @property string $label
  * @property integer $url_intern
  * @property string $url
- * @property string $siteid
+ * @property string $site
  * @property string $icon
  * @property integer $position
  * @property string $parent_menuid
@@ -21,17 +21,23 @@
  * @property string $roleaccess
  *
  * The followings are the available model relations:
- * @property AuthItem $roleaccess0
  * @property Language $langugage
  * @property User $createUser
  * @property User $updateUser
- * @property DBMenu $parentMenu
- * @property DBMenu[] $menus
- * @property DBMenu $parentLangugage
- * @property DBMenu[] $menus1
+ * @property Menu $parentMenu
  */
 class Menu extends CActiveRecord
 {
+	public $haschilds;
+	public $parent_menu;
+	public $oldparent_menuid;
+	
+	public function init()
+	{
+		if($this->scenario === 'create')
+			$this->url_intern = true;
+	}
+	
 	/**
 	 * @return string the associated database table name
 	 */
@@ -45,21 +51,63 @@ class Menu extends CActiveRecord
 	 */
 	public function rules()
 	{
-		// NOTE: you should only define rules for those attributes that
-		// will receive user inputs.
 		return array(
-			array('menuid, languageid, label, url_intern, parent_menuid, parent_languageid, update_userid, update_time, create_userid, roleaccess', 'required'),
+			array('languageid, label, roleaccess', 'required', 'on'=>'create, update'),
 			array('url_intern, position', 'numerical', 'integerOnly'=>true),
-			array('menuid, siteid, parent_menuid', 'length', 'max'=>32),
+			array('menuid, parent_menuid', 'length', 'max'=>32),
+			array('site', 'length', 'max'=>20),
 			array('languageid, parent_languageid', 'length', 'max'=>2),
-			array('label, icon, update_userid, create_userid', 'length', 'max'=>20),
+			array('label, update_userid, create_userid', 'length', 'max'=>20),
+			array('icon', 'length', 'max'=>40),
 			array('url', 'length', 'max'=>50),
 			array('roleaccess', 'length', 'max'=>64),
-			array('create_time', 'safe'),
-			// The following rule is used by search().
-			// @todo Please remove those attributes that should not be searched.
-			array('menuid, languageid, label, url_intern, url, siteid, icon, parent_menuid, parent_languageid, update_userid, update_time, create_userid, create_time, roleaccess', 'safe', 'on'=>'search'),
+			array('haschilds, parent_menu, oldparent_menuid', 'safe', 'on'=>'create, update'),
+			array('url', 'validateUrl', 'on'=>'create, update'),
+			array('parent_menu', 'validateParent', 'on'=>'create, update'),
+			array('menuid, languageid, label, url_intern, url, site, icon, parent_menuid, parent_languageid, update_userid, update_time, create_userid, create_time, roleaccess', 'safe', 'on'=>'search'),
 		);
+	}
+	
+	public function validateParent($attribute, $params)
+	{
+		if($this->parent_menuid === '' || $this->parent_menuid === null)
+		{
+			$this->parent_languageid = null;
+			$this->parent_menuid = null;
+		}
+		else
+		{
+			$menu = Menu::model()->findByAttributes(array('menuid'=>$this->parent_menuid, 'languageid'=>$this->parent_languageid));
+			if($menu === null)
+				throw new CHttpException(500, MsgPicker::msg()->getMessage(MSG::EXCEPTION_MENU_PARENTNOTFOUND));
+		}
+	}
+	
+	public function validateUrl($attribute, $params)
+	{
+		if($this->haschilds)
+		{
+			$this->url_intern = true;
+			$this->site = null;
+			$this->url = null;
+			
+			return true;
+		}
+		
+		if($this->url_intern)
+		{
+			$site = Site::model()->findByAttributes(array('label'=>$this->url));
+			if($site === null)
+			{
+				$this->addError('url', MsgPicker::msg()->getMessage(MSG::EXCEPTION_SITE_NOTFOUND));
+				return false;
+			}
+			$this->site = $site->label;
+			$this->url = null;
+			return true;
+		}
+		
+		return true;
 	}
 
 	/**
@@ -70,16 +118,13 @@ class Menu extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'roleaccess0' => array(self::BELONGS_TO, 'AuthItem', 'roleaccess'),
 			'langugage' => array(self::BELONGS_TO, 'Language', 'languageid'),
 			'createUser' => array(self::BELONGS_TO, 'User', 'create_userid'),
 			'updateUser' => array(self::BELONGS_TO, 'User', 'update_userid'),
-			'parentMenu' => array(self::BELONGS_TO, 'DBMenu', 'parent_menuid'),
-			'menus' => array(self::HAS_MANY, 'DBMenu', 'parent_menuid'),
-			'parentLangugage' => array(self::BELONGS_TO, 'DBMenu', 'parent_languageid'),
-			'menus1' => array(self::HAS_MANY, 'DBMenu', 'parent_languageid'),
+			'parentMenu' => array(self::BELONGS_TO, 'Menu', 'parent_menuid, parent_languageid'),
 		);
 	}
+	
 
 	/**
 	 * @return array customized attribute labels (name=>label)
@@ -92,7 +137,7 @@ class Menu extends CActiveRecord
 			'label' => 'Label',
 			'url_intern' => 'Url Intern',
 			'url' => 'Url',
-			'siteid' => 'Site',
+			'site' => 'Site',
 			'icon' => 'Icon',
 			'parent_menuid' => 'parent Menuid',
 			'parent_languageid' => 'parent languageid',
@@ -120,23 +165,23 @@ class Menu extends CActiveRecord
 	{
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('menuid',$this->menuid,true);
 		$criteria->compare('languageid',$this->languageid,true);
 		$criteria->compare('label',$this->label,true);
-		$criteria->compare('url_intern',$this->url_intern);
-		$criteria->compare('url',$this->url,true);
-		$criteria->compare('siteid',$this->siteid,true);
 		$criteria->compare('icon',$this->icon,true);
-		$criteria->compare('parent_menuid',$this->parent_menuid,true);
-		$criteria->compare('parent_languageid',$this->parent_languageid,true);
-		$criteria->compare('update_userid',$this->update_userid,true);
-		$criteria->compare('update_time',$this->update_time,true);
-		$criteria->compare('create_userid',$this->create_userid,true);
-		$criteria->compare('create_time',$this->create_time,true);
 		$criteria->compare('roleaccess',$this->roleaccess,true);
-
+		$criteria->compare('url_intern',true,true);
+		$criteria->addCondition('site IS NULL');
+		$criteria->addCondition('url IS NULL');
+		
 		return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
+			'criteria' => $criteria,
+			'pagination' => array(
+				'pageSize' => 8,
+				'route'=>'menu/viewUpdate'
+			),
+			'sort'=>array(
+				'route'=>'menu/viewUpdate'
+			)
 		));
 	}
 
@@ -154,11 +199,11 @@ class Menu extends CActiveRecord
 	public static function getMenuArray()
 	{
 		return array(
-				'collapse' => true,
-				'brandLabel' => BsHtml::icon(BsHtml::GLYPHICON_HOME),
-				'brandUrl' => Yii::app()->homeUrl,
-				'items' => Menu::getMenuItems(Menu::model()->findAll('parent_menuid IS NULL AND languageid = "'.Yii::app()->language.'" ORDER BY position')),
-				'menu' => Menu::getMenuNavbar(),
+			'collapse' => true,
+			'brandLabel' => BsHtml::icon(BsHtml::GLYPHICON_HOME),
+			'brandUrl' => Yii::app()->homeUrl,
+			'items' => Menu::getMenuItems(Menu::model()->findAll('parent_menuid IS NULL AND languageid = "'.Yii::app()->language.'" ORDER BY position')),
+			'menu' => Menu::getMenuNavbar(),
 		);
 	}
 	
@@ -174,9 +219,12 @@ class Menu extends CActiveRecord
 		{
 			$items[$counter]['label'] = $menu->label;
 				
+			if($menu->icon !== null)
+			$items[$counter]['icon'] = $menu->icon;
+			
 			if($menu->url_intern)
 			{
-				if($menu->siteid === null && $menu->url === null) //ist ein Menüpunkt
+				if($menu->site === null && $menu->url === null) //ist ein Menüpunkt
 				{
 					$items[$counter]['url'] = "#";
 					$items[$counter]['items'] = Menu::getMenuItems(Menu::model()->findAll(
@@ -184,7 +232,7 @@ class Menu extends CActiveRecord
 				}
 				else //ein interner Link zu einer seite
 				{
-					$items[$counter]['url'] = Yii::app()->createAbsoluteUrl('site/site', array('name'=>$menu->siteid));
+					$items[$counter]['url'] = Yii::app()->createAbsoluteUrl('site/site', array('name'=>$menu->site));
 				}
 			}
 			else //externe Url verweist auf eine Seite im WWW

@@ -122,4 +122,12 @@ if($editLng === '' && array_key_exists('editLng', $_GET))
 		$('#menuicon').removeClass();
 		$('#modalmenu').modal('hide');
 	}
+
+	function cmsMenuSetArrows()
+	{
+		$(".list-group-item .pull-right .<?php echo BsHtml::GLYPHICON_ARROW_UP ?>").parent().removeClass('disabled');
+		$(".list-group-item .pull-right .<?php echo BsHtml::GLYPHICON_ARROW_DOWN ?>").parent().removeClass('disabled');
+		$(".list-group-item:nth-last-of-type(2) >.pull-right .<?php echo BsHtml::GLYPHICON_ARROW_DOWN ?>").parent().addClass('disabled');
+		$(".list-group-item:first-child >.pull-right .<?php echo BsHtml::GLYPHICON_ARROW_UP ?>").parent().addClass('disabled');
+	}
 </script>

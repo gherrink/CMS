@@ -174,6 +174,7 @@ return array(
 	'EXCEPTION_MENU_NOTFOUND'			=> 'Der Menüpunkt konnte leider nicht gefunden werden.',
 	'EXCEPTION_MENU_NOTDELETE'			=> 'Der Menüpunkt konnte leider nicht gelöscht werden.',
 	'EXCEPTION_MENU_PARENTNOTFOUND'		=> 'Das Übergeordnete Menü wurde nicht gefunden.',
+	'EXCEPTION_MENU_NEWPOSNOTCORREKT'	=> 'Die neue Menüpunkt Position ist nicht korrekt.',
 	/*/EXEPTION */
 
 	/* QUESTION */

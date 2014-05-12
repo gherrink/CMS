@@ -12,11 +12,11 @@
  * @var string $id
  */
 ?>
-<div class="list-group<?php echo (isset($id))?' submenu" id="'.$id.'" style="display: none;':''?>">
+<div class="list-group<?php echo (isset($id))?' submenu" id="sub-'.$id.'" style="display: none;':''?>">
 	<?php 
 		foreach ($menupoints as $menupoint)
 		{
-			$this->renderPartial('_menupoint', array('menupoint'=>$menupoint, 'edit'=>$edit));
+			$this->renderPartial('_menupoint', array('menupoint'=>$menupoint, 'edit'=>$edit, 'lastpos'=>$menupoint->countOnLevel() -1));
 		}
 	?>
 	<span id="menuitem<?php echo (isset($id))?'-'.$id:''?>"></span>

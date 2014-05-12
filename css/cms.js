@@ -18,22 +18,60 @@ function cmsActions(data)
 {
 	if('success' in data)
 		window.location = data['success'];
+	
+	cmsActionExecute(data);
+	
+	if('eval' in data)
+		for (index = 0; index < data['eval'].length; ++index)
+			eval(data['eval'][index]);
+	
+	if('aloha' in data)
+		Aloha.jQuery('.edit').aloha();
+}
+
+function cmsActionExecute(data)
+{
 	if('remove' in data)
 	{
 		$(data['remove']).remove();
 	}
+	
 	if('html' in data)
 	{
 		if('replace' in data)
 			$(data['replace']).replaceWith(data['html']);
 		if('before' in data)
 			$(data['before']).before(data['html']);
+		if('after' in data)
+			$(data['after']).after(data['html']);
 	}
-	if('aloha' in data)
-		Aloha.jQuery('.edit').aloha();
+	else if('after' in data)
+	{
+		var selectors = data['after'].split('***');
+		$(selectors[0]).after($(selectors[1]));
+	}
+	else if('before' in data)
+	{
+		var selectors = data['before'].split('***');
+		$(selectors[0]).before($(selectors[1]));
+	}
+	
+	if('disable' in data)
+	{
+		$(data['disable']).attr('disabled', 'disabled');
+		$(data['disable']).addClass('disabled');
+	}
+	
+	if('enable' in data)
+	{
+		$(data['enable']).removeAttr('disabled');
+		$(data['enable']).removeClass('disabled');
+	}
+	
 	if('modalhide' in data)
 		$('#'+data['modalhide']).modal('hide');
 }
+
 
 function cmsSubmitForm(modelid, formid, url)
 {

@@ -196,6 +196,16 @@ class Menu extends CActiveRecord
 		return parent::model($className);
 	}
 	
+	public function countOnLevel()
+	{
+		if($this->parent_menuid === null)
+			$where = 'parent_menuid IS NULL AND parent_languageid IS NULL';
+		else
+			$where = "parent_menuid = '{$this->parent_menuid}' AND parent_languageid = '{$this->parent_languageid}'";
+		
+		return $this->count($where);
+	}
+	
 	public static function getMenuArray()
 	{
 		return array(

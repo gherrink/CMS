@@ -9,12 +9,21 @@
  * @var MenuController $this
  * @var Menu $menupoint
  * @var boolean $edit
+ * @var int $lastpos
  */
 
 $toggle = ($menupoint->url_intern && $menupoint->url === null && $menupoint->site === null);
 
-$urlEdit = Yii::app()->createAbsoluteUrl('menu/update', array('name'=>'update', 'editLng'=>$menupoint->languageid, 'name'=>$menupoint->menuid));
-$urlDelete = Yii::app()->createAbsoluteUrl('menu/delete', array('name'=>'delete', 'editLng'=>$menupoint->languageid, 'name'=>$menupoint->menuid));
+if(! isset($lastpos))
+	$lastpos = $menupoint->countOnLevel() -1;
+
+$disableDown = ($menupoint->position == $lastpos);
+$disableUp = ($menupoint->position == 0);
+
+$urlDown = Yii::app()->createAbsoluteUrl('menu/moveMenupoint', array('editLng'=>$menupoint->languageid, 'name'=>$menupoint->menuid, 'move'=>1));
+$urlUp = Yii::app()->createAbsoluteUrl('menu/moveMenupoint', array('editLng'=>$menupoint->languageid, 'name'=>$menupoint->menuid, 'move'=>-1));
+$urlEdit = Yii::app()->createAbsoluteUrl('menu/update', array('editLng'=>$menupoint->languageid, 'name'=>$menupoint->menuid));
+$urlDelete = Yii::app()->createAbsoluteUrl('menu/delete', array('editLng'=>$menupoint->languageid, 'name'=>$menupoint->menuid));
 $urlQuestionDelete = Yii::app()->createAbsoluteUrl('site/question', array(
 		'head'=>MSG::HEAD_QUESTION_REALYDELETE,
 		'question'=>MSG::QUESTION_DELETE_MENU,
@@ -31,7 +40,7 @@ $jsonDelete = json_encode(array('buttons'=>array(
 		$htmlOptions = array();
 		
 		if($toggle)
-			$htmlOptions = array('onclick'=>"$('#{$menupoint->menuid}.submenu').toggle();", 'class'=>'right-caret');
+			$htmlOptions = array('onclick'=>"$('#sub-{$menupoint->menuid}.submenu').toggle();", 'class'=>'right-caret');
 			
 		$htmlOptions['icon'] = $menupoint->icon;
 		
@@ -52,9 +61,13 @@ $jsonDelete = json_encode(array('buttons'=>array(
 				));
 				echo BsHtml::button('', array(
 					'icon' => BsHtml::GLYPHICON_ARROW_DOWN,
+					'onclick' => "cmsAjax('$urlDown')",
+					'disabled' => $disableDown,
 				));
 				echo BsHtml::button('', array(
 					'icon' => BsHtml::GLYPHICON_ARROW_UP,
+					'onclick' => "cmsAjax('$urlUp')",
+					'disabled' => $disableUp,
 				));
 				echo BsHtml::button('', array(
 					'icon' => BsHtml::GLYPHICON_TRASH,
@@ -66,7 +79,7 @@ $jsonDelete = json_encode(array('buttons'=>array(
 	<?php 
 		if($toggle)
 		{
-			$menupoints = Menu::model()->findAllByAttributes(array('parent_menuid'=>$menupoint->menuid, 'parent_languageid'=>$menupoint->languageid));
+			$menupoints = Menu::model()->findAllByAttributes(array('parent_menuid'=>$menupoint->menuid, 'parent_languageid'=>$menupoint->languageid), array('order'=>'position'));
 			$this->renderPartial('_menu', array('menupoints'=>$menupoints, 'id'=>$menupoint->menuid, 'edit'=>$edit));
 		}
 	?>

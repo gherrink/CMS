@@ -167,6 +167,7 @@ CREATE TABLE Gallery
 	parent_galleryid char(32),
 	roleaccess varchar(64) NOT NULL,
 	position smallint NOT NULL,
+	haschild boolean NOT NULL,
 	update_userid varchar(20) NOT NULL,
 	update_time timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL,
 	create_userid varchar(20) NOT NULL,
@@ -642,7 +643,7 @@ ALTER TABLE Menu
 
 /* Create Views */
 
-CREATE VIEW GalleryView AS SELECT g.galleryid, gl.languageid, g.label, g.roleaccess, gl.head, i.imageid, i.url, g.parent_galleryid, gp.label parent_label, g.create_userid, g.create_time, g.update_userid, g.update_time
+CREATE VIEW GalleryView AS SELECT g.galleryid, gl.languageid, g.label, g.roleaccess, g.haschild, gl.head, i.imageid, i.url, g.parent_galleryid, gp.label parent_label, g.create_userid, g.create_time, g.update_userid, g.update_time
 FROM Gallery g
 RIGHT JOIN GalleryLanguage gl ON g.galleryid = gl.galleryid
 LEFT JOIN Image i ON g.imageid = i.imageid

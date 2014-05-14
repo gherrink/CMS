@@ -88,6 +88,8 @@ class LanguageSelector extends CWidget
 
         if ($this->params === null)
             $this->params = $_GET;
+        
+        $this->languageid = str_replace(' ', '', $this->languageid);
     }
 
     /**
@@ -135,7 +137,8 @@ class LanguageSelector extends CWidget
 
     private function printFlagLink(Language $language, $menu = false)
     {
-        $this->params[$this->languageid] = $language->languageid;
+        foreach (mb_split(',', $this->languageid) as $id)
+            $this->params[$id] = $language->languageid;
 
         if ($menu)
             $link = '#" class="dropdown-toggle" data-toggle="dropdown';

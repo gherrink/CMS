@@ -120,7 +120,7 @@ abstract class CRUDController extends Controller {
      * @param boolean $edit
      */
     public function actionRead($name, $edit = false, $editLng = '') {
-        $this->checkAccess('read' . $this->getModelName());
+//         $this->checkAccess('read' . $this->getModelName());
 
         if ($editLng !== '') {
             if (!MsgPicker::isAvailable($editLng) ||

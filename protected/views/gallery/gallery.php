@@ -1,19 +1,22 @@
 <?php
 
-echo "<h1>Galerie</h1>";
-
-$path = Yii::app()->basePath.'/../images';
-
-
-$contentOfImageFolder = scandir($path);
-$url = Yii::app()->baseUrl;
-
-echo '<div class="row" style="">';
-foreach ($contentOfImageFolder as $image)
-{
-	if($image !== '.' && $image !== '..')
-		$this->renderPartial('_image', array('url'=> $url . '/images/'. $image));
-}
-echo '</div>';
-
+/*
+ * @var GalleryController $this
+ * @var GalleryView[] $model
+ * @var boolean $edit
+ * @var boolean $editable
+ * @var string $editLng
+ */
 ?>
+
+<h1>Gallery</h1>
+
+<div class="row">
+	<?php 
+	foreach ($model as $gallery)
+	{
+		$this->renderPartial('_galleryImage', array('gallery'=> $gallery));
+	}
+	?>
+</div>
+

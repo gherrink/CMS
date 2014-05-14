@@ -36,6 +36,11 @@ INSERT INTO `AuthItem` (`name`, `type`, `description`, `bizrule`, `data`) VALUES
 ('updateMenu', 0, '', NULL, 'N;'),
 ('USER', 2, '', NULL, 'N;'),
 ('VISITOR', 2, '', NULL, 'N;');
+('readGallery', 0, '', NULL, 'N;'),
+('deleteGallery', 0, '', NULL, 'N;'),
+('editGallery', 0, '', NULL, 'N;'),
+('MGALLERY', 2, '', NULL, 'N;'),
+('updateGallery', 0, '', NULL, 'N;');
 
 INSERT INTO `AuthItemChild` (`parent`, `child`) VALUES
 ('MSITE', 'addSiteContent'),
@@ -69,4 +74,8 @@ INSERT INTO `AuthItemChild` (`parent`, `child`) VALUES
 ('MSITE', 'updateContentText'),
 ('MNEWS', 'updateNews'),
 ('MMENU', 'updateMenu'),
-('MSITE', 'updateSite');
+('MSITE', 'updateSite'),
+('MGALLERY', 'readGallery'),
+('MGALLERY', 'updateGallery'),
+('MGALLERY', 'editGallery'),
+('MGALLERY', 'deleteGallery');

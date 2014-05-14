@@ -10,6 +10,7 @@
  * @property string $roleaccess
  * @property string $head
  * @property string $imageid
+ * @property boolean $haschild
  * @property string $url
  * @property string $parent_galleryid
  * @property string $parent_label

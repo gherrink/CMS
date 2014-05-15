@@ -6,23 +6,11 @@
  */
 /*
  * @var MenuController $this
- * @var mixed $model
+ * @var array $models
  * @var boolean $editable
  * @var boolean $edit
  * @var string $editLng
  */
-
-if (!isset($editable))
-    $editable = false;
-
-if (!isset($edit))
-    $edit = false;
-
-if ($edit || $editable)
-    $edit = true;
-
-if ($editLng === '' && array_key_exists('editLng', $_GET))
-    $editLng = $_GET['editLng'];
 ?>
 
 <h1><?php MsgPicker::msg()->getMessage(MSG::HEAD_MENU) ?></h1>
@@ -38,7 +26,7 @@ if ($editLng === '' && array_key_exists('editLng', $_GET))
 <hr>
 <div class="row">
     <div class="col-sm-12">
-<?php $this->renderPartial('_menu', array('menupoints' => $model, 'edit' => $edit)); ?>
+<?php $this->renderPartial('_menu', array('menupoints' => $models, 'edit' => $edit)); ?>
     </div>
 </div>
 

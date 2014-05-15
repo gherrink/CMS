@@ -1,5 +1,22 @@
 <?php
 
+/*
+ * Copyright (C) 2014 Maurice Busch <busch.maurice@gmx.net>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 /**
  * Grundimplementierung für alle Controller dessen Seiten
  * Create Read Update und Delete enthalten
@@ -16,10 +33,20 @@
  *  - public function findModel($name, $editLng);
  *  - protected function modelCreate(CActiveRecord $model);
  *  - protected function modelUpdate(CActiveRecord $model, CActiveRecord $dbModel);
+ * 
+ * You can implement the CRUDReadModels interface to give over an array of models
+ * on the read action. For this you have to implement the function:
+ *  - public function getReadModels($name, $editLng);
  *  
- * Es können folgende Methoden überschrieben werden:
- *  - protected function testMoadelRead($model);
- *  - protected function getParamsRead();
+ * You can implement the CRUDReadCheck interface to tell the read action
+ * to check before render if the $model can be displeyed, for this
+ * you have to implement the method:
+ *  - public function checkReadable($model, $editable);
+ * 
+ * You can implement the CRUDReadParams interface to tell the read action
+ * to give aditional parameters for the view. For this you have to
+ * implement the method:
+ *  - publci function getParamsRead();
  * 
  * Für den Controller müssen folgende Views erstellt werden:
  *  - {modelName}
@@ -64,34 +91,23 @@
  *  - for setting the row id change $viewColumns
  * 
  * @author Maurice Busch <busch.maurice@gmx.net>
- * @copyright 2014
- * @version 0.1
  *
  */
-abstract class CRUDController extends Controller {
+abstract class CRUDController extends ViewController
+{
 
-    protected $view = "../_view";
-    protected $viewid = 'view-table';
-    protected $viewColumns = array(
-        'label',
-        array(
-            'name' => 'roleaccess',
-            'type' => 'raw',
-            'value' => 'MsgPicker::msg()->getMessage($data->roleaccess)',
-        ),
-    );
-    protected $rowExpression = '["id" => $data->label]';
-    protected $selectableRows = 1;
     protected $model = null;
 
     /**
      * Gives back the Model.
      * @param string $name
      * @param string $editLng
-     * @return mixed
+     * @return CActiveRecord
      */
-    public function getModel($name = '', $editLng = '') {
-        if ($this->model === null) {
+    public function getModel($name = '', $editLng = '')
+    {
+        if ($this->model === null)
+        {
             $this->model = $this->findModel($name, $editLng);
             if ($this->model === null)
                 throw new CHttpException(500, MsgPicker::msg()->getMessage('EXCEPTION_' . strtoupper($this->getModelName()) . '_NOTFOUND'));
@@ -104,7 +120,7 @@ abstract class CRUDController extends Controller {
      * Searching the Model on the Database with a unique identifire.
      * @param string $name
      * @param string $editLng
-     * @return mixed
+     * @return CActiveRecord
      */
     public abstract function findModel($name, $editLng);
 
@@ -119,51 +135,63 @@ abstract class CRUDController extends Controller {
      * @param string $name
      * @param boolean $edit
      */
-    public function actionRead($name, $edit = false, $editLng = '') {
-//         $this->checkAccess('read' . $this->getModelName());
+    public function actionRead($name, $edit = false, $editLng = '')
+    {
+        $this->checkAccess('read' . $this->getModelName());
 
-        if ($editLng !== '') {
-            if (!MsgPicker::isAvailable($editLng) ||
-                    !Language::isLanguageActive($editLng)) {
-                $editLng = Yii::app()->language;
-            }
+        $this->render(strtolower($this->getModelName()), $this->buildReadParams($name, $edit, $editLng));
+    }
+
+    private function buildReadParams($name, $edit, $editLng)
+    {
+        if ($editLng !== '')
+        {
+            if (MsgPicker::isAvailable($editLng) && Language::isLanguageActive($editLng))
+                $params['editLng'] = $editLng;
+            else
+                $params['editLng'] = Yii::app()->language;
         }
+        else
+            $params['editLng'] = Yii::app()->language;
 
-        $model = $this->getModel($name, $editLng);
+        if ($this instanceof CRUDReadModels)
+            $params['models'] = $this->getReadModels($name, $editLng);
+        else
+            $params['model'] = $this->getModel($name, $editLng);
 
-        $editable = Yii::app()->user->checkAccess('edit' . $this->getModelName());
+        $params = $this->buildParamsEditable($params, $edit);
 
-        if (!$editable)
-            $this->testMoadelRead($model);
+        if ($this instanceof CRUDReadCheck)
+            $this->checkReadable($params['model'], ($params['edit'] ||
+                    $params['editable']));
 
-        $params = CMap::mergeArray(
-            array('model' => $model, 'editable' => $editable, 'edit' => $edit, 'editLng' => $editLng), $this->getParamsRead()
-        );
+        if ($this instanceof CRUDReadParams)
+            $params = CMap::mergeArray($params, $this->getReadParams());
 
-        $this->render(strtolower($this->getModelName()), $params);
+        return $params;
     }
 
-    /**
-     * Giving additional Parameter for the view.
-     */
-    protected function getParamsRead() {
-        return array();
-    }
+    private function buildParamsEditable($params, $edit)
+    {
+        $params['editable'] = Yii::app()->user->checkAccess('edit' . $this->getModelName());
 
-    /**
-     * Test if the model can be displeyed for the user don't effects
-     * the displey of the edit-mode
-     * @param $model
-     */
-    protected function testMoadelRead($model) {
-        return true;
+        if ($params['editable'] && $edit)
+        {
+            $params['edit'] = true;
+            $params['editable'] = false;
+        }
+        else
+            $params['edit'] = false;
+
+        return $params;
     }
 
     /**
      * Action to view the edit-mode of the Model
      * @param string $name
      */
-    public function actionEdit($name, $editLng = '') {
+    public function actionEdit($name, $editLng = '')
+    {
         $this->checkAccess('edit' . $this->getModelName());
 
         $this->actionRead($name, true, $editLng);
@@ -172,7 +200,8 @@ abstract class CRUDController extends Controller {
     /**
      * Action to create a new Model.
      */
-    public function actionCreate() {
+    public function actionCreate()
+    {
         $this->editForm(true);
     }
 
@@ -180,7 +209,8 @@ abstract class CRUDController extends Controller {
      * Update action to update a Model with the $name.
      * @param string $name
      */
-    public function actionUpdate($name, $editLng = '') {
+    public function actionUpdate($name, $editLng = '')
+    {
         $this->editForm(false, $name, $editLng);
     }
 
@@ -189,47 +219,61 @@ abstract class CRUDController extends Controller {
      * @param boolean $create
      * @param string $name
      */
-    private function editForm($create, $name = '', $editLng = '') {
+    private function editForm($create, $name = '', $editLng = '')
+    {
         $modelName = $this->getModelName();
         $formName = strtolower($modelName);
 
         $class = new ReflectionClass($this->getModelName());
-        if ($create) {
+        if ($create)
+        {
             $model = $class->newInstanceArgs(array('create'));
             $url = Yii::app()->createAbsoluteUrl(strtolower($this->getModelName()) . '/create');
             $modelCheck = new ModelCheck($model, $modelName, 'create' . $modelName, $formName);
             $questionID = 'QUESTION_EXIT_' . strtoupper($this->getModelName()) . 'CREATE';
-        } else {
+        }
+        else
+        {
             $model = $class->newInstanceArgs(array('update'));
-            $url = Yii::app()->createAbsoluteUrl(strtolower($this->getModelName()) . '/update', array('name' => $name));
+            $url = Yii::app()->createAbsoluteUrl(strtolower($this->getModelName()) . '/update', array(
+                'name' => $name));
             $modelCheck = new ModelCheck($model, $modelName, 'update' . $modelName, $formName);
             $questionID = 'QUESTION_EXIT_' . strtoupper($this->getModelName()) . 'UPDATE';
         }
 
         $error = '';
 
-        if ($this->checkModel($modelCheck)) {
+        if ($this->checkModel($modelCheck))
+        {
             $model->update_userid = Yii::app()->user->getID();
             $model->update_time = date('Y-m-d H:i:s', time());
 
-            if ($create) {
+            if ($create)
+            {
                 $model->create_userid = Yii::app()->user->getID();
                 $model->create_time = date('Y-m-d H:i:s', time());
                 $this->modelCreate($model);
                 $error = BsHtml::alert(BsHtml::ALERT_COLOR_ERROR, MsgPicker::msg()->getMessage('ERROR_' . strtoupper($this->getModelName()) . '_NOTCREATE'));
-            } else {
+            }
+            else
+            {
                 $this->modelUpdate($model, $this->getModel($name, $editLng));
                 $error = BsHtml::alert(BsHtml::ALERT_COLOR_ERROR, MsgPicker::msg()->getMessage('ERROR_' . strtoupper($this->getModelName()) . '_NOTUPDATE'));
             }
         }
 
-        if ($create) {
-            $button = BsHtml::button(MsgPicker::msg()->getMessage(MSG::BTN_CREATE), array('onclick' => "cmsSubmitForm('modal', '$formName-form', '$url')"));
+        if ($create)
+        {
+            $button = BsHtml::button(MsgPicker::msg()->getMessage(MSG::BTN_CREATE), array(
+                        'onclick' => "cmsSubmitForm('modal', '$formName-form', '$url')"));
             $head = MsgPicker::msg()->getMessage('HEAD_' . strtoupper($this->getModelName()) . '_CREATE');
-        } else {
+        }
+        else
+        {
             if (!isset($_POST[$this->getModelName()]))
                 $model = $this->getModel($name, $editLng);
-            $button = BsHtml::button(MsgPicker::msg()->getMessage(MSG::BTN_UPDATE), array('onclick' => "cmsSubmitForm('modal', '$formName-form', '$url')"));
+            $button = BsHtml::button(MsgPicker::msg()->getMessage(MSG::BTN_UPDATE), array(
+                        'onclick' => "cmsSubmitForm('modal', '$formName-form', '$url')"));
             $head = MsgPicker::msg()->getMessage('HEAD_' . strtoupper($this->getModelName()) . '_UPDATE');
         }
 
@@ -243,8 +287,10 @@ abstract class CRUDController extends Controller {
         )));
 
         $content['header'] = $head;
-        $content['body'] = $error . $this->renderPartial('_edit', array('model' => $model, 'url' => $url), true);
-        $content['footer'] = BSHtml::button(MsgPicker::msg()->getMessage(MSG::BTN_EXIT), array('onclick' => "cmsShowModalAjax('modalmsg', '" . $urlExit . "', $json);")) .
+        $content['body'] = $error . $this->renderPartial('_edit', array(
+                    'model' => $model, 'url' => $url), true);
+        $content['footer'] = BSHtml::button(MsgPicker::msg()->getMessage(MSG::BTN_EXIT), array(
+                    'onclick' => "cmsShowModalAjax('modalmsg', '" . $urlExit . "', $json);")) .
                 $button;
 
         echo json_encode($content);
@@ -287,7 +333,8 @@ abstract class CRUDController extends Controller {
      * 
      * @param string $name
      */
-    public function actionDelete($name, $editLng = '') {
+    public function actionDelete($name, $editLng = '')
+    {
         $this->checkAccess('delete' . $this->getModelName());
         $this->modelDelete($this->findModel($name, $editLng));
         throw new CHttpException(500, MsgPicker::msg()->getMessage('EXCEPTION_' . strtoupper($this->getModelName()) . '_NOTDELETE'));
@@ -298,64 +345,4 @@ abstract class CRUDController extends Controller {
      * @param CActiveRecor $model
      */
     protected abstract function modelDelete(CActiveRecord $model);
-
-    /**
-     * echos json-data for a View over all Models in DB
-     */
-    public function actionView($head) {
-        Yii::app()->clientscript->scriptMap['jquery.js'] = false;
-
-        $mname = $this->getModelName();
-        $model = new $mname('search');
-        $model->unsetAttributes();
-
-        $view['header'] = MsgPicker::msg()->getMessage($head);
-        $view['body'] = $this->renderPartial($this->view, array('model' => $model), true, true);
-        $view['footer'] = $this->createButtonFooter();
-
-        echo json_encode($view);
-    }
-
-    /**
-     * Updates the View
-     */
-    public function actionViewUpdate() {
-        $mname = $this->getModelName();
-        $model = new $mname('search');
-        $model->unsetAttributes();
-        if (isset($_GET[$mname]))
-            $model->attributes = $_GET[$mname];
-
-        $this->renderPartial($this->view, array('model' => $model));
-    }
-
-    /**
-     * Gives a JSON array for a Question
-     * @param String $question
-     */
-    public function actionQuestion($head, $question) {
-        $content['header'] = MsgPicker::msg()->getMessage($head);
-        $content['body'] = MsgPicker::msg()->getMessage($question);
-        $content['footer'] = $this->createButtonFooter();
-
-        echo json_encode($content);
-    }
-
-    private function createButtonFooter() {
-        if (in_array('buttons', $_POST))
-            throw new CHttpException(400, MsgPicker::msg()->getMessage(MSG::EXCEPTION_NOBUTTONS));
-
-        $html = '';
-        $buttons = $_POST['buttons'];
-
-        while (($buttonaction = current($buttons)) !== FALSE) {
-            $html .= BsHtml::button(MsgPicker::msg()->getMessage(key($buttons)), array(
-                        'onclick' => $buttonaction,
-            ));
-            next($buttons);
-        }
-
-        return $html;
-    }
-
 }

@@ -1,14 +1,31 @@
 <?php
 
+/*
+ * Copyright (C) 2014 Maurice Busch <busch.maurice@gmx.net>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 /**
  *
  * @author Maurice Busch <busch.maurice@gmx.net>
- * @copyright 2014
- * @version 0.1
  */
-class MenuController extends CRUDController
+class MenuController extends CRUDController implements CRUDReadModels
 {
 
+    public $defaultAction = 'read';
+    
     protected $viewColumns = array(
         'label',
         array(
@@ -19,25 +36,30 @@ class MenuController extends CRUDController
     );
     protected $rowExpression = '["id" => $data->menuid ."***". $data->label]';
 
+    /**
+     * @see CRUDController::findModel
+     */
     public function findModel($name, $editLng)
     {
-        if ($this->action->id === 'read')
-        {
-            $_GET['editLng'] = $name;
-            return Menu::model()->findAll("languageid = '$name' AND parent_menuid IS NULL AND {$this->getRoleaccessSQLWhere()} ORDER BY position");
-        }
-        else
-            return Menu::model()->findByAttributes(array('menuid' => $name, 'languageid' => $editLng));
+        return Menu::model()->findByAttributes(array('menuid' => $name,
+                    'languageid' => $editLng));
+    }
+    
+    /**
+     * @see CRUDReadModels::getReadModels
+     */
+    public function getReadModels($name, $editLng)
+    {
+        return Menu::model()->findAll("languageid = '$editLng' AND parent_menuid IS NULL AND "
+                        . "{$this->getRoleaccessSQLWhere()} ORDER BY position");
     }
 
+    /**
+     * @see CRUDController::getModelName
+     */
     public function getModelName()
     {
         return 'Menu';
-    }
-
-    protected function getParamsRead()
-    {
-        return array();
     }
 
     protected function modelCreate(CActiveRecord $model)
@@ -121,7 +143,16 @@ class MenuController extends CRUDController
 
         $transaktion->rollBack();
     }
-
+    
+    public function actionRead($name = '', $edit = false, $editLng = '')
+    {
+        parent::actionRead($name, $edit, $editLng);
+    }
+    
+    /**
+     * echoes an json array with datas for a Icon-view with all available
+     * icons.
+     */
     public function actionIconView()
     {
         $icon['header'] = MsgPicker::msg()->getMessage(MSG::HEAD_MENU_ICONSELECT);
@@ -131,6 +162,13 @@ class MenuController extends CRUDController
         echo json_encode($icon);
     }
 
+    /**
+     * Acton to move an menupoint on the same level up and down
+     * @param string $name
+     * @param string $editLng
+     * @param int $move
+     * @throws CHttpException
+     */
     public function actionMoveMenupoint($name, $editLng, $move)
     {
         $this->checkAccess('editMenu');
@@ -138,7 +176,8 @@ class MenuController extends CRUDController
         if (!is_numeric($move))
             throw new CHttpException(400, MsgPicker::msg()->getMessage(MSG::EXCEPTION_MENU_NEWPOSNOTCORREKT));
 
-        $menu = Menu::model()->findByAttributes(array('menuid' => $name, 'languageid' => $editLng));
+        $menu = Menu::model()->findByAttributes(array('menuid' => $name,
+            'languageid' => $editLng));
         if ($menu === null)
             throw new CHttpException(400, MsgPicker::msg()->getMessage(MSG::EXCEPTION_MENU_NOTFOUND));
 

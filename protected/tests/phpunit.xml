@@ -6,7 +6,8 @@
 		stopOnFailure="false">
 	
 	<php>
-		<const name="TEST_BASE_URL" value="http://localhost/cms/index-test.php/"/>
+		<const name="TEST_BASE_URL" value="http://localhost/"/>
+		<const name="TEST_BASE_URL_PATH" value="cms/de/"/>
 	</php>
 	
 	<selenium>

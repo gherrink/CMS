@@ -1,4 +1,5 @@
 # behat.yml
+
 default:
     extensions:
         Behat\YiiExtension\Extension:

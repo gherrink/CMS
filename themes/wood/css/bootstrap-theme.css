@@ -382,7 +382,7 @@ fieldset[disabled] .form-control {
   -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 5px rgba(0, 0, 0, 0.075);
           box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 5px rgba(0, 0, 0, 0.075);*/
   background-image: url("images/wood-menu.png");
-  background-repeat: repeat;		<div class="row">
+  background-repeat: repeat;
   color: #4C1D00;
   font-size: 22px;
   border-color: #983A00;

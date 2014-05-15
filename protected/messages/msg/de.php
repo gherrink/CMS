@@ -22,7 +22,7 @@ return array(
 	/* Rollen */
 	'ADMIN' 	=> 'Administrator',
 	'MCALENDER' => 'Modarator Kalender',
-	'MGALLERY'	=> 'Moderator Gallery',
+	'MGALLERY'	=> 'Moderator Galerie',
 	'MSITE'		=> 'Moderator Seite',
 	'MMENU'		=> 'Moderator Menü',
 	'MNEWS'		=> 'Moderator News',
@@ -70,6 +70,8 @@ return array(
 	'HEAD_MENU_LINK2SITE'				=> 'Link zur Seite',
 	'HEAD_MENU_ICONSELECT'				=> 'Menüicon auswählen',
 	'HEAD_MENU_PARENTMENU'				=> 'Übergeordneter Menüpunkt',
+	'HEAD_GALLERY_CREATE'               => 'Galerie erstellen',
+	'HEAD_GALLERY_UPDATE'				=> 'Galerie bearbeiten',
 	/*/Ueberschriften */
 		
 	/* Buttons */
@@ -154,6 +156,8 @@ return array(
 	'ERROR_NEWS_NOTUPDATE'			=> 'Die Neuigkeit konnte leider nicht geändert werden, bitte versuchen Sie es erneut!',
 	'ERROR_MENU_NOTCREATE'			=> 'Der Menüpunkt konnte leider nicht erstellt werden, bitte versuchen Sie es erneut.',
 	'ERROR_MENU_NOTUPDATE'			=> 'Der Menüpunkt konnte leider nicht geändert werden, bitte versucehn Sie es erneut.',
+	'ERROR_GALLERY_NOTCREATE'		=> 'Die Galerie konnte leider nicht erstellt werden, bitte versuchen Sie es erneut',
+	'ERROR_GALLERY_NOTUPDATE'		=> 'Die Galerie konnte leider nicht geändert werden, bitte versuchen Sie es erneut',
 	/*/MSG ERROR */
 
 	/* EXEPTION */
@@ -175,6 +179,8 @@ return array(
 	'EXCEPTION_MENU_NOTDELETE'			=> 'Der Menüpunkt konnte leider nicht gelöscht werden.',
 	'EXCEPTION_MENU_PARENTNOTFOUND'		=> 'Das Übergeordnete Menü wurde nicht gefunden.',
 	'EXCEPTION_MENU_NEWPOSNOTCORREKT'	=> 'Die neue Menüpunkt Position ist nicht korrekt.',
+	'EXCEPTION_GALLERY_NOTFOUND'		=> 'Die Galerie konnte leider nicht gefunden werden.',
+	'EXCEPTION_GALLERY_NOTDELETE'		=> 'Die Galerie konnte leider nicht gelöscht werden.',
 	/*/EXEPTION */
 
 	/* QUESTION */
@@ -190,6 +196,8 @@ return array(
 	'QUESTION_EXIT_MENUCREATE'		=> 'Möchten Sie wirklich die Menüpunkt-Erstellung beenden? Der Menüpunkt wurde noch nicht erstellt!',
 	'QUESTION_EXIT_MENUUPDATE'		=> 'Möchten Sie wirklich die Menüpunkt-Bearbeitung beenden? Die Änderungen wurden noch nicht gespeichert!',
 	'QUESTION_DELETE_MENU'			=> 'Möchten Sie den Menüpunkt wirklich löschen? Alle Untergeordnetenmenüpunkte werden ebenfalls gelöscht.',
+	'QUESTION_EXIT_GALLERYCREATE'   => 'Möchten Sie wirklich die Galerie-Erstellung verlassen? Die Galerie wurde noch nicht gespeichert.',
+	'QUESTION_EXIT_GALLERYUPDATE'	=> 'Möchten Sie wirklich die Galerie-Bearbeitung verlassen? Die Änderungen wurden noch nicht gespeichert',
 	/*/QUESTION */
 		
 	/* MAIL */

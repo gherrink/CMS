@@ -43,7 +43,7 @@ class GalleryView extends CActiveRecord
 			array('label, parent_label, create_userid, update_userid', 'length', 'max'=>20),
 			array('roleaccess', 'length', 'max'=>64),
 			array('head', 'length', 'max'=>40),
-			array('url', 'length', 'max'=>50),
+			array('url', 'length', 'max'=>100),
 			array('create_time, update_time', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.

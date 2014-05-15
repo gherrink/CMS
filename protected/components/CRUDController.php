@@ -130,7 +130,7 @@ abstract class CRUDController extends Controller {
         }
 
         $model = $this->getModel($name, $editLng);
-
+        
         $editable = Yii::app()->user->checkAccess('edit' . $this->getModelName());
 
         if (!$editable)

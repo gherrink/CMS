@@ -18,8 +18,12 @@ if ($model->languageid === null || $model->languageid === '')
     }
 
 if ($model->scenario === 'update')
+{
     if ($model->url == null && $model->site == null)
         $model->haschilds = true;
+    elseif($model->site !== null)
+        $model->url = $model->site;
+}
 
 if (array_key_exists('parent', $_GET))
 {

@@ -1,11 +1,26 @@
 <?php
 
-/**
- * 
- * @author Maurice Busch <busch.maurice@gmx.net>
- * @copyright 2014
- * @version 0.1
+/*
+ * Copyright (C) 2014 Maurice Busch <busch.maurice@gmx.net>
  *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/**
+ * Description of RightTest
+ *
+ * @author Maurice Busch <busch.maurice@gmx.net>
  */
 class MsgPickerTest extends TestCase
 {
@@ -127,35 +142,45 @@ class MsgPickerTest extends TestCase
     public function testCeckGRUDControllerConsts()
     {
         $success = true;
-        $error = '';
 
         $class = new ReflectionClass('MSG');
         $consts = $class->getConstants();
 
         $path = Yii::app()->basePath . '/controllers/';
-
+        $errors = '';
+        
         foreach (glob($path . '*Controller.php') as $filename)
+            $errors .= $this->crudControlerConstTest($path, $filename, $consts);
+        
+        $this->assertTrue(($errors === ''), $errors);
+    }
+
+    /**
+     * Checks if a file is an extension of a CRUDController. If it is
+     * the method will ceck if all const for the CRUD are set.
+     * @param type $filename
+     * @return type
+     */
+    private function crudControlerConstTest($path, $filename, $consts)
+    {
+        $errors = '';
+
+        include_once $filename;
+        $filename = str_replace('.php', '', $filename);
+        $filename = str_replace($path, '', $filename);
+        $class = new $filename($filename);
+        if ($class instanceof CRUDController)
         {
-            include_once $filename;
-            $filename = str_replace('.php', '', $filename);
-            $filename = str_replace($path, '', $filename);
-            $class = new $filename($filename);
-            if ($class instanceof CRUDController)
+            $filename = str_replace('CONTROLLER', '', strtoupper($filename));
+            foreach (self::$CRUDCONSTS as $crud)
             {
-                $filename = str_replace('CONTROLLER', '', strtoupper($filename));
-                foreach (self::$CRUDCONSTS as $crud)
-                {
-                    $crud = str_replace('###', $filename, $crud);
-                    if (!array_key_exists($crud, $consts))
-                    {
-                        $error .= "CRUD const $crud missing \n";
-                        $success = false;
-                    }
-                }
+                $crud = str_replace('###', $filename, $crud);
+                if (!array_key_exists($crud, $consts))
+                    $errors .= "CRUD const $crud missing \n";
             }
         }
 
-        $this->assertTrue($success, $error);
+        return $errors;
     }
 
     /**

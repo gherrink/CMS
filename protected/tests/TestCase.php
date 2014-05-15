@@ -17,7 +17,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-define('TEST_MAILS', true);
+if (!defined('TEST_MAILS'))
+    define('TEST_MAILS', true);
 
 /**
  * Description of TestCase
@@ -26,4 +27,5 @@ define('TEST_MAILS', true);
  */
 class TestCase extends CTestCase
 {
+    
 }

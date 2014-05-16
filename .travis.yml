@@ -1,9 +1,7 @@
 language: php
 
 php:
-  - 5.3
   - 5.4
-  - 5.5
 
 addons:
   sauce_connect:
@@ -28,7 +26,7 @@ before_script:
 
 script:
   - cd ./protected/tests
-  - phpunit --coverage-clover ../../clover.xml -c phpunit-travis.xml .
+  - phpunit --coverage-clover ../../clover.xml -c phpunit-travis.xml ./functional/LoginTest.php
 
 after_script:
   - cd ../..

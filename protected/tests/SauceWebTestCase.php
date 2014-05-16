@@ -26,29 +26,18 @@ abstract class CWebTestCase extends SauceOnDemandTestCase
 {
 	public static $browsers = array(
         array(
-            'name'           => 'Firefox 3.6 on Windows',
-            'os'             => 'Windows 2003',
-            'browser'        => 'firefox',
-            'browserVersion' => '27.0',
-        	'port'			 => 4445,
-        	'host'			 => 'localhost'
+            'browserName' => 'firefox',
+            'desiredCapabilities' => array(
+                'version' => '15',
+                'platform' => 'VISTA'
+            )
         ),
         array(
-            'name'           => 'Firefox 3.6 on Windows',
-            'os'             => 'Windows 2003',
-            'browser'        => 'firefox',
-            'browserVersion' => '26.0',
-        	'port'			 => 4445,
-        	'host'			 => 'localhost'
-        ),
-        array(
-            'name'           => 'Firefox 3.6 on Windows',
-            'os'             => 'Windows 2003',
-            'browser'        => 'firefox',
-            'browserVersion' => '28.0',
-        	'port'			 => 4445,
-        	'host'			 => 'localhost'
-        ),
+            'browserName' => 'chrome',
+            'desiredCapabilities' => array(
+                'platform' => 'Linux'
+          )
+        )
 	);
 	
 	/**

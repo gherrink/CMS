@@ -35,7 +35,7 @@ class VisitTest extends WebTestCase
         $this->open('');
     }
     
-    public function testOpen()
+    public function testOpenHub()
     {
         $this->open('/wd/hub');
     }

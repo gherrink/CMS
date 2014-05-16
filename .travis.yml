@@ -21,7 +21,7 @@ before_script:
   - mysql -u root -e "GRANT ALL PRIVILEGES ON cmstest . * TO 'cms'@'localhost';"
   - mysql -u root cmstest < ./DB.sql
   - mysql -u root cmstest < ./sql/rights/create.sql
-  - java -jar selenium-server.jar
+  - java -jar selenium-server.jar &
 
 script:
   - cd ./protected/tests

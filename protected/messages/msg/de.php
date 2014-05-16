@@ -1,9 +1,9 @@
 <?php
+
 /**
  * @author Maurice Busch
  * Language Array Deutsch
  */
-
 return array(
 	'EXCEPTION_MSG_NOTFOUND'=>'Die Message ###msg### wurde nicht gefunden.',
 	
@@ -207,18 +207,15 @@ return array(
 		<p><a href="###link###">E-Mail best&auml;tigen.</a></p>
 		<p>Mit freundlichen Gr&szling;en</p>
 		<p>Ihr CMS-Team</p>',
-	/*/MAIL */
-	
-	'VERIFY'			=> 'Verifizierungscode',
-	'VERIFY_INFO'		=> 'Bitte tragen Sie die Buchstaben so ein, wie sie im Bild dar&uuml;ber zu sehen sind.
+    /* /MAIL */
+    'VERIFY' => 'Verifizierungscode',
+    'VERIFY_INFO' => 'Bitte tragen Sie die Buchstaben so ein, wie sie im Bild dar&uuml;ber zu sehen sind.
 					<br/>Gro&szlig;- und Kleinschreibung muss nicht beachtet werden.',
-	
-	'CREATE_USER_TIME' => 'Erstellt von ###user### am ###time###',
-	'UPDATE_USER_TIME' => 'Geändert von ###user### am ###time###',				
-	
-	'FOOTER' => 'Copyright &copy; ###year### bei CollectMySociety.<br/>
+    'CREATE_USER_TIME' => 'Erstellt von ###user### am ###time###',
+    'UPDATE_USER_TIME' => 'Geändert von ###user### am ###time###',
+    'FOOTER' => 'Copyright &copy; ###year### bei CollectMySociety.<br/>
 		Alle Rechte Vorbehalten.</br>
 		Entwickelt von Maurice Busch, Alessio Bisgen, Lukas Schreck, Angela Gerstner.</br>',
-	'TEST' 			=> 'This is a Test',
-	'TEST_PARAM'		=> 'Test with params ###par1### and ###par2###',
+    'TEST' => 'This is a Test',
+    'TEST_PARAM' => 'Test with params ###par1### and ###par2###',
 );

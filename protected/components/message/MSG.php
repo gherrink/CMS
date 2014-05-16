@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Enthällt alle Message Konstanten
  * 
@@ -215,3 +216,4 @@ class MSG
 	const TEST 				= 'TEST';
 	const TEST_PARAM 		= 'TEST_PARAM';
 }
+

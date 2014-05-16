@@ -6,7 +6,10 @@
 
 // change the following paths if necessary
 $yii=dirname(__FILE__).'/framework/yii.php';
-$config=dirname(__FILE__).'/protected/config/test.php';
+//if(defined('TEST_ON_TRAVIS'))
+//	$config=dirname(__FILE__).'/../config/travis.php';
+//else
+    $config=dirname(__FILE__).'/protected/config/travis.php';
 
 // remove the following line when in production mode
 defined('YII_DEBUG') or define('YII_DEBUG',true);

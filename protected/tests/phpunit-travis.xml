@@ -9,7 +9,7 @@
 		<const name="TEST_ON_TRAVIS" value="TRUE"/>
 		<const name="SAUCEONDEMAND_USERNAME" value="mrbirne"/>
 		<const name="SAUCEONDEMAND_ACCESSKEY" value="930becfc-4cda-4152-a309-3fa01a078814"/>
-		<const name="TEST_BASE_URL" value="http://localhost:4445/"/>
+		<const name="TEST_BASE_URL" value="http://localhost/"/>
 		<const name="TEST_BASE_URL_PATH" value="index-test.php/de/"/>
 	</php>
 	

@@ -24,19 +24,14 @@
  */
 class VisitTest extends WebTestCase
 {
+    public function setUp()
+    {
+        parent::setUp();
+        $this->setBrowserUrl('localhost:4445/');
+    }
+    
     public function testOpen()
     {
         $this->open('');
-    }
-    
-    public function testIrgendwas()
-    {
-        $this->setBrowserUrl('localhost:4445/');
-        $this->open('');
-        $this->open('index.php');
-        $this->open('index-test.php');
-        $this->open('mrbirne');
-        $this->open('CMS');
-        $this->open('mrbirne/CMS/');
     }
 }

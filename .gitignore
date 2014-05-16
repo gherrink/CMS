@@ -12,6 +12,5 @@ images-edit/
 vendor/
 composer.lock
 selenium-server.jar
-Sauce-Connect.jar
 sauce_connect.log
 /nbproject/

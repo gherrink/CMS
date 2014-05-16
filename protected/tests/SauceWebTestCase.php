@@ -35,8 +35,8 @@ abstract class CWebTestCase extends SauceOnDemandTestCase
         ),
         array(
             'name'           => 'Firefox 26.0 on Linux',
-            'os'             => 'VISTA',
-            'browser'        => 'Linux',
+            'os'             => 'Linux',
+            'browser'        => 'firefox',
             'browserVersion' => '26.0',
         	'port'			 => 4445,
         	'host'			 => 'localhost'

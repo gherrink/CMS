@@ -154,6 +154,7 @@ abstract class CRUDController extends ViewController
         else
             $params['editLng'] = Yii::app()->language;
 
+
         if ($this instanceof CRUDReadModels)
             $params['models'] = $this->getReadModels($name, $editLng);
         else

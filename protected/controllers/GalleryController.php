@@ -4,12 +4,12 @@ class GalleryController extends CRUDController
 	
 	public function actionIndex()
 	{
-		$this->render('gallery');
+		$this->actionRead('');
 	}
 	
 	public function findModel($name, $editLng)
 	{
-		if($this->action->id === 'read')
+		if($this->action->id === 'read' || $this->action->id === 'index')
 		{
 			if($editLng === null || $editLng === '')
 				$lng = Yii::app()->language;
@@ -17,9 +17,9 @@ class GalleryController extends CRUDController
 				$lng = $editLng;
 			
 			if($name === '' || $name === null || $name === 'index')
-				return GalleryView::model()->find("parent_label IS NULL AND languageid = '$lng'");
+				return GalleryView::model()->findAll("parent_label IS NULL AND languageid = '$lng'");
 			else
-				return GalleryView::model()->findByAttributes(array('languageid'=>$lng, 'parent_label'=>$name));
+				return GalleryView::model()->findAllByAttributes(array('languageid'=>$lng, 'parent_label'=>$name));
 		}
 		
 		return Gallery::model()->findByAttributes(array('label'=>$name));

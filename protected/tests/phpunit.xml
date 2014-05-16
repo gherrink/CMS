@@ -1,3 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (C) 2014 Maurice Busch <busch.maurice@gmx.net>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
 <phpunit bootstrap="bootstrap.php"
          colors="true"
          convertErrorsToExceptions="true"
@@ -10,19 +28,11 @@
         <const name="TEST_BASE_URL_PATH" value="cms/index-test.php/de/"/>
     </php>
 	
-    <selenium>
-        <browser name="Firefox 4 Linux" browser="*firefox"/>
-    </selenium>
-	
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">../components</directory>
             <directory suffix=".php">../controllers</directory>
             <directory suffix=".php">../models</directory>
-            <exclude>
-                <file>./WebTestCase.php</file>
-                <directory suffix=".php">functional</directory>
-            </exclude>
         </whitelist>
     </filter>
 	

@@ -5,7 +5,7 @@
  * In this class, we set the base URL for the test application.
  * We also provide some common methods to be used by concrete test classes.
  */
-if (defined('TEST_ON_TRAVIS'))
+if (defined('TEST_WITH_SAUCELAB'))
 {
     require_once dirname(__FILE__) . '/SauceWebTestCase.php';
 }
@@ -14,8 +14,7 @@ else
     Yii::import('system.test.CWebTestCase');
 }
 
-if(!defined('TEST_BASE_URL_PATH'))
-    define('TEST_BASE_URL_PATH', 'cms/de/');
+define('TEST_BASE_URL_PATH', 'cms/de/');
 
 define('TEST_MAILS', true);
 

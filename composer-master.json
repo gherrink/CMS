@@ -1,0 +1,11 @@
+{
+    "require-dev": {
+	"phpunit/phpunit-selenium": ">=1.2",
+	"behat/behat": "2.4.*@stable",
+        "phpunit/phpunit": "3.7.*",
+	"phpunit/php-invoker": "*",
+	"phpunit/dbunit": ">=1.2",
+	"phpunit/phpunit-story": "*",
+	"behat/yii-extension":  "~1.0"
+    }
+}

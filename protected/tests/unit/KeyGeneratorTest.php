@@ -23,7 +23,7 @@
  * @author Maurice Busch <busch.maurice@gmx.net>
  */
 
-class KeyGeneratorTest extends CDbTestCase
+class KeyGeneratorTest extends CTestCase
 {
 		
 	public function testGetPasswordKey()

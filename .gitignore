@@ -13,3 +13,5 @@ vendor/
 composer*.lock
 sauce_connect.log
 /nbproject/
+Sauce-Connect.jar
+selenium-server.jar

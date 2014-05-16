@@ -3,6 +3,11 @@ language: php
 php:
   - 5.4
 
+addons:
+  sauce_connect:
+    username: "mrbirne"
+    access_key: "930becfc-4cda-4152-a309-3fa01a078814"
+
 before_script:
   - composer install
   - export PATH=../../vendor/bin:$PATH
@@ -14,7 +19,6 @@ before_script:
   - mysql -u root -e "GRANT ALL PRIVILEGES ON cmstest . * TO 'cms'@'localhost';"
   - mysql -u root cmstest < ./DB.sql
   - mysql -u root cmstest < ./sql/rights/create.sql
-  - java -jar Sauce-Connect.jar mrbirne 930becfc-4cda-4152-a309-3fa01a078814 &
 
 script:
   - cd ./protected/tests

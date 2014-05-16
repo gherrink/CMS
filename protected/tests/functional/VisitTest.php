@@ -29,31 +29,6 @@ class VisitTest extends WebTestCase
         $this->open('');
     }
     
-    public function testOpenIndex()
-    {
-        $this->open('index.php');
-    }
-    
-    public function testOpenIndexTest()
-    {
-        $this->open('index-test.php');
-    }
-    
-    public function testOpenMrbirne()
-    {
-        $this->open('mrbirne');
-    }
-    
-    public function testOpenCMS()
-    {
-        $this->open('CMS');
-    }
-    
-    public function testOpenMrbirneCMS()
-    {
-        $this->open('mrbirne/CMS/');
-    }
-    
     public function testIrgendwas()
     {
         $this->setBrowserUrl('localhost:4445/');

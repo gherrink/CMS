@@ -77,7 +77,7 @@ class LoginTest extends WebTestCase
      */
     public function testLogin($user, $password)
     {
-        $this->visitLogin();
+//        $this->visitLogin();
 //        $this->fillinForm('userid', $user);
 //        $this->fillinForm('password', $password);
 //        $this->submitForm();

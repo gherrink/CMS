@@ -8,10 +8,6 @@ addons:
     username: "mrbirne"
     access_key: "930becfc-4cda-4152-a309-3fa01a078814"
 
-before_install:
-  - "export DISPLAY=:99.0"
-  - "sh -e /etc/init.d/xvfb start"
-
 before_script:
   - composer install
   - export PATH=../../vendor/bin:$PATH
@@ -26,7 +22,7 @@ before_script:
 
 script:
   - cd ./protected/tests
-  - phpunit --coverage-clover ../../clover.xml -c phpunit-travis.xml ./functional/LoginTest.php
+  - phpunit --coverage-clover ../../clover.xml -c phpunit-travis.xml ./functional/VisitTest.php
 
 after_script:
   - cd ../..

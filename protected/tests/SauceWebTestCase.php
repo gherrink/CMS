@@ -29,7 +29,23 @@ abstract class CWebTestCase extends SauceOnDemandTestCase
             'name'           => 'Firefox 3.6 on Windows',
             'os'             => 'Windows 2003',
             'browser'        => 'firefox',
-            'browserVersion' => '3.6.',
+            'browserVersion' => '27.0',
+        	'port'			 => 4445,
+        	'host'			 => 'localhost'
+        ),
+        array(
+            'name'           => 'Firefox 3.6 on Windows',
+            'os'             => 'Windows 2003',
+            'browser'        => 'firefox',
+            'browserVersion' => '26.0',
+        	'port'			 => 4445,
+        	'host'			 => 'localhost'
+        ),
+        array(
+            'name'           => 'Firefox 3.6 on Windows',
+            'os'             => 'Windows 2003',
+            'browser'        => 'firefox',
+            'browserVersion' => '28.0',
         	'port'			 => 4445,
         	'host'			 => 'localhost'
         ),

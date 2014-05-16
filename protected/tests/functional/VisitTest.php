@@ -27,7 +27,7 @@ class VisitTest extends WebTestCase
     public function setUp()
     {
         parent::setUp();
-        $this->setBrowserUrl('localhost');
+        $this->setBrowserUrl('http://localhost');
     }
     
     public function testOpen()

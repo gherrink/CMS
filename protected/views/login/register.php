@@ -78,6 +78,6 @@ $this->breadcrumbs=array(
 		</div>
 	<?php endif; ?>
  	
-	<?php echo BSHtml::submitButton(MsgPicker::msg()->getMessage(MSG::BTN_REGISTER)); ?>
+	<?php echo BsHtml::submitButton(MsgPicker::msg()->getMessage(MSG::BTN_REGISTER)); ?>
  
 <?php $this->endWidget(); ?>

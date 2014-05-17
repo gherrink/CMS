@@ -22,6 +22,7 @@ return array(
         'application.models.data.*',
         'application.components.*',
         'application.components.message.*',
+        'application.components.controller.*',
         'bootstrap.behaviors.*',
         'bootstrap.helpers.*',
         'bootstrap.widgets.*',

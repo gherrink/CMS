@@ -1,4 +1,26 @@
 <?php
+/*
+ * Copyright (C) 2014 Maurice Busch <busch.maurice@gmx.net>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/**
+ * The LayoutManager manages the available Layouts
+ *
+ * @author Maurice Busch <busch.maurice@gmx.net>
+ */
 class DbAuthManager extends CDbAuthManager
 {
 	/**
@@ -15,99 +37,104 @@ class DbAuthManager extends CDbAuthManager
 		return $return;
 	}
 	
-	public function getRolesArray()
+    /**
+     * returns an array of all available roles
+     * @return string[]
+     */
+	public function getAllRoles()
 	{
 		return $this->buildRolesArray($this->getRoles());
 	}
-	
-	/**
-	 * Gibt alle Rollen zurück, die etwas mit Seiten zu tun haben.
-	 * @return Ambigous <Ambigous, string, mixed, multitype:>
-	 */
-	public function getSiteRolesArray()
+    
+    /**
+     * Gives an array with the roles witch are needed everywhere
+     * @return string[]
+     */
+    private static function getUserRoles()
 	{
 		return array(
-			MSG::MSITE => MSG::msg()->getMsg(MSG::MSITE),
-			MSG::MEMBER => MSG::msg()->getMsg(MSG::MEMBER),
-			MSG::USER => MSG::msg()->getMsg(MSG::USER),
-			MSG::VISITOR => MSG::msg()->getMsg(MSG::VISITOR),
+			MSG::MEMBER => MsgPicker::msg()->getMessage(MSG::MEMBER),
+			MSG::USER => MsgPicker::msg()->getMessage(MSG::USER),
+			MSG::VISITOR => MsgPicker::msg()->getMessage(MSG::VISITOR),
 		);
 	}
 	
 	/**
-	 * Gibt alle Rollen zurück, die etwas mit dem Menü zu tun haben.
-	 * @return Ambigous <Ambigous, string, mixed, multitype:>
+	 * Alle Rollen die für die Seiten benötigt werden
+	 * @return string[]
 	 */
-	public function getMenuRolesArray()
+	public static function getRolesSite()
 	{
-		return array(
-				MSG::MMENU => MSG::msg()->getMsg(MSG::MMENU),
-				MSG::MEMBER => MSG::msg()->getMsg(MSG::MEMBER),
-				MSG::USER => MSG::msg()->getMsg(MSG::USER),
-				MSG::VISITOR => MSG::msg()->getMsg(MSG::VISITOR),
-		);
+		return CMap::mergeArray(array(
+			MSG::MSITE => MsgPicker::msg()->getMessage(MSG::MSITE),
+		), self::getUserRoles());
 	}
 	
 	/**
-	 * Gibt alle Rollen zurück, die etwas mit den Neuigkeiten zu tun haben.
-	 * @return Ambigous <Ambigous, string, mixed, multitype:>
+	 * Alle Rollen die für das Menü benötigt werden
+	 * @return string[]
 	 */
-	public function getNewsRolesArray()
+	public static function getRolesMenu()
 	{
-		return array(
-				MSG::MNEWS => MSG::msg()->getMsg(MSG::MNEWS),
-				MSG::MEMBER => MSG::msg()->getMsg(MSG::MEMBER),
-				MSG::USER => MSG::msg()->getMsg(MSG::USER),
-				MSG::VISITOR => MSG::msg()->getMsg(MSG::VISITOR),
-		);
+		return CMap::mergeArray(array(
+				MSG::MMENU => MsgPicker::msg()->getMessage(MSG::MMENU),
+		), self::getUserRoles());
 	}
 	
 	/**
-	 * Gibt alle Rollen zurück, die etwas mit den Galerien zu tun haben.
-	 * @return Ambigous <Ambigous, string, mixed, multitype:>
+	 * Alle Rollen die für die Gallery benötigt werden
+	 * @return string[]
 	 */
-	public function getGalleryRolesArray()
+	public static function getRolesGallery()
 	{
-		return array(
-				MSG::MGALLERY => MSG::msg()->getMsg(MSG::MGALLERY),
-				MSG::MEMBER => MSG::msg()->getMsg(MSG::MEMBER),
-				MSG::USER => MSG::msg()->getMsg(MSG::USER),
-				MSG::VISITOR => MSG::msg()->getMsg(MSG::VISITOR),
-		);
+		return CMap::mergeArray(array(
+				MSG::MGALLERY => MsgPicker::msg()->getMessage(MSG::MGALLERY),
+		), self::getUserRoles());
+	}
+    
+    /**
+	 * Alle Rollen die für die Gallery benötigt werden
+	 * @return string[]
+	 */
+	public static function getRolesNews()
+	{
+		return CMap::mergeArray(array(
+				MSG::MNEWS => MsgPicker::msg()->getMessage(MSG::MNEWS),
+		), self::getUserRoles());
 	}
 	
 	/**
-	 * Gibt die Defoult Rolle für die Seiten zurück.
+	 * Gibt die Default Rolle für die Seiten zurück.
 	 * @return string
 	 */
-	public function getDefoultSiteRole()
+	public static function getDefaultSiteRole()
 	{
 		return MSG::MSITE;
 	}
 	
 	/**
-	 * Gibt die Defoult Rolle für das Menü zurück.
+	 * Gibt die Default Rolle für das Menü zurück.
 	 * @return string
 	 */
-	public function getDefoultMenuRole()
+	public static function getDefaultMenuRole()
 	{
 		return MSG::MMENU;
 	}
 	
 	/**
-	 * Gibt die Defoult Rolle für die News zurück.
+	 * Gibt die Default Rolle für die News zurück.
 	 * @return string
 	 */
-	public function getDefoultNewsRole()
+	public static function getDefaultNewsRole()
 	{
 		return MSG::MNEWS;
 	}
 	
 	/**
-	 * Gibt die Defoult Rolle für die Gallerie zurück.
+	 * Gibt die Default Rolle für die Gallerie zurück.
 	 * @return string
 	 */
-	public function getDefoultGalleryRole()
+	public static function getDefaultGalleryRole()
 	{
 		return MSG::MGALLERY;
 	}

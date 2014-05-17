@@ -1,58 +1,40 @@
 <?php
+/*
+ * Copyright (C) 2014 Maurice Busch <busch.maurice@gmx.net>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 /**
  * @author Maurice Busch <busch.maurice@gmx.net>
- * @version 0.1
- * @copyright 2014
  */
+
 /*
  * @var MenuController $this 
  * @var Menu $model
  * @var BsActiveForm $form
  */
 
-if ($model->languageid === null || $model->languageid === '')
-    if (array_key_exists('editLng', $_GET))
-    {
-        $model->languageid = $_GET['editLng'];
-        $model->parent_languageid = $_GET['editLng'];
-    }
-
-if ($model->scenario === 'update')
-{
-    if ($model->url == null && $model->site == null)
-        $model->haschilds = true;
-    elseif($model->site !== null)
-        $model->url = $model->site;
-}
-
-if (array_key_exists('parent', $_GET))
-{
-    $model->parent_menuid = $_GET['parent'];
-    $menu = Menu::model()->findByAttributes(array('menuid' => $model->parent_menuid,
-        'languageid' => $model->languageid));
-    $model->parent_menu = $menu->label;
-}
-elseif ($model->parent_menuid !== null)
-{
-    $menu = Menu::model()->findByAttributes(array('menuid' => $model->parent_menuid,
-        'languageid' => $model->languageid));
-    $model->parent_menu = $menu->label;
-}
-
-$model->oldparent_menuid = $model->parent_menuid;
-
-$roles = SelectHelper::getMenuRoles();
-
-$selectedRole = MSG::MMENU;
-if ($model->roleaccess !== null)
-    $selectedRole = $model->roleaccess;
-
 $form = $this->beginWidget('bootstrap.widgets.BsActiveForm', array(
-    'layout' => BSHtml::FORM_LAYOUT_HORIZONTAL,
+    'layout' => BsHtml::FORM_LAYOUT_VERTICAL,
     'enableAjaxValidation' => false,
     'id' => 'menu-form',
-    'action' => array('menu/edit'),
-        ));
+    'htmlOptions' => array(
+        'onsubmit' => "return false;",
+        'onkeypress' => " if(event.keyCode == 13){ cmsSubmitForm('modal', 'menu-form', '" . $url . "'); } ",
+    ),
+    ));
 ?>
 
 <div class="row">
@@ -103,8 +85,10 @@ $form = $this->beginWidget('bootstrap.widgets.BsActiveForm', array(
 <div class="row">
     <div class="col-sm-9">
         <div class="form-group">
-                <?php echo $form->label($model, 'haschilds', array(
-                    'class' => 'control-label col-lg-4')); ?>
+            <?php
+            echo $form->label($model, 'haschilds', array(
+                'class' => 'control-label col-lg-4'));
+            ?>
             <div class="col-lg-8" style="padding-top: 12px">
                 <?php
                 echo $form->checkBox($model, 'haschilds', array(
@@ -120,16 +104,18 @@ $form = $this->beginWidget('bootstrap.widgets.BsActiveForm', array(
 <div class="row">
     <div class="col-sm-9">
         <div class="form-group">
-                <?php echo $form->label($model, 'url_intern', array(
-                    'class' => 'control-label col-lg-4')); ?>
+            <?php
+            echo $form->label($model, 'url_intern', array(
+                'class' => 'control-label col-lg-4'));
+            ?>
             <div class="col-lg-8" style="padding-top: 12px">
-<?php
-echo $form->checkBox($model, 'url_intern', array(
-    'class' => 'control-label',
-    'onchange' => 'cmsMenuChangeUrl()',
-    'disabled' => $model->haschilds,
-));
-?>
+                <?php
+                echo $form->checkBox($model, 'url_intern', array(
+                    'class' => 'control-label',
+                    'onchange' => 'cmsMenuChangeUrl()',
+                    'disabled' => $model->haschilds,
+                ));
+                ?>
             </div>
         </div>
     </div>
@@ -166,28 +152,30 @@ echo $form->checkBox($model, 'url_intern', array(
 
 <div class="row">
     <div class="col-sm-9">
-<?php
-echo $form->dropDownListControlGroup($model, 'roleaccess', $roles, array(
-    'options' => array($selectedRole => array('selected' => true)),
-    'labelOptions' => array('class' => 'col-lg-4'),
-    'controlOptions' => array('class' => 'col-lg-8')
-));
-?>
+        <?php
+        echo $form->dropDownListControlGroup($model, 'roleaccess', $roles, array(
+            'options' => array($selectedRole => array('selected' => true)),
+            'labelOptions' => array('class' => 'col-lg-4'),
+            'controlOptions' => array('class' => 'col-lg-8')
+        ));
+        ?>
     </div>
 </div>
 
 <div class="row">
     <div class="col-sm-9">
-<?php echo $form->hiddenField($model, 'icon') ?>
-<?php echo $form->label($model, 'icon', array('class' => 'control-label col-lg-4')); ?>
+            <?php echo $form->hiddenField($model, 'icon') ?>
+            <?php echo $form->label($model, 'icon', array(
+                'class' => 'control-label col-lg-4')); ?>
         <div class="col-lg-8">
-        <?php
-        if ($model->icon !== null && $model->icon !== '')
-            echo BSHtml::icon($model->icon, array('class' => 'control-label',
-                'id' => 'menuicon'));
-        else
-            echo BSHtml::icon('', array('class' => 'control-label', 'id' => 'menuicon'));
-        ?>
+            <?php
+            if ($model->icon !== null && $model->icon !== '')
+                echo BsHtml::icon($model->icon, array('class' => 'control-label',
+                    'id' => 'menuicon'));
+            else
+                echo BsHtml::icon('', array('class' => 'control-label',
+                    'id' => 'menuicon'));
+            ?>
         </div>
     </div>
     <div class="col-sm-3 btn-group">
@@ -206,4 +194,5 @@ echo $form->dropDownListControlGroup($model, 'roleaccess', $roles, array(
     </div>
 </div>
 
-<?php $this->endWidget(); 
+<?php
+$this->endWidget();

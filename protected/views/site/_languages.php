@@ -43,7 +43,7 @@ else if ($model->siteid !== null && $model->siteid !== "")
     <div class="col-sm-6">
         <?php
         $select = Yii::app()->language;
-        $languages = SelectHelper::getActiveLanguages();
+        $languages = Language::getActiveLanguages();
         echo BsHtml::dropDownList('language-select', $select, $languages);
         ?>
     </div>

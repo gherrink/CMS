@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Copyright (C) 2014 Maurice Busch <busch.maurice@gmx.net>
  *
@@ -22,9 +23,9 @@
  * alows a user to add content to a site
  * @author Maurice Busch <busch.maurice@gmx.net>
  */
-class ContentController extends CRUDController
+class ContentController extends CRUDController implements CRUDEditParams
 {
-    
+
     /**
      * @see CRUDController::findModel
      */
@@ -32,7 +33,7 @@ class ContentController extends CRUDController
     {
         return Content::model()->findByAttributes(array('label' => $name));
     }
-    
+
     /**
      * @see CRUDController::getModelName
      */
@@ -40,7 +41,7 @@ class ContentController extends CRUDController
     {
         return 'Content';
     }
-    
+
     /**
      * Creats a Site model and saves it to the DB and redirects the
      * user to the new site.
@@ -57,7 +58,7 @@ class ContentController extends CRUDController
             Yii::app()->end();
         }
     }
-    
+
     /**
      * Updates the $dbModel with the $model and saves the changes to 
      * the DB.
@@ -79,6 +80,22 @@ class ContentController extends CRUDController
         }
     }
     
+    public function getEditParams(\CActiveRecord $model)
+    {
+        $params['roles'] = DbAuthManager::getRolesSite();
+        $params['languages'] = Language::getActiveLanguages();
+
+        $params['selectedRole'] = DbAuthManager::defaultSiteRole();
+        if ($model->roleaccess !== null)
+            $params['selectedRole'] = $model->roleaccess;
+
+        $params['selectedLanguage'] = Yii::app()->language;
+        if ($model->languageid !== null)
+            $params['selectedLanguage'] = $model->languageid;
+        
+        return $params;
+    }
+
     /**
      * Delets the Content and redirects the user to the default site action.
      * @param CActiveRecord $model
@@ -141,7 +158,8 @@ class ContentController extends CRUDController
         $siteContent = new SiteContent();
         $siteContent->siteid = $mSite->siteid;
         $siteContent->contentid = $mContent->contentid;
-        $siteContent->position = SiteContent::getLastPosition($site) +  1;
+        $siteContent->position = SiteContent::getLastPosition($site) +
+            1;
         $siteContent->col = $col;
 
         if (!$siteContent->insert())
@@ -149,7 +167,7 @@ class ContentController extends CRUDController
 
         $this->renderSiteContent($onSite, $mContent, $mSite);
     }
-    
+
     /**
      * Renders the new Content and gives it over as JSON array. If the
      * user prassed add2site on a content-view he will redirected to the

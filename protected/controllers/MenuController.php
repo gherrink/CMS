@@ -21,11 +21,10 @@
  *
  * @author Maurice Busch <busch.maurice@gmx.net>
  */
-class MenuController extends CRUDController implements CRUDReadModels
+class MenuController extends CRUDController implements CRUDReadModels, CRUDEditParams, CRUDEditPrepareModel
 {
 
     public $defaultAction = 'read';
-    
     protected $viewColumns = array(
         'label',
         array(
@@ -42,16 +41,16 @@ class MenuController extends CRUDController implements CRUDReadModels
     public function findModel($name, $editLng)
     {
         return Menu::model()->findByAttributes(array('menuid' => $name,
-                    'languageid' => $editLng));
+                'languageid' => $editLng));
     }
-    
+
     /**
      * @see CRUDReadModels::getReadModels
      */
     public function getReadModels($name, $editLng)
     {
         return Menu::model()->findAll("languageid = '$editLng' AND parent_menuid IS NULL AND "
-                        . "{$this->getRoleaccessSQLWhere()} ORDER BY position");
+                . "{$this->getRoleaccessSQLWhere()} ORDER BY position");
     }
 
     /**
@@ -118,6 +117,60 @@ class MenuController extends CRUDController implements CRUDReadModels
             Yii::app()->end();
         }
     }
+    
+    public function getEditParams(CActiveRecord $model)
+    {
+        $params['roles'] = DbAuthManager::getRolesMenu();
+
+        $params['selectedRole'] = DbAuthManager::getDefaultMenuRole();
+        if ($model->roleaccess !== null)
+            $params['selectedRole'] = $model->roleaccess;
+
+        return $params;
+    }
+    
+    public function prepareEditModel(CActiveRecord $model)
+    {
+        if ($model->languageid === null || $model->languageid === '')
+            if (array_key_exists('editLng', $_GET))
+            {
+                $model->languageid = $_GET['editLng'];
+                $model->parent_languageid = $_GET['editLng'];
+            }
+
+        if ($model->scenario === 'update')
+        {
+            if ($model->url == null && $model->site == null)
+                $model->haschilds = true;
+            elseif ($model->site !== null)
+                $model->url = $model->site;
+        }
+
+        $model = $this->editModelSetLng($model);
+        
+        $model->oldparent_menuid = $model->parent_menuid;
+        
+        return $model;
+    }
+    
+    private function editModelSetLng($model)
+    {
+        if (array_key_exists('parent', $_GET))
+        {
+            $model->parent_menuid = $_GET['parent'];
+            $menu = Menu::model()->findByAttributes(array('menuid' => $model->parent_menuid,
+                'languageid' => $model->languageid));
+            $model->parent_menu = $menu->label;
+        }
+        elseif ($model->parent_menuid !== null)
+        {
+            $menu = Menu::model()->findByAttributes(array('menuid' => $model->parent_menuid,
+                'languageid' => $model->languageid));
+            $model->parent_menu = $menu->label;
+        }
+        
+        return $model;
+    }
 
     protected function modelDelete(CActiveRecord $model)
     {
@@ -143,12 +196,12 @@ class MenuController extends CRUDController implements CRUDReadModels
 
         $transaktion->rollBack();
     }
-    
+
     public function actionRead($name = '', $edit = false, $editLng = '')
     {
         parent::actionRead($name, $edit, $editLng);
     }
-    
+
     /**
      * echoes an json array with datas for a Icon-view with all available
      * icons.
@@ -158,7 +211,7 @@ class MenuController extends CRUDController implements CRUDReadModels
         $icon['header'] = MsgPicker::msg()->getMessage(MSG::HEAD_MENU_ICONSELECT);
         $icon['body'] = $this->renderPartial('_iconselect', array(), true);
         $icon['footer'] = BsHtml::button(MsgPicker::msg()->getMessage(MSG::BTN_EXIT), array(
-                    'onclick' => "$('#modalmenu').modal('hide');"));
+                'onclick' => "$('#modalmenu').modal('hide');"));
         echo json_encode($icon);
     }
 
@@ -223,9 +276,7 @@ class MenuController extends CRUDController implements CRUDReadModels
             Yii::app()->end();
         }
         catch (Exception $e)
-        {
-            
-        }
+        { }
 
         $transaktion->rollBack();
     }

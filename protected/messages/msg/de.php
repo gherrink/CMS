@@ -44,6 +44,7 @@ return array(
 	'MP_GALLERY'					=> 'Galerie',
 	'MP_MODERATOR'					=> 'Moderator',
 	'MP_MODERATOR_SITE'				=> 'Seiten',
+    'MP_MODERATOR_MENU'             => 'Menü bearbeiten',
 	'MP_MODERATOR_SITECREATE'		=> 'Seite erstellen',
 	'MP_MODERATOR_CONTENTCREATE'	=> 'Inhalt erstellen',
 	/*/Menu Punkte */

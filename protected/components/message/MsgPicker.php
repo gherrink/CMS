@@ -1,5 +1,28 @@
 <?php
 
+/*
+ * Copyright (C) 2014 Maurice Busch <busch.maurice@gmx.net>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/**
+ * The LayoutManager manages the available Layouts
+ *
+ * @author Maurice Busch <busch.maurice@gmx.net>
+ */
+
 /**
  * 
  * Die Klasse MsgPicker liefert Methoden zur selektierung von Sprachen
@@ -23,7 +46,7 @@ class MsgPicker {
 	private static $instance;
 	
 	/**
-	 * 
+	 * Constructor sets the message-array with the given $language
 	 */
 	private function __construct($language = '')
 	{
@@ -31,7 +54,10 @@ class MsgPicker {
 	}
 	
 	/**
-	 * Verwalten der Instance
+	 * Creates one instance if one is existing it gives the existing one
+     * if you want to change the language you can give the new languageid
+     * and the MsgPicker will give you frome now on Messages in the new
+     * Language.
 	 * @return MsgPicker
 	 */
 	public static function msg($language = '')
@@ -46,7 +72,7 @@ class MsgPicker {
 	}
 	
 	/**
-	 * Waehlt die aktuelle Sprache die vom Browser uebermittelt wurde
+	 * Picks the actual Language.
 	 */
 	private function pickLanguage($language = '')
 	{
@@ -75,7 +101,7 @@ class MsgPicker {
 	}
 	
 	/**
-	 * Setzt das Message Array
+	 * Set the Message-array with the picked Language.
 	 */
 	private function setMessages()
 	{
@@ -108,16 +134,29 @@ class MsgPicker {
 		return $msg;
 	}
 	
+    /**
+     * returns an Array with all available Languages
+     * @return string[]
+     */
 	public static function getAvailableLanguages()
 	{
 		return self::$availableLanguages;
 	}
 	
+    /**
+     * Returns the path where the language arrays are placed
+     * @return string
+     */
 	public static function getMsgPath()
 	{
 		return self::$msgPath;
 	}
 	
+    /**
+     * Checks if the language is Available.
+     * @param string $language
+     * @return boolean
+     */
 	public static function isAvailable($language)
 	{
 		return array_key_exists($language, self::$availableLanguages);

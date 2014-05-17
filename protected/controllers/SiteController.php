@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Copyright (C) 2014 Maurice Busch <busch.maurice@gmx.net>
  *
@@ -20,9 +21,9 @@
  *
  * @author Maurice Busch <busch.maurice@gmx.net>
  */
-class SiteController extends CRUDController implements CRUDReadParams, CRUDReadCheck
+class SiteController extends CRUDController implements CRUDReadParams, CRUDReadCheck, CRUDEditParams
 {
-    
+
     /**
      * @see CRUDController::getModelName
      */
@@ -30,7 +31,7 @@ class SiteController extends CRUDController implements CRUDReadParams, CRUDReadC
     {
         return 'Site';
     }
-    
+
     /**
      * @see CRUDController::findModel
      */
@@ -38,7 +39,7 @@ class SiteController extends CRUDController implements CRUDReadParams, CRUDReadC
     {
         return Site::model()->findByAttributes(array('label' => $name));
     }
-    
+
     /**
      * @see CRUDReadParams::getReadParams
      */
@@ -46,7 +47,7 @@ class SiteController extends CRUDController implements CRUDReadParams, CRUDReadC
     {
         return array('layout' => $this->getModel()->layout);
     }
-    
+
     /**
      * @see CRUDReadCheck::checkReadable
      */
@@ -89,7 +90,7 @@ class SiteController extends CRUDController implements CRUDReadParams, CRUDReadC
 
         $transaktion->rollBack();
     }
-    
+
     private function createSiteHeader(Site $site)
     {
         if (!isset($_POST['SiteLanguage']))
@@ -164,6 +165,22 @@ class SiteController extends CRUDController implements CRUDReadParams, CRUDReadC
 
         return true;
     }
+    
+    public function getEditParams(\CActiveRecord $model)
+    {
+        $params['roles'] = DbAuthManager::getRolesSite();
+        $params['layouts'] = LayoutManager::getLayouts();
+
+        $params['selectedRole'] = DbAuthManager::getDefaultSiteRole();
+        if ($model->roleaccess !== null)
+            $params['selectedRole'] = $model->roleaccess;
+
+        $params['selectedLayout'] = LayoutManager::getDefaultLayout();
+        if ($model->layout !== null)
+            $params['selectedRole'] = $model->layout;
+        
+        return $params;
+    }
 
     protected function modelDelete(CActiveRecord $model)
     {
@@ -209,7 +226,7 @@ class SiteController extends CRUDController implements CRUDReadParams, CRUDReadC
         $this->checkAccess('deleteSiteLanguage');
 
         if (!SiteLanguage::model()->deleteAllByAttributes(array('siteid' => $name,
-                    'languageid' => $language)))
+                'languageid' => $language)))
             throw new CHttpException(500, MsgPicker::msg()->getMessage(MSG::EXCEPTION_SITE_LANGUAGENOTDELETE));
     }
 

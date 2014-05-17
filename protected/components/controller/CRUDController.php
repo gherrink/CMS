@@ -164,7 +164,7 @@ abstract class CRUDController extends ViewController
 
         if ($this instanceof CRUDReadCheck)
             $this->checkReadable($params['model'], ($params['edit'] ||
-                    $params['editable']));
+                $params['editable']));
 
         if ($this instanceof CRUDReadParams)
             $params = CMap::mergeArray($params, $this->getReadParams());
@@ -203,7 +203,26 @@ abstract class CRUDController extends ViewController
      */
     public function actionCreate()
     {
-        $this->editForm(true);
+        $error = false;
+        $modelName = $this->getModelName();
+        $formName = strtolower($modelName);
+
+        $class = new ReflectionClass($this->getModelName());
+        $model = $class->newInstanceArgs(array('create'));
+        $url = Yii::app()->createAbsoluteUrl(strtolower($modelName) . '/create');
+        $modelCheck = new ModelCheck($model, $modelName, 'create' . $modelName, $formName);
+
+        if ($this->checkModel($modelCheck))
+        {
+            $model->update_userid = Yii::app()->user->getID();
+            $model->update_time = date('Y-m-d H:i:s', time());
+            $model->create_userid = Yii::app()->user->getID();
+            $model->create_time = date('Y-m-d H:i:s', time());
+            $this->modelCreate($model);
+            $error = true;
+        }
+
+        $this->editForm('CREATE', MSG::BTN_CREATE, $url, $error, $formName, $model);
     }
 
     /**
@@ -212,73 +231,62 @@ abstract class CRUDController extends ViewController
      */
     public function actionUpdate($name, $editLng = '')
     {
-        $this->editForm(false, $name, $editLng);
-    }
-
-    /**
-     * Create the Data for the Modal to create or update a Model.
-     * @param boolean $create
-     * @param string $name
-     */
-    private function editForm($create, $name = '', $editLng = '')
-    {
+        $error = false;
         $modelName = $this->getModelName();
         $formName = strtolower($modelName);
 
         $class = new ReflectionClass($this->getModelName());
-        if ($create)
-        {
-            $model = $class->newInstanceArgs(array('create'));
-            $url = Yii::app()->createAbsoluteUrl(strtolower($this->getModelName()) . '/create');
-            $modelCheck = new ModelCheck($model, $modelName, 'create' . $modelName, $formName);
-            $questionID = 'QUESTION_EXIT_' . strtoupper($this->getModelName()) . 'CREATE';
-        }
-        else
-        {
-            $model = $class->newInstanceArgs(array('update'));
-            $url = Yii::app()->createAbsoluteUrl(strtolower($this->getModelName()) . '/update', array(
-                'name' => $name));
-            $modelCheck = new ModelCheck($model, $modelName, 'update' . $modelName, $formName);
-            $questionID = 'QUESTION_EXIT_' . strtoupper($this->getModelName()) . 'UPDATE';
-        }
 
-        $error = '';
+
+        $model = $class->newInstanceArgs(array('update'));
+        $url = Yii::app()->createAbsoluteUrl(strtolower($modelName) . '/update', array(
+            'name' => $name));
+        $modelCheck = new ModelCheck($model, $modelName, 'update' . $modelName, $formName);
 
         if ($this->checkModel($modelCheck))
         {
             $model->update_userid = Yii::app()->user->getID();
             $model->update_time = date('Y-m-d H:i:s', time());
-
-            if ($create)
-            {
-                $model->create_userid = Yii::app()->user->getID();
-                $model->create_time = date('Y-m-d H:i:s', time());
-                $this->modelCreate($model);
-                $error = BsHtml::alert(BsHtml::ALERT_COLOR_ERROR, MsgPicker::msg()->getMessage('ERROR_' . strtoupper($this->getModelName()) . '_NOTCREATE'));
-            }
-            else
-            {
-                $this->modelUpdate($model, $this->getModel($name, $editLng));
-                $error = BsHtml::alert(BsHtml::ALERT_COLOR_ERROR, MsgPicker::msg()->getMessage('ERROR_' . strtoupper($this->getModelName()) . '_NOTUPDATE'));
-            }
+            $this->modelUpdate($model, $this->getModel($name, $editLng));
+            $error = true;
         }
 
-        if ($create)
-        {
-            $button = BsHtml::button(MsgPicker::msg()->getMessage(MSG::BTN_CREATE), array(
-                        'onclick' => "cmsSubmitForm('modal', '$formName-form', '$url')"));
-            $head = MsgPicker::msg()->getMessage('HEAD_' . strtoupper($this->getModelName()) . '_CREATE');
-        }
+        if (!isset($_POST[$this->getModelName()]))
+            $model = $this->getModel($name, $editLng);
+
+        $this->editForm('UPDATE', MSG::BTN_UPDATE, $url, $error, $formName, $model);
+    }
+
+    private function editForm($action, $btnID, $actionUrl, $error, $formName, $model)
+    {
+        if ($error)
+            $error = BsHtml::alert(BsHtml::ALERT_COLOR_ERROR, MsgPicker::msg()->getMessage('ERROR_'
+                        . strtoupper($this->getModelName()) . '_NOT' . $action));
+        
+        $params['url'] = $actionUrl;
+        if($this instanceof CRUDEditPrepareModel)
+            $params['model'] = $this->prepareEditModel($model);
         else
-        {
-            if (!isset($_POST[$this->getModelName()]))
-                $model = $this->getModel($name, $editLng);
-            $button = BsHtml::button(MsgPicker::msg()->getMessage(MSG::BTN_UPDATE), array(
-                        'onclick' => "cmsSubmitForm('modal', '$formName-form', '$url')"));
-            $head = MsgPicker::msg()->getMessage('HEAD_' . strtoupper($this->getModelName()) . '_UPDATE');
-        }
+            $params['model'] = $model;
+        
+        if($this instanceof CRUDEditParams)
+            $params = CMap::mergeArray($params, $this->getEditParams($model));
+            
+        $content['header'] = MsgPicker::msg()->getMessage('HEAD_' . strtoupper($this->getModelName())
+            . '_' . $action);
+        $content['body'] = $error . $this->renderPartial('_edit', $params, true);
+        $content['footer'] = $this->buildEditFooter($formName, $btnID, $actionUrl, $action);
 
-        $urlExit = Yii::app()->createAbsoluteUrl('site/question', array(
+        echo json_encode($content);
+    }
+
+    private function buildEditFooter($formName, $btnID, $actionUrl, $action)
+    {
+        $questionID = 'QUESTION_EXIT_' . strtoupper($this->getModelName()) . $action;
+        $button = BsHtml::button(MsgPicker::msg()->getMessage($btnID), array(
+                'onclick' => "cmsSubmitForm('modal', '$formName-form', '$actionUrl')"));
+
+        $urlExit = Yii::app()->createAbsoluteUrl(strtolower($this->getModelName()) . '/question', array(
             'head' => MSG::HEAD_QUESTION_REALYCLOSE,
             'question' => $questionID,
         ));
@@ -287,14 +295,9 @@ abstract class CRUDController extends ViewController
                 MSG::BTN_NO => "$('#modalmsg').modal('hide');",
         )));
 
-        $content['header'] = $head;
-        $content['body'] = $error . $this->renderPartial('_edit', array(
-                    'model' => $model, 'url' => $url), true);
-        $content['footer'] = BSHtml::button(MsgPicker::msg()->getMessage(MSG::BTN_EXIT), array(
-                    'onclick' => "cmsShowModalAjax('modalmsg', '" . $urlExit . "', $json);")) .
-                $button;
-
-        echo json_encode($content);
+        return BsHtml::button(MsgPicker::msg()->getMessage(MSG::BTN_EXIT), array(
+                'onclick' => "cmsShowModalAjax('modalmsg', '" . $urlExit . "', $json);")) .
+            $button;
     }
 
     /**

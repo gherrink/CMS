@@ -1,8 +1,23 @@
 <?php
+/*
+ * Copyright (C) 2014 Maurice Busch <busch.maurice@gmx.net>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 /**
- * @author Maurice Busch
- * @copyright 2014
- * @version 0.1
+ * @author Maurice Busch <busch.maurice@gmx.net>
  */
 /*
  * @var SiteController $this 
@@ -10,18 +25,6 @@
  * @var BsActiveForm $form
  * @var String $url
  */
-
-$roles = SelectHelper::getSiteRoles();
-$layouts = SelectHelper::getLayouts();
-
-$selectedRole = MSG::MSITE;
-if ($model->roleaccess !== null)
-    $selectedRole = $model->roleaccess;
-
-$selectedLayout = MSG::COL01;
-if ($model->layout !== null)
-    $selectedRole = $model->layout;
-
 
 $form = $this->beginWidget('bootstrap.widgets.BsActiveForm', array(
     'layout' => BsHtml::FORM_LAYOUT_VERTICAL,
@@ -31,14 +34,16 @@ $form = $this->beginWidget('bootstrap.widgets.BsActiveForm', array(
         'onsubmit' => "return false;",
         'onkeypress' => " if(event.keyCode == 13){ cmsSubmitForm('modal', 'site-form', '" . $url . "'); } ",
     ),
-        ));
+    ));
 $model->oldLabel = $model->label;
 ?>
 <div class="row">
     <div class="col-sm-6">
-        <?php echo $form->textFieldControlGroup($model, 'label', array(
+        <?php
+        echo $form->textFieldControlGroup($model, 'label', array(
             'labelOptions' => array('class' => 'control-label required'),
-            'controlOptions' => array('class' => ''))); ?>
+            'controlOptions' => array('class' => '')));
+        ?>
 <?php echo $form->hiddenField($model, 'oldLabel') ?>
     </div>
 </div>
@@ -65,4 +70,5 @@ $model->oldLabel = $model->label;
 </div>
 
 <?php $this->renderPartial('_languages', array('form' => $form, 'model' => $model)) ?>
-<?php $this->endWidget();
+<?php
+$this->endWidget();

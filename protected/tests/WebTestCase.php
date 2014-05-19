@@ -6,15 +6,12 @@
  * We also provide some common methods to be used by concrete test classes.
  */
 if (defined('TEST_WITH_SAUCELAB'))
-{
     require_once dirname(__FILE__) . '/SauceWebTestCase.php';
-}
 else
-{
     Yii::import('system.test.CWebTestCase');
-}
 
-define('TEST_BASE_URL_PATH', 'cms/de/');
+if(!defined('TEST_BASE_URL_PATH'))
+    define('TEST_BASE_URL_PATH', 'cms/de/');
 
 define('TEST_MAILS', true);
 

@@ -24,10 +24,6 @@
  */
 class MailerTest extends TestCase
 {
-//    public function __construct($name = NULL, array $data = array(), $dataName = '')
-//    {
-//        parent::__construct('Mail Test', $data, $dataName);
-//    }
 
     /**
      * @dataProvider providerSendMail
@@ -74,7 +70,7 @@ class MailerTest extends TestCase
 
         $this->checkMail($mailer, $mailer->contactAddress, $subject, $body, '', '', $mail, $name);
     }
-    
+
     /**
      * @dataProvider providerRegisterMail
      * @param type $username
@@ -147,7 +143,9 @@ class MailerTest extends TestCase
     {
         return array(
             array('dummy.dummy@blla.de', 'A Test Mail', 'Some content for the body.',
-                true, '', '', '', ''),
+                false, '', '', '', ''),
+            array('dummy.dummy@blla.de', 'Test Mail', 'Some HTML content for he body here.',
+                false, '', '', '', ''),
         );
     }
 
@@ -158,7 +156,7 @@ class MailerTest extends TestCase
             array('bob.depp@gmx.net', 'Bob Depp', 'Kontakt', 'Ein Inhalt'),
         );
     }
-    
+
     //$username, $mail, $validateid
     public function providerRegisterMail()
     {

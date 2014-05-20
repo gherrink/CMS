@@ -28,7 +28,7 @@ return array(
         'userid' => 'bob123',
         'firstname' => 'Bob',
         'lastname' => 'Boddo',
-        'password' => '0591b1eb2d7d64af28cc0bcb4d29569d4b6a6e727da2c4f314884813813945ca', //Boddo123
+        'password' => '551fd2d30ebf11deb3c6e4186f821c9d1e8d47bb4ce5296d00c730809de24a9a', //Boddo123
         'mail' => 'bob.boddo@gmx.de',
         'mail_valid' => 1,
         'active' => 1,
@@ -37,7 +37,7 @@ return array(
         'userid' => 'fuuu',
         'firstname' => 'Fuuu',
         'lastname' => 'Dooo',
-        'password' => '2cdf7ae5f2c435310156a162dd84ad71b1f05b90c1654a5eebb115636707cb90', //Fuuu123
+        'password' => 'e0f87ff6e7bbb68d2a9bd327f583f2fecebab5a76012ae04ea736db06d23f9e7', //Fuuu123
         'mail' => 'fuuu.dooo@gmail.com',
         'mail_valid' => 1,
         'active' => 1,
@@ -46,7 +46,7 @@ return array(
         'userid' => 'dooo',
         'firstname' => 'dooo',
         'lastname' => 'fuuu',
-        'password' => 'f46068bcc76c59e9ac8e190f0c51a14cd1c4561bbf7ac118d22fd9a4e443edfd', //Dooo123
+        'password' => 'c6640fdcbb1ce62a4131884de1e644658e0d94fbfb619e3ac07a01ee98cfb2f5', //Dooo123
         'mail' => 'dooo.fuuu@domain.com',
         'mail_valid' => 1,
         'active' => 0,

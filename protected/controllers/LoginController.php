@@ -175,9 +175,6 @@ class LoginController extends Controller
 	 */
 	private function loginUser(User $user)
 	{
-		if(! $user->active)
-			return false;
-		
 		$identity = new UserIdentity($user);
 		$user = $identity->authenticate();
 		

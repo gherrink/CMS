@@ -33,12 +33,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">../components</directory>
-            <directory suffix=".php">../controllers</directory>
             <directory suffix=".php">../models</directory>
-            <exclude>
-                <file>./WebTestCase.php</file>
-                <directory suffix=".php">functional</directory>
-            </exclude>
         </whitelist>
     </filter>
 	

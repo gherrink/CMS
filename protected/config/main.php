@@ -79,6 +79,7 @@ return array(
             ),
         ),
         'db' => array(
+//            'connectionString' => 'mysql:host=localhost;dbname=cms2',
             'connectionString' => 'mysql:host=localhost;dbname=cms2',
             'emulatePrepare' => true,
             'username' => 'cms',

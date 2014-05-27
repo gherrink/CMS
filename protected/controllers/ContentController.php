@@ -85,7 +85,7 @@ class ContentController extends CRUDController implements CRUDEditParams
         $params['roles'] = DbAuthManager::getRolesSite();
         $params['languages'] = Language::getActiveLanguages();
 
-        $params['selectedRole'] = DbAuthManager::defaultSiteRole();
+        $params['selectedRole'] = DbAuthManager::getDefaultSiteRole();
         if ($model->roleaccess !== null)
             $params['selectedRole'] = $model->roleaccess;
 

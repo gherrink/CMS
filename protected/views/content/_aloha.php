@@ -13,7 +13,7 @@
 $this->widget('application.widgets.aloha.Aloha', array(
 	'selector' => '.edit',
 	'plugins' => array(
-		'load' => 'common/ui,common/format,common/highlighteditables,custom/save',
+		'load' => 'common/ui,common/format,common/list,common/table,common/highlighteditables,custom/save',
 		'format' => array('config' => array('b','i','sub','sup','p','h2','h3','h4','h5','h6'))
 	),
 ));

@@ -1,5 +1,5 @@
 <?php
-class GalleryController extends CRUDController
+class GalleryController extends CRUDController implements CRUDReadModels
 {
 	
 	public function actionIndex()
@@ -7,21 +7,16 @@ class GalleryController extends CRUDController
 		$this->actionRead('');
 	}
 	
+	public function getReadModels($name, $editLng)
+	{
+		if($name === '' || $name === null || $name === 'index')
+			return GalleryView::model()->findAll("parent_label IS NULL AND languageid = '$editLng'");
+		else
+			return GalleryView::model()->findAllByAttributes(array('languageid'=>$editLng, 'parent_label'=>$name));
+	}
+	
 	public function findModel($name, $editLng)
 	{
-		if($this->action->id === 'read' || $this->action->id === 'index')
-		{
-			if($editLng === null || $editLng === '')
-				$lng = Yii::app()->language;
-			else
-				$lng = $editLng;
-			
-			if($name === '' || $name === null || $name === 'index')
-				return GalleryView::model()->findAll("parent_label IS NULL AND languageid = '$lng'");
-			else
-				return GalleryView::model()->findAllByAttributes(array('languageid'=>$lng, 'parent_label'=>$name));
-		}
-		
 		return Gallery::model()->findByAttributes(array('label'=>$name));
 	}
 	

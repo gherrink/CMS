@@ -1,19 +1,19 @@
 <?php
+
 /**
  * @author Maurice Busch
  * Language Array Deutsch
  */
-
 return array(
 	'EXCEPTION_MSG_NOTFOUND'=>'Die Message ###msg### wurde nicht gefunden.',
 	
 	/* Sprachen */
-	'DE'	=> 'German',
-	'EN'	=> 'English',
+	'DE'	=> 'Deutsch',
+	'EN'	=> 'Englisch',
 	/*/Sprachen */
 	
 	/* MSG HEADER */
-	'MSG_SUCCESS'	=> 'Success',
+	'MSG_SUCCESS'	=> 'Erfolg',
 	'MSG_INFO'		=> 'Information',
 	'MSG_WARNING'	=> 'Warnung',
 	'MSG_DANGER'	=> 'Error',
@@ -22,7 +22,7 @@ return array(
 	/* Rollen */
 	'ADMIN' 	=> 'Administrator',
 	'MCALENDER' => 'Modarator Kalender',
-	'MGALLERY'	=> 'Moderator Gallery',
+	'MGALLERY'	=> 'Moderator Galerie',
 	'MSITE'		=> 'Moderator Seite',
 	'MMENU'		=> 'Moderator Menü',
 	'MNEWS'		=> 'Moderator News',
@@ -44,40 +44,53 @@ return array(
 	'MP_GALLERY'					=> 'Galerie',
 	'MP_MODERATOR'					=> 'Moderator',
 	'MP_MODERATOR_SITE'				=> 'Seiten',
+    'MP_MODERATOR_MENU'             => 'Menü bearbeiten',
 	'MP_MODERATOR_SITECREATE'		=> 'Seite erstellen',
 	'MP_MODERATOR_CONTENTCREATE'	=> 'Inhalt erstellen',
 	/*/Menu Punkte */
 		
 	/* Ueberschriften */
-	'HEAD_QUESTION_REALYCLOSE'			=> 'Realy close?',
-	'HEAD_QUESTION_REALYDELETE'			=> 'Realy delete?',
-	'HEAD_CONTACT'						=> 'Contact',
-	'HEAD_LOGIN'						=> 'Login',
-	'HEAD_REGISTER'						=> 'Register',
-	'HEAD_CHANGEMAIL'					=> 'Change mail',
-	'HEAD_SITE_CREATE'					=> 'Create site',
-	'HEAD_SITE_UPDATE'					=> 'Edit site',
-	'HEAD_SITE_CREATELANGUAGE'			=> 'Languages and Headers',
-	'HEAD_CONTENT_CREATE'				=> 'Create Content',
-	'HEAD_CONTENT_UPDATE'				=> 'Edit Content',
-	'HEAD_CONTENT_ADD2SITE'				=> 'Add content to site',
-	'HEAD_NEWS_CREATE'					=> 'Create news',
-	'HEAD_NEWS_UPDATE'					=> 'Edit news',
+	'HEAD_QUESTION_REALYCLOSE'			=> 'Wirklich Schließen?',
+	'HEAD_QUESTION_REALYDELETE'			=> 'Wirklich Löschen?',
+	'HEAD_CONTACT'						=> 'Kontakt',
+	'HEAD_LOGIN'						=> 'Anmelden',
+	'HEAD_REGISTER'						=> 'Registrieren',
+	'HEAD_CHANGEMAIL'					=> 'E-Mail ändern',
+	'HEAD_MENU'							=> 'Menu bearbeiten',
+	'HEAD_SITE_CREATE'					=> 'Seite erstellen',
+	'HEAD_SITE_UPDATE'					=> 'Seite bearbeiten',
+	'HEAD_SITE_CREATELANGUAGE'			=> 'Sprache und Überschriften',
+	'HEAD_SITE_ADDCONTENT'				=> 'Seiteninhalt hinzufügen',
+	'HEAD_CONTENT_CREATE'				=> 'Inhalt erstellen',
+	'HEAD_CONTENT_UPDATE'				=> 'Inhalt bearbeiten',
+	'HEAD_CONTENT_ADD2SITE'				=> 'Inhalt zur Seite hinzufügen',
+	'HEAD_NEWS_CREATE'					=> 'Neuigkeit erstellen',
+	'HEAD_NEWS_UPDATE'					=> 'Neuigkeit bearbeiten',
+	'HEAD_MENU_CREATE'					=> 'Menüpunkt erstellen',
+	'HEAD_MENU_UPDATE'					=> 'Menüpunkt bearbeiten',
+	'HEAD_MENU_LINK2SITE'				=> 'Link zur Seite',
+	'HEAD_MENU_ICONSELECT'				=> 'Menüicon auswählen',
+	'HEAD_MENU_PARENTMENU'				=> 'Übergeordneter Menüpunkt',
+	'HEAD_GALLERY_CREATE'               => 'Galerie erstellen',
+	'HEAD_GALLERY_UPDATE'				=> 'Galerie bearbeiten',
 	/*/Ueberschriften */
 		
 	/* Buttons */
 	'BTN_OK'					=> 'OK',
-	'BTN_YES'					=> 'Yes',
-	'BTN_NO'					=> 'No',
-	'BTN_REGISTER'				=> 'Register',
-	'BTN_EDIT'					=> 'Edit',
-	'BTN_CREATE'				=> 'Create',
-	'BTN_UPDATE'				=> 'Update',
-	'BTN_DELETE'				=> 'Delete',
-	'BTN_EXIT'					=> 'Exit',
-	'BTN_NEW_CONTENT'			=> 'Create new Content',
-	'BTN_SITE_ADDLANGUAGE'		=> 'Add new Language',
-	'BTN_NEWS'					=> 'Add News',
+	'BTN_YES'					=> 'Ja',
+	'BTN_NO'					=> 'Nein',
+	'BTN_REGISTER'				=> 'Registrieren',
+	'BTN_EDIT'					=> 'Bearbeiten',
+	'BTN_READ'					=> 'Ansehen',
+	'BTN_CREATE'				=> 'Erstellen',
+	'BTN_UPDATE'				=> 'Ändern',
+	'BTN_DELETE'				=> 'Löschen',
+	'BTN_EXIT'					=> 'Beenden',
+	'BTN_SITE_NEWCONTENT'		=> 'Neuen Inhalt hinzufügen',
+	'BTN_SITE_ADDLANGUAGE'		=> 'Neue Sprache hinzufügen',
+	'BTN_SITE_DELETECONTENT'	=> 'Von Seite löschen',
+	'BTN_CONTENT_ADD2SITE'		=> 'Zu Site hinzufügen',
+	'BTN_NEWS'					=> 'Neuigkeit hinzufügen',
 	/*/Buttons */
 	
 	/* Models */
@@ -142,9 +155,14 @@ return array(
 	'ERROR_CONTENT_NOTUPDATE'		=> 'Der Inhalt konnte leider nicht geändert werden, bitte versuchen Sie es erneut.',
 	'ERROR_NEWS_NOTCREATE'			=> 'Die Neuigkeit konnte leider nichterstellt werden, bitte versuchen Sie es erneut',
 	'ERROR_NEWS_NOTUPDATE'			=> 'Die Neuigkeit konnte leider nicht geändert werden, bitte versuchen Sie es erneut!',
+	'ERROR_MENU_NOTCREATE'			=> 'Der Menüpunkt konnte leider nicht erstellt werden, bitte versuchen Sie es erneut.',
+	'ERROR_MENU_NOTUPDATE'			=> 'Der Menüpunkt konnte leider nicht geändert werden, bitte versucehn Sie es erneut.',
+	'ERROR_GALLERY_NOTCREATE'		=> 'Die Galerie konnte leider nicht erstellt werden, bitte versuchen Sie es erneut',
+	'ERROR_GALLERY_NOTUPDATE'		=> 'Die Galerie konnte leider nicht geändert werden, bitte versuchen Sie es erneut',
 	/*/MSG ERROR */
 
 	/* EXEPTION */
+	'EXCEPTION_NOTHINGSELECTED'			=> 'Es wurde nichts ausgewählt.',
 	'EXCEPTION_NOBUTTONS'				=> 'Es wurden keine Buttons gesetzt.',
 	'EXCEPTION_SITE_NOTFOUND' 			=> 'Die Angeforderte Seite konnte leider nicht gefunden werden.',
 	'EXCEPTION_SITE_NOTDELETE'			=> 'Die Seite konnte leider nicht gelöscht werden, bitte versuchen Sie es erneut.',
@@ -154,9 +172,16 @@ return array(
 	'EXCEPTION_CONTENT_NOTDELETE'		=> 'Der Inhalt konnte nicht gelöscht werden, bitte versuchen Sie es erneut.',
 	'EXCEPTION_CONTENT_NOCONTENT'		=> 'Es wurde kein Kontent übertragen, der gespeichert werden soll.',
 	'EXCEPTION_CONTENT_TEXTNOTUPDATE'	=> 'Die Änderungen konnten leider nicht gespeichert werden, bitte versuchen Sie es erneut.',
-	'EXCEPTION_CONTENT_NOTADD2SITE'		=> 'EXCEPTION_CONTENT_NOTADD2SITE',
+	'EXCEPTION_CONTENT_NOTADD2SITE'		=> 'Der Inhalt konnte leider nicht der Seite hinzugefügt werden, bitte versuchen Sie es erneut.',
+	'EXCEPTION_SITECONTENT_EXISTS'		=> 'Der Inhalt existiert bereits auf dieser Seite und kann kein zweites mal hinzugefügt werden.',
 	'EXCEPTION_NEWS_NOTFOUND'			=> 'Die Neuigkeit konnte leider nicht gefunden werden',
 	'EXCEPTION_NEWS_NOTDELETE'			=> 'Die Neuigeit konnte nicht gelöscht werden, versuchen Sie es erneut!',
+	'EXCEPTION_MENU_NOTFOUND'			=> 'Der Menüpunkt konnte leider nicht gefunden werden.',
+	'EXCEPTION_MENU_NOTDELETE'			=> 'Der Menüpunkt konnte leider nicht gelöscht werden.',
+	'EXCEPTION_MENU_PARENTNOTFOUND'		=> 'Das Übergeordnete Menü wurde nicht gefunden.',
+	'EXCEPTION_MENU_NEWPOSNOTCORREKT'	=> 'Die neue Menüpunkt Position ist nicht korrekt.',
+	'EXCEPTION_GALLERY_NOTFOUND'		=> 'Die Galerie konnte leider nicht gefunden werden.',
+	'EXCEPTION_GALLERY_NOTDELETE'		=> 'Die Galerie konnte leider nicht gelöscht werden.',
 	/*/EXEPTION */
 
 	/* QUESTION */
@@ -165,9 +190,15 @@ return array(
 	'QUESTION_EXIT_CONTENTCREATE'	=> 'Möchten Sie wirklich die Inhalts-Bearbeitung beenden? Die Änderungen werden nicht übernommen.',
 	'QUESTION_EXIT_CONTENTUPDATE'	=> 'Möchten Sie wirklich die Inhalts-Bearbeitung beenden? Alle Änderungen verloren.',
 	'QUESTION_DELETE_SITE'			=> 'Möchten Sie die Seite wirklich löschen? Diese Änderung kann nicht wieder rückgänig gemacht werden.',
+	'QUESTION_DELETE_SITECONTENT'	=> 'Möchten Sie den Inhalt wirklich von der Seite löschen? Der Inhalt wird nicht glöscht.',
 	'QUESTION_DELETE_CONTENT'		=> 'Möchten Sie den Inhalt wirklich löschen? Diese Änderungen kann nichtmehr rückgänig gemacht werden.',
 	'QUESTION_EXIT_NEWSCREATE'		=> 'Möchten Sie wirklich die Neuigkeiten-Erstellung beenden? Die Neuigkeit wurde noch nicht erstellt!',
 	'QUESTION_EXIT_NEWSUPDATE'		=> 'Möchten Sie wirklich die Neuigkeiten-Bearbeitung beenden? Die Änderungen wurden noch nicht gespeichert!',
+	'QUESTION_EXIT_MENUCREATE'		=> 'Möchten Sie wirklich die Menüpunkt-Erstellung beenden? Der Menüpunkt wurde noch nicht erstellt!',
+	'QUESTION_EXIT_MENUUPDATE'		=> 'Möchten Sie wirklich die Menüpunkt-Bearbeitung beenden? Die Änderungen wurden noch nicht gespeichert!',
+	'QUESTION_DELETE_MENU'			=> 'Möchten Sie den Menüpunkt wirklich löschen? Alle Untergeordnetenmenüpunkte werden ebenfalls gelöscht.',
+	'QUESTION_EXIT_GALLERYCREATE'   => 'Möchten Sie wirklich die Galerie-Erstellung verlassen? Die Galerie wurde noch nicht gespeichert.',
+	'QUESTION_EXIT_GALLERYUPDATE'	=> 'Möchten Sie wirklich die Galerie-Bearbeitung verlassen? Die Änderungen wurden noch nicht gespeichert',
 	/*/QUESTION */
 		
 	/* MAIL */
@@ -177,18 +208,15 @@ return array(
 		<p><a href="###link###">E-Mail best&auml;tigen.</a></p>
 		<p>Mit freundlichen Gr&szling;en</p>
 		<p>Ihr CMS-Team</p>',
-	/*/MAIL */
-	
-	'VERIFY'			=> 'Verifizierungscode',
-	'VERIFY_INFO'		=> 'Bitte tragen Sie die Buchstaben so ein, wie sie im Bild dar&uuml;ber zu sehen sind.
+    /* /MAIL */
+    'VERIFY' => 'Verifizierungscode',
+    'VERIFY_INFO' => 'Bitte tragen Sie die Buchstaben so ein, wie sie im Bild dar&uuml;ber zu sehen sind.
 					<br/>Gro&szlig;- und Kleinschreibung muss nicht beachtet werden.',
-	
-	'CREATE_USER_TIME' => 'Erstellt von ###user### am ###time###',
-	'UPDATE_USER_TIME' => 'Geändert von ###user### am ###time###',				
-	
-	'FOOTER' => 'Copyright &copy; ###year### bei CollectMySociety.<br/>
+    'CREATE_USER_TIME' => 'Erstellt von ###user### am ###time###',
+    'UPDATE_USER_TIME' => 'Geändert von ###user### am ###time###',
+    'FOOTER' => 'Copyright &copy; ###year### bei CollectMySociety.<br/>
 		Alle Rechte Vorbehalten.</br>
 		Entwickelt von Maurice Busch, Alessio Bisgen, Lukas Schreck, Angela Gerstner.</br>',
-	'TEST' 			=> 'This is a Test',
-	'TEST_PARAM'		=> 'Test with params ###par1### and ###par2###',
+    'TEST' => 'This is a Test',
+    'TEST_PARAM' => 'Test with params ###par1### and ###par2###',
 );

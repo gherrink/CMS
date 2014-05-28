@@ -124,6 +124,7 @@ class SiteController extends CRUDController implements CRUDReadParams, CRUDReadC
         if ($dbModel->update() && $this->updateSiteHeader($dbModel))
             try
             {
+                $transaktion->commit();
                 $content['success'] = Yii::app()->createAbsoluteUrl('site/edit', array(
                     'name' => $dbModel->label));
                 echo json_encode($content);
@@ -142,7 +143,7 @@ class SiteController extends CRUDController implements CRUDReadParams, CRUDReadC
     {
         if (!isset($_POST['SiteLanguage']))
             return true;
-
+        
         foreach ($_POST['SiteLanguage'] as $siteAttributes)
         {
             $siteLangauge = new SiteLanguage();

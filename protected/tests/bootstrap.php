@@ -11,5 +11,7 @@ else
 
 Yii::createWebApplication($config);
 
+require_once dirname(_FILE_) . '/ModelTestCase.php';
+
 if (!defined('TEST_ON_TRAVIS'))
     require_once(dirname(__FILE__) . '/WebTestCase.php');

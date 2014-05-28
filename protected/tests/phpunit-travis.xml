@@ -17,21 +17,24 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
 <phpunit bootstrap="bootstrap.php"
-		colors="true"
-		convertErrorsToExceptions="true"
-		convertNoticesToExceptions="true"
-		convertWarningsToExceptions="true"
-		stopOnFailure="false">
+         colors="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         stopOnFailure="false">
 	
-	<php>
-		<const name="TEST_ON_TRAVIS" value="TRUE"/>
-	</php>
+    <php>
+        <const name="TEST_ON_TRAVIS" value="TRUE"/>
+    </php>
 	
-	<filter>
-		<whitelist processUncoveredFilesFromWhitelist="true">
-		    <directory suffix=".php">../components</directory>
-		    <directory suffix=".php">../models</directory>
-		</whitelist>
-	</filter>
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">../components</directory>
+            <directory suffix=".php">../models</directory>
+            <exclude>
+                <directory suffix=".php">../models/data</directory>
+            </exclude>
+        </whitelist>
+    </filter>
 	
 </phpunit>

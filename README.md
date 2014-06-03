@@ -1,6 +1,8 @@
 # Collect My Society
 
 >Awesome Content-Management made easy - für Vereine!
+[![Coverage Status](https://coveralls.io/repos/mrbirne/CMS/badge.png?branch=master)](https://coveralls.io/r/mrbirne/CMS?branch=master)
+[![Build Status](https://travis-ci.org/mrbirne/CMS.svg?branch=master)](https://travis-ci.org/mrbirne/CMS)
 
 ![Yii-Logo](http://static.yiiframework.com/css/img/logo.png)
 ![Bootstrap-Logo](http://www.omarketingo.com/img/logos/bootstrap.png)

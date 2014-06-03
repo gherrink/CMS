@@ -1,6 +1,6 @@
 # Collect My Society
 
-Awesome Content-Management made easy - für Vereine!
+>Awesome Content-Management made easy - für Vereine!
 
 ![Yii-Logo](http://static.yiiframework.com/css/img/logo.png)
 ![Bootstrap-Logo](http://www.omarketingo.com/img/logos/bootstrap.png)

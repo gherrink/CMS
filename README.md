@@ -1,7 +1,6 @@
 # Collect My Society
-
-[![Coverage Status](https://coveralls.io/repos/mrbirne/CMS/badge.png?branch=master)](https://coveralls.io/r/mrbirne/CMS?branch=master)
 [![Build Status](https://travis-ci.org/mrbirne/CMS.svg?branch=master)](https://travis-ci.org/mrbirne/CMS)
+[![Coverage Status](https://coveralls.io/repos/mrbirne/CMS/badge.png?branch=master)](https://coveralls.io/r/mrbirne/CMS?branch=master)
 
 Awesome Content-Management made easy - für Vereine!
 

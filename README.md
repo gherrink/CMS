@@ -1,25 +1,25 @@
 # Collect My Society
 
-## Installationsanleitung
+## Installation instructions
 
 ### Webserver
 - clone this repository into the root directory of your webserver
-- create the folder "assets" in this directory
-- create the folder "runtime" in the folder "protected"
-- for this folders you have to set read and writh excess for the webserver
+- create the folder "assets" in that directory
+- enter the folder "protected" and create the folder "runtime" 
+- for this folders you have to set read and write access for the webserver
 
 ### MySql
-- create the DB "cms2" we recomand to use the "utf8_general_ci" as default charset 
-- for this new DB you have to create an user "cms" with the password "BCv4r2hrfhw4ahrc" if you wish to change this password you have to go into protected/config/main.php and lock under 'db' => array( 'password' => 'BCv4r2hrfhw4ahrc' ) and change it
-- execute the "script DB.sql" and "sql/rights/create.sql"
+- create the DB "cms2". We recommend to use the "utf8_general_ci" as default charset 
+- for this new DB you have to create an user "cms" with the password "BCv4r2hrfhw4ahrc". If you wish to change this password you have to open protected/config/main.php and search for the line 'db' => array( 'password' => 'BCv4r2hrfhw4ahrc' )
+- execute the "script DB.sql" and "sql/rights/create.sql" scripts
 
 ## Usage
 
 ### User rights
-You have the folowing rights witch grand you full permission:
-- MSITE on editing Sites
-- MMENU on editing Menu
-- MNEWS on editing news
-- MGALLERY on editing gallery
+You may set the folowing rights in order to obtain full permissions:
+- MSITE for editing Sites
+- MMENU for editing Menu
+- MNEWS for editing news
+- MGALLERY for editing gallery
 
-to give your user this rights for now you have to type folowing link "url to your website/right/Assign?user=mrbirne&role=role from above"
+in order to grant this rights to your user-account (this is how it works at the moment) you have to visit folowing link on your server "<url to your website>/<right>/Assign?user=<your user>&role=<role from above>"

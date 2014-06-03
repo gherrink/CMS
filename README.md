@@ -22,4 +22,4 @@ You may set the folowing rights in order to obtain full permissions:
 - MNEWS for editing news
 - MGALLERY for editing gallery
 
-in order to grant this rights to your user-account (this is how it works at the moment) you have to visit folowing link on your server "<url to your website>/<right>/Assign?user=<your user>&role=<role from above>"
+in order to grant this rights to your user-account (this is how it works at the moment) you have to visit folowing link on your server "\<url to your website\>/\<right\>/Assign?user=\<your user\>&role=\<role from above\>"

@@ -120,7 +120,7 @@ class Language extends CActiveRecord
 	 */
 	public static function getActiveLanguages()
 	{
-		$languages = $this->getActiveModelLanguages();
+		$languages = self::getActiveModelLanguages();
 		$return = array();
 		foreach ($languages as $language)
 			$return[$language->languageid] = MsgPicker::msg()->getMessage(strtoupper($language->languageid));

@@ -65,12 +65,36 @@ class GalleryController extends CRUDController implements CRUDReadModels, CRUDRe
 	*/
 	protected function modelUpdate(CActiveRecord $model, CActiveRecord $dbModel)
 	{
+		$dbModel->label = $model->label;
+		$dbModel->imageid = $model->imageid;
+		$dbModel->roleaccess = $model->roleaccess;
 		
+		$transaktion = Yii::app()->db->beginTransaction();
+		if ($dbModel->update() && $this->updateGalleryHeader($dbModel))
+			try
+			{
+				$transaktion->commit();
+				$content['success'] = Yii::app()->createAbsoluteUrl('gallery/edit', array(
+						'name' => $dbModel->label));
+				echo json_encode($content);
+				Yii::app()->end();
+			}
+			catch (Exception $e)
+			{
+		
+			}
+		
+			$transaktion->rollBack();
+			return BsHtml::alert(BsHtml::ALERT_COLOR_ERROR, MsgPicker::msg()->getMessage(MSG::ERROR_GALLERY_NOTUPDATE));
 	}
 	
 	protected function modelDelete(CActiveRecord $model)
 	{
-		
+		if ($model->delete())
+		{
+			echo json_encode(array('success' => Yii::app()->createAbsoluteUrl('gallery')));
+			Yii::app()->end();
+		}
 	}
 	
 	public function getEditParams(CActiveRecord $model)
@@ -144,6 +168,21 @@ class GalleryController extends CRUDController implements CRUDReadModels, CRUDRe
 			}
 		}
 		return true;		 
+	}
+	
+	private function updateGalleryHeader(Gallery $gallery)
+	{
+		foreach ($this->galleryLanguages as $galleryLanguage)
+		{
+			$galleryLanguage->galleryid = $gallery->galleryid;
+			$dbGalleryLanguage = GalleryLanguage::model()->findByAttributes(array('galleryid'=>$gallery->galleryid, 'languageid'=>$galleryLanguage->languageid));
+			$dbGalleryLanguage->head = $galleryLanguage->head;
+			if (!$dbGalleryLanguage->update())
+			{
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	public function getReadParams($name, $editLng)

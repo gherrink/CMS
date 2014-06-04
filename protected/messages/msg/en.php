@@ -91,6 +91,7 @@ return array(
 	'BTN_SITE_DELETECONTENT'	=> 'Von Seite löschen',
 	'BTN_CONTENT_ADD2SITE'		=> 'Zu Site hinzufügen',
 	'BTN_NEWS'					=> 'Neuigkeit hinzufügen',
+	'BTN_GALLERY_PICK'			=> 'Bild auswählen',
 	/*/Buttons */
 	
 	/* Models */
@@ -219,4 +220,8 @@ return array(
 		Entwickelt von Maurice Busch, Alessio Bisgen, Lukas Schreck, Angela Gerstner.</br>',
     'TEST' => 'This is a Test',
     'TEST_PARAM' => 'Test with params ###par1### and ###par2###',
+    
+    /* GALLERY */
+    'GAL_TITLE' => 'Titel',
+    /*/GALLER> */
 );

@@ -1,5 +1,5 @@
 <?php
-class GalleryController extends CRUDController implements CRUDReadModels
+class GalleryController extends CRUDController implements CRUDReadModels, CRUDEditParams
 {
 	
 	public function actionIndex()
@@ -50,5 +50,29 @@ class GalleryController extends CRUDController implements CRUDReadModels
 	protected function modelDelete(CActiveRecord $model)
 	{
 		
+	}
+	
+	public function getEditParams(CActiveRecord $model)
+	{
+		$imageurl = Yii::app()->baseUrl.'/images/default.jpg';
+		if ($model->image !== null) {
+			$imageurl = $model->image->url;
+		}
+		
+		$galleryLanguages = $model->languages;
+		if(count($galleryLanguages) <= 0)
+		{
+			foreach (Language::getActiveModelLanguages() as $language)
+			{
+				$galleryLanguage = new GalleryLanguage();
+				$galleryLanguage->languageid = $language->languageid;
+				$galleryLanguages[] = $galleryLanguage;
+			}
+		}
+		
+		return array(
+			'imageurl' => $imageurl,
+			'galleryLanguages' => $galleryLanguages,
+		);
 	}
 }

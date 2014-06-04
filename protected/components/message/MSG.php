@@ -96,6 +96,7 @@ class MSG
 	const BTN_SITE_DELETECONTENT	= 'BTN_SITE_DELETECONTENT';
 	const BTN_CONTENT_ADD2SITE		= 'BTN_CONTENT_ADD2SITE';
 	const BTN_NEWS					= 'BTN_NEWS';
+	const BTN_GALLERY_PICK          = 'BTN_GALLERY_PICK';
 	/*/Buttons */
 	
 	/* Models */
@@ -216,5 +217,9 @@ class MSG
 	const FOOTER			= 'FOOTER';
 	const TEST 				= 'TEST';
 	const TEST_PARAM 		= 'TEST_PARAM';
+	
+	/* GALLERY */
+	const GAL_TITLE			= 'GAL_TITLE';
+	/*/GALLER> */
 }
 

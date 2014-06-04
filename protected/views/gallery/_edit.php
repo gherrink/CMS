@@ -9,6 +9,8 @@
  * @var Gallery $model
  * @var BsActiveForm $form
  * @var String $url
+ * @var String $imageurl
+ * @var GalleryLanguage[] $galleryLanguages
  */
 
 
@@ -25,8 +27,19 @@ $form = $this->beginWidget('bootstrap.widgets.BsActiveForm', array(
 	<div class="row">
 		<div class="col-sm-6">
 			<?php echo $form->textFieldControlGroup($model, 'label', array('labelOptions'=>array('class'=>'control-label required'), 'controlOptions'=>array('class'=>''))); ?>
+			<?php $this->renderPartial('_languages', array('model'=>$model, 'form'=>$form, 'galleryLanguages'=>$galleryLanguages))?>
+		</div>
+		<div class="col-sm-6">
+			<?php echo BsHtml::imageThumbnail($imageurl, 'thumbnail', array('style'=>'width: 100%; height: auto;')); ?>
 		</div>
 	</div>
-	
+	<div class="row">
+		<div class="col-sm-6"></div>
+		<div class="col-sm-6">
+			<?php echo BsHtml::button(MsgPicker::msg()->getMessage(MSG::BTN_GALLERY_PICK))?>
+		</div>
+	</div>
+
+		
 	
 <?php $this->endWidget(); ?>

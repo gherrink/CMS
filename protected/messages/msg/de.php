@@ -92,6 +92,7 @@ return array(
 	'BTN_CONTENT_ADD2SITE'		=> 'Zu Site hinzufügen',
 	'BTN_NEWS'					=> 'Neuigkeit hinzufügen',
 	'BTN_GALLERY_PICK'			=> 'Bild auswählen',
+	'BTN_UPLOAD'				=> 'Hochladen',
 	/*/Buttons */
 	
 	/* Models */

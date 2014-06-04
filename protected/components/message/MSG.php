@@ -97,6 +97,7 @@ class MSG
 	const BTN_CONTENT_ADD2SITE		= 'BTN_CONTENT_ADD2SITE';
 	const BTN_NEWS					= 'BTN_NEWS';
 	const BTN_GALLERY_PICK          = 'BTN_GALLERY_PICK';
+	const BTN_UPLOAD				= 'BTN_UPLOAD';
 	/*/Buttons */
 	
 	/* Models */

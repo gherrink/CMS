@@ -18,6 +18,8 @@ echo BsHtml::button(MsgPicker::msg()->getMessage(MSG::BTN_CREATE), array(
 		'onclick' => 'cmsShowModalAjax("modal", "' . Yii::app()->createAbsoluteUrl('gallery/create') . '");',
 ));
 
+//Fall wir uns in der Galerie befinden
+
 if($model !== null)
 {
 	//Bearbeiten-Funktion
@@ -41,6 +43,8 @@ if($model !== null)
 			'onclick' => "cmsShowModalAjax('modalmsg', '$urlQuestionDelete', $json);")
 	);
 	//ENDE Lösch-Funktion
+	echo BsHtml::button(MsgPicker::msg()->getMessage(MSG::BTN_UPLOAD), array(
+		'onclick' => Yii::app()->createAbsoluteUrl('image/upload')));
 }
 ?>
 

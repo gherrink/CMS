@@ -14,9 +14,11 @@ return array(
     'preload' => array('log'),
     'aliases' => array(
         'bootstrap' => 'ext.bootstrap',
+    	'xupload' => 'ext.xupload',
     ),
     // autoloading model and component classes
     'import' => array(
+   		'application.models.*',
         'application.models.db.*',
         'application.models.forms.*',
         'application.models.data.*',

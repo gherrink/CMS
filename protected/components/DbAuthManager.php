@@ -28,7 +28,7 @@ class DbAuthManager extends CDbAuthManager
 	 * @param unknown $roles
 	 * @return Ambigous <Ambigous, string, mixed, multitype:>
 	 */
-	private function buildRolesArray($roles)
+	private static function buildRolesArray($roles)
 	{
 		while ( ($role = current($roles)) !== FALSE ) {
  			$return[key($roles)] = MSG::msg()->getMsg(key($roles));

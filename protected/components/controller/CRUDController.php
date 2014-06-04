@@ -173,7 +173,7 @@ abstract class CRUDController extends ViewController
                 $params['editable']));
 
         if ($this instanceof CRUDReadParams)
-            $params = CMap::mergeArray($params, $this->getReadParams());
+            $params = CMap::mergeArray($params, $this->getReadParams($name, $editLng));
 
         return $params;
     }
@@ -217,8 +217,9 @@ abstract class CRUDController extends ViewController
         $model = $class->newInstanceArgs(array('create'));
         $url = Yii::app()->createAbsoluteUrl(strtolower($modelName) . '/create');
         $modelCheck = new ModelCheck($model, $modelName, 'create' . $modelName, $formName);
-
-        if ($this->checkModel($modelCheck))
+		
+        $aditionalVal = ($this instanceof CRUDValidate && $this->validateAditional($model));
+        if ($this->checkModel($modelCheck) && $aditionalVal)
         {
             $model->update_userid = Yii::app()->user->getID();
             $model->update_time = date('Y-m-d H:i:s', time());
@@ -248,8 +249,9 @@ abstract class CRUDController extends ViewController
         $url = Yii::app()->createAbsoluteUrl(strtolower($modelName) . '/update', array(
             'name' => $name));
         $modelCheck = new ModelCheck($model, $modelName, 'update' . $modelName, $formName);
-
-        if ($this->checkModel($modelCheck))
+		
+        $aditionalVal = ($this instanceof CRUDValidate && $this->validateAditional($model));
+        if ($this->checkModel($modelCheck) && $aditionalVal)
         {
             $model->update_userid = Yii::app()->user->getID();
             $model->update_time = date('Y-m-d H:i:s', time());

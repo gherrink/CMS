@@ -91,6 +91,7 @@ return array(
 	'BTN_SITE_DELETECONTENT'	=> 'Von Seite löschen',
 	'BTN_CONTENT_ADD2SITE'		=> 'Zu Site hinzufügen',
 	'BTN_NEWS'					=> 'Neuigkeit hinzufügen',
+	'BTN_GALLERY_PICK'			=> 'Bild auswählen',
 	/*/Buttons */
 	
 	/* Models */
@@ -199,6 +200,7 @@ return array(
 	'QUESTION_DELETE_MENU'			=> 'Möchten Sie den Menüpunkt wirklich löschen? Alle Untergeordnetenmenüpunkte werden ebenfalls gelöscht.',
 	'QUESTION_EXIT_GALLERYCREATE'   => 'Möchten Sie wirklich die Galerie-Erstellung verlassen? Die Galerie wurde noch nicht gespeichert.',
 	'QUESTION_EXIT_GALLERYUPDATE'	=> 'Möchten Sie wirklich die Galerie-Bearbeitung verlassen? Die Änderungen wurden noch nicht gespeichert',
+	'QUESTION_DELETE_GALLERY'		=> 'Möchten Sie wirklich diese Galerie löschen?',
 	/*/QUESTION */
 		
 	/* MAIL */
@@ -219,4 +221,8 @@ return array(
 		Entwickelt von Maurice Busch, Alessio Bisgen, Lukas Schreck, Angela Gerstner.</br>',
     'TEST' => 'This is a Test',
     'TEST_PARAM' => 'Test with params ###par1### and ###par2###',
+    
+    /* GALLERY */
+    'GAL_TITLE' => 'Titel',
+    /*/GALLER> */
 );

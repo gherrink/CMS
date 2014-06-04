@@ -43,7 +43,7 @@ class SiteController extends CRUDController implements CRUDReadParams, CRUDReadC
     /**
      * @see CRUDReadParams::getReadParams
      */
-    public function getReadParams()
+    public function getReadParams($name, $editLng)
     {
         return array('layout' => $this->getModel()->layout);
     }

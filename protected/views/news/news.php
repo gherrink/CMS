@@ -16,10 +16,12 @@
 <h1>Neuigkeiten</h1>
 
 <?php
-
-	echo BsHtml::button(MsgPicker::msg()->getMessage(MSG::BTN_NEWS), array('onclick'=>'showModalAjax("modal", "'.Yii::app()->createAbsoluteUrl('news/create').'");'));
+//Button um Neuigkeiten hinzuzufügen
+	echo BsHtml::button(MsgPicker::msg()->getMessage(MSG::BTN_NEWS), array('onclick'=>'cmsShowModalAjax("modal", "'.Yii::app()->createAbsoluteUrl('news/create').'");'));
+	
 	$this->renderPartial('_news', array('ID'=>Yii::app()->user->getID()));
 
+//Buttons am Seitenende	
 	echo BsHtml::pager(array(
 			array(
 					'label' => '<- Älter',
@@ -47,6 +49,7 @@ $this->widget('application.widgets.aloha.Aloha', array(
 ?>
 
 <script type="text/javascript">
+// textformatierungsding
 function alohaSave()
 {
 	var news = Aloha.activeEditable.getContents();
@@ -68,5 +71,4 @@ function alohaSave()
 }
 </script>
 
-?>
 

@@ -21,7 +21,7 @@
  *
  * @author Maurice Busch <busch.maurice@gmx.net>
  */
-class SiteController extends CRUDController implements CRUDReadParams, CRUDReadCheck, CRUDEditParams
+class SiteController extends CRUDController implements CRUDReadParams, CRUDReadCheck, CRUDEditParams, CRUDVisitHelper
 {
 
     /**
@@ -190,6 +190,13 @@ class SiteController extends CRUDController implements CRUDReadParams, CRUDReadC
             echo json_encode(array('success' => Yii::app()->createAbsoluteUrl('site')));
             Yii::app()->end();
         }
+    }
+    
+    public function logVisit()
+    {
+        $model = $this->getModel();
+        if($model != null)
+            VisitHelper::siteVisit($model->siteid);
     }
 
     /**

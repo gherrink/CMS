@@ -28,9 +28,4 @@ class ImageTest extends ModelTestCase
     {
         return 'Image';
     }
-
-    public function testSearch()
-    {
-        
-    }
 }

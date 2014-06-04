@@ -28,9 +28,4 @@ class NewsLanguageTest extends ModelTestCase
     {
         return 'NewsLanguage';
     }
-
-    public function testSearch()
-    {
-        
-    }
 }

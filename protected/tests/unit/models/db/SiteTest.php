@@ -28,9 +28,4 @@ class SiteTest extends ModelTestCase
     {
         return 'Site';
     }
-
-    public function testSearch()
-    {
-        
-    }
 }

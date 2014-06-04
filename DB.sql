@@ -71,8 +71,8 @@ CREATE TABLE Visit
 	visitid char(32) NOT NULL UNIQUE,
 	session varchar(32) NOT NULL,
 	ip varchar(15) NOT NULL,
-	system char(3) NOT NULL,
-	browser char(3) NOT NULL,
+	system varchar(20) NOT NULL,
+	browser varchar(40) NOT NULL,
 	version varchar(20) NOT NULL,
 	PRIMARY KEY (visitid)
 );
@@ -252,7 +252,7 @@ CREATE TABLE VisitSite
 	siteid char(32) NOT NULL,
 	languageid char(2) NOT NULL,
 	time timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL,
-	PRIMARY KEY (visitid, siteid, languageid)
+	PRIMARY KEY (visitid, siteid, languageid, time)
 );
 
 

@@ -46,7 +46,12 @@
  * You can implement the CRUDReadParams interface to tell the read action
  * to give aditional parameters for the view. For this you have to
  * implement the method:
- *  - publci function getParamsRead();
+ *  - public function getParamsRead();
+ * 
+ * You can implement the CRUDVisitHelper interface to tell the read action
+ * to log the visit of this action. For this you have to implement
+ * the method:
+ *  - public function logVisit();
  * 
  * Für den Controller müssen folgende Views erstellt werden:
  *  - {modelName}
@@ -138,8 +143,9 @@ abstract class CRUDController extends ViewController
     public function actionRead($name, $edit = false, $editLng = '')
     {
         $this->checkAccess('read' . $this->getModelName());
-
         $this->render(strtolower($this->getModelName()), $this->buildReadParams($name, $edit, $editLng));
+        if($this instanceof CRUDVisitHelper)
+            $this->logVisit();
     }
 
     private function buildReadParams($name, $edit, $editLng)

@@ -64,6 +64,16 @@ abstract class ModelTestCase extends DbTestCase
         $this->assertTrue(is_array($lables), "{$this->getModelName()}: Lables must be an array");
     }
     
-    public abstract function testSearch();
+    public function testSearch()
+    {
+        $result = $this->getModel()->search();
+        $this->assertInstanceOf('CActiveDataProvider', $result, 'search not an instanceof CActiveDataProvider');
+    }
+    
+    public function testModel()
+    {
+        $model = $this->getModel()->model();
+        $this->assertInstanceOf($this->getModelName(), $model);
+    }
 
 }

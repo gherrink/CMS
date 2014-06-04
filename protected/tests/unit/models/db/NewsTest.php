@@ -28,9 +28,4 @@ class NewsTest extends ModelTestCase
     {
         return 'News';
     }
-
-    public function testSearch()
-    {
-        
-    }
 }

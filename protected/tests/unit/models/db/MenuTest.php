@@ -28,9 +28,4 @@ class MenuTest extends ModelTestCase
     {
         return 'Menu';
     }
-
-    public function testSearch()
-    {
-        
-    }
 }

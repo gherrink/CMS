@@ -18,14 +18,14 @@
  */
 
 /**
- * Description of LanguageTest
+ * Description of VisitTest
  *
  * @author Maurice Busch <busch.maurice@gmx.net>
  */
-class SiteContentTest extends ModelTestCase
+class VisitTest extends ModelTestCase
 {
     public function getModelName()
     {
-        return 'SiteContent';
+        return 'Visit';
     }
 }

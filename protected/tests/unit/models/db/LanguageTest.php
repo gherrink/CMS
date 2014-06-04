@@ -28,9 +28,4 @@ class LanguageTest extends ModelTestCase
     {
         return 'Language';
     }
-
-    public function testSearch()
-    {
-        
-    }
 }

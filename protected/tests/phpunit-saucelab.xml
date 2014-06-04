@@ -35,6 +35,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             <directory suffix=".php">../components</directory>
             <directory suffix=".php">../models</directory>
             <exclude>
+                <directory suffix=".php">../components/controller</directory>
                 <directory suffix=".php">../models/data</directory>
             </exclude>
         </whitelist>

@@ -200,6 +200,7 @@ return array(
 	'QUESTION_DELETE_MENU'			=> 'Möchten Sie den Menüpunkt wirklich löschen? Alle Untergeordnetenmenüpunkte werden ebenfalls gelöscht.',
 	'QUESTION_EXIT_GALLERYCREATE'   => 'Möchten Sie wirklich die Galerie-Erstellung verlassen? Die Galerie wurde noch nicht gespeichert.',
 	'QUESTION_EXIT_GALLERYUPDATE'	=> 'Möchten Sie wirklich die Galerie-Bearbeitung verlassen? Die Änderungen wurden noch nicht gespeichert',
+	'QUESTION_DELETE_GALLERY'		=> 'Möchten Sie wirklich diese Galerie löschen?',
 	/*/QUESTION */
 		
 	/* MAIL */

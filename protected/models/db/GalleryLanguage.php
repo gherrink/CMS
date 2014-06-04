@@ -26,7 +26,7 @@ class GalleryLanguage extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('galleryid, languageid', 'required'),
+			array('galleryid, languageid, head', 'required'),
 			array('galleryid', 'length', 'max'=>32),
 			array('languageid', 'length', 'max'=>2),
 			array('head', 'length', 'max'=>40),
@@ -55,7 +55,7 @@ class GalleryLanguage extends CActiveRecord
 		return array(
 			'galleryid' => 'Galleryid',
 			'languageid' => 'Languageid',
-			'head' => 'Head',
+			'head' => MsgPicker::msg()->getMessage(MSG::GAL_TITLE),
 		);
 	}
 

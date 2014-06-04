@@ -26,5 +26,5 @@ interface CRUDReadParams
     /**
      * @return array Array of params for the read action
      */
-    public function getReadParams();
+    public function getReadParams($name, $editLng);
 }

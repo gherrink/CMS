@@ -27,7 +27,6 @@ $label = MsgPicker::msg()->getMessage(strtoupper($model->languageid));
             'name' => "SiteLanguage[$counter][head]",
                 )
         );
-        $form = new BsActiveForm();
         echo $form->hiddenField($model, 'languageid', array('name' => "SiteLanguage[$counter][languageid]"));
         ?>
     </div>

@@ -28,9 +28,4 @@ class UserTest extends ModelTestCase
     {
         return 'User';
     }
-
-    public function testSearch()
-    {
-        
-    }
 }

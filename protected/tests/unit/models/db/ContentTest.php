@@ -28,9 +28,4 @@ class ContentTest extends ModelTestCase
     {
         return 'Content';
     }
-
-    public function testSearch()
-    {
-        
-    }
 }

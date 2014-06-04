@@ -183,9 +183,7 @@ class LoginController extends Controller
 			if($user->mail_valid)
 			{
 				Yii::app()->user->login($identity);
-				
-				//@TODO Login des Benutzers speichern
-				
+				VisitHelper::userLogin($user->userid);
 				return true;
 			}
 			else

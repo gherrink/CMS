@@ -28,11 +28,4 @@ class GalleryLanguageTest extends ModelTestCase
     {
         return 'GalleryLanguage';
     }
-
-    public function testSearch()
-    {
-        
-    }
-
-//put your code here
 }

@@ -109,13 +109,18 @@ class Language extends CActiveRecord
 		return ($language !== null);
 	}
     
+	public static function getActiveModelLanguages()
+	{
+		return Language::model()->findAllByAttributes(array('active'=>1));
+	}
+	
     /**
 	 * gives an Array of all active languages
 	 * @return string[]
 	 */
 	public static function getActiveLanguages()
 	{
-		$languages = Language::model()->findAllByAttributes(array('active'=>1));
+		$languages = $this->getActiveModelLanguages();
 		$return = array();
 		foreach ($languages as $language)
 			$return[$language->languageid] = MsgPicker::msg()->getMessage(strtoupper($language->languageid));

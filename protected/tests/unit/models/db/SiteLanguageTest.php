@@ -28,9 +28,4 @@ class SiteLanguageTest extends ModelTestCase
     {
         return 'SiteLanguage';
     }
-
-    public function testSearch()
-    {
-        
-    }
 }

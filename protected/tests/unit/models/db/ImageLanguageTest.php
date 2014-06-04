@@ -18,14 +18,14 @@
  */
 
 /**
- * Description of LanguageTest
+ * Description of ImageLanguageTest
  *
  * @author Maurice Busch <busch.maurice@gmx.net>
  */
-class SiteContentTest extends ModelTestCase
+class ImageLanguageTest extends ModelTestCase
 {
     public function getModelName()
     {
-        return 'SiteContent';
+        return 'ImageLanguage';
     }
 }

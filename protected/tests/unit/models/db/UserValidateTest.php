@@ -28,9 +28,4 @@ class UserValidateTest extends ModelTestCase
     {
         return 'UserValidate';
     }
-
-    public function testSearch()
-    {
-        
-    }
 }

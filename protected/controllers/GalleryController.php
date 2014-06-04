@@ -1,6 +1,7 @@
 <?php
-class GalleryController extends CRUDController implements CRUDReadModels
+class GalleryController extends CRUDController implements CRUDReadModels, CRUDReadParams, CRUDEditParams, CRUDValidate
 {
+	private $galleryLanguages = array();
 	
 	public function actionIndex()
 	{
@@ -9,6 +10,9 @@ class GalleryController extends CRUDController implements CRUDReadModels
 	
 	public function getReadModels($name, $editLng)
 	{
+		if($editLng === '')
+			$editLng = Yii::app()->language;
+		
 		if($name === '' || $name === null || $name === 'index')
 			return GalleryView::model()->findAll("parent_label IS NULL AND languageid = '$editLng'");
 		else
@@ -33,7 +37,24 @@ class GalleryController extends CRUDController implements CRUDReadModels
 	*/
 	protected function modelCreate(CActiveRecord $model)
 	{
+		$model->galleryid = Yii::app()->keygen->getUniquKey();
 		
+		$transaktion = Yii::app()->db->beginTransaction();
+		if ($model->insert() && $this->createGalleryHeader($model))
+			try
+			{
+				$transaktion->commit();
+				$content['success'] = Yii::app()->createAbsoluteUrl('gallery/edit', array(
+						'name' => $model->label));
+				echo json_encode($content);
+				Yii::app()->end();
+			}
+			catch (Exception $e)
+			{
+				
+			}
+		
+		$transaktion->rollBack();
 	}
 	
 	/**
@@ -44,11 +65,139 @@ class GalleryController extends CRUDController implements CRUDReadModels
 	*/
 	protected function modelUpdate(CActiveRecord $model, CActiveRecord $dbModel)
 	{
+		$dbModel->label = $model->label;
+		$dbModel->imageid = $model->imageid;
+		$dbModel->roleaccess = $model->roleaccess;
 		
+		$transaktion = Yii::app()->db->beginTransaction();
+		if ($dbModel->update() && $this->updateGalleryHeader($dbModel))
+			try
+			{
+				$transaktion->commit();
+				$content['success'] = Yii::app()->createAbsoluteUrl('gallery/edit', array(
+						'name' => $dbModel->label));
+				echo json_encode($content);
+				Yii::app()->end();
+			}
+			catch (Exception $e)
+			{
+		
+			}
+		
+			$transaktion->rollBack();
+			return BsHtml::alert(BsHtml::ALERT_COLOR_ERROR, MsgPicker::msg()->getMessage(MSG::ERROR_GALLERY_NOTUPDATE));
 	}
 	
 	protected function modelDelete(CActiveRecord $model)
 	{
+		if ($model->delete())
+		{
+			echo json_encode(array('success' => Yii::app()->createAbsoluteUrl('gallery')));
+			Yii::app()->end();
+		}
+	}
+	
+	public function getEditParams(CActiveRecord $model)
+	{
+
+		$selectedRole = DbAuthManager::getDefaultGalleryRole();
+		if ($model->roleaccess !== null)
+			$selectedRole = $model->roleaccess;
 		
+		$imageurl = Yii::app()->baseUrl.'/images/default.jpg';
+		if ($model->image !== null) {
+			$imageurl = Yii::app()->baseUrl . "/" . $model->image->url;
+		}
+		
+		return array(
+			'imageurl' => $imageurl,
+			'galleryLanguages' => $this->getGalleryLanguages($model),
+			'roles' => DbAuthManager::getRolesGallery(),
+			'selectedRole' => $selectedRole,
+		);
+	}
+	
+	public function validateAditional(CActiveRecord $model)
+	{
+		$valid = true;
+		
+		if(! isset($_POST['GalleryLanguage']))
+			return false;
+		
+		foreach ($_POST['GalleryLanguage'] as $galleryAttributes)
+		{
+			$galleryLanguage = new GalleryLanguage();
+			$galleryLanguage->attributes = $galleryAttributes;
+			$galleryLanguage->galleryid = $model->galleryid;
+			if ($galleryLanguage->validate())
+				$valid = false;
+				
+			$this->galleryLanguages[] = $galleryLanguage;
+		}
+		
+		return $valid;
+	}
+	
+	private function getGalleryLanguages(Gallery $model)
+	{
+		if(count($this->galleryLanguages) > 0)
+			return $this->galleryLanguages;
+		
+		$galleryLanguages = GalleryLanguage::model()->findAllByAttributes(array('galleryid'=>$model->galleryid));
+		if(count($galleryLanguages) <= 0)
+		{
+			foreach (Language::getActiveModelLanguages() as $language)
+			{
+				$galleryLanguage = new GalleryLanguage();
+				$galleryLanguage->languageid = $language->languageid;
+				$galleryLanguages[] = $galleryLanguage;
+			}
+		}
+		
+		return $galleryLanguages;
+	}
+	
+	private function createGalleryHeader(Gallery $gallery)
+	{
+		foreach ($this->galleryLanguages as $galleryLanguage)
+		{
+			$galleryLanguage->galleryid = $gallery->galleryid;
+			if (!$galleryLanguage->insert())
+			{
+				return false;
+			}
+		}
+		return true;		 
+	}
+	
+	private function updateGalleryHeader(Gallery $gallery)
+	{
+		foreach ($this->galleryLanguages as $galleryLanguage)
+		{
+			$galleryLanguage->galleryid = $gallery->galleryid;
+			$dbGalleryLanguage = GalleryLanguage::model()->findByAttributes(array('galleryid'=>$gallery->galleryid, 'languageid'=>$galleryLanguage->languageid));
+			$dbGalleryLanguage->head = $galleryLanguage->head;
+			if (!$dbGalleryLanguage->update())
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public function getReadParams($name, $editLng)
+	{
+		$head = '';
+		$model = null;
+		if($name !== null && $name !== '' && $name !== 'index')
+		{
+			$model = $this->getModel($name, $editLng);
+			$language = GalleryLanguage::model()->findByAttributes(array('galleryid'=>$model->galleryid, 'languageid'=>Yii::app()->language));
+			$head = $language->head;
+		}
+		return array(
+			'head' => $head,
+			'model' => $model,
+		);
 	}
 }

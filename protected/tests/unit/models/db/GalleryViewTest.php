@@ -28,9 +28,4 @@ class GalleryViewTest extends ModelTestCase
     {
         return 'GalleryView';
     }
-
-    public function testSearch()
-    {
-        
-    }
 }

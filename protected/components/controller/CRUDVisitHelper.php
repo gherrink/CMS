@@ -18,14 +18,12 @@
  */
 
 /**
- * Description of LanguageTest
- *
+ * You can implement the CRUDVisitHelper interface to tell the read action
+ * to log the visit of this action.
+ * 
  * @author Maurice Busch <busch.maurice@gmx.net>
  */
-class SiteContentTest extends ModelTestCase
+interface CRUDVisitHelper
 {
-    public function getModelName()
-    {
-        return 'SiteContent';
-    }
+    public function logVisit();
 }

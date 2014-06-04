@@ -28,9 +28,4 @@ class SiteContentViewTest extends ModelTestCase
     {
         return 'SiteContentView';
     }
-
-    public function testSearch()
-    {
-        
-    }
 }

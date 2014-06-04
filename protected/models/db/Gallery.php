@@ -42,17 +42,18 @@ class Gallery extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('galleryid, label, imageid, roleaccess, update_userid, update_time, create_userid', 'required'),
+			array('label, imageid, roleaccess', 'required'),
 			array('galleryid, imageid, parent_galleryid', 'length', 'max'=>32),
 			array('label, update_userid, create_userid', 'length', 'max'=>20),
 			array('roleaccess', 'length', 'max'=>64),
 			array('create_time', 'safe'),
+			array('imageid', 'safe', 'on'=>'create, update'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('galleryid, label, imageid, parent_galleryid, roleaccess, update_userid, update_time, create_userid, create_time', 'safe', 'on'=>'search'),
 		);
 	}
-
+	
 	/**
 	 * @return array relational rules.
 	 */
@@ -82,7 +83,7 @@ class Gallery extends CActiveRecord
 			'label' => 'Label',
 			'imageid' => 'Imageid',
 			'parent_galleryid' => 'Parent Galleryid',
-			'roleaccess' => 'Roleaccess',
+			'roleaccess' => MsgPicker::msg()->getMessage(MSG::MODEL_ROLE),
 			'update_userid' => 'Update Userid',
 			'update_time' => 'Update Time',
 			'create_userid' => 'Create Userid',

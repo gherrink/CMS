@@ -167,7 +167,7 @@ class SiteController extends CRUDController implements CRUDReadParams, CRUDReadC
         return true;
     }
     
-    public function getEditParams(\CActiveRecord $model)
+    public function getEditParams(CActiveRecord $model)
     {
         $params['roles'] = DbAuthManager::getRolesSite();
         $params['layouts'] = LayoutManager::getLayouts();

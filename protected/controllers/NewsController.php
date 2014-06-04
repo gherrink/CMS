@@ -1,9 +1,18 @@
 <?php
 
-class NewsController extends CRUDController
-{
+class NewsController extends CRUDController implements CRUDEditParams{
 
     public $defaultAction = 'news';
+    
+    public function getEditParams(\CActiveRecord $model){
+    	$params['roles'] = DbAuthManager::getRolesNews();
+
+        $params['selectedRole'] = DbAuthManager::getDefaultNewsRole();
+        if ($model->roleaccess !== null)
+            $params['selectedRole'] = $model->roleaccess;
+
+        return $params;
+    }
 
     public function actionNews()
     {

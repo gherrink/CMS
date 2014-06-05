@@ -178,7 +178,7 @@ class SiteController extends CRUDController implements CRUDReadParams, CRUDReadC
 
         $params['selectedLayout'] = LayoutManager::getDefaultLayout();
         if ($model->layout !== null)
-            $params['selectedRole'] = $model->layout;
+            $params['selectedLayout'] = $model->layout;
         
         return $params;
     }

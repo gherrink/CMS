@@ -8,15 +8,27 @@
  * @var string $editLng
  */
 ?>
-<h1><?php echo MsgPicker::msg()->getMessage(MSG::MP_GALLERY).": ".$head ?></h1>
+<h1>
+	<?php
+		if ($head !== "") {
+			echo MsgPicker::msg()->getMessage(MSG::MP_GALLERY).": ".$head;
+		}
+		else 
+		{
+			echo MsgPicker::msg()->getMessage(MSG::MP_GALLERIES);
+		}
+	?>
+</h1>
 
 <!-- Menü-Buttons -->
 <?php
-
-//Erstellen-Funktion
-echo BsHtml::button(MsgPicker::msg()->getMessage(MSG::BTN_CREATE), array(
-		'onclick' => 'cmsShowModalAjax("modal", "' . Yii::app()->createAbsoluteUrl('gallery/create') . '");',
-));
+//Erstellen-Button nur anzeigen, wenn man sich in der Galerienübersicht befindet 
+if ($head === "") {
+	//Erstellen-Funktion
+	echo BsHtml::button(MsgPicker::msg()->getMessage(MSG::BTN_CREATE), array(
+			'onclick' => 'cmsShowModalAjax("modal", "' . Yii::app()->createAbsoluteUrl('gallery/create') . '");',
+	));
+}
 
 //Fall wir uns in der Galerie befinden
 

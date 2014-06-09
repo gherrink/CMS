@@ -28,6 +28,7 @@ class WebTestCase extends CWebTestCase
     protected function setUp()
     {
         parent::setUp();
+	$this->setBrowser('firefox');
         $this->setBrowserUrl(TEST_BASE_URL);
     }
 
@@ -103,6 +104,47 @@ class WebTestCase extends CWebTestCase
                 ),
             );
         $this->assertTag($errorMatcher, $this->getHtmlSource());
+    }
+
+    /*
+     * Logs in with the given username and password
+     * @param string $name
+     */
+    public function logInAs($name, $password)
+    {
+        $this->visitTag('login', array(
+            'tag' => 'li',
+            'content' => $this->getMessage(MSG::HEAD_LOGIN)
+        ));
+	$this->fillin('User[userid]', $name);
+	$this->fillin('User[password]', $password);
+	$this->submitForm();
+	$this->assertTextPresent($name);
+    }
+
+    /**
+     * Submit the Form
+     */
+    public function submitForm()
+    {
+        $this->clickAndWait("//button[@type='submit']");
+    }
+
+    /**
+     * presses the button
+     */
+    public function pressButton($name)
+    {
+	$this->click("name=yt0");	
+    }
+
+    /**
+     * tests if two urls are the are equal
+     */
+
+    public function isUrlTheSame($url){
+	$currentURL = $this->getLocation();
+	$this->assertStringStartsWith('http://localhost/' . TEST_BASE_URL_PATH . $url, $currentURL);
     }
 
 }

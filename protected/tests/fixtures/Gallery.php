@@ -37,4 +37,17 @@ return array(
 	'create_userid' => 'bob123',
 	'create_time' => '2014-06-08 15:20:41',
     ),
+'LoeschGalerie' => array(
+        'galleryid' => '0db2660c259c6bd8ad7898f5973baa9e',
+        'label' => 'LoeschGalerie',
+        'imageid' => 'default',
+	'parent_galleryid' => 'NULL',
+	'roleaccess' => 'MGALLERY',
+	'position' => '0',
+	'haschild' => '0',
+	'update_userid' => 'bob123',
+	'update_time' => '2014-06-08 15:20:41',
+	'create_userid' => 'bob123',
+	'create_time' => '2014-06-08 15:20:41',
+    ),
 );

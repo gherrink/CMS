@@ -29,4 +29,10 @@ return array(
         'imageid' => 'default',
         'position' => '0',
     ),
+
+    'LoeschGalerieDefault' => array(
+        'galleryid' => '0db2660c259c6bd8ad7898f5973baa9e',
+        'imageid' => 'default',
+        'position' => '0',
+    ),
 );

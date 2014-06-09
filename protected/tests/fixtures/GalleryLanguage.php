@@ -18,7 +18,7 @@
  */
 
 /**
- * Description of AuthAssignment
+ * Description of GalleryLanguage
  *
  * @author Maurice Busch <busch.maurice@gmx.net>
  */
@@ -28,5 +28,10 @@ return array(
         'galleryid' => '0db2660c259c6bd8ad7898f5973baa9d',
         'languageid' => 'de',
         'head' => 'Erste Galerie',
+    ),
+    'LoeschGalerie' => array(
+        'galleryid' => '0db2660c259c6bd8ad7898f5973baa9e',
+        'languageid' => 'de',
+        'head' => 'LoeschGalerie',
     ),
 );

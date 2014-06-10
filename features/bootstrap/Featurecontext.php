@@ -87,6 +87,17 @@ class FeatureContext extends BehatContext
     }
 
     /**
+     * @Then /^I shoud see an error on the help block of "([^"]*)"$/
+     */
+    public function iShoudSeeAnErrorOnTheHelpBlockOf($fields)
+    {
+        $fields = str_replace(' ', '', $fields);
+        foreach (mb_split(',', $fields) as $field)
+            $this->getTest()->seeErrorOnHelpBlockOf($field);
+    }
+
+
+    /**
      * @Then /^I shoud see that my mail was send correctly$/
      */
     public function iShoudSeeThatMyMailWasSendCorrectly()
@@ -238,6 +249,114 @@ class FeatureContext extends BehatContext
     {
         $this->getTest('Gallery')->seeGalleryNotVisible($name);
     }
+
+
+    /**
+     * @Given /^I am logged in as site moderator$/
+     */
+    public function iAmLoggedInAsSiteModerator()
+    {
+        $this->getTest('Site')->logInAs('bob123', 'Boddo123');
+    }
+
+    /**
+     * @Given /^I am visiting the createpage page$/
+     */
+    public function iAmVisitingTheCreatepagePage()
+    {
+        //$this->getTest('Site')->visitCreatePage();
+	$this->getTest('Site')->visitCreatePage();
+    }
+
+    /**
+     * @Given /^I set the page title to "([^"]*)"$/
+     */
+    public function iSetThePageTitleTo($title)
+    {
+       $this->getTest('Site')->setPageTitleTo($title);
+    }
+
+    /**
+     * @Given /^I create the page$/
+     */
+    public function iCreateThePage()
+    {
+        $this->getTest('Site')->createPage();
+    }
+
+    /**
+     * @Given /^I try to create the page$/
+     */
+    public function iTryToCreateThePage()
+    {
+        $this->getTest('Site')->tryCreatePage();
+    }
+
+
+    /**
+     * @Given /^I visit the "([^"]*)" page$/
+     */
+    public function iVisitThePage($label)
+    {
+	$this->getTest('Site')->visitPage($label);
+    }
+
+    /**
+     * @Then /^I should see the text "([^"]*)"$/
+     */
+    public function iShouldSeeTheText($text)
+    {
+        $this->getTest()->seeTextPresent($text);
+    }
+
+    /**
+     * @When /^I am visiting the editpage page of "([^"]*)"$/
+     */
+    public function iAmVisitingTheEditpagePageOf($label)
+    {
+        $this->getTest('Site')->visitEditPage($label);
+    }
+
+    /**
+     * @Given /^I open the site update form$/
+     */
+    public function iOpenTheSiteUpdateForm()
+    {
+        $this->getTest('Site')->openUpdateForm();
+    }
+
+    /**
+     * @Given /^I update the site$/
+     */
+    public function iUpdateTheSite()
+    {
+        $this->getTest('Site')->updateSite();
+    }
+
+    /**
+     * @Then /^I should be on the editpage page of "([^"]*)"$/
+     */
+    public function iShouldBeOnTheEditpagePageOf($label)
+    {
+        $this->getTest('Site')->isUserOnEditPageOf($label);
+    }
+
+    /**
+     * @Given /^I delete the site$/
+     */
+    public function iDeleteTheSite()
+    {
+        $this->getTest('Site')->deletePage();
+    }
+
+    /**
+     * @Given /^I should not see the text "([^"]*)"$/
+     */
+    public function iShouldNotSeeTheText($text)
+    {
+        $this->getTest()->seeTextNotPresent($text);
+    }
+
 
 
 }

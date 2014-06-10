@@ -147,4 +147,20 @@ class WebTestCase extends CWebTestCase
 	$this->assertStringStartsWith('http://localhost/' . TEST_BASE_URL_PATH . $url, $currentURL);
     }
 
+    /**
+     * tests that the text is present on the page
+     */
+
+    public function seeTextPresent($text){
+	$this->assertTextPresent($text);
+    }
+
+    /**
+     * tests that the text is NOT present on the page
+     */
+
+    public function seeTextNotPresent($text){
+	$this->assertTextNotPresent($text);
+    }
+
 }

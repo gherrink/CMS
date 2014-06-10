@@ -18,30 +18,26 @@
  */
 
 /**
- * Description of AuthAssignment
+ * Description of SiteLanguage
  *
  * @author Maurice Busch <busch.maurice@gmx.net>
  */
 
 return array(
-    'MGALLERY' => array(
-        'itemname' => 'MGALLERY',
-        'userid' => 'bob123',
-        'data' => 'N;',
+    'ErsteSeite' => array(
+        'siteid' => 'd528ad0a31f914d5d8a4cb19c52c56f1',
+        'languageid' => 'de',
+        'head' => 'Erste Seite',
     ),
-    'MSITE' => array(
-        'itemname' => 'MSITE',
-        'userid' => 'bob123',
-        'data' => 'N;',
+    'LoeschSeite' => array(
+        'siteid' => 'd528ad0a31f914d5d8a4cb19c52c56f2',
+        'languageid' => 'de',
+        'head' => 'LoeschSeite',
     ),
 //    '' => array(
-//        'userid' => '',
-//        'firstname' => '',
-//        'lastname' => '',
-//        'password' => '',
-//        'mail' => '',
-//        'mail_valid' => '',
-//        'active' => '',
+//        'siteid' => '',
+//        'languageid' => '',
+//        'head' => '',
 //    ),
 
 );

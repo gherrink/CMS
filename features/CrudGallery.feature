@@ -4,12 +4,12 @@ Feature: Show Gallery
     I need to be able to edit galleries
 
     Scenario: show existing gallery
-	Given I am logged in as moderator
+	Given I am logged in as gallery moderator
 	And I am visting the gallery page
 	Then I should see the gallery "Erste Galerie"
 
     Scenario: create gallery successful
-	Given I am logged in as moderator
+	Given I am logged in as gallery moderator
 	And I am visting the gallery page
 	When I open the gallery creation form
 	And I enter "TestGallery" into the "label"field
@@ -20,7 +20,7 @@ Feature: Show Gallery
 	And I should see the gallery "TestGallery"
 
     Scenario Outline: update gallery
-	Given I am logged in as moderator
+	Given I am logged in as gallery moderator
 	And I am visting the gallery page
         When I open the "<label>" gallery with name "<gallerybefore>"
 	And I open the gallery update form
@@ -36,7 +36,7 @@ Feature: Show Gallery
 	| ZweiteGalerie | Erste Galerie | GalleryLanguage[0][head] | Zweite Galerie | Zweite Galerie |
 
     Scenario: delete gallery successful
-	Given I am logged in as moderator
+	Given I am logged in as gallery moderator
 	And I am visting the gallery page
 	When I open the "LoeschGalerie" gallery with name "LoeschGalerie"
 	And I delete the gallery

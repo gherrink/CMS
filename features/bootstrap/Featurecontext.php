@@ -134,12 +134,13 @@ class FeatureContext extends BehatContext
         $this->getTest()->seeLogout($user);
     }
 
+
     /**
-     * @Given /^I am logged in as moderator$/
+     * @Given /^I am logged in as gallery moderator$/
      */
-    public function iAmLoggedInAsModerator()
-    {    
-	$this->getTest('Gallery')->logInAs('bob123', 'Boddo123');
+    public function iAmLoggedInAsGalleryModerator()
+    {
+        $this->getTest('Gallery')->logInAs('bob123', 'Boddo123');
     }
 
     /**
@@ -237,8 +238,6 @@ class FeatureContext extends BehatContext
     {
         $this->getTest('Gallery')->seeGalleryNotVisible($name);
     }
-
-
 
 
 }

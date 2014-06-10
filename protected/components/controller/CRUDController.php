@@ -218,7 +218,10 @@ abstract class CRUDController extends ViewController
         $url = Yii::app()->createAbsoluteUrl(strtolower($modelName) . '/create');
         $modelCheck = new ModelCheck($model, $modelName, 'create' . $modelName, $formName);
 		
-        $aditionalVal = ($this instanceof CRUDValidate && $this->validateAditional($model));
+        $aditionalVal = true;
+        if($this instanceof CRUDValidate)
+            $aditionalVal = $this->validateAditional($model);
+        
         if ($this->checkModel($modelCheck) && $aditionalVal)
         {
             $model->update_userid = Yii::app()->user->getID();
@@ -250,7 +253,10 @@ abstract class CRUDController extends ViewController
             'name' => $name));
         $modelCheck = new ModelCheck($model, $modelName, 'update' . $modelName, $formName);
 		
-        $aditionalVal = ($this instanceof CRUDValidate && $this->validateAditional($model));
+        $aditionalVal = true;
+        if($this instanceof CRUDValidate)
+            $aditionalVal = $this->validateAditional($model);
+        
         if ($this->checkModel($modelCheck) && $aditionalVal)
         {
             $model->update_userid = Yii::app()->user->getID();

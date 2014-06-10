@@ -115,7 +115,7 @@ class Controller extends CController
 		if(isset($_POST[$model->getModelName()]))
 		{
 			$model->getModel()->attributes = $_POST[$model->getModelName()];
-			return $model->getModel()->validate();
+            return $model->getModel()->validate();
 		}
 		
 		return false;	

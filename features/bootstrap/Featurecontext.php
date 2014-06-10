@@ -134,4 +134,111 @@ class FeatureContext extends BehatContext
         $this->getTest()->seeLogout($user);
     }
 
+    /**
+     * @Given /^I am logged in as moderator$/
+     */
+    public function iAmLoggedInAsModerator()
+    {    
+	$this->getTest('Gallery')->logInAs('bob123', 'Boddo123');
+    }
+
+    /**
+     * @Given /^I am visting the gallery page$/
+     */
+    public function iAmVistingTheGalleryPage()
+    {
+        $this->getTest('Gallery')->visitGallery();
+    }
+
+    /**
+     * @Given /^I fill in "([^"]*)" into the "([^"]*)" field$/
+     */
+    public function iFillInIntoTheField($value, $element)
+    {
+        $this->getTest()->fillin($element, $value);
+    }
+
+    /**
+     * @Then /^the url should match "([^"]*)"$/
+     */
+    public function theUrlShouldMatch($url)
+    {
+        $this->getTest()->isUrlTheSame($url);
+    }
+
+    /**
+     * @Given /^I should see the gallery "([^"]*)"$/
+     */
+    public function iShouldSeeTheGallery($name)
+    {
+        $this->getTest('Gallery')->seeGalleryVisible($name);
+    }
+
+    /**
+     * @When /^I open the gallery creation form$/
+     */
+    public function iOpenTheGalleryCreationForm()
+    {
+        $this->getTest('Gallery')->openGalleryForm();
+    }
+
+    /**
+     * @Given /^I create the gallery$/
+     */
+    public function iCreateTheGallery()
+    {
+        $this->getTest('Gallery')->createGallery();
+    }
+
+    /**
+     * @Given /^I try to create the gallery$/
+     */
+    public function iTryToCreateTheGallery()
+    {
+        $this->getTest('Gallery')->tryCreateGallery();
+    }
+
+    /**
+     * @When /^I open the "([^"]*)" gallery with name "([^"]*)"$/
+     */
+    public function iOpenTheGallery($label, $name)
+    {
+        $this->getTest('Gallery')->openGallery($label, $name);
+    }
+
+    /**
+     * @Given /^I open the gallery update form$/
+     */
+    public function iOpenTheGalleryUpdateForm()
+    {
+        $this->getTest('Gallery')->openGalleryUpdateForm();
+    }
+
+    /**
+     * @Given /^I update the gallery$/
+     */
+    public function iUpdateTheGallery()
+    {
+        $this->getTest('Gallery')->updateGallery();
+    }
+
+    /**
+     * @Given /^I delete the gallery$/
+     */
+    public function iDeleteTheGallery()
+    {
+        $this->getTest('Gallery')->deleteGallery();
+    }
+
+    /**
+     * @Given /^I should not see the gallery "([^"]*)"$/
+     */
+    public function iShouldNotSeeTheGallery($name)
+    {
+        $this->getTest('Gallery')->seeGalleryNotVisible($name);
+    }
+
+
+
+
 }

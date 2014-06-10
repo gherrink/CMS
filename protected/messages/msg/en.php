@@ -42,6 +42,7 @@ return array(
 	'MP_USER_REGISTERASMEMBER'		=> 'Mitgliedsregistrierung',
 	'MP_NEWS'						=> 'Neuigkeiten',
 	'MP_GALLERY'					=> 'Galerie',
+	'MP_GALLERIES'					=> 'Galerien',
 	'MP_MODERATOR'					=> 'Moderator',
 	'MP_MODERATOR_SITE'				=> 'Seiten',
     'MP_MODERATOR_MENU'             => 'Menü bearbeiten',
@@ -92,6 +93,7 @@ return array(
 	'BTN_CONTENT_ADD2SITE'		=> 'Zu Site hinzufügen',
 	'BTN_NEWS'					=> 'Neuigkeit hinzufügen',
 	'BTN_GALLERY_PICK'			=> 'Bild auswählen',
+	'BTN_UPLOAD'				=> 'Hochladen',
 	/*/Buttons */
 	
 	/* Models */

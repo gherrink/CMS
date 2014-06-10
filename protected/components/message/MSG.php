@@ -47,6 +47,7 @@ class MSG
 	const MP_USER_REGISTERASMEMBER 		= 'MP_USER_REGISTERASMEMBER';
 	const MP_NEWS						= 'MP_NEWS';
 	const MP_GALLERY					= 'MP_GALLERY';
+	const MP_GALLERIES					= 'MP_GALLERIES';
 	const MP_MODERATOR					= 'MP_MODERATOR';
 	const MP_MODERATOR_SITE				= 'MP_MODERATOR_SITE';
     const MP_MODERATOR_MENU             = 'MP_MODERATOR_MENU';
@@ -97,6 +98,7 @@ class MSG
 	const BTN_CONTENT_ADD2SITE		= 'BTN_CONTENT_ADD2SITE';
 	const BTN_NEWS					= 'BTN_NEWS';
 	const BTN_GALLERY_PICK          = 'BTN_GALLERY_PICK';
+	const BTN_UPLOAD				= 'BTN_UPLOAD';
 	/*/Buttons */
 	
 	/* Models */

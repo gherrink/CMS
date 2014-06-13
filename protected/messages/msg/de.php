@@ -227,4 +227,9 @@ return array(
     /* GALLERY */
     'GAL_TITLE' => 'Titel',
     /*/GALLER> */
+
+	/*Home Seite*/
+	'PAGE_HOME' => 'CollectMySociety ist ein einfaches Content Management System, optimiert für Vereine und soziale Gemeinschaften. Es ist intuitiv, leichtgewichtig und absolut benutzerfreundich!\n Schau es dir doch einfach mal selbst an und überzeuge dich von der modernen Art, Inhalte zu verwalten.',
+	'PAGE_HOME_WELCOME' => 'Willkommen bei',
+	/* /Home Seite */
 );

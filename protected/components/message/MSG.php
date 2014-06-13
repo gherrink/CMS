@@ -224,5 +224,10 @@ class MSG
 	/* GALLERY */
 	const GAL_TITLE			= 'GAL_TITLE';
 	/*/GALLER> */
+	
+	/*Home Seite*/
+	const PAGE_HOME			= 'PAGE_HOME';
+	const PAGE_HOME_WELCOME = 'PAGE_HOME_WELCOME';
+	/* /Home Seite */
 }
 

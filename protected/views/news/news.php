@@ -13,7 +13,7 @@
 
 ?>
 
-<h1>Neuigkeiten</h1>
+<h1><?php echo MsgPicker::msg()->getMessage(MSG::MP_NEWS) ?></h1>
 
 <?php
 //Button um Neuigkeiten hinzuzufügen

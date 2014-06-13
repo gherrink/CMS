@@ -5,226 +5,231 @@
  * Language Array Deutsch
  */
 return array(
-	'EXCEPTION_MSG_NOTFOUND'=>'Die Message ###msg### wurde nicht gefunden.',
+	'EXCEPTION_MSG_NOTFOUND'=>'The message ###msg### could not be found.',
 	
 	/* Sprachen */
-	'DE'	=> 'Deutsch',
-	'EN'	=> 'Englisch',
+	'DE'	=> 'German',
+	'EN'	=> 'English',
 	/*/Sprachen */
 	
 	/* MSG HEADER */
-	'MSG_SUCCESS'	=> 'Erfolg',
+	'MSG_SUCCESS'	=> 'Success',
 	'MSG_INFO'		=> 'Information',
-	'MSG_WARNING'	=> 'Warnung',
+	'MSG_WARNING'	=> 'Warning',
 	'MSG_DANGER'	=> 'Error',
 	/*/MSG HEADER */
 		
 	/* Rollen */
 	'ADMIN' 	=> 'Administrator',
-	'MCALENDER' => 'Modarator Kalender',
-	'MGALLERY'	=> 'Moderator Galerie',
-	'MSITE'		=> 'Moderator Seite',
-	'MMENU'		=> 'Moderator Menü',
-	'MNEWS'		=> 'Moderator News',
-	'MEMBER'	=> 'Mitglied',
-	'USER'		=> 'Benutzer',
-	'VISITOR'	=> 'Besucher',
+	'MCALENDER' => 'Moderator calendar',
+	'MGALLERY'	=> 'Moderator gallery',
+	'MSITE'		=> 'Moderator site',
+	'MMENU'		=> 'Moderator menu',
+	'MNEWS'		=> 'Moderator news',
+	'MEMBER'	=> 'Member',
+	'USER'		=> 'User',
+	'VISITOR'	=> 'Visitor',
 	/*/Rollen */
 		
 	/* Layouts */
-	'COL01'		=> 'Eine Spalte',
+	'COL01'		=> 'One column',
 	/*/Layouts */
 		
 	/* Menu Punkte */
-	'MP_LOGIN'						=> 'Anmelden',
-	'MP_LOGOUT'						=> 'Abmelden',
-	'MP_CONTACT'					=> 'Kontakt',
-	'MP_USER_REGISTERASMEMBER'		=> 'Mitgliedsregistrierung',
-	'MP_NEWS'						=> 'Neuigkeiten',
-	'MP_GALLERY'					=> 'Galerie',
-	'MP_GALLERIES'					=> 'Galerien',
+	'MP_LOGIN'						=> 'Login',
+	'MP_LOGOUT'						=> 'Logout',
+	'MP_CONTACT'					=> 'Contact',
+	'MP_USER_REGISTERASMEMBER'		=> 'Member registration',
+	'MP_NEWS'						=> 'News',
+	'MP_GALLERY'					=> 'Gallery',
+	'MP_GALLERIES'					=> 'Galleries',
 	'MP_MODERATOR'					=> 'Moderator',
-	'MP_MODERATOR_SITE'				=> 'Seiten',
-    'MP_MODERATOR_MENU'             => 'Menü bearbeiten',
-	'MP_MODERATOR_SITECREATE'		=> 'Seite erstellen',
-	'MP_MODERATOR_CONTENTCREATE'	=> 'Inhalt erstellen',
+	'MP_MODERATOR_SITE'				=> 'Sites',
+    'MP_MODERATOR_MENU'             => 'Edit menu',
+	'MP_MODERATOR_SITECREATE'		=> 'Create site',
+	'MP_MODERATOR_CONTENTCREATE'	=> 'Create content',
 	/*/Menu Punkte */
 		
 	/* Ueberschriften */
-	'HEAD_QUESTION_REALYCLOSE'			=> 'Wirklich Schließen?',
-	'HEAD_QUESTION_REALYDELETE'			=> 'Wirklich Löschen?',
-	'HEAD_CONTACT'						=> 'Kontakt',
-	'HEAD_LOGIN'						=> 'Anmelden',
-	'HEAD_REGISTER'						=> 'Registrieren',
-	'HEAD_CHANGEMAIL'					=> 'E-Mail ändern',
-	'HEAD_MENU'							=> 'Menu bearbeiten',
-	'HEAD_SITE_CREATE'					=> 'Seite erstellen',
-	'HEAD_SITE_UPDATE'					=> 'Seite bearbeiten',
-	'HEAD_SITE_CREATELANGUAGE'			=> 'Sprache und Überschriften',
-	'HEAD_SITE_ADDCONTENT'				=> 'Seiteninhalt hinzufügen',
-	'HEAD_CONTENT_CREATE'				=> 'Inhalt erstellen',
-	'HEAD_CONTENT_UPDATE'				=> 'Inhalt bearbeiten',
-	'HEAD_CONTENT_ADD2SITE'				=> 'Inhalt zur Seite hinzufügen',
-	'HEAD_NEWS_CREATE'					=> 'Neuigkeit erstellen',
-	'HEAD_NEWS_UPDATE'					=> 'Neuigkeit bearbeiten',
-	'HEAD_MENU_CREATE'					=> 'Menüpunkt erstellen',
-	'HEAD_MENU_UPDATE'					=> 'Menüpunkt bearbeiten',
-	'HEAD_MENU_LINK2SITE'				=> 'Link zur Seite',
-	'HEAD_MENU_ICONSELECT'				=> 'Menüicon auswählen',
-	'HEAD_MENU_PARENTMENU'				=> 'Übergeordneter Menüpunkt',
-	'HEAD_GALLERY_CREATE'               => 'Galerie erstellen',
-	'HEAD_GALLERY_UPDATE'				=> 'Galerie bearbeiten',
+	'HEAD_QUESTION_REALYCLOSE'			=> 'Do you really want to close this?',
+	'HEAD_QUESTION_REALYDELETE'			=> 'Do you really want to delete this?',
+	'HEAD_CONTACT'						=> 'Contact',
+	'HEAD_LOGIN'						=> 'Login',
+	'HEAD_REGISTER'						=> 'Register',
+	'HEAD_CHANGEMAIL'					=> 'Change email',
+	'HEAD_MENU'							=> 'Edit menu',
+	'HEAD_SITE_CREATE'					=> 'Create site',
+	'HEAD_SITE_UPDATE'					=> 'Edit site',
+	'HEAD_SITE_CREATELANGUAGE'			=> 'Language and headings',
+	'HEAD_SITE_ADDCONTENT'				=> 'Add site content',
+	'HEAD_CONTENT_CREATE'				=> 'Create content',
+	'HEAD_CONTENT_UPDATE'				=> 'Edit content',
+	'HEAD_CONTENT_ADD2SITE'				=> 'Add content to site',
+	'HEAD_NEWS_CREATE'					=> 'Create news',
+	'HEAD_NEWS_UPDATE'					=> 'Edit news',
+	'HEAD_MENU_CREATE'					=> 'Create menu entry',
+	'HEAD_MENU_UPDATE'					=> 'Modify menu entry',
+	'HEAD_MENU_LINK2SITE'				=> 'Lint to site',
+	'HEAD_MENU_ICONSELECT'				=> 'Select menu icon',
+	'HEAD_MENU_PARENTMENU'				=> 'Parent menu item',
+	'HEAD_GALLERY_CREATE'               => 'Create gallery',
+	'HEAD_GALLERY_UPDATE'				=> 'Edit gallery',
 	/*/Ueberschriften */
 		
 	/* Buttons */
 	'BTN_OK'					=> 'OK',
-	'BTN_YES'					=> 'Ja',
-	'BTN_NO'					=> 'Nein',
-	'BTN_REGISTER'				=> 'Registrieren',
-	'BTN_EDIT'					=> 'Bearbeiten',
-	'BTN_READ'					=> 'Ansehen',
-	'BTN_CREATE'				=> 'Erstellen',
-	'BTN_UPDATE'				=> 'Ändern',
-	'BTN_DELETE'				=> 'Löschen',
-	'BTN_EXIT'					=> 'Beenden',
-	'BTN_SITE_NEWCONTENT'		=> 'Neuen Inhalt hinzufügen',
-	'BTN_SITE_ADDLANGUAGE'		=> 'Neue Sprache hinzufügen',
-	'BTN_SITE_DELETECONTENT'	=> 'Von Seite löschen',
-	'BTN_CONTENT_ADD2SITE'		=> 'Zu Site hinzufügen',
-	'BTN_NEWS'					=> 'Neuigkeit hinzufügen',
-	'BTN_GALLERY_PICK'			=> 'Bild auswählen',
-	'BTN_UPLOAD'				=> 'Hochladen',
+	'BTN_YES'					=> 'Yes',
+	'BTN_NO'					=> 'No',
+	'BTN_REGISTER'				=> 'Register',
+	'BTN_EDIT'					=> 'Edit',
+	'BTN_READ'					=> 'View',
+	'BTN_CREATE'				=> 'Create',
+	'BTN_UPDATE'				=> 'Edit',
+	'BTN_DELETE'				=> 'Delete',
+	'BTN_EXIT'					=> 'Exit',
+	'BTN_SITE_NEWCONTENT'		=> 'Add new content',
+	'BTN_SITE_ADDLANGUAGE'		=> 'Add new language',
+	'BTN_SITE_DELETECONTENT'	=> 'Delete content from site',
+	'BTN_CONTENT_ADD2SITE'		=> 'Add content to site',
+	'BTN_NEWS'					=> 'Add news',
+	'BTN_GALLERY_PICK'			=> 'Select image',
+	'BTN_UPLOAD'				=> 'Upload',
 	/*/Buttons */
 	
 	/* Models */
-	'MODEL_LABEL' 		=> 'Identifikation',
-	'MODEL_ROLE'		=> 'Zugriffsrechte',
-	'MODEL_LANGUAGE'	=> 'Sprache',
+	'MODEL_LABEL' 		=> 'Identification',
+	'MODEL_ROLE'		=> 'Admission rights',
+	'MODEL_LANGUAGE'	=> 'Language',
 	/*/Models */
 	
 	/* Contact */
-	'CONTACT_INFO'		=> 'Wenn Sie fragen oder Anmerkungen haben, f&uuml;llen Sie bitte das folgende Formular aus, um uns zu kontaktieren. Wir danken f&uuml;r Ihre Angaschma.',
+	'CONTACT_INFO'		=> 'If you have any enquiries or remarks, just fill in this form in order to contact us. Thank you in advance!',
 	'CONTACT_NAME'		=> 'Name',
-	'CONTACT_MAIL'		=> 'Mail',
-	'CONTACT_SUBJECT'	=> 'Betreff',
-	'CONTACT_BODY'		=> 'Text',
+	'CONTACT_MAIL'		=> 'Email',
+	'CONTACT_SUBJECT'	=> 'Subject',
+	'CONTACT_BODY'		=> 'Body',
 	/*/Contact */
 
 	/* User */
-	'USER_USER'			=> 'Benutzername',
-	'USER_FIRSTNAME'	=> 'Vorname',
-	'USER_LASTNAME'		=> 'Nachname',
-	'USER_PASSWORD'		=> 'Passwort',
-	'USER_PASSWORDREP'	=> 'Passwort wiederholen',
+	'USER_USER'			=> 'Username',
+	'USER_FIRSTNAME'	=> 'Christianname',
+	'USER_LASTNAME'		=> 'Surname',
+	'USER_PASSWORD'		=> 'Password',
+	'USER_PASSWORDREP'	=> 'Repeat password',
 	'USER_MAIL'			=> 'Mail',
-	'USER_MSG_USER'		=> 'Der Benutzername darf nur aus Zahlen, Groß- und Kleinbuchstaben und "-_".',
-	'USER_MSG_PASSWORD'	=> 'Das Passwort muss aus mindestens einer Zahl, einem Groß- und einem Kleinbuchstaben bestehen.',
+	'USER_MSG_USER'		=> 'The username can only consist of numbers, uppercase-, lowercase letters and "-_".',
+	'USER_MSG_PASSWORD'	=> 'The password must at least contain one digit, one uppercase- and one lowercase letter.',
 	/*/User */
 
 	/* Site */
 	'SITE_LAYOUT'					=> 'Layout',
-	'SITE_MSG_MATCH'				=> 'Das Label darf nur Groß- und Kleinbuchstaben enthalten',
-	'SITE_MSG_LABELEXISTS'			=> 'Das Label existiert bereits.',
-	'SITE_MSG_HEADLANGUAGEEXISTS'	=> 'Für diese Sprache Existiert bereits eine Überschrift, bitte wählen Sie eine andere.',
+	'SITE_MSG_MATCH'				=> 'The label can only contain uppercase- and lowercase letters',
+	'SITE_MSG_LABELEXISTS'			=> 'This label already exists.',
+	'SITE_MSG_HEADLANGUAGEEXISTS'	=> 'A heading for this language already exists, please choose another.',
 	/*/Site */
 
 	/* MSG SUCCESS */
-	'SUCCESS_CONTACT_SENDMAIL'		=> 'Ihre Kontaktmail wurde erfolgreich versendet, wir werden Ihre Anfrage sobald wie möglich bearbeiten.',
-	'SUCCESS_LOGIN_REGISTER'		=> 'Sie wurden erfolgreich registriert, bitte Prüben Sie ihr E-Mail Postfach.',
-	'SUCCESS_LOGIN_USERVALIDATE'	=> 'Ihre E-Mail wurde erfolgreich registriert, Sie können sich nun anmelden.',
-	'SUCCESS_LOGIN_RESENDMAIL'		=> 'Die Registrierungsmail wurde erneut an ihre E-Mail-Addresse gesendet, bitte prüfen Sie ihr Postfach.',
-	'SUCCESS_LOGIN_MAILCHANGE'		=> 'Ihre E-Mail-Addresse wurde erfolgreich geändert und eine Registrierungsmail gesendet. Bitte prüfen Sie die Mails in ihrem Postfach.',
-	'SUCCESS_SITE_CREATE'			=> 'Die Seite wurde erfolgreich erstellt.',
-	'SUCCESS_SITE_UPDATE'			=> 'Die Seite wurde erfolgreich geändert.',
+	'SUCCESS_CONTACT_SENDMAIL'		=> 'Your Enquiry has successfully been sent. You will hear from us soon.',
+	'SUCCESS_LOGIN_REGISTER'		=> 'You have been successfully registered. Please check your email-inbox.',
+	'SUCCESS_LOGIN_USERVALIDATE'	=> 'Your email has successfully been registered. You may now log in.',
+	'SUCCESS_LOGIN_RESENDMAIL'		=> 'The registration email has once again been sent to your address. Please check your inbox.',
+	'SUCCESS_LOGIN_MAILCHANGE'		=> 'Your email address has successfully been modified ans a confirmation email has been sent. Please check your inbox.',
+	'SUCCESS_SITE_CREATE'			=> 'The site has successfully been created.',
+	'SUCCESS_SITE_UPDATE'			=> 'The site has successfully been modified.',
 	/*/MSG SUCCESS */
 
 	/* MSG WARNING */
-	'WARNING_LOGIN_MAILNOTVALID'		=> 'Ihre Mailadresse wurde noch nicht best&auml;tigt.<br>
-											<a href="###mailresend###">E-Mail erneut senden</a> <br>
-											<a href="###mailchange###">E-Mail &auml;ndern</a>',
-	'WARNING_LOGIN_SENDREGISTERMAIL'	=> 'Sie wurden erfolgreich angemeldet, aber die Registrierungsemail konnte nicht gesendet werden. Bitte versuchen Sie sich anzumelden, dann werden Sie aufgefordert ihre Mailaddresse zu ändern oder die Mail erneut zu senden.',
+	'WARNING_LOGIN_MAILNOTVALID'		=> 'Your email address has not been confirmed yet.<br>
+											<a href="###mailresend###">send confirmation email again</a> <br>
+											<a href="###mailchange###">change email address</a>',
+	'WARNING_LOGIN_SENDREGISTERMAIL'	=> 'You have successfully been logged out, but the registration email could not be sent to your address. Please try to log in, where you will be requested to change your email address or to resend the confirmation email.',
 	/*/MSG WARNING */
 	
 	/* MSG ERROR */
-	'ERROR_CONTACT_SENDMAIL'		=> 'Ihre Kontakt-Email wurde leider nicht gesendet, bitte versuchen Sie es später erneut.',
-	'ERROR_LOGIN_PWWRONG'			=> 'Der Benutzername und das Passwort passen nicht zusammen.',
-	'ERROR_LOGIN_NOTREGISTERED'		=> 'Bei der Registrierung ist ein Fehler aufgetreten, bitte versuchen Sie es erneut.',
-	'ERROR_LOGIN_USERVALIDATE'		=> 'Ihre E-Mail-Addresse konnte leider nicht validiert werden, bitte versuchen Sie es erneut, oder <a href="###mailchange###">&auml;ndern Sie ihre E-Mail</a>',
-	'ERROR_LOGIN_RESENDMAIL'		=> 'Die Registrierungsmail konnte leider nicht versendet werden, bitte versuchen Sie es erneut.',
-	'ERROR_LOGIN_MAILCHANGE'		=> 'Ihre E-Mail-Addresse konnte leider nicht geändert werden, bitte versuchen Sie es erneut.',
-	'ERROR_SITE_NOTCREATE'			=> 'Die Seite konnte nicht erstellt werden, bitte versuchen Sie es erneut.',
-	'ERROR_SITE_NOTUPDATE'			=> 'Die Seite konnte nicht geändert werden, bitte versuchen Sie es erneut.',
-	'ERROR_CONTENT_NOTCREATE'		=> 'Der Inhalt konnte leider nicht erstellt werden, bitte versuchen Sie es erneut.',
-	'ERROR_CONTENT_NOTUPDATE'		=> 'Der Inhalt konnte leider nicht geändert werden, bitte versuchen Sie es erneut.',
-	'ERROR_NEWS_NOTCREATE'			=> 'Die Neuigkeit konnte leider nichterstellt werden, bitte versuchen Sie es erneut',
-	'ERROR_NEWS_NOTUPDATE'			=> 'Die Neuigkeit konnte leider nicht geändert werden, bitte versuchen Sie es erneut!',
-	'ERROR_MENU_NOTCREATE'			=> 'Der Menüpunkt konnte leider nicht erstellt werden, bitte versuchen Sie es erneut.',
-	'ERROR_MENU_NOTUPDATE'			=> 'Der Menüpunkt konnte leider nicht geändert werden, bitte versucehn Sie es erneut.',
-	'ERROR_GALLERY_NOTCREATE'		=> 'Die Galerie konnte leider nicht erstellt werden, bitte versuchen Sie es erneut',
-	'ERROR_GALLERY_NOTUPDATE'		=> 'Die Galerie konnte leider nicht geändert werden, bitte versuchen Sie es erneut',
+	'ERROR_CONTACT_SENDMAIL'		=> 'Unfortunately, your contact email has not been sent. Please try again later.',
+	'ERROR_LOGIN_PWWRONG'			=> 'Unfortunately, your username and password do not match.',
+	'ERROR_LOGIN_NOTREGISTERED'		=> 'Unfortunately, there was an error during registration. Please try again later.',
+	'ERROR_LOGIN_USERVALIDATE'		=> 'Unfortunately, your email adress could not be validated. Please try again later or <a href="###mailchange###">change your email address</a>.',
+	'ERROR_LOGIN_RESENDMAIL'		=> 'Unfortunately, the registration email could not be sent to your address. Please try again.',
+	'ERROR_LOGIN_MAILCHANGE'		=> 'Unfortunately, your email adress could not be modified. Please try again.',
+	'ERROR_SITE_NOTCREATE'			=> 'Unfortunately, the site could not be created. Please try again.',
+	'ERROR_SITE_NOTUPDATE'			=> 'Unfortunately, the site could not be modified. Please try again.',
+	'ERROR_CONTENT_NOTCREATE'		=> 'Unfortunately, the content could not be created. Please try again.',
+	'ERROR_CONTENT_NOTUPDATE'		=> 'Unfortunately, the content could not be modified. Please try again.',
+	'ERROR_NEWS_NOTCREATE'			=> 'Unfortunately, the news could not be created. Please try again.',
+	'ERROR_NEWS_NOTUPDATE'			=> 'Unfortunately, the news could not be modified. Please try again.',
+	'ERROR_MENU_NOTCREATE'			=> 'Unfortunately, the menu entry could not be created. Please try again.',
+	'ERROR_MENU_NOTUPDATE'			=> 'Unfortunately, the menu entry could not be modified. Please try again.',
+	'ERROR_GALLERY_NOTCREATE'		=> 'Unfortunately, the gallery could not be created. Please try again.',
+	'ERROR_GALLERY_NOTUPDATE'		=> 'Unfortunately, the gallery could not be modified. Please try again.',
 	/*/MSG ERROR */
 
 	/* EXEPTION */
-	'EXCEPTION_NOTHINGSELECTED'			=> 'Es wurde nichts ausgewählt.',
-	'EXCEPTION_NOBUTTONS'				=> 'Es wurden keine Buttons gesetzt.',
-	'EXCEPTION_SITE_NOTFOUND' 			=> 'Die Angeforderte Seite konnte leider nicht gefunden werden.',
-	'EXCEPTION_SITE_NOTDELETE'			=> 'Die Seite konnte leider nicht gelöscht werden, bitte versuchen Sie es erneut.',
-	'EXCEPTION_SITE_NOCONTENT'			=> 'Die Seite hat noch keinen Inhalt',
-	'EXCEPTION_SITE_LANGUAGENOTDELETE'	=> 'Die Sprache konnte nicht gelöscht werden, bitte versuchen Sie es erneut.',
-	'EXCEPTION_CONTENT_NOTFOUND'		=> 'Der Inhalt konnte leider nicht gefunden werden.',
-	'EXCEPTION_CONTENT_NOTDELETE'		=> 'Der Inhalt konnte nicht gelöscht werden, bitte versuchen Sie es erneut.',
-	'EXCEPTION_CONTENT_NOCONTENT'		=> 'Es wurde kein Kontent übertragen, der gespeichert werden soll.',
-	'EXCEPTION_CONTENT_TEXTNOTUPDATE'	=> 'Die Änderungen konnten leider nicht gespeichert werden, bitte versuchen Sie es erneut.',
-	'EXCEPTION_CONTENT_NOTADD2SITE'		=> 'Der Inhalt konnte leider nicht der Seite hinzugefügt werden, bitte versuchen Sie es erneut.',
-	'EXCEPTION_SITECONTENT_EXISTS'		=> 'Der Inhalt existiert bereits auf dieser Seite und kann kein zweites mal hinzugefügt werden.',
-	'EXCEPTION_NEWS_NOTFOUND'			=> 'Die Neuigkeit konnte leider nicht gefunden werden',
-	'EXCEPTION_NEWS_NOTDELETE'			=> 'Die Neuigeit konnte nicht gelöscht werden, versuchen Sie es erneut!',
-	'EXCEPTION_MENU_NOTFOUND'			=> 'Der Menüpunkt konnte leider nicht gefunden werden.',
-	'EXCEPTION_MENU_NOTDELETE'			=> 'Der Menüpunkt konnte leider nicht gelöscht werden.',
-	'EXCEPTION_MENU_PARENTNOTFOUND'		=> 'Das Übergeordnete Menü wurde nicht gefunden.',
-	'EXCEPTION_MENU_NEWPOSNOTCORREKT'	=> 'Die neue Menüpunkt Position ist nicht korrekt.',
-	'EXCEPTION_GALLERY_NOTFOUND'		=> 'Die Galerie konnte leider nicht gefunden werden.',
-	'EXCEPTION_GALLERY_NOTDELETE'		=> 'Die Galerie konnte leider nicht gelöscht werden.',
+	'EXCEPTION_NOTHINGSELECTED'			=> 'Nothing has been selected.',
+	'EXCEPTION_NOBUTTONS'				=> 'No buttons have been set.',
+	'EXCEPTION_SITE_NOTFOUND' 			=> 'Unfortunately, the requested site could not be found.',
+	'EXCEPTION_SITE_NOTDELETE'			=> 'Unfortunately, the site could not be deleted, please try again.',
+	'EXCEPTION_SITE_NOCONTENT'			=> 'The site has no content yet',
+	'EXCEPTION_SITE_LANGUAGENOTDELETE'	=> 'The language could not be deleted, please try again.',
+	'EXCEPTION_CONTENT_NOTFOUND'		=> 'Unfortunately, the content could not be found.',
+	'EXCEPTION_CONTENT_NOTDELETE'		=> 'The content could not be deleted, please try again.',
+	'EXCEPTION_CONTENT_NOCONTENT'		=> 'No content to save has been submitted.',
+	'EXCEPTION_CONTENT_TEXTNOTUPDATE'	=> 'Unfortunately, the changes could not be saved. Please try again.',
+	'EXCEPTION_CONTENT_NOTADD2SITE'		=> 'Unfortunately, the content could not be added to the site. Please try again.',
+	'EXCEPTION_SITECONTENT_EXISTS'		=> 'This content already exists on this page and cannot be added twice.',
+	'EXCEPTION_NEWS_NOTFOUND'			=> 'Unfortunately, the news could not be found',
+	'EXCEPTION_NEWS_NOTDELETE'			=> 'Unfortunately, the news could not be deleted. Please try again!',
+	'EXCEPTION_MENU_NOTFOUND'			=> 'The menu entry could not be found.',
+	'EXCEPTION_MENU_NOTDELETE'			=> 'The menu entry could not be deleted.',
+	'EXCEPTION_MENU_PARENTNOTFOUND'		=> 'The parent menu could not be found.',
+	'EXCEPTION_MENU_NEWPOSNOTCORREKT'	=> 'The new menu entry position is incorrect.',
+	'EXCEPTION_GALLERY_NOTFOUND'		=> 'Unfortunately, the gallery could not be found.',
+	'EXCEPTION_GALLERY_NOTDELETE'		=> 'Unfortunately, the gallery could not be deleted.',
 	/*/EXEPTION */
 
 	/* QUESTION */
-	'QUESTION_EXIT_SITECREATE'		=> 'Möchten Sie wirklich die Seitenerstellung beenden? Die Seite wurde noch nicht angelegt.',
-	'QUESTION_EXIT_SITEUPDATE'		=> 'Möchten Sie wirklich die Seitenbearbeitung beenden? Die Änderungen wurden noch nicht gespeichert.',
-	'QUESTION_EXIT_CONTENTCREATE'	=> 'Möchten Sie wirklich die Inhalts-Bearbeitung beenden? Die Änderungen werden nicht übernommen.',
-	'QUESTION_EXIT_CONTENTUPDATE'	=> 'Möchten Sie wirklich die Inhalts-Bearbeitung beenden? Alle Änderungen verloren.',
-	'QUESTION_DELETE_SITE'			=> 'Möchten Sie die Seite wirklich löschen? Diese Änderung kann nicht wieder rückgänig gemacht werden.',
-	'QUESTION_DELETE_SITECONTENT'	=> 'Möchten Sie den Inhalt wirklich von der Seite löschen? Der Inhalt wird nicht glöscht.',
-	'QUESTION_DELETE_CONTENT'		=> 'Möchten Sie den Inhalt wirklich löschen? Diese Änderungen kann nichtmehr rückgänig gemacht werden.',
-	'QUESTION_EXIT_NEWSCREATE'		=> 'Möchten Sie wirklich die Neuigkeiten-Erstellung beenden? Die Neuigkeit wurde noch nicht erstellt!',
-	'QUESTION_EXIT_NEWSUPDATE'		=> 'Möchten Sie wirklich die Neuigkeiten-Bearbeitung beenden? Die Änderungen wurden noch nicht gespeichert!',
-	'QUESTION_EXIT_MENUCREATE'		=> 'Möchten Sie wirklich die Menüpunkt-Erstellung beenden? Der Menüpunkt wurde noch nicht erstellt!',
-	'QUESTION_EXIT_MENUUPDATE'		=> 'Möchten Sie wirklich die Menüpunkt-Bearbeitung beenden? Die Änderungen wurden noch nicht gespeichert!',
-	'QUESTION_DELETE_MENU'			=> 'Möchten Sie den Menüpunkt wirklich löschen? Alle Untergeordnetenmenüpunkte werden ebenfalls gelöscht.',
-	'QUESTION_EXIT_GALLERYCREATE'   => 'Möchten Sie wirklich die Galerie-Erstellung verlassen? Die Galerie wurde noch nicht gespeichert.',
-	'QUESTION_EXIT_GALLERYUPDATE'	=> 'Möchten Sie wirklich die Galerie-Bearbeitung verlassen? Die Änderungen wurden noch nicht gespeichert',
-	'QUESTION_DELETE_GALLERY'		=> 'Möchten Sie wirklich diese Galerie löschen?',
+	'QUESTION_EXIT_SITECREATE'		=> 'Do you really want to quit the site creation? The site has not been saved yet... too bad!',
+	'QUESTION_EXIT_SITEUPDATE'		=> 'Do you really want to finish editing this site without having saved the changes yet?',
+	'QUESTION_EXIT_CONTENTCREATE'	=> 'Do you really want to quit the content creation without having saved the changes yet?.',
+	'QUESTION_EXIT_CONTENTUPDATE'	=> 'Do you really want to finish editing this content without having saved the changes yet?',
+	'QUESTION_DELETE_SITE'			=> 'Do you really want to delete this beautiful site? This cannot be undone. Don\'t say I didn\'t tell you!',
+	'QUESTION_DELETE_SITECONTENT'	=> 'Do you really want to delete this content from this beautiful site? This cannot be undone. Don\'t say I didn\'t tell you!',
+	'QUESTION_DELETE_CONTENT'		=> 'Do you really want to delete this beautiful content? This cannot be undone. Don\'t say I didn\'t tell you!.',
+	'QUESTION_EXIT_NEWSCREATE'		=> 'Do you really want to quit the news creation? The news has not been saved yet... too bad!',
+	'QUESTION_EXIT_NEWSUPDATE'		=> 'Do you really want to finish editing the news without having saved the changes yet? Don\'t say I didn\'t tell you!',
+	'QUESTION_EXIT_MENUCREATE'		=> 'Do you really want to quit the menu entry creation? The entry has not been saved yet... too bad!',
+	'QUESTION_EXIT_MENUUPDATE'		=> 'Do you really want to finish editing the menu entry without having saved the changes yet? Don\'t say I didn\'t tell you!',
+	'QUESTION_DELETE_MENU'			=> 'Do you really dare to delete this menu entry? All child entries will be deleted equally.',
+	'QUESTION_EXIT_GALLERYCREATE'   => 'Do you really want to quit the gallery creation? The gallery has not been saved yet... too bad!',
+	'QUESTION_EXIT_GALLERYUPDATE'	=> 'Do you really want to finish editing the gallery without having saved the changes yet? Don\'t say I didn\'t tell you!',
+	'QUESTION_DELETE_GALLERY'		=> 'Do you really want to delete this hilarious gallery?',
 	/*/QUESTION */
 		
 	/* MAIL */
-	'MAIL_SUBJECT_REGISTER' => 'E-Mail Best&auml;tigung bei CMS',
-	'MAIL_BODY_REGISTER'	=> '<p>Hallo ###name###,</p>
-		<p>um Ihre Registierung auf CMS abzuschlie&szlig;en klicken Sie bitte auf folgenden Link: </p>
-		<p><a href="###link###">E-Mail best&auml;tigen.</a></p>
-		<p>Mit freundlichen Gr&szling;en</p>
-		<p>Ihr CMS-Team</p>',
+	'MAIL_SUBJECT_REGISTER' => 'Email confirmation by CMS',
+	'MAIL_BODY_REGISTER'	=> '<p>Hi ###name###,</p>
+		<p>in order to complete your awesome registration, please click on the following link: </p>
+		<p><a href="###link###">Get me in! I am so excited!</a></p>
+		<p>With the kindest regards,</p>
+		<p>Your CMS-Team</p>',
     /* /MAIL */
-    'VERIFY' => 'Verifizierungscode',
-    'VERIFY_INFO' => 'Bitte tragen Sie die Buchstaben so ein, wie sie im Bild dar&uuml;ber zu sehen sind.
-					<br/>Gro&szlig;- und Kleinschreibung muss nicht beachtet werden.',
-    'CREATE_USER_TIME' => 'Erstellt von ###user### am ###time###',
-    'UPDATE_USER_TIME' => 'Geändert von ###user### am ###time###',
-    'FOOTER' => 'Copyright &copy; ###year### bei CollectMySociety.<br/>
-		Alle Rechte Vorbehalten.</br>
-		Entwickelt von Maurice Busch, Alessio Bisgen, Lukas Schreck, Angela Gerstner.</br>',
+    'VERIFY' => 'Captcha',
+    'VERIFY_INFO' => 'Please fill the field in with the letters you can depict above.
+					<br/>You don\'t have to worry about upper- and lowercase letters',
+    'CREATE_USER_TIME' => 'Created by ###user### on ###time###',
+    'UPDATE_USER_TIME' => 'Modified by ###user### on ###time###',
+    'FOOTER' => 'Copyright &copy; ###year### by CollectMySociety.<br/>
+		All rights reserved.</br>
+		Developed by Maurice Busch, Alessio Bisgen, Lukas Schreck, Angela Gerstner.</br>',
     'TEST' => 'This is a Test',
     'TEST_PARAM' => 'Test with params ###par1### and ###par2###',
     
     /* GALLERY */
-    'GAL_TITLE' => 'Titel',
+    'GAL_TITLE' => 'Title',
     /*/GALLER> */
+
+	/*Home SITE*/
+	'PAGE_HOME' => 'CollectMySociety is a simple Content Management System, optimized for social organizations. It\'s intuitive, lightweight and absolutely perfect for you!\n Just come in and convince yourself of the modern way of managing contents! As a thankyou, we will give you a cookie ;-)',
+	'PAGE_HOME_WELCOME' => 'Welcome to',
+	/* /Home SITE */
 );

@@ -30,6 +30,12 @@ return array(
         'active' => '1',
 	'flag' => ''
     ),
+    'en' => array(
+        'languageid' => 'en',
+        'label' => 'English',
+        'active' => '1',
+	'flag' => ''
+    ),
 //    '' => array(
 //        'languageid' => '',
 //        'label' => '',

@@ -358,5 +358,45 @@ class FeatureContext extends BehatContext
     }
 
 
+    /**
+     * @Given /^I am visiting the index page$/
+     */
+    public function iAmVisitingTheIndexPage()
+    {
+        $this->getTest('Language')->visitIndex();
+    }
+
+    /**
+     * @Given /^the current language is "([^"]*)"$/
+     */
+    public function theCurrentLanguageIs($lang)
+    {
+       $this->getTest('Language')->checkCurrentLanguage($lang);
+    }
+
+    /**
+     * @Given /^I can see the homepage description$/
+     */
+    public function iCanSeeTheHomepageDescription()
+    {
+        $this->getTest('Language')->isGermanHomepageDescriptionVisible();
+    }
+
+    /**
+     * @When /^I select the language "([^"]*)"$/
+     */
+    public function iSelectTheLanguage($lang)
+    {
+       $this->getTest('Language')->selectLanguage($lang);
+    }
+
+    /**
+     * @Then /^there should be the english homepage description$/
+     */
+    public function thereShouldBeTheEnglishHomepageDescription()
+    {
+       $this->getTest('Language')->isEnglishHomepageDescriptionVisible();
+    }
+
 
 }

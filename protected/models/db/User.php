@@ -75,7 +75,7 @@ class User extends CActiveRecord
             'authItems' => array(self::MANY_MANY, 'AuthItem', 'AuthAssignment(userid, itemname)'),
             'menus' => array(self::HAS_MANY, 'Menu', 'create_userid'),
             'menus1' => array(self::HAS_MANY, 'Menu', 'update_userid'),
-            'validate' => array(self::HAS_ONE, 'UserValidate', 'userid'),
+            'userValidate' => array(self::HAS_ONE, 'UserValidate', 'userid'),
         );
     }
 

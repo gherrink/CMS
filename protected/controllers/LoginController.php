@@ -113,7 +113,7 @@ class LoginController extends Controller
 		if($valid !== null)
 		{
 			$user = $valid->user;
-			$valid->validateid = Yii::app()->key->getUniquKey();
+			$valid->validateid = Yii::app()->keygen->getUniquKey();
 			
 			$error = true;
 			
@@ -149,8 +149,8 @@ class LoginController extends Controller
 				$user->mail = $model->mail;
 				if($user->update(array('mail')))
 				{
-					$valid = $user->validate;
-					$valid->validateid = Yii::app()->key->getUniquKey();
+					$valid = $user->userValidate;
+					$valid->validateid = Yii::app()->keygen->getUniquKey();
 						
 					if($valid->update(array('validateid')))
 						if(Yii::app()->mail->sendRegisterMail($user, $valid))
@@ -192,7 +192,7 @@ class LoginController extends Controller
 				$this->addWarningMessage(new Message(
 					MSG::WARNING_LOGIN_MAILNOTVALID,
 					array(
-						'mailresend' => Yii::app()->createUrl("login/sendRegisterMail", array('key'=>$valide->validateid)),
+						'mailresend' => Yii::app()->createUrl("login/sendRegisterMail", array('key'=>$valide->validateid, 'user'=>$user->userid)),
 						'mailchange' => Yii::app()->createUrl('login/changeMail'),
 					)
 				));

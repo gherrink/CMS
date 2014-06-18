@@ -17,7 +17,7 @@ Awesome Content-Management made easy - für Vereine!
 ### MySql
 - create the DB "cms2". We recommend to use the "utf8_general_ci" as default charset 
 - for this new DB you have to create an user "cms" with the password "BCv4r2hrfhw4ahrc". If you wish to change this password you have to open protected/config/main.php and search for the line 'db' => array( 'password' => 'BCv4r2hrfhw4ahrc' )
-- execute the "script DB.sql" and "sql/rights/create.sql" scripts
+- execute the scripts "DB.sql", "sql/rights/create.sql" and "sql/language/language.sql"
 
 ## Usage
 
